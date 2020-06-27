@@ -1,4 +1,4 @@
-import { GET_SERVERS } from '../types';
+import { GET_SERVERS } from "../types";
 
 export default (state, action) => {
  switch (action.type) {

@@ -1,7 +1,9 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment } from "react";
 
-import AuthContext from '../../context/auth/authContext';
-import ServerlistContext from '../../context/serverlists/serverlistContext';
+import AuthContext from "../../context/auth/authContext";
+import ServerlistContext from "../../context/serverlists/serverlistContext";
+
+import Modal from "./Modal";
 
 const Serverlist = () => {
  const authContext = useContext(AuthContext);
@@ -56,6 +58,15 @@ const Serverlist = () => {
           ></div>
          </li>
         ))}
+        <li key='createserver'>
+         <div
+          className='serverimgsmall'
+          style={{
+           backgroundImage: "url('https://img.icons8.com/cotton/2x/plus.png')",
+          }}
+         ></div>
+         <Modal />
+        </li>
        </ul>
       </div>
      </div>

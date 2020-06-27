@@ -1,9 +1,9 @@
-import React, { useReducer } from 'react';
-import uuid from 'uuid';
-import ServerlistContext from './serverlistContext';
-import serverlistReducer from './serverlistReducer';
-import { GET_SERVERS } from '../types';
-import Axios from 'axios';
+import React, { useReducer } from "react";
+import uuid from "uuid";
+import ServerlistContext from "./serverlistContext";
+import serverlistReducer from "./serverlistReducer";
+import { GET_SERVERS } from "../types";
+import Axios from "axios";
 
 const ServerlistState = (props) => {
  const initialState = {
@@ -15,11 +15,11 @@ const ServerlistState = (props) => {
  //Get Servers
  const getServers = async () => {
   try {
-   const res = await Axios.get('/api/servers');
+   const res = await Axios.get("/api/servers");
 
    dispatch({ type: GET_SERVERS, payload: res.data });
   } catch (err) {
-   console.log('no servers to display');
+   console.log("no servers to display");
   }
  };
 
