@@ -2,75 +2,139 @@ import React, { useContext, useEffect } from 'react';
 
 import AuthContext from '../../context/auth/authContext';
 import DashContext from '../../context/dash/dashContext';
+import GameContext from '../../context/games/gameContext';
 
 const Dash = () => {
  const authContext = useContext(AuthContext);
 
  const dashContext = useContext(DashContext);
 
- const { stream, games } = dashContext;
+ const { trendstream, trendgames } = dashContext;
+
+ const gameContext = useContext(GameContext);
+
+ const { games } = gameContext;
 
  useEffect(() => {
   authContext.loadUser();
   // eslint-disable-next-line
  }, []);
 
- return (
-  <div className='dashboard'>
-   <h1 className='center' style={{ color: 'white' }}>
-    Dashboard!
-   </h1>
-   <div className='dashGrid'>
-    <div className='trendstream'>
-     <h2 className='center'>Trending Streams For You!</h2>
-     <ul>
-      {stream.map((stream) => (
-       <li key={stream._id}>
-        <div
-         className='dashimg'
-         style={{
-          backgroundImage: `url(${stream.img})`,
-         }}
-        ></div>
-        <h3 className='center'>{stream.name}</h3>
-       </li>
-      ))}
-     </ul>
+ if (games !== null) {
+  return (
+   <div className='dashboard'>
+    <h1 className='center' style={{ color: 'white' }}>
+     Dashboard!
+    </h1>
+    <div className='dashGrid'>
+     <div className='trendstream'>
+      <h2 className='sticky'>Trending Streams For You!</h2>
+      <ul>
+       {trendstream.map((trendstream) => (
+        <li key={trendstream._id}>
+         <div
+          className='dashimg'
+          style={{
+           backgroundImage: `url(${trendstream.img})`,
+          }}
+         ></div>
+         <h3 className='center'>{trendstream.name}</h3>
+        </li>
+       ))}
+      </ul>
+     </div>
+     <div className='trendgames'>
+      <h2 className='sticky'>Trending Games For You!</h2>
+      <ul>
+       {trendgames.map((trendgames) => (
+        <li key={trendgames._id}>
+         <div
+          className='dashimg'
+          style={{
+           backgroundImage: `url(${trendgames.img})`,
+          }}
+         ></div>
+         <h3 className='center'>{trendgames.name}</h3>
+        </li>
+       ))}
+      </ul>
+     </div>
     </div>
-    <div className='trendgames'>
-     <h2 className='center'>Trending Games For You!</h2>
+    <div className='dashmygames'>
      <ul>
-      {games.map((games) => (
-       <li key={games._id}>
+      {games.map((game) => (
+       <li key={game._id}>
         <div
-         className='dashimg'
+         className='dashmygamesimg'
          style={{
-          backgroundImage: `url(${games.img})`,
+          backgroundImage: `url(${game.img})`,
          }}
         ></div>
-        <h3 className='center'>{games.name}</h3>
+        <h3 className='center'>{game.name}</h3>
        </li>
       ))}
      </ul>
     </div>
    </div>
-   <div className='dashmygames'>
-    <ul>
-     {games.map((games) => (
-      <li key={games._id}>
-       <div
-        className='dashmygamesimg'
-        style={{
-         backgroundImage: `url(${games.img})`,
-        }}
-       ></div>
-       <h3 className='center'>{games.name}</h3>
-      </li>
-     ))}
-    </ul>
+  );
+ } else {
+  return (
+   <div className='dashboard'>
+    <h1 className='center' style={{ color: 'white' }}>
+     Dashboard!
+    </h1>
+    <div className='dashGrid'>
+     <div className='trendstream'>
+      <h2 className='sticky'>Trending Streams For You!</h2>
+      <ul>
+       {trendstream.map((trendstream) => (
+        <li key={trendstream._id}>
+         <div
+          className='dashimg'
+          style={{
+           backgroundImage: `url(${trendstream.img})`,
+          }}
+         ></div>
+         <h3 className='center'>{trendstream.name}</h3>
+        </li>
+       ))}
+      </ul>
+     </div>
+     <div className='trendgames'>
+      <h2 className='sticky'>Trending Games For You!</h2>
+      <ul>
+       {trendgames.map((trendgames) => (
+        <li key={trendgames._id}>
+         <div
+          className='dashimg'
+          style={{
+           backgroundImage: `url(${trendgames.img})`,
+          }}
+         ></div>
+         <h3 className='center'>{trendgames.name}</h3>
+        </li>
+       ))}
+      </ul>
+     </div>
+    </div>
+    <div className='dashmygames'>
+     <ul>
+      {trendgames.map((game) => (
+       <li key={game._id}>
+        <div
+         className='dashmygamesimg'
+         style={{
+          backgroundImage: `url(${game.img})`,
+         }}
+        ></div>
+        <h3 className='center'>{game.name}</h3>
+       </li>
+      ))}
+     </ul>
+    </div>
    </div>
-  </div>
- );
+  );
+ }
 };
 
 export default Dash;

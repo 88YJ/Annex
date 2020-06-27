@@ -177,9 +177,9 @@
 }
 
 .dashGrid {
- height: 100%;
+ height: 80%;
  display: grid;
- grid-template-rows: 50% 50%;
+ grid-template-rows: 49% 49%;
 }
 .dashimg {
  height: 140px;
@@ -188,10 +188,14 @@
  background-position: center;
  padding: 10px;
  margin: 10px;
+ border: grey 1px solid;
+}
+.dashimg:hover {
+ border: gold 1px solid;
 }
 .trendstream {
  height: 100%;
- border-bottom: white 1px dotted;
+ border-bottom: white 1px solid;
 }
 .trendstream ul {
  display: inline-flex;
@@ -200,7 +204,7 @@
  float: left;
 }
 .trendgames {
- border-bottom: white 1px dotted;
+ border-bottom: white 1px solid;
  height: 100%;
 }
 .trendgames ul {
@@ -214,6 +218,7 @@
 }
 .dashmygames li {
  float: left;
+ margin-left: 10px;
 }
 
 .dashmygamesimg {
@@ -223,4 +228,14 @@
  background-position: center;
  padding: 5px;
  margin: 10px;
+ border: grey 1px solid;
+}
+.dashmygamesimg:hover {
+ border: gold 1px solid;
+}
+
+.sticky {
+ text-align: center;
+ position: sticky;
+ left: 0;
 }
