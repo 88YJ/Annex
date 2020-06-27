@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AuthState from './context/auth/AuthState';
 import AlertState from './context/alert/AlertState';
 import GameState from './context/games/GameState';
+import DashState from './context/dash/DashState';
 import ServerlistState from './context/serverlists/ServerlistState';
 
 //AuthRoutes
@@ -40,41 +41,43 @@ const App = () => {
   <div className='app'>
    <AuthState>
     <ServerlistState>
-     <GameState>
-      <AlertState>
-       <Router>
-        <Fragment>
-         <Navbar />
-         <Alerts />
-         <div
-          className='img'
-          style={{
-           backgroundImage: `url(${background})`,
-          }}
-         >
-          <div className='grid'>
-           <ChatSidebar />
-           <div className='browser'>
-            <div className='dash'>
-             <Switch>
-              <Route exact path='/' component={Dash} />
-              <Route exact path='/server' component={ServerPage} />
-              <PrivateRoute exact path='/about' component={About} />
-              <Route exact path='/game' component={Game} />
-              <Route exact path='/register' component={Register} />
-              <Route exact path='/login' component={Login} />
-             </Switch>
+     <DashState>
+      <GameState>
+       <AlertState>
+        <Router>
+         <Fragment>
+          <Navbar />
+          <Alerts />
+          <div
+           className='img'
+           style={{
+            backgroundImage: `url(${background})`,
+           }}
+          >
+           <div className='grid'>
+            <ChatSidebar />
+            <div className='browser'>
+             <div className='dash'>
+              <Switch>
+               <Route exact path='/' component={Dash} />
+               <Route exact path='/server' component={ServerPage} />
+               <PrivateRoute exact path='/about' component={About} />
+               <Route exact path='/game' component={Game} />
+               <Route exact path='/register' component={Register} />
+               <Route exact path='/login' component={Login} />
+              </Switch>
+             </div>
             </div>
+            <Gamelist />
            </div>
-           <Gamelist />
-          </div>
 
-          <Serverlist />
-         </div>
-        </Fragment>
-       </Router>
-      </AlertState>
-     </GameState>
+           <Serverlist />
+          </div>
+         </Fragment>
+        </Router>
+       </AlertState>
+      </GameState>
+     </DashState>
     </ServerlistState>
    </AuthState>
   </div>
