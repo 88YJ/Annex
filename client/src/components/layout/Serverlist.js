@@ -2,8 +2,12 @@ import React, { useContext, useEffect, Fragment } from 'react';
 
 import AuthContext from '../../context/auth/authContext';
 import ServerlistContext from '../../context/serverlists/serverlistContext';
-
+import Logo from './Logo.jpg';
 const Serverlist = () => {
+ let background = Logo;
+
+ //background = 'https://wallpaperplay.com/walls/full/e/0/3/21596.jpg';
+
  const authContext = useContext(AuthContext);
 
  const serverlistContext = useContext(ServerlistContext);
@@ -23,8 +27,7 @@ const Serverlist = () => {
      <div
       className='serverimg'
       style={{
-       backgroundImage:
-        "url('https://wallpaperplay.com/walls/full/e/0/3/21596.jpg')",
+       backgroundImage: `url(${background})`,
       }}
      ></div>
      <div className='bottomlists'></div>
@@ -39,8 +42,7 @@ const Serverlist = () => {
      <div
       className='serverimg'
       style={{
-       backgroundImage:
-        "url('https://wallpaperplay.com/walls/full/e/0/3/21596.jpg')",
+       backgroundImage: `url(${background})`,
       }}
      ></div>
      <div className='bottomlists'>

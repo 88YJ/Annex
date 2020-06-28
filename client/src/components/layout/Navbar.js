@@ -2,6 +2,7 @@ import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
+import TwoBeLogo from './TwoBeLogo.png';
 
 const Navbar = ({ title, icon }) => {
  const authContext = useContext(AuthContext);
@@ -45,6 +46,7 @@ const Navbar = ({ title, icon }) => {
  return (
   <div className='Nav'>
    <h1>{title}</h1>
+
    <div className='Navlower'>
     <div>Server Settings</div>
     <div>
