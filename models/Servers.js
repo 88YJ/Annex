@@ -1,10 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ServersSchema = mongoose.Schema({
- user: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: 'users',
- },
  name: {
   type: String,
   required: true,
@@ -13,6 +9,14 @@ const ServersSchema = mongoose.Schema({
   type: String,
   required: true,
  },
+ userList: {
+  type: [mongoose.Schema.Types.ObjectId],
+  ref: "users",
+ },
+ owner: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "users",
+ },
 });
 
-module.exports = mongoose.model('server', ServersSchema);
+module.exports = mongoose.model("server", ServersSchema);

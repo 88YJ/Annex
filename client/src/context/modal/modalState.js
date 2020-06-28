@@ -6,7 +6,7 @@ import { SHOW_MODAL, HIDE_MODAL } from "../types";
 const ModalState = (props) => {
  const initialState = {
   show: false,
-  createServer: false,
+  addServer: true,
  };
  const [state, dispatch] = useReducer(modalReducer, initialState);
 
@@ -28,10 +28,12 @@ const ModalState = (props) => {
   }
  };
 
+ console.log(state.show);
  return (
   <ModalContext.Provider
    value={{
     show: state.show,
+    addServer: state.addServer,
     showModal,
     hideModal,
    }}

@@ -1,21 +1,28 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const auth = require('../middleware/auth');
-const { check, validationResult } = require('express-validator');
+const auth = require("../middleware/auth");
+const { check, validationResult } = require("express-validator");
 
-const User = require('../models/User');
-const Server = require('../models/Servers');
+const User = require("../models/User");
+const Server = require("../models/Servers");
 
 // @route     GET api/contacts
 // @desc      Get all users contacts
 // @access    Private
-router.get('/', auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
  try {
-  const servers = await Server.find({ user: req.user.id }).sort({ date: -1 });
+  const currentUser = await User.findById(req.user.id);
+  const { serverList } = currentUser;
+
+  let servers = [];
+  for (const id of serverList) {
+   servers.push(await Server.findById(id));
+  }
+
   res.json(servers);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
@@ -23,8 +30,8 @@ router.get('/', auth, async (req, res) => {
 // @desc      Add new contact
 // @access    Private
 router.post(
- '/',
- [auth, [check('name', 'Name is required').not().isEmpty()]],
+ "/",
+ [auth, [check("name", "Name is required").not().isEmpty()]],
  async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -37,15 +44,15 @@ router.post(
    const newServer = new Server({
     name,
     img,
-    user: req.user.id,
+    userList: [req.user.id],
+    owner: req.user.id,
    });
 
    const server = await newServer.save();
-
    res.json(server);
   } catch (err) {
    console.error(err.message);
-   res.status(500).send('Server Err');
+   res.status(500).send("Server Err");
   }
  }
 );

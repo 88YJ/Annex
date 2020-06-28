@@ -1,25 +1,32 @@
 import React, { Fragment, useContext } from "react";
 import ModalContext from "../../context/modal/modalContext";
+import CreateServerForm from "./CreateServerForm";
 
 const Modal = () => {
  const modalContext = useContext(ModalContext);
 
- const { show } = modalContext;
- /*
- const guessLinks = (
-  <Fragment>
-   <li>
-    <Link to='/register'>Register</Link>
-   </li>
-   <li>
-    <Link to='/login'>Login</Link>
-   </li>
-  </Fragment>
+ const { show, addServer, hideModal } = modalContext;
+
+ const onHideModal = () => {
+  hideModal();
+ };
+
+ const createServerContent = (
+  <div className='modal'>
+   <div className='modal-content'>
+    <span className='close' onClick={onHideModal}>
+     &times;
+    </span>
+    <CreateServerForm />
+   </div>
+  </div>
  );
-*/
+
+ const defaultContent = <Fragment></Fragment>;
+
  return (
   <Fragment>
-   <h3>Display: {show.toString()}</h3>
+   {show && addServer ? createServerContent : defaultContent}
   </Fragment>
  );
 };

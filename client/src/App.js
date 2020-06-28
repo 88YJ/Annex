@@ -8,7 +8,6 @@ import AlertState from "./context/alert/AlertState";
 import GameState from "./context/games/GameState";
 import ServerlistState from "./context/serverlists/ServerlistState";
 import DashState from "./context/dash/DashState";
-
 import ModalState from "./context/modal/modalState";
 
 //AuthRoutes

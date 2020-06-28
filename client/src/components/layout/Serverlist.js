@@ -2,6 +2,7 @@ import React, { useContext, useEffect, Fragment } from "react";
 
 import AuthContext from "../../context/auth/authContext";
 import ServerlistContext from "../../context/serverlists/serverlistContext";
+import ModalContext from "../../context/modal/modalContext";
 
 import Modal from "./Modal";
 
@@ -10,13 +11,21 @@ const Serverlist = () => {
 
  const serverlistContext = useContext(ServerlistContext);
 
+ const modalContext = useContext(ModalContext);
+
  const { servers, getServers } = serverlistContext;
+
+ const { showModal } = modalContext;
 
  useEffect(() => {
   authContext.loadUser();
   getServers();
   // eslint-disable-next-line
  }, []);
+
+ const displayModal = () => {
+  showModal();
+ };
 
  if (servers == null) {
   return (
@@ -58,20 +67,20 @@ const Serverlist = () => {
           ></div>
          </li>
         ))}
-        <li key='createserver'>
+        <li key='addServer' onClick={displayModal}>
          <div
           className='serverimgsmall'
           style={{
            backgroundImage: "url('https://img.icons8.com/cotton/2x/plus.png')",
           }}
          ></div>
-         <Modal />
         </li>
        </ul>
       </div>
      </div>
      <div>Stream</div>
     </div>
+    <Modal />
    </Fragment>
   );
  }

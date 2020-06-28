@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const UserSchema = mongoose.Schema({
  name: {
@@ -18,6 +18,10 @@ const UserSchema = mongoose.Schema({
   type: Date,
   default: Date.now,
  },
+ serverList: {
+  type: [mongoose.Schema.Types.ObjectId],
+  ref: "servers",
+ },
 });
 
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model("user", UserSchema);
