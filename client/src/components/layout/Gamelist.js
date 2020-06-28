@@ -43,31 +43,6 @@ const Gamelist = () => {
    </Fragment>
   );
  }
-
- // <div>
- //  <div className='gamelist'>
- //   <h3>Games:</h3>
- //   <div className='games'>
- //    <ul>
- //     <li>
- //      <Link to='/game'>Skyrim</Link>
- //     </li>
- //     <li>
- //      <Link to='/game'>Archeage</Link>
- //     </li>
- //     <li>
- //      <Link to='/game'>ARK:Survival Evolved</Link>
- //     </li>
- //     <li>
- //      <Link to='/game'>7 Days to Die</Link>
- //     </li>
- //     <li>
- //      <Link to='/game'>Assassins Creed IV Black Flag</Link>
- //     </li>
- //    </ul>
- //   </div>
- //  </div>
- // </div>
 };
 
 export default Gamelist;

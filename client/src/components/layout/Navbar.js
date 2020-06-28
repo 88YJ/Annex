@@ -29,6 +29,9 @@ const Navbar = ({ title, icon }) => {
    <li>
     <Link to='/stream'>Stream</Link>
    </li>
+   <li>
+    <Link to='/chat'>Chat</Link>
+   </li>
   </Fragment>
  );
 
