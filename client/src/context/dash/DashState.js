@@ -6,7 +6,7 @@ import Axios from 'axios';
 
 const DashState = (props) => {
  const initialState = {
-  games: [
+  trendgames: [
    {
     name: 'Halo 4',
     img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
@@ -56,7 +56,7 @@ const DashState = (props) => {
     img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
    },
   ],
-  stream: [
+  trendstream: [
    {
     name: 'Ninja',
     img: 'https://a.espncdn.com/photo/2018/0917/r432464_1600x800cc.jpg',
@@ -89,8 +89,8 @@ const DashState = (props) => {
  return (
   <DashContext.Provider
    value={{
-    games: state.games,
-    stream: state.stream,
+    trendgames: state.trendgames,
+    trendstream: state.trendstream,
    }}
   >
    {props.children}

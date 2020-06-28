@@ -21,6 +21,7 @@ import Dash from "./components/pages/Dash";
 import About from "./components/pages/About";
 import Game from "./components/pages/Game";
 import ServerPage from "./components/pages/ServerPage";
+import Store from "./components/pages/Store";
 
 //layouts
 import Navbar from "./components/layout/Navbar";
@@ -28,6 +29,7 @@ import Alerts from "./components/layout/Alerts";
 import Serverlist from "./components/layout/Serverlist";
 import Gamelist from "./components/layout/Gamelist";
 import ChatSidebar from "./components/layout/ChatSidebar";
+import Logo from "./components/layout/Logo.jpg";
 
 let background = null;
 
@@ -35,6 +37,8 @@ if (localStorage.token) {
  setAuthToken(localStorage.token);
 
  background = "https://images2.alphacoders.com/928/thumb-1920-928971.jpg";
+} else {
+ background = "https://wallpaperset.com/w/full/7/e/3/180293.jpg";
 }
 
 const App = () => {
@@ -62,6 +66,7 @@ const App = () => {
               <div className='dash'>
                <Switch>
                 <Route exact path='/' component={Dash} />
+                <Route exact path='/store' component={Store} />
                 <Route exact path='/server' component={ServerPage} />
                 <PrivateRoute exact path='/about' component={About} />
                 <Route exact path='/game' component={Game} />
