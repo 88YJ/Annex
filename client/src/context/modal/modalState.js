@@ -28,7 +28,6 @@ const ModalState = (props) => {
   }
  };
 
- console.log(state.show);
  return (
   <ModalContext.Provider
    value={{

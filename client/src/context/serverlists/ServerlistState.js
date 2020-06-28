@@ -16,7 +16,6 @@ const ServerlistState = (props) => {
  const getServers = async () => {
   try {
    const res = await Axios.get("/api/servers");
-   console.log(res.data);
 
    dispatch({ type: GET_SERVERS, payload: res.data });
   } catch (err) {

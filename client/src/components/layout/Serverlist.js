@@ -2,14 +2,13 @@ import React, { useContext, useEffect, Fragment } from "react";
 
 import AuthContext from "../../context/auth/authContext";
 import ServerlistContext from "../../context/serverlists/serverlistContext";
+import ServerContext from "../../context/server/serverContext";
 import ModalContext from "../../context/modal/modalContext";
 
-import Logo from "./Logo.jpg";
 import Modal from "./Modal";
+import { Link } from "react-router-dom";
 
 const Serverlist = () => {
- let background = Logo;
-
  //background = 'https://wallpaperplay.com/walls/full/e/0/3/21596.jpg';
 
  const authContext = useContext(AuthContext);
@@ -18,8 +17,10 @@ const Serverlist = () => {
 
  const modalContext = useContext(ModalContext);
 
- const { servers, getServers } = serverlistContext;
+ const serverContext = useContext(ServerContext);
 
+ const { setCurrentServer, serverLogo } = serverContext;
+ const { servers, getServers } = serverlistContext;
  const { showModal } = modalContext;
 
  useEffect(() => {
@@ -32,6 +33,10 @@ const Serverlist = () => {
   showModal();
  };
 
+ function openServer(server) {
+  setCurrentServer(server);
+ }
+
  if (servers == null) {
   return (
    <Fragment>
@@ -39,7 +44,7 @@ const Serverlist = () => {
      <div
       className='serverimg'
       style={{
-       backgroundImage: `url(${background})`,
+       backgroundImage: `url(${serverLogo})`,
       }}
      ></div>
      <div className='bottomlists'></div>
@@ -54,21 +59,23 @@ const Serverlist = () => {
      <div
       className='serverimg'
       style={{
-       backgroundImage: `url(${background})`,
+       backgroundImage: `url(${serverLogo})`,
       }}
      ></div>
      <div className='bottomlists'>
       <div className='servers'>
        <ul>
         {servers.map((server) => (
-         <li key={server._id}>
-          <div
-           className='serverimgsmall'
-           style={{
-            backgroundImage: `url(${server.img})`,
-           }}
-          ></div>
-         </li>
+         <Link to='/server'>
+          <li key={server._id} onClick={() => openServer(server)}>
+           <div
+            className='serverimgsmall'
+            style={{
+             backgroundImage: `url(${server.img})`,
+            }}
+           ></div>
+          </li>
+         </Link>
         ))}
         <li key='addServer' onClick={displayModal}>
          <div

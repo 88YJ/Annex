@@ -12,6 +12,6 @@ export const GET_GAMES = "GET_GAMES";
 export const GET_SERVERS = "GET_SERVERS";
 export const GET_BACKGROUND = "GET_BACKGROUND";
 export const GET_DASH = "GET_DASH";
-
+export const SET_CURRENT_SERVER = "SET_CURRENT_SERVER";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
