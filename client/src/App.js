@@ -23,6 +23,7 @@ import About from "./components/pages/About";
 import Game from "./components/pages/Game";
 import ServerPage from "./components/pages/ServerPage";
 import Store from "./components/pages/Store";
+import Chat from "./components/pages/Chat";
 
 //layouts
 import Navbar from "./components/layout/Navbar";
@@ -69,6 +70,7 @@ const App = () => {
                 <Switch>
                  <Route exact path='/' component={Dash} />
                  <Route exact path='/store' component={Store} />
+                 <Route exact path='/chat' component={Chat} />
                  <Route exact path='/server' component={ServerPage} />
                  <PrivateRoute exact path='/about' component={About} />
                  <Route exact path='/game' component={Game} />
@@ -79,7 +81,6 @@ const App = () => {
               </div>
               <Gamelist />
              </div>
-
              <Serverlist />
             </div>
            </Fragment>

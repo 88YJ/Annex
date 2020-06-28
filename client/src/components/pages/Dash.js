@@ -61,6 +61,7 @@ const Dash = () => {
      </div>
     </div>
     <div className='dashmygames'>
+     <h2 className='sticky'>My Games</h2>
      <ul>
       {games.map((game) => (
        <li key={game._id}>
