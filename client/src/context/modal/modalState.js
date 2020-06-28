@@ -1,19 +1,19 @@
 import React, { useReducer } from "react";
 import ModalContext from "./modalContext";
 import modalReducer from "./modalReducer";
-import { SHOW_MODAL, HIDE_MODAL } from "../types";
+import { SHOW_MODAL_WITH_ADD_SERVER, HIDE_MODAL } from "../types";
 
 const ModalState = (props) => {
  const initialState = {
   show: false,
-  addServer: true,
+  addServer: false,
  };
  const [state, dispatch] = useReducer(modalReducer, initialState);
 
  // Show Modal
- const showModal = async () => {
+ const showModalWithAddServer = async () => {
   try {
-   dispatch({ type: SHOW_MODAL });
+   dispatch({ type: SHOW_MODAL_WITH_ADD_SERVER });
   } catch (err) {
    console.log("Couldn't display modal");
   }
@@ -33,7 +33,7 @@ const ModalState = (props) => {
    value={{
     show: state.show,
     addServer: state.addServer,
-    showModal,
+    showModalWithAddServer,
     hideModal,
    }}
   >

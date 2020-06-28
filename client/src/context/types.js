@@ -13,5 +13,5 @@ export const GET_SERVERS = "GET_SERVERS";
 export const GET_BACKGROUND = "GET_BACKGROUND";
 export const GET_DASH = "GET_DASH";
 export const SET_CURRENT_SERVER = "SET_CURRENT_SERVER";
-export const SHOW_MODAL = "SHOW_MODAL";
+export const SHOW_MODAL_WITH_ADD_SERVER = "SHOW_MODAL_WITH_ADD_SERVER";
 export const HIDE_MODAL = "HIDE_MODAL";

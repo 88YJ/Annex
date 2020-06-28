@@ -21,7 +21,7 @@ const Serverlist = () => {
 
  const { setCurrentServer, serverLogo } = serverContext;
  const { servers, getServers } = serverlistContext;
- const { showModal } = modalContext;
+ const { showModalWithAddServer } = modalContext;
 
  useEffect(() => {
   authContext.loadUser();
@@ -30,7 +30,7 @@ const Serverlist = () => {
  }, []);
 
  const displayModal = () => {
-  showModal();
+  showModalWithAddServer();
  };
 
  function openServer(server) {
