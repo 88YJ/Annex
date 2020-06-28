@@ -1,29 +1,37 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from "react";
 
-import AuthContext from '../../context/auth/authContext';
-import DashContext from '../../context/dash/dashContext';
-import GameContext from '../../context/games/gameContext';
+import AuthContext from "../../context/auth/authContext";
+import DashContext from "../../context/dash/dashContext";
+import GameContext from "../../context/games/gameContext";
+import ServerContext from "../../context/server/serverContext";
 
 const Dash = () => {
  const authContext = useContext(AuthContext);
 
  const dashContext = useContext(DashContext);
 
- const { trendstream, trendgames } = dashContext;
-
  const gameContext = useContext(GameContext);
 
- const { games } = gameContext;
+ const serverContext = useContext(ServerContext);
+
+ const { hideServerSidebars } = serverContext;
+
+ const { trendstream, trendgames } = dashContext;
+
+ const { games, displayGamesSidebar, getGames } = gameContext;
 
  useEffect(() => {
   authContext.loadUser();
+  displayGamesSidebar();
+  hideServerSidebars();
+  getGames();
   // eslint-disable-next-line
  }, []);
 
  if (games !== null) {
   return (
    <div className='dashboard'>
-    <h1 className='center' style={{ color: 'white' }}>
+    <h1 className='center' style={{ color: "white" }}>
      Dashboard!
     </h1>
     <div className='dashGrid'>
@@ -81,7 +89,7 @@ const Dash = () => {
  } else {
   return (
    <div className='dashboard'>
-    <h1 className='center' style={{ color: 'white' }}>
+    <h1 className='center' style={{ color: "white" }}>
      Dashboard!
     </h1>
     <div className='dashGrid'>

@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from "react";
 
-import AuthContext from '../../context/auth/authContext';
+import AuthContext from "../../context/auth/authContext";
 
-const ChatSidebar = () => {
+const LeftSidebar = () => {
  const authContext = useContext(AuthContext);
 
  useEffect(() => {
@@ -19,4 +19,4 @@ const ChatSidebar = () => {
  );
 };
 
-export default ChatSidebar;
+export default LeftSidebar;

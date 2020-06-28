@@ -1,4 +1,9 @@
-import { SET_CURRENT_SERVER } from "../types";
+import {
+ SET_CURRENT_SERVER,
+ DISPLAY_SERVER_SIDEBARS,
+ HIDE_SERVER_SIDEBARS,
+ GET_SERVER_USERLIST,
+} from "../types";
 
 export default (state, action) => {
  switch (action.type) {
@@ -7,6 +12,21 @@ export default (state, action) => {
     ...state,
     server: action.payload,
     serverLogo: action.payload.img,
+   };
+  case DISPLAY_SERVER_SIDEBARS:
+   return {
+    ...state,
+    serverSidebar: true,
+   };
+  case HIDE_SERVER_SIDEBARS:
+   return {
+    ...state,
+    serverSidebar: false,
+   };
+  case GET_SERVER_USERLIST:
+   return {
+    ...state,
+    serverUserList: action.payload,
    };
   default:
    return state;

@@ -1,14 +1,29 @@
-import React, { useContext, useEffect, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import TwoBeLogo from '../layout/TwoBeLogo.png';
+import React, { useContext, useEffect, Fragment } from "react";
+import { Link } from "react-router-dom";
+import TwoBeLogo from "../layout/TwoBeLogo.png";
 
-import AuthContext from '../../context/auth/authContext';
+import AuthContext from "../../context/auth/authContext";
+
+import GameContext from "../../context/games/gameContext";
+
+import ServerContext from "../../context/server/serverContext";
 
 const Store = () => {
  const authContext = useContext(AuthContext);
 
+ const gameContext = useContext(GameContext);
+
+ const serverContext = useContext(ServerContext);
+
+ const { hideServerSidebars } = serverContext;
+
+ const { displayGamesSidebar, getGames } = gameContext;
+
  useEffect(() => {
   authContext.loadUser();
+  displayGamesSidebar();
+  hideServerSidebars();
+  getGames();
   // eslint-disable-next-line
  }, []);
 

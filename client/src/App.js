@@ -29,8 +29,8 @@ import Chat from "./components/pages/Chat";
 import Navbar from "./components/layout/Navbar";
 import Alerts from "./components/layout/Alerts";
 import Serverlist from "./components/layout/Serverlist";
-import Gamelist from "./components/layout/Gamelist";
-import ChatSidebar from "./components/layout/ChatSidebar";
+import RightSidebar from "./components/layout/RightSidebar";
+import LeftSidebar from "./components/layout/LeftSidebar";
 import Logo from "./components/layout/Logo.jpg";
 
 let background = null;
@@ -64,7 +64,7 @@ const App = () => {
              }}
             >
              <div className='grid'>
-              <ChatSidebar />
+              <LeftSidebar />
               <div className='browser'>
                <div className='dash'>
                 <Switch>
@@ -79,7 +79,7 @@ const App = () => {
                 </Switch>
                </div>
               </div>
-              <Gamelist />
+              <RightSidebar />
              </div>
              <Serverlist />
             </div>

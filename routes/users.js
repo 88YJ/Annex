@@ -84,4 +84,32 @@ router.put("/:id", auth, async (req, res) => {
  }
 });
 
+router.get("/:ids", auth, async (req, res) => {
+ try {
+  const userIdsList = req.params.ids.split(",");
+
+  const userArray = await User.find({
+   _id: { $in: userIdsList },
+  });
+
+  let userInfoArray = [];
+
+  userArray.forEach((user) => {
+   const { name, email } = user;
+   const userInfoObject = {
+    name: name,
+    email: email,
+   };
+   userInfoArray.push(userInfoObject);
+  });
+
+  console.log(userInfoArray);
+
+  res.json(userInfoArray);
+ } catch (err) {
+  console.error(err.message);
+  res.status(500).send("Server Err");
+ }
+});
+
 module.exports = router;

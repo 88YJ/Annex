@@ -7,12 +7,12 @@ const ServerPage = () => {
  const authContext = useContext(AuthContext);
 
  const serverContext = useContext(ServerContext);
- const { server } = serverContext;
 
- console.log(server);
+ const { server, displayServerSidebars, getUserList } = serverContext;
 
  useEffect(() => {
   authContext.loadUser();
+  displayServerSidebars();
   // eslint-disable-next-line
  }, []);
 
