@@ -1,15 +1,15 @@
-import React, { useReducer, useContext } from "react";
-import ServerContext from "./serverContext";
-import serverReducer from "./serverReducer";
+import React, { useReducer, useContext } from 'react';
+import ServerContext from './serverContext';
+import serverReducer from './serverReducer';
 import {
  SET_CURRENT_SERVER,
  DISPLAY_SERVER_SIDEBARS,
  HIDE_SERVER_SIDEBARS,
  GET_SERVER_USERLIST,
-} from "../types";
-import Axios from "axios";
+} from '../types';
+import Axios from 'axios';
 
-import Logo from "../../components/layout/Logo.jpg";
+import Logo from '../../components/layout/Logo.jpg';
 
 const ServerState = (props) => {
  const initialState = {
@@ -50,14 +50,14 @@ const ServerState = (props) => {
  const getUserList = async (UserIds) => {
   const config = {
    headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
    },
   };
   try {
    const res = await Axios.get(`/api/users/${UserIds}`, config);
    dispatch({ type: GET_SERVER_USERLIST, payload: res.data });
   } catch (err) {
-   console.log("No users in the server");
+   console.log('No users in the server');
   }
  };
 

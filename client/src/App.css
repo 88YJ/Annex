@@ -137,13 +137,16 @@
  opacity: 0.8;
 }
 .footer div {
- border-right: white 1px solid;
  color: red;
 }
 .serverimg {
  height: auto;
  width: auto;
  background-size: cover;
+ border-right: white 1px solid;
+}
+.rightbottom {
+ border-left: white 1px solid;
 }
 
 .serverimgsmall {
@@ -380,4 +383,11 @@
 .serverfind {
  overflow-y: scroll;
  height: 100%;
+}
+
+.profilepicture {
+ height: 45px;
+ width: 45px;
+ background-size: cover;
+ background-position: center;
 }

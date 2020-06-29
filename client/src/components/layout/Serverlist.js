@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, Fragment } from "react";
+import React, { useContext, useEffect, Fragment } from 'react';
 
-import AuthContext from "../../context/auth/authContext";
-import ServerlistContext from "../../context/serverlists/serverlistContext";
-import ServerContext from "../../context/server/serverContext";
-import ModalContext from "../../context/modal/modalContext";
+import AuthContext from '../../context/auth/authContext';
+import ServerlistContext from '../../context/serverlists/serverlistContext';
+import ServerContext from '../../context/server/serverContext';
+import ModalContext from '../../context/modal/modalContext';
 
-import Modal from "./Modal";
-import { Link } from "react-router-dom";
+import Modal from './Modal';
+import { Link } from 'react-router-dom';
 
 const Serverlist = () => {
  //background = 'https://wallpaperplay.com/walls/full/e/0/3/21596.jpg';
@@ -88,7 +88,7 @@ const Serverlist = () => {
        </ul>
       </div>
      </div>
-     <div>Stream</div>
+     <div className='rightbottom'>Stream</div>
     </div>
     <Modal />
    </Fragment>

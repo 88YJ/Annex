@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema({
  name: {
@@ -21,12 +21,14 @@ const UserSchema = mongoose.Schema({
  serverList: [
   {
    type: mongoose.Schema.Types.ObjectId,
-   ref: "servers",
+   ref: 'servers',
   },
  ],
  profilePicture: {
   type: String,
+  default:
+   'https://www.digitalconfectioners.com/wp-content/uploads/2016/11/dc-default-profile.png',
  },
 });
 
-module.exports = mongoose.model("user", UserSchema);
+module.exports = mongoose.model('user', UserSchema);
