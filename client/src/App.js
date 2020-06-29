@@ -11,6 +11,7 @@ import DashState from "./context/dash/DashState";
 import ModalState from "./context/modal/ModalState";
 import ServerState from "./context/server/ServerState";
 import FindserversState from "./context/findservers/FindserversState";
+import ChatState from "./context/chat/ChatState";
 
 //AuthRoutes
 import PrivateRoute from "./components/routing/PrivateRoute";
@@ -54,43 +55,45 @@ const App = () => {
       <AlertState>
        <ModalState>
         <DashState>
-         <ServerState>
-          <FindserversState>
-           <Router>
-            <Fragment>
-             <Navbar />
-             <Alerts />
-             <div
-              className='img'
-              style={{
-               backgroundImage: `url(${background})`,
-              }}
-             >
-              <div className='grid'>
-               <LeftSidebar />
-               <div className='browser'>
-                <div className='dash'>
-                 <Switch>
-                  <Route exact path='/' component={Dash} />
-                  <Route exact path='/store' component={Store} />
-                  <Route exact path='/chat' component={Chat} />
-                  <Route exact path='/findservers' component={FindServers} />
-                  <Route exact path='/server' component={ServerPage} />
-                  <PrivateRoute exact path='/about' component={About} />
-                  <Route exact path='/game' component={Game} />
-                  <Route exact path='/register' component={Register} />
-                  <Route exact path='/login' component={Login} />
-                 </Switch>
+         <ChatState>
+          <ServerState>
+           <FindserversState>
+            <Router>
+             <Fragment>
+              <Navbar />
+              <Alerts />
+              <div
+               className='img'
+               style={{
+                backgroundImage: `url(${background})`,
+               }}
+              >
+               <div className='grid'>
+                <LeftSidebar />
+                <div className='browser'>
+                 <div className='dash'>
+                  <Switch>
+                   <Route exact path='/' component={Dash} />
+                   <Route exact path='/store' component={Store} />
+                   <Route exact path='/chat' component={Chat} />
+                   <Route exact path='/findservers' component={FindServers} />
+                   <Route exact path='/server' component={ServerPage} />
+                   <PrivateRoute exact path='/about' component={About} />
+                   <Route exact path='/game' component={Game} />
+                   <Route exact path='/register' component={Register} />
+                   <Route exact path='/login' component={Login} />
+                  </Switch>
+                 </div>
                 </div>
+                <RightSidebar />
                </div>
-               <RightSidebar />
+               <Serverlist />
               </div>
-              <Serverlist />
-             </div>
-            </Fragment>
-           </Router>
-          </FindserversState>
-         </ServerState>
+             </Fragment>
+            </Router>
+           </FindserversState>
+          </ServerState>
+         </ChatState>
         </DashState>
        </ModalState>
       </AlertState>

@@ -24,6 +24,9 @@ const UserSchema = mongoose.Schema({
    ref: "servers",
   },
  ],
+ profilePicture: {
+  type: String,
+ },
 });
 
 module.exports = mongoose.model("user", UserSchema);

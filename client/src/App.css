@@ -344,8 +344,37 @@
 }
 
 .chat {
+ height: 100%;
  display: grid;
- grid-template-rows: 100px 50% 100px;
+ grid-template-rows: 5% 85% 10%;
+ background: rgb(0, 4, 17, 0.7);
+}
+.chatbox {
+ border: white 1px solid;
+ color: grey;
+ overflow-y: scroll;
+}
+.chatbox ul {
+ text-align: left;
+ padding: 5px;
+ margin: 5px;
+}
+.messages {
+ width: 100%;
+ margin: 0;
+ padding: 0;
+ border: rgb(0, 0, 0, 0) 1px solid;
+}
+.messages:hover {
+ background: rgba(125, 125, 126, 0.5);
+}
+.sendingmessage {
+ width: 98%;
+ padding: 2px;
+ margin: 5px;
+ background-color: black;
+ color: red;
+ outline: none;
 }
 
 .serverfind {
