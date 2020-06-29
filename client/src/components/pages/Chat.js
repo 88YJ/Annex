@@ -12,7 +12,16 @@ const Chat = () => {
  const [activeTopic] = useState(topics[0]);
  const [textValue, setTextValue] = useState('');
 
- function onUpdate() {}
+ function submit(e) {
+  e.preventDefault();
+  sendMessageAction({
+   from: user.name,
+   msg: textValue,
+   topic: activeTopic,
+  });
+  setTextValue('');
+  document.getElementById('typebox').value = '';
+ }
 
  return (
   <div className='chat'>
@@ -20,32 +29,22 @@ const Chat = () => {
    <div className='chatbox'>
     <ul>
      {allChats[activeTopic].map((item, i) => (
-      <li key={i}>
-       {item.from}
+      <li key={i} className='messages'>
+       <h3 style={{ color: 'red' }}>{item.from}: </h3>
        <span>{item.msg}</span>
       </li>
      ))}
     </ul>
    </div>
    <div className='chatfooter'>
-    <input
-     type='text'
-     className='sendingmessage'
-     onChange={(e) => setTextValue(e.target.value)}
-    />
-    <button
-     onClick={() => {
-      sendMessageAction({
-       from: user.name,
-       msg: textValue,
-       topic: activeTopic,
-      });
-      setTextValue('');
-     }}
-    >
-     {' '}
-     Send
-    </button>
+    <form onSubmit={submit}>
+     <input
+      id='typebox'
+      type='text'
+      className='sendingmessage'
+      onChange={(e) => setTextValue(e.target.value)}
+     />
+    </form>
    </div>
   </div>
  );
