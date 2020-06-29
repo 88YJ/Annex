@@ -384,6 +384,17 @@
  overflow-y: scroll;
  height: 100%;
 }
+.profilefind {
+ overflow-y: scroll;
+ height: 100%;
+}
+.profilefind ul {
+ list-style: none;
+}
+.profilefind a {
+ text-decoration: none;
+ color: red;
+}
 
 .profilepicture {
  height: 45px;

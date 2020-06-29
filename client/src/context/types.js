@@ -22,3 +22,4 @@ export const SHOW_MODAL_WITH_ADD_SERVER = 'SHOW_MODAL_WITH_ADD_SERVER';
 export const HIDE_MODAL = 'HIDE_MODAL';
 export const GET_MESSAGE = 'GET_MESSAGE';
 export const GET_PROFILE = 'GET_PROFILE';
+export const SET_PROFILE = 'SET_PROFILE';

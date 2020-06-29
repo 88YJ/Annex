@@ -42,7 +42,7 @@ const Navbar = ({ title, icon }) => {
     <Link to='/findservers'>Find Servers</Link>
    </li>
    <li>
-    <Link to='/profile'>Profile</Link>
+    <Link to='/profilesearch'>ProfileSearch</Link>
    </li>
   </Fragment>
  );
