@@ -9,7 +9,7 @@ const Server = require("../models/Servers");
 // @route     GET api/contacts
 // @desc      Get all users contacts
 // @access    Private
-router.get("/", auth, async (req, res) => {
+router.get("/userservers", auth, async (req, res) => {
  try {
   const currentUser = await User.findById(req.user.id);
   const { serverList } = currentUser;
@@ -20,6 +20,16 @@ router.get("/", auth, async (req, res) => {
   }
 
   res.json(servers);
+ } catch (err) {
+  console.error(err.message);
+  res.status(500).send("Server Err");
+ }
+});
+
+router.get("/", auth, async (req, res) => {
+ try {
+  const allServers = await Server.find();
+  res.json(allServers);
  } catch (err) {
   console.error(err.message);
   res.status(500).send("Server Err");
@@ -56,5 +66,17 @@ router.post(
   }
  }
 );
+
+router.put("/:id", auth, async (req, res) => {
+ try {
+  let updatedServer = await Server.findByIdAndUpdate(req.params.id, {
+   $push: { userList: req.user.id },
+  });
+  res.json(updatedServer);
+ } catch (err) {
+  console.error(err.message);
+  res.status(500).send("Server Err");
+ }
+});
 
 module.exports = router;

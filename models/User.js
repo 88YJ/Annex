@@ -18,10 +18,12 @@ const UserSchema = mongoose.Schema({
   type: Date,
   default: Date.now,
  },
- serverList: {
-  type: [mongoose.Schema.Types.ObjectId],
-  ref: "servers",
- },
+ serverList: [
+  {
+   type: mongoose.Schema.Types.ObjectId,
+   ref: "servers",
+  },
+ ],
 });
 
 module.exports = mongoose.model("user", UserSchema);

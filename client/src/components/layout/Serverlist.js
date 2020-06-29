@@ -20,12 +20,12 @@ const Serverlist = () => {
  const serverContext = useContext(ServerContext);
 
  const { setCurrentServer, serverLogo } = serverContext;
- const { servers, getServers } = serverlistContext;
+ const { userServerList, getUserServers } = serverlistContext;
  const { showModalWithAddServer } = modalContext;
 
  useEffect(() => {
   authContext.loadUser();
-  getServers();
+  getUserServers();
   // eslint-disable-next-line
  }, []);
 
@@ -37,7 +37,7 @@ const Serverlist = () => {
   setCurrentServer(server);
  }
 
- if (servers == null) {
+ if (userServerList == null) {
   return (
    <Fragment>
     <div className='footer'>
@@ -65,7 +65,7 @@ const Serverlist = () => {
      <div className='bottomlists'>
       <div className='servers'>
        <ul>
-        {servers.map((server) => (
+        {userServerList.map((server) => (
          <Link to='/server'>
           <li key={server._id} onClick={() => openServer(server)}>
            <div

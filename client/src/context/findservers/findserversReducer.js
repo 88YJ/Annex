@@ -1,11 +1,11 @@
-import { GET_USER_SERVERS } from "../types";
+import { GET_SERVERS } from "../types";
 
 export default (state, action) => {
  switch (action.type) {
-  case GET_USER_SERVERS:
+  case GET_SERVERS:
    return {
     ...state,
-    userServerList: action.payload,
+    servers: action.payload,
     loading: false,
    };
   default:

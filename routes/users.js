@@ -72,6 +72,7 @@ router.post(
  }
 );
 
+//Update User's server list
 router.put("/:id", auth, async (req, res) => {
  try {
   let updatedUser = await User.findByIdAndUpdate(req.user.id, {
@@ -84,6 +85,7 @@ router.put("/:id", auth, async (req, res) => {
  }
 });
 
+//Get server users
 router.get("/:ids", auth, async (req, res) => {
  try {
   const userIdsList = req.params.ids.split(",");

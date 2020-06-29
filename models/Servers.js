@@ -9,10 +9,12 @@ const ServersSchema = mongoose.Schema({
   type: String,
   required: true,
  },
- userList: {
-  type: [mongoose.Schema.Types.ObjectId],
-  ref: "users",
- },
+ userList: [
+  {
+   type: mongoose.Schema.Types.ObjectId,
+   ref: "users",
+  },
+ ],
  owner: {
   type: mongoose.Schema.Types.ObjectId,
   ref: "users",

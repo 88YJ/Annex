@@ -32,6 +32,9 @@ const Navbar = ({ title, icon }) => {
    <li>
     <Link to='/chat'>Chat</Link>
    </li>
+   <li>
+    <Link to='/findservers'>Find Servers</Link>
+   </li>
   </Fragment>
  );
 

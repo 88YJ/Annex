@@ -347,3 +347,8 @@
  display: grid;
  grid-template-rows: 100px 50% 100px;
 }
+
+.serverfind {
+ overflow-y: scroll;
+ height: 100%;
+}
