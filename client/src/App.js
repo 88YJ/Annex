@@ -11,6 +11,7 @@ import DashState from "./context/dash/DashState";
 import ModalState from "./context/modal/ModalState";
 import ServerState from "./context/server/ServerState";
 import FindserversState from "./context/findservers/FindserversState";
+
 //import ChatState from './context/chat/ChatState';
 import ProfileState from "./context/profile/ProfileState";
 import FindprofileState from "./context/findprofiles/FindprofileState";
@@ -40,6 +41,7 @@ import Alerts from "./components/layout/Alerts";
 import Serverlist from "./components/layout/Serverlist";
 import RightSidebar from "./components/layout/RightSidebar";
 import LeftSidebar from "./components/layout/LeftSidebar";
+import Modal from "./components/layout/Modal";
 import Logo from "./components/layout/Logo.jpg";
 
 let background = null;
@@ -69,6 +71,7 @@ const App = () => {
               <Fragment>
                <Navbar />
                <Alerts />
+               <Modal />
                <div
                 className='img'
                 style={{

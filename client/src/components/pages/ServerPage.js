@@ -1,15 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from "react";
 
-import ServerContext from '../../context/server/serverContext';
-import io from 'socket.io-client';
-import AuthContext from '../../context/auth/authContext';
+import ServerContext from "../../context/server/serverContext";
+import io from "socket.io-client";
+import AuthContext from "../../context/auth/authContext";
 
-import TextContainer from '../chatbox/TextContainer';
-import Messages from '../chatbox/Messages';
-import InfoBar from '../chatbox/InfoBar';
-import Input from '../chatbox/Input';
+import TextContainer from "../chatbox/TextContainer";
+import Messages from "../chatbox/Messages";
+import InfoBar from "../chatbox/InfoBar";
+import Input from "../chatbox/Input";
 
-import '../chatcss/Chat.css';
+import "../chatcss/Chat.css";
 
 let socket;
 
@@ -22,13 +22,13 @@ const ServerPage = ({ location }) => {
 
  const { user } = authContext;
 
- const [name, setName] = useState('');
- const [room, setRoom] = useState('');
- const [profileimg, setprofileimg] = useState('');
- const [users, setUsers] = useState('');
- const [message, setMessage] = useState('');
+ const [name, setName] = useState("");
+ const [room, setRoom] = useState("");
+ const [profileimg, setprofileimg] = useState("");
+ const [users, setUsers] = useState("");
+ const [message, setMessage] = useState("");
  const [messages, setMessages] = useState([]);
- const ENDPOINT = ':5002';
+ const ENDPOINT = ":5002";
 
  useEffect(() => {
   //const { name } = queryString.parse(location.search);
@@ -43,7 +43,7 @@ const ServerPage = ({ location }) => {
   setName(name);
   setprofileimg(profileimg);
 
-  socket.emit('join', { name, room, profileimg }, (error) => {
+  socket.emit("join", { name, room, profileimg }, (error) => {
    if (error) {
     alert(error);
    }
@@ -51,11 +51,11 @@ const ServerPage = ({ location }) => {
  }, [ENDPOINT, location.search]);
 
  useEffect(() => {
-  socket.on('message', (message) => {
+  socket.on("message", (message) => {
    setMessages((messages) => [...messages, message]);
   });
 
-  socket.on('roomData', ({ users }) => {
+  socket.on("roomData", ({ users }) => {
    setUsers(users);
   });
  }, []);
@@ -64,7 +64,7 @@ const ServerPage = ({ location }) => {
   event.preventDefault();
 
   if (message) {
-   socket.emit('sendMessage', message, () => setMessage(''));
+   socket.emit("sendMessage", message, () => setMessage(""));
   }
  };
 

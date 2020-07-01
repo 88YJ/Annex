@@ -5,7 +5,6 @@ import ServerlistContext from "../../context/serverlists/serverlistContext";
 import ServerContext from "../../context/server/serverContext";
 import ModalContext from "../../context/modal/modalContext";
 
-import Modal from "./Modal";
 import { Link } from "react-router-dom";
 
 const Serverlist = () => {
@@ -90,7 +89,6 @@ const Serverlist = () => {
      </div>
      <div className='rightbottom'>Stream</div>
     </div>
-    <Modal />
    </Fragment>
   );
  }

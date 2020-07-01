@@ -15,6 +15,12 @@ const ServersSchema = mongoose.Schema({
    ref: "users",
   },
  ],
+ channelList: [
+  {
+   type: mongoose.Schema.Types.ObjectId,
+   ref: "channels",
+  },
+ ],
  owner: {
   type: mongoose.Schema.Types.ObjectId,
   ref: "users",

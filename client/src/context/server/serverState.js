@@ -18,6 +18,12 @@ const ServerState = (props) => {
   serverSidebar: false,
   serverUserList: [],
  };
+
+ const config = {
+  headers: {
+   "Content-Type": "application/json",
+  },
+ };
  const [state, dispatch] = useReducer(serverReducer, initialState);
 
  const displayServerSidebars = async () => {
@@ -48,16 +54,27 @@ const ServerState = (props) => {
 
  // Get server userlist
  const getUserList = async (UserIds) => {
-  const config = {
-   headers: {
-    "Content-Type": "application/json",
-   },
-  };
   try {
    const res = await Axios.get(`/api/users/${UserIds}`, config);
    dispatch({ type: GET_SERVER_USERLIST, payload: res.data });
   } catch (err) {
    console.log("No users in the server");
+  }
+ };
+
+ //Create a channel
+ const createChannel = async (server, channel) => {
+  try {
+   console.log(server._id);
+   const res = await Axios.post(
+    `/api/servers/${server._id}/channels`,
+    channel,
+    config
+   );
+
+   console.log(res);
+  } catch (err) {
+   console.log("Failed to create channel");
   }
  };
 
@@ -72,6 +89,7 @@ const ServerState = (props) => {
     displayServerSidebars,
     hideServerSidebars,
     getUserList,
+    createChannel,
    }}
   >
    {props.children}

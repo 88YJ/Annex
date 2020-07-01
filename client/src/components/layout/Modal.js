@@ -1,23 +1,24 @@
 import React, { Fragment, useContext } from "react";
 import ModalContext from "../../context/modal/modalContext";
 import CreateServerForm from "./CreateServerForm";
+import CreateChannelForm from "./CreateChannelForm";
 
 const Modal = () => {
  const modalContext = useContext(ModalContext);
 
- const { show, addServer, hideModal } = modalContext;
+ const { show, addServer, addChannel, hideModal } = modalContext;
 
  const onHideModal = () => {
   hideModal();
  };
 
- const createServerContent = (
+ const customContent = (content) => (
   <div className='modal'>
    <div className='modal-content'>
     <span className='close' onClick={onHideModal}>
      &times;
     </span>
-    <CreateServerForm />
+    {content}
    </div>
   </div>
  );
@@ -26,7 +27,8 @@ const Modal = () => {
 
  return (
   <Fragment>
-   {show && addServer ? createServerContent : defaultContent}
+   {show && addServer ? customContent(<CreateServerForm />) : defaultContent}
+   {show && addChannel ? customContent(<CreateChannelForm />) : defaultContent}
   </Fragment>
  );
 };
