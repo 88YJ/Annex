@@ -11,8 +11,7 @@ import DashState from "./context/dash/DashState";
 import ModalState from "./context/modal/ModalState";
 import ServerState from "./context/server/ServerState";
 import FindserversState from "./context/findservers/FindserversState";
-
-//import ChatState from './context/chat/ChatState';
+import ChatState from "./context/chat/ChatState";
 import ProfileState from "./context/profile/ProfileState";
 import FindprofileState from "./context/findprofiles/FindprofileState";
 
@@ -34,6 +33,7 @@ import ProfilePage from "./components/pages/ProfilePage";
 import NewChat from "./components/chatbox/Chat";
 import JoinChat from "./components/chatbox/Join";
 import DMChat from "./components/pages/DMChat";
+import RedirectChat from "./components/redirect/RedirectChat";
 
 //layouts
 import Navbar from "./components/layout/Navbar";
@@ -63,56 +63,63 @@ const App = () => {
       <AlertState>
        <ModalState>
         <DashState>
-         <ServerState>
-          <ProfileState>
-           <FindserversState>
-            <FindprofileState>
-             <Router>
-              <Fragment>
-               <Navbar />
-               <Alerts />
-               <Modal />
-               <div
-                className='img'
-                style={{
-                 backgroundImage: `url(${background})`,
-                }}
-               >
-                <div className='grid'>
-                 <LeftSidebar />
-                 <div className='browser'>
-                  <div className='dash'>
-                   <Switch>
-                    <Route exact path='/join' component={JoinChat} />
-                    <Route path='/chat' component={NewChat} />
-                    <Route path='/dmchat' component={DMChat} />
-                    <Route exact path='/' component={Dash} />
-                    <Route exact path='/store' component={Store} />
-                    <Route exact path='/findservers' component={FindServers} />
-                    <Route exact path='/server' component={ServerPage} />
-                    <PrivateRoute exact path='/about' component={About} />
-                    <Route exact path='/game' component={Game} />
-                    <Route exact path='/register' component={Register} />
-                    <Route exact path='/login' component={Login} />
-                    <Route
-                     exact
-                     path='/profilesearch'
-                     component={ProfileSearch}
-                    />
-                    <Route exact path='/profilepage' component={ProfilePage} />
-                   </Switch>
+         <ChatState>
+          <ServerState>
+           <ProfileState>
+            <FindserversState>
+             <FindprofileState>
+              <Router>
+               <Fragment>
+                <Navbar />
+                <Alerts />
+                <Modal />
+                <div
+                 className='img'
+                 style={{
+                  backgroundImage: `url(${background})`,
+                 }}
+                >
+                 <div className='grid'>
+                  <LeftSidebar />
+                  <div className='browser'>
+                   <div className='dash'>
+                    <Switch>
+                     <Route exact path='/join' component={JoinChat} />
+                     <Route
+                      exact
+                      path='/redirectchat'
+                      component={RedirectChat}
+                     />
+                     <Route path='/chat' component={NewChat} />
+                     <Route path='/dmchat' component={DMChat} />
+                     <Route exact path='/' component={Dash} />
+                     <Route exact path='/store' component={Store} />
+                     <Route exact path='/findservers' component={FindServers} />
+                     <Route exact path='/server' component={ServerPage} />
+                     <PrivateRoute exact path='/about' component={About} />
+                     <Route exact path='/game' component={Game} />
+                     <Route exact path='/register' component={Register} />
+                     <Route exact path='/login' component={Login} />
+                     <Route
+                      exact
+                      path='/profilesearch'
+                      component={ProfileSearch}
+                     />
+                     <Route exact path='/profilepage' component={ProfilePage} />
+                    </Switch>
+                   </div>
                   </div>
+                  <RightSidebar />
                  </div>
-                 <RightSidebar />
+                 <Serverlist />
                 </div>
-                <Serverlist />
-               </div>
-              </Fragment>
-             </Router>
-            </FindprofileState>
-           </FindserversState>
-          </ProfileState>
-         </ServerState>
+               </Fragment>
+              </Router>
+             </FindprofileState>
+            </FindserversState>
+           </ProfileState>
+          </ServerState>
+         </ChatState>
         </DashState>
        </ModalState>
       </AlertState>

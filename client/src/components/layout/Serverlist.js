@@ -4,11 +4,17 @@ import AuthContext from "../../context/auth/authContext";
 import ServerlistContext from "../../context/serverlists/serverlistContext";
 import ServerContext from "../../context/server/serverContext";
 import ModalContext from "../../context/modal/modalContext";
+import ChatContext from "../../context/chat/chatContext";
+import { refresh } from "../pages/ServerPage";
 
 import { Link } from "react-router-dom";
 
 const Serverlist = () => {
  //background = 'https://wallpaperplay.com/walls/full/e/0/3/21596.jpg';
+
+ const chatContext = useContext(ChatContext);
+
+ const { setConnectTrue, connect } = chatContext;
 
  const authContext = useContext(AuthContext);
 
@@ -33,7 +39,12 @@ const Serverlist = () => {
  };
 
  function openServer(server) {
+  refresh();
   setCurrentServer(server);
+
+  if (!connect) {
+   setConnectTrue();
+  }
  }
 
  if (userServerList == null) {
@@ -73,8 +84,8 @@ const Serverlist = () => {
          ></div>
         </li>
         {userServerList.map((server, i) => (
-         <Link to='/server'>
-          <li key={i} onClick={() => openServer(server)}>
+         <Link to={`/redirectchat`} key={i}>
+          <li onClick={() => openServer(server)}>
            <div
             className='serverimgsmall'
             style={{
