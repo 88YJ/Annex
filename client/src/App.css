@@ -438,3 +438,77 @@ select:focus {
  background-size: cover;
  background-position: center;
 }
+
+.messageBox {
+ background: #f3f3f3;
+ margin-top: 2%;
+ margin-left: 1%;
+ border-radius: 8px;
+ padding: 5px 20px;
+ color: white;
+ display: inline-block;
+ max-width: 80%;
+ height: 10%;
+}
+
+.messageText {
+ width: 100%;
+ letter-spacing: 0;
+ float: left;
+ font-size: 1.1em;
+ word-wrap: break-word;
+}
+
+.messageText img {
+ vertical-align: middle;
+}
+
+.messageContainer {
+ display: flex;
+ justify-content: flex-end;
+ padding: 0 1%;
+ margin-top: 3px;
+}
+.messageContainer:hover {
+ background: rgb(0, 4, 17, 0.7);
+}
+
+.sentText {
+ display: flex;
+ align-items: center;
+ font-family: Helvetica;
+ color: red;
+ letter-spacing: 0.3px;
+}
+
+.pl-10 {
+ padding-left: 10=px;
+}
+
+.pr-10 {
+ padding-right: 10px;
+}
+
+.justifyStart {
+ justify-content: flex-start;
+}
+
+.justifyEnd {
+ justify-content: flex-end;
+}
+
+.colorWhite {
+ color: white;
+}
+
+.colorDark {
+ color: #353535;
+}
+
+.backgroundRed {
+ background: red;
+}
+
+.backgroundLight {
+ background: #f3f3f3;
+}

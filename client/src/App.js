@@ -31,7 +31,6 @@ import FindServers from './components/pages/FindServers';
 import ProfileSearch from './components/pages/ProfileSearch';
 import ProfilePage from './components/pages/ProfilePage';
 import NewChat from './components/chatbox/Chat';
-import JoinChat from './components/chatbox/Join';
 import DMChat from './components/pages/DMChat';
 import RedirectChat from './components/redirect/RedirectChat';
 
@@ -85,7 +84,6 @@ const App = () => {
                   <div className='browser'>
                    <div className='dash'>
                     <Switch>
-                     <Route exact path='/join' component={JoinChat} />
                      <Route
                       exact
                       path='/redirectchat'

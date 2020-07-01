@@ -6,9 +6,7 @@ import io from 'socket.io-client';
 import AuthContext from '../../context/auth/authContext';
 import ChatContext from '../../context/chat/chatContext';
 
-import TextContainer from '../chatbox/TextContainer';
 import Messages from '../chatbox/Messages';
-import InfoBar from '../chatbox/InfoBar';
 import Input from '../chatbox/Input';
 
 let socket;
@@ -111,7 +109,6 @@ const ServerPage = ({ location }) => {
        sendMessage={sendMessage}
       />
      </div>
-     <TextContainer users={users} />
     </div>
    </div>
   );

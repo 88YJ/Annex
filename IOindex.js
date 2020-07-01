@@ -20,10 +20,6 @@ io.on('connect', (socket) => {
 
   if (error) return callback(error);
   socket.join(user.room);
-  /*socket.emit('message', {
-   user: 'admin',
-   text: `${user.name}, This is the start of your chat ${user.room}, ${user.profileimg}`,
-  });*/
   socket.broadcast.to(user.room).emit('message', {
    user: 'admin',
    profileimg: profileimg,

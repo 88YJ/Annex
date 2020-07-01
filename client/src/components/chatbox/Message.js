@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '../chatcss/Message.css';
-
 import ReactEmoji from 'react-emoji';
 
 const Message = ({ message: { text, user, profileimg }, name }) => {
@@ -22,14 +20,15 @@ const Message = ({ message: { text, user, profileimg }, name }) => {
   </div>
  ) : (
   <div className='messageContainer justifyStart'>
-   <div className='messageBox backgroundLight'>
-    <p className='messageText colorDark'>{ReactEmoji.emojify(text)}</p>
-   </div>
-   <p className='sentText pl-10 '>{user}</p>
    <div
     className='serverimgsmall'
     style={{ backgroundImage: `url(${profileimg})` }}
    ></div>
+   <p className='sentText pl-10 '>{user}</p>
+
+   <div className='messageBox backgroundLight'>
+    <p className='messageText colorDark'>{ReactEmoji.emojify(text)}</p>
+   </div>
   </div>
  );
 };

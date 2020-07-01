@@ -55,6 +55,7 @@ const AuthState = (props) => {
    });
 
    loadUser();
+   window.location.reload(false);
   } catch (err) {
    dispatch({
     type: REGISTER_FAIL,
@@ -79,6 +80,7 @@ const AuthState = (props) => {
    });
 
    loadUser();
+   window.location.reload(false);
   } catch (err) {
    dispatch({
     type: LOGIN_FAIL,
@@ -88,7 +90,10 @@ const AuthState = (props) => {
  };
 
  // Logout
- const logout = () => dispatch({ type: LOGOUT });
+ const logout = () => {
+  dispatch({ type: LOGOUT });
+  window.location.reload(false);
+ };
 
  // Clear Errors
  const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
