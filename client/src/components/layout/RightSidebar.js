@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, Fragment } from "react";
-import { Link } from "react-router-dom";
-import GameContext from "../../context/games/gameContext";
-import ServerContext from "../../context/server/serverContext";
+import React, { useContext, useEffect, Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import GameContext from '../../context/games/gameContext';
+import ServerContext from '../../context/server/serverContext';
 
-import AuthContext from "../../context/auth/authContext";
+import AuthContext from '../../context/auth/authContext';
 
 const RightSidebar = () => {
  const authContext = useContext(AuthContext);
@@ -29,8 +29,8 @@ const RightSidebar = () => {
      <h3>Users:</h3>
      <div className='games'>
       <ul>
-       {serverUserList.map((user) => (
-        <li key={user._id}>
+       {serverUserList.map((user, i) => (
+        <li key={i}>
          <Link to='/'>{user.name}</Link>
         </li>
        ))}
@@ -55,8 +55,8 @@ const RightSidebar = () => {
       <h3>Games:</h3>
       <div className='games'>
        <ul>
-        {games.map((game) => (
-         <li key={game._id}>
+        {games.map((game, i) => (
+         <li key={i}>
           <Link to='/'>{game.name}</Link>
          </li>
         ))}

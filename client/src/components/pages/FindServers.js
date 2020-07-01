@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from 'react';
 
-import AuthContext from "../../context/auth/authContext";
-import FindserversContext from "../../context/findservers/findserversContext";
-import ServerlistContext from "../../context/serverlists/serverlistContext";
+import AuthContext from '../../context/auth/authContext';
+import FindserversContext from '../../context/findservers/findserversContext';
+import ServerlistContext from '../../context/serverlists/serverlistContext';
 
 const FindServers = () => {
  const authContext = useContext(AuthContext);
@@ -31,8 +31,8 @@ const FindServers = () => {
     <h3>Servers:</h3>
     <div className='serverfind'>
      <ul>
-      {servers.map((server) => (
-       <li key={server._id} onClick={() => joinServer(server)}>
+      {servers.map((server, i) => (
+       <li key={i} onClick={() => joinServer(server)}>
         <div
          className='serverimgsmall'
          style={{

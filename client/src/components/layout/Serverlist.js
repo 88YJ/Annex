@@ -65,9 +65,9 @@ const Serverlist = () => {
      <div className='bottomlists'>
       <div className='servers'>
        <ul>
-        {userServerList.map((server) => (
-         <Link to='/server'>
-          <li key={server._id} onClick={() => openServer(server)}>
+        {userServerList.map((server, i) => (
+         <Link to='/server' key={i}>
+          <li onClick={() => openServer(server)}>
            <div
             className='serverimgsmall'
             style={{

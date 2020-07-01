@@ -78,7 +78,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
- title: 'Annex',
+ title: 'Annex Prototype',
 };
 
 export default Navbar;

@@ -26,9 +26,9 @@ const ProfileSearch = () => {
     <h3>Users:</h3>
     <div className='profilefind'>
      <ul>
-      {profiles.map((profile) => (
-       <Link to='/profilepage'>
-        <li key={profile._id} onClick={() => openProfile(profile)}>
+      {profiles.map((profile, i) => (
+       <Link to='/dmchat' key={i}>
+        <li onClick={() => openProfile(profile)}>
          <div
           className='serverimgsmall'
           style={{

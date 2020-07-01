@@ -122,8 +122,9 @@ router.get('/', auth, async (req, res) => {
   let profileInfoArray = [];
 
   allProfiles.forEach((user) => {
-   const { name, email, profilePicture } = user;
+   const { _id, name, email, profilePicture } = user;
    const profileInfoObject = {
+    _id: _id,
     name: name,
     email: email,
     profilePicture: profilePicture,

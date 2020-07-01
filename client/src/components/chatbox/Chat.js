@@ -1,24 +1,20 @@
-import React, { useState, useContext, useEffect } from 'react';
-
-import ServerContext from '../../context/server/serverContext';
+import React, { useState, useEffect, useContext } from 'react';
+import queryString from 'query-string';
 import io from 'socket.io-client';
 import AuthContext from '../../context/auth/authContext';
 
-import TextContainer from '../chatbox/TextContainer';
-import Messages from '../chatbox/Messages';
-import InfoBar from '../chatbox/InfoBar';
-import Input from '../chatbox/Input';
+import TextContainer from './TextContainer';
+import Messages from './Messages';
+import InfoBar from './InfoBar';
+import Input from './Input';
 
 import '../chatcss/Chat.css';
+import { connect } from 'mongoose';
 
 let socket;
 
-const ServerPage = ({ location }) => {
+const Chat = ({ location }) => {
  const authContext = useContext(AuthContext);
-
- const serverContext = useContext(ServerContext);
-
- const { server, displayServerSidebars, getUserList } = serverContext;
 
  const { user } = authContext;
 
@@ -35,7 +31,7 @@ const ServerPage = ({ location }) => {
 
   let name = user.name;
   let profileimg = user.profilePicture;
-  let room = server._id;
+  let room = 'whoo';
 
   socket = io(ENDPOINT);
 
@@ -68,42 +64,20 @@ const ServerPage = ({ location }) => {
   }
  };
 
- useEffect(() => {
-  authContext.loadUser();
-  displayServerSidebars();
-  // eslint-disable-next-line
- }, []);
-
  return (
-  <div>
-   <div className='outerContainer'>
-    <div className='container'>
-     <InfoBar room={room} />
-     <Messages messages={messages} name={name} />
-     <Input
-      message={message}
-      setMessage={setMessage}
-      sendMessage={sendMessage}
-     />
-    </div>
-    <TextContainer users={users} />
+  <div className='outerContainer'>
+   <div className='container'>
+    <InfoBar room={room} />
+    <Messages messages={messages} name={name} />
+    <Input
+     message={message}
+     setMessage={setMessage}
+     sendMessage={sendMessage}
+    />
    </div>
+   <TextContainer users={users} />
   </div>
  );
 };
 
-export default ServerPage;
-
-/* <ul>
-    {
-     <li key={server._id}>
-      <div
-       className='dashimg'
-       style={{
-        backgroundImage: `url(${server.img})`,
-       }}
-      ></div>
-      <h3 className='center'>{server.name}</h3>
-     </li>
-    }
-   </ul>*/
+export default Chat;
