@@ -18,7 +18,6 @@ const RightSidebar = () => {
 
  useEffect(() => {
   authContext.loadUser();
-  //getGames();
   // eslint-disable-next-line
  }, []);
 

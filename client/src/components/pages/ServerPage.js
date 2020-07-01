@@ -18,7 +18,7 @@ const ServerPage = ({ location }) => {
 
  const serverContext = useContext(ServerContext);
 
- const { server, displayServerSidebars, getUserList } = serverContext;
+ const { server, displayServerSidebars } = serverContext;
 
  const { user } = authContext;
 

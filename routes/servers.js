@@ -70,7 +70,7 @@ router.post(
 router.put("/:id", auth, async (req, res) => {
  try {
   let updatedServer = await Server.findByIdAndUpdate(req.params.id, {
-   $push: { userList: req.user.id },
+   $addToSet: { userList: req.user.id },
   });
   res.json(updatedServer);
  } catch (err) {

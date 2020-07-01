@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment } from "react";
 
-import AuthContext from '../../context/auth/authContext';
-import ServerlistContext from '../../context/serverlists/serverlistContext';
-import ServerContext from '../../context/server/serverContext';
-import ModalContext from '../../context/modal/modalContext';
+import AuthContext from "../../context/auth/authContext";
+import ServerlistContext from "../../context/serverlists/serverlistContext";
+import ServerContext from "../../context/server/serverContext";
+import ModalContext from "../../context/modal/modalContext";
 
-import Modal from './Modal';
-import { Link } from 'react-router-dom';
+import Modal from "./Modal";
+import { Link } from "react-router-dom";
 
 const Serverlist = () => {
  //background = 'https://wallpaperplay.com/walls/full/e/0/3/21596.jpg';
@@ -65,9 +65,17 @@ const Serverlist = () => {
      <div className='bottomlists'>
       <div className='servers'>
        <ul>
+        <li key='addServer' onClick={displayModal}>
+         <div
+          className='serverimgsmall'
+          style={{
+           backgroundImage: "url('https://img.icons8.com/cotton/2x/plus.png')",
+          }}
+         ></div>
+        </li>
         {userServerList.map((server, i) => (
-         <Link to='/server' key={i}>
-          <li onClick={() => openServer(server)}>
+         <Link to='/server'>
+          <li key={i} onClick={() => openServer(server)}>
            <div
             className='serverimgsmall'
             style={{
@@ -77,14 +85,6 @@ const Serverlist = () => {
           </li>
          </Link>
         ))}
-        <li key='addServer' onClick={displayModal}>
-         <div
-          className='serverimgsmall'
-          style={{
-           backgroundImage: "url('https://img.icons8.com/cotton/2x/plus.png')",
-          }}
-         ></div>
-        </li>
        </ul>
       </div>
      </div>
