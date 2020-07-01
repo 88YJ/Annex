@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 
-import ServerContext from '../../context/server/serverContext';
 import io from 'socket.io-client';
 import AuthContext from '../../context/auth/authContext';
+import ProfileContext from '../../context/profile/profileContext';
 
 import TextContainer from '../chatbox/TextContainer';
 import Messages from '../chatbox/Messages';
@@ -13,14 +13,14 @@ import '../chatcss/Chat.css';
 
 let socket;
 
-const ServerPage = ({ location }) => {
+const DMChat = ({ location }) => {
  const authContext = useContext(AuthContext);
 
- const serverContext = useContext(ServerContext);
-
- const { server, displayServerSidebars } = serverContext;
+ const profileContext = useContext(ProfileContext);
 
  const { user } = authContext;
+
+ const { profile } = profileContext;
 
  const [name, setName] = useState('');
  const [room, setRoom] = useState('');
@@ -33,9 +33,13 @@ const ServerPage = ({ location }) => {
  useEffect(() => {
   //const { name } = queryString.parse(location.search);
 
+  let chatdir = [user._id, profile._id];
+
+  console.log(chatdir);
+
   let name = user.name;
   let profileimg = user.profilePicture;
-  let room = server._id;
+  let room = chatdir;
 
   socket = io(ENDPOINT);
 
@@ -70,7 +74,6 @@ const ServerPage = ({ location }) => {
 
  useEffect(() => {
   authContext.loadUser();
-  displayServerSidebars();
   // eslint-disable-next-line
  }, []);
 
@@ -92,7 +95,7 @@ const ServerPage = ({ location }) => {
  );
 };
 
-export default ServerPage;
+export default DMChat;
 
 /* <ul>
     {

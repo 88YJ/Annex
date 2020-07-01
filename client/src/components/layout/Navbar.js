@@ -1,8 +1,8 @@
-import React, { Fragment, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import AuthContext from "../../context/auth/authContext";
-import TwoBeLogo from "./TwoBeLogo.png";
+import React, { Fragment, useContext } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import AuthContext from '../../context/auth/authContext';
+import TwoBeLogo from './TwoBeLogo.png';
 
 const Navbar = ({ title, icon }) => {
  const authContext = useContext(AuthContext);
@@ -15,6 +15,12 @@ const Navbar = ({ title, icon }) => {
 
  const authLinks = (
   <Fragment>
+   <li>
+    <div
+     className='profilepicture'
+     style={{ backgroundImage: `url(${user && user.profilePicture})` }}
+    ></div>
+   </li>
    <li>
     <Link to='/'>{user && user.name}</Link>
    </li>
@@ -34,6 +40,9 @@ const Navbar = ({ title, icon }) => {
    </li>
    <li>
     <Link to='/findservers'>Find Servers</Link>
+   </li>
+   <li>
+    <Link to='/profilesearch'>ProfileSearch</Link>
    </li>
   </Fragment>
  );
@@ -69,7 +78,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
- title: "Annex",
+ title: 'Annex Prototype',
 };
 
 export default Navbar;

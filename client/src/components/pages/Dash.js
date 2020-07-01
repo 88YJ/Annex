@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from 'react';
 
-import AuthContext from "../../context/auth/authContext";
-import DashContext from "../../context/dash/dashContext";
-import GameContext from "../../context/games/gameContext";
-import ServerContext from "../../context/server/serverContext";
+import AuthContext from '../../context/auth/authContext';
+import DashContext from '../../context/dash/dashContext';
+import GameContext from '../../context/games/gameContext';
+import ServerContext from '../../context/server/serverContext';
 
 const Dash = () => {
  const authContext = useContext(AuthContext);
@@ -31,15 +31,15 @@ const Dash = () => {
  if (games !== null) {
   return (
    <div className='dashboard'>
-    <h1 className='center' style={{ color: "white" }}>
+    <h1 className='center' style={{ color: 'white' }}>
      Dashboard!
     </h1>
     <div className='dashGrid'>
      <div className='trendstream'>
       <h2 className='sticky'>Trending Streams For You!</h2>
       <ul>
-       {trendstream.map((trendstream) => (
-        <li key={trendstream._id}>
+       {trendstream.map((trendstream, i) => (
+        <li key={i}>
          <div
           className='dashimg'
           style={{
@@ -54,8 +54,8 @@ const Dash = () => {
      <div className='trendgames'>
       <h2 className='sticky'>Trending Games For You!</h2>
       <ul>
-       {trendgames.map((trendgames) => (
-        <li key={trendgames._id}>
+       {trendgames.map((trendgames, i) => (
+        <li key={i}>
          <div
           className='dashimg'
           style={{
@@ -89,15 +89,15 @@ const Dash = () => {
  } else {
   return (
    <div className='dashboard'>
-    <h1 className='center' style={{ color: "white" }}>
+    <h1 className='center' style={{ color: 'white' }}>
      Dashboard!
     </h1>
     <div className='dashGrid'>
      <div className='trendstream'>
       <h2 className='sticky'>Trending Streams For You!</h2>
       <ul>
-       {trendstream.map((trendstream) => (
-        <li key={trendstream._id}>
+       {trendstream.map((trendstream, i) => (
+        <li key={i}>
          <div
           className='dashimg'
           style={{
@@ -112,8 +112,8 @@ const Dash = () => {
      <div className='trendgames'>
       <h2 className='sticky'>Trending Games For You!</h2>
       <ul>
-       {trendgames.map((trendgames) => (
-        <li key={trendgames._id}>
+       {trendgames.map((trendgames, i) => (
+        <li key={i}>
          <div
           className='dashimg'
           style={{
@@ -128,8 +128,8 @@ const Dash = () => {
     </div>
     <div className='dashmygames'>
      <ul>
-      {trendgames.map((game) => (
-       <li key={game._id}>
+      {trendgames.map((game, i) => (
+       <li key={i}>
         <div
          className='dashmygamesimg'
          style={{

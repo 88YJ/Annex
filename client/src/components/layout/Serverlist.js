@@ -73,9 +73,9 @@ const Serverlist = () => {
           }}
          ></div>
         </li>
-        {userServerList.map((server) => (
+        {userServerList.map((server, i) => (
          <Link to='/server'>
-          <li key={server._id} onClick={() => openServer(server)}>
+          <li key={i} onClick={() => openServer(server)}>
            <div
             className='serverimgsmall'
             style={{
@@ -88,7 +88,7 @@ const Serverlist = () => {
        </ul>
       </div>
      </div>
-     <div>Stream</div>
+     <div className='rightbottom'>Stream</div>
     </div>
     <Modal />
    </Fragment>

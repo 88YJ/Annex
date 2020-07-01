@@ -1,25 +1,25 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const config = require("config");
-const { check, validationResult } = require("express-validator");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
+const { check, validationResult } = require('express-validator');
 
-const auth = require("../middleware/auth");
+const auth = require('../middleware/auth');
 
-const User = require("../models/User");
+const User = require('../models/User');
 
 // @route     POST api/users
 // @desc      Register a user
 // @access    Public
 router.post(
- "/",
+ '/',
  [
-  check("name", "Please enter Name").not().isEmpty(),
-  check("email", "Please enter a valid Email").isEmail(),
+  check('name', 'Please enter Name').not().isEmpty(),
+  check('email', 'Please enter a valid Email').isEmail(),
   check(
-   "password",
-   "Please enter a password with 6 or more characters"
+   'password',
+   'Please enter a password with 6 or more characters'
   ).isLength({ min: 6 }),
  ],
  async (req, res) => {
@@ -34,7 +34,7 @@ router.post(
    let user = await User.findOne({ email });
 
    if (user) {
-    return res.status(400).json({ msg: "User already exists" });
+    return res.status(400).json({ msg: 'User already exists' });
    }
    user = new User({
     name,
@@ -56,7 +56,7 @@ router.post(
 
    jwt.sign(
     payload,
-    config.get("jwtSecret"),
+    config.get('jwtSecret'),
     {
      expiresIn: 999999,
     },
@@ -67,13 +67,13 @@ router.post(
    );
   } catch (err) {
    console.error(err.message);
-   res.status(500).send("ServerErr");
+   res.status(500).send('ServerErr');
   }
  }
 );
 
 //Update User's server list
-router.put("/:id", auth, async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
  try {
   let updatedUser = await User.findByIdAndUpdate(req.user.id, {
    $addToSet: { serverList: req.params.id },
@@ -81,14 +81,14 @@ router.put("/:id", auth, async (req, res) => {
   res.json(updatedUser);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send("Server Err");
+  res.status(500).send('Server Err');
  }
 });
 
 //Get server users
-router.get("/:ids", auth, async (req, res) => {
+router.get('/:ids', auth, async (req, res) => {
  try {
-  const userIdsList = req.params.ids.split(",");
+  const userIdsList = req.params.ids.split(',');
 
   const userArray = await User.find({
    _id: { $in: userIdsList },
@@ -110,7 +110,31 @@ router.get("/:ids", auth, async (req, res) => {
   res.json(userInfoArray);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send("Server Err");
+  res.status(500).send('Server Err');
+ }
+});
+
+//Getting profiles
+router.get('/', auth, async (req, res) => {
+ try {
+  const allProfiles = await User.find();
+
+  let profileInfoArray = [];
+
+  allProfiles.forEach((user) => {
+   const { _id, name, email, profilePicture } = user;
+   const profileInfoObject = {
+    _id: _id,
+    name: name,
+    email: email,
+    profilePicture: profilePicture,
+   };
+   profileInfoArray.push(profileInfoObject);
+  });
+  res.json(profileInfoArray);
+ } catch (err) {
+  console.error(err.message);
+  res.status(500).send('Server Err');
  }
 });
 
