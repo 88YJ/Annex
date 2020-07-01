@@ -65,6 +65,14 @@ const Serverlist = () => {
      <div className='bottomlists'>
       <div className='servers'>
        <ul>
+        <li key='addServer' onClick={displayModal}>
+         <div
+          className='serverimgsmall'
+          style={{
+           backgroundImage: "url('https://img.icons8.com/cotton/2x/plus.png')",
+          }}
+         ></div>
+        </li>
         {userServerList.map((server) => (
          <Link to='/server'>
           <li key={server._id} onClick={() => openServer(server)}>
@@ -77,14 +85,6 @@ const Serverlist = () => {
           </li>
          </Link>
         ))}
-        <li key='addServer' onClick={displayModal}>
-         <div
-          className='serverimgsmall'
-          style={{
-           backgroundImage: "url('https://img.icons8.com/cotton/2x/plus.png')",
-          }}
-         ></div>
-        </li>
        </ul>
       </div>
      </div>

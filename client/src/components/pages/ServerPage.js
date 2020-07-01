@@ -8,7 +8,7 @@ const ServerPage = () => {
 
  const serverContext = useContext(ServerContext);
 
- const { server, displayServerSidebars, getUserList } = serverContext;
+ const { server, displayServerSidebars } = serverContext;
 
  useEffect(() => {
   authContext.loadUser();
