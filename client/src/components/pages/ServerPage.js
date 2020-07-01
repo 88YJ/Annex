@@ -1,8 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import ServerContext from '../../context/server/serverContext';
 import io from 'socket.io-client';
 import AuthContext from '../../context/auth/authContext';
+import ChatContext from '../../context/chat/chatContext';
 
 import TextContainer from '../chatbox/TextContainer';
 import Messages from '../chatbox/Messages';
@@ -12,6 +14,10 @@ import Input from '../chatbox/Input';
 import '../chatcss/Chat.css';
 
 let socket;
+
+export function refresh() {
+ //window.location.reload(false);
+}
 
 const ServerPage = ({ location }) => {
  const authContext = useContext(AuthContext);
@@ -29,13 +35,24 @@ const ServerPage = ({ location }) => {
  const [message, setMessage] = useState('');
  const [messages, setMessages] = useState([]);
  const ENDPOINT = ':5002';
-
  useEffect(() => {
-  //const { name } = queryString.parse(location.search);
+  if (socket) {
+   socket.disconnect();
+  }
+  let name;
+  let profileimg;
+  let room;
 
-  let name = user.name;
-  let profileimg = user.profilePicture;
-  let room = server._id;
+  //const { name } = queryString.parse(location.search);
+  if (user) {
+   name = user.name;
+   profileimg = user.profilePicture;
+   room = server._id;
+  } else {
+   name = 'youre not supposed to be here';
+   profileimg = 'lol';
+   room = 'haha';
+  }
 
   socket = io(ENDPOINT);
 
@@ -73,23 +90,27 @@ const ServerPage = ({ location }) => {
   displayServerSidebars();
   // eslint-disable-next-line
  }, []);
-
- return (
-  <div>
-   <div className='outerContainer'>
-    <div className='container'>
-     <InfoBar room={room} />
-     <Messages messages={messages} name={name} />
-     <Input
-      message={message}
-      setMessage={setMessage}
-      sendMessage={sendMessage}
-     />
+ if (!user) {
+  console.log('nothing to return');
+  return <div></div>;
+ } else {
+  return (
+   <div>
+    <div className='outerContainer'>
+     <div className='container'>
+      <InfoBar room={room} />
+      <Messages messages={messages} name={name} />
+      <Input
+       message={message}
+       setMessage={setMessage}
+       sendMessage={sendMessage}
+      />
+     </div>
+     <TextContainer users={users} />
     </div>
-    <TextContainer users={users} />
    </div>
-  </div>
- );
+  );
+ }
 };
 
 export default ServerPage;

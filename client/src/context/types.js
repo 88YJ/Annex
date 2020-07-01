@@ -23,3 +23,6 @@ export const HIDE_MODAL = 'HIDE_MODAL';
 export const GET_MESSAGE = 'GET_MESSAGE';
 export const GET_PROFILE = 'GET_PROFILE';
 export const SET_PROFILE = 'SET_PROFILE';
+export const SET_CONNECT_TRUE = 'SET_CONNECT_TRUE';
+export const SET_CONNECT_FALSE = 'SET_CONNECT_FALSE';
+export const INITIAL_CONNECT = 'INITIAL_CONNECT';
