@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '../chatcss/Input.css';
-
 const Input = ({ setMessage, sendMessage, message }) => (
  <form className='form'>
   <input

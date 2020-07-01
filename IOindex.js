@@ -18,8 +18,6 @@ io.on('connect', (socket) => {
  socket.on('join', ({ name, room, profileimg }, callback) => {
   const { error, user } = addUser({ id: socket.id, name, profileimg, room });
 
-  console.log(user);
-
   if (error) return callback(error);
   socket.join(user.room);
   /*socket.emit('message', {
@@ -55,9 +53,11 @@ io.on('connect', (socket) => {
   const user = removeUser(socket.id);
 
   if (user) {
-   io
-    .to(user.room)
-    .emit('message', { user: 'Admin', text: `${user.name} has left.` });
+   io.to(user.room).emit('message', {
+    user: 'Admin',
+    profileimg: user.profileimg,
+    text: `${user.name} has left.`,
+   });
    io
     .to(user.room)
     .emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });

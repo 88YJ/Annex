@@ -4,8 +4,6 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 
 import Message from './Message';
 
-import '../chatcss/Messages.css';
-
 const Messages = ({ messages, name }) => (
  <ScrollToBottom className='messages'>
   {messages.map((message, i) => (

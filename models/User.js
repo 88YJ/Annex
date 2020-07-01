@@ -29,6 +29,10 @@ const UserSchema = mongoose.Schema({
   default:
    'https://www.digitalconfectioners.com/wp-content/uploads/2016/11/dc-default-profile.png',
  },
+ backgroundPicture: {
+  type: String,
+  default: 'https://cdn.wallpapersafari.com/16/42/BYjicP.jpg',
+ },
 });
 
 module.exports = mongoose.model('user', UserSchema);

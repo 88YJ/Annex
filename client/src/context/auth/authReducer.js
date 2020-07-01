@@ -12,6 +12,7 @@ import {
 export default (state, action) => {
  switch (action.type) {
   case USER_LOADED:
+   localStorage.setItem('profilepic', action.payload.backgroundPicture);
    return {
     ...state,
     isAuthenticated: true,

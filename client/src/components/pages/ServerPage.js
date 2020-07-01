@@ -1,19 +1,19 @@
-import React, { useState, useContext, useEffect, Component } from "react";
-import { Redirect } from "react-router-dom";
+import React, { useState, useContext, useEffect, Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
-import ServerContext from "../../context/server/serverContext";
-import io from "socket.io-client";
-import AuthContext from "../../context/auth/authContext";
-import ChatContext from "../../context/chat/chatContext";
+import ServerContext from '../../context/server/serverContext';
+import io from 'socket.io-client';
+import AuthContext from '../../context/auth/authContext';
+import ChatContext from '../../context/chat/chatContext';
 
-import TextContainer from "../chatbox/TextContainer";
-import Messages from "../chatbox/Messages";
-import InfoBar from "../chatbox/InfoBar";
-import Input from "../chatbox/Input";
-
-import "../chatcss/Chat.css";
+import TextContainer from '../chatbox/TextContainer';
+import Messages from '../chatbox/Messages';
+import InfoBar from '../chatbox/InfoBar';
+import Input from '../chatbox/Input';
 
 let socket;
+
+let red = false;
 
 export function refresh() {
  //window.location.reload(false);
@@ -28,13 +28,13 @@ const ServerPage = ({ location }) => {
 
  const { user } = authContext;
 
- const [name, setName] = useState("");
- const [room, setRoom] = useState("");
- const [profileimg, setprofileimg] = useState("");
- const [users, setUsers] = useState("");
- const [message, setMessage] = useState("");
+ const [name, setName] = useState('');
+ const [room, setRoom] = useState('');
+ const [profileimg, setprofileimg] = useState('');
+ const [users, setUsers] = useState('');
+ const [message, setMessage] = useState('');
  const [messages, setMessages] = useState([]);
- const ENDPOINT = ":5002";
+ const ENDPOINT = ':5002';
 
  useEffect(() => {
   if (socket) {
@@ -49,10 +49,12 @@ const ServerPage = ({ location }) => {
    name = user.name;
    profileimg = user.profilePicture;
    room = server._id;
+   red = false;
   } else {
-   name = "youre not supposed to be here";
-   profileimg = "lol";
-   room = "haha";
+   name = 'youre not supposed to be here';
+   profileimg = 'lol';
+   room = 'haha';
+   red = true;
   }
 
   socket = io(ENDPOINT);
@@ -61,7 +63,7 @@ const ServerPage = ({ location }) => {
   setName(name);
   setprofileimg(profileimg);
 
-  socket.emit("join", { name, room, profileimg }, (error) => {
+  socket.emit('join', { name, room, profileimg }, (error) => {
    if (error) {
     alert(error);
    }
@@ -69,11 +71,11 @@ const ServerPage = ({ location }) => {
  }, [ENDPOINT, location.search]);
 
  useEffect(() => {
-  socket.on("message", (message) => {
+  socket.on('message', (message) => {
    setMessages((messages) => [...messages, message]);
   });
 
-  socket.on("roomData", ({ users }) => {
+  socket.on('roomData', ({ users }) => {
    setUsers(users);
   });
  }, []);
@@ -82,7 +84,7 @@ const ServerPage = ({ location }) => {
   event.preventDefault();
 
   if (message) {
-   socket.emit("sendMessage", message, () => setMessage(""));
+   socket.emit('sendMessage', message, () => setMessage(''));
   }
  };
 
@@ -91,15 +93,17 @@ const ServerPage = ({ location }) => {
   displayServerSidebars();
   // eslint-disable-next-line
  }, []);
- if (!user) {
-  console.log("nothing to return");
+ if (red) {
+  console.log('nothing to return');
   return <div></div>;
  } else {
   return (
-   <div>
-    <div className='outerContainer'>
-     <div className='container'>
-      <InfoBar room={room} />
+   <div className='chat' style={{ backgroundImage: `url(${server.img})` }}>
+    <div className='channelname'>
+     <h1>{server.name}</h1>
+    </div>
+    <div className='chatbox'>
+     <div className='chatcontainer'>
       <Messages messages={messages} name={name} />
       <Input
        message={message}
