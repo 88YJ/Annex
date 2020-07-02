@@ -23,20 +23,24 @@ const Navbar = ({ title, icon }) => {
    </li>
    <li>
     <Link to='/'>{user && user.name}</Link>
-   </li>
-   <li>
-    <a onClick={onLogout} href='#!'>
-     <span>Logout</span>
-    </a>
+    <div className='subMenu'>
+     <ul>
+      <li>
+       <Link to='/'>My Profile</Link>
+      </li>
+      <li>
+       <a onClick={onLogout} href='#!'>
+        <span>Logout</span>
+       </a>
+      </li>
+     </ul>
+    </div>
    </li>
    <li>
     <Link to='/store'>Store</Link>
    </li>
    <li>
     <Link to='/stream'>Stream</Link>
-   </li>
-   <li>
-    <Link to='/chat'>Chat</Link>
    </li>
    <li>
     <Link to='/findservers'>Find Servers</Link>

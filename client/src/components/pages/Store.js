@@ -8,24 +8,41 @@ import GameContext from '../../context/games/gameContext';
 
 import ServerContext from '../../context/server/serverContext';
 
+import StoreContext from '../../context/store/storeContext';
+
+import GameStoreContext from '../../context/gamestorepage/gamestoreContext';
+
 const Store = () => {
  const authContext = useContext(AuthContext);
 
  const gameContext = useContext(GameContext);
 
+ const storeContext = useContext(StoreContext);
+
  const serverContext = useContext(ServerContext);
+
+ const gamestoreContext = useContext(GameStoreContext);
 
  const { hideServerSidebars } = serverContext;
 
  const { displayGamesSidebar, getGames } = gameContext;
+
+ const { storegames, getStoreGames } = storeContext;
+
+ const { setCurrentGame } = gamestoreContext;
 
  useEffect(() => {
   authContext.loadUser();
   displayGamesSidebar();
   hideServerSidebars();
   getGames();
+  getStoreGames();
   // eslint-disable-next-line
  }, []);
+
+ function openGamePage(games) {
+  setCurrentGame(games);
+ }
 
  return (
   <Fragment>
@@ -54,186 +71,19 @@ const Store = () => {
    </div>
    <div className='storepage'>
     <ul>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
-     <li>
-      <div
-       className='dashmygamesimg'
-       style={{
-        backgroundImage: `url('https://images3.alphacoders.com/835/thumb-1920-83519.jpg')`,
-       }}
-      ></div>
-      Halo Wars
-     </li>
+     {storegames.map((games, i) => (
+      <Link to='/storegamepage' key={i}>
+       <li onClick={() => openGamePage(games)}>
+        <div
+         className='dashmygamesimg'
+         style={{
+          backgroundImage: `url(${games.img})`,
+         }}
+        ></div>
+        <h3 className='center wrap'>{games.name}</h3>
+       </li>
+      </Link>
+     ))}
     </ul>
    </div>
   </Fragment>
