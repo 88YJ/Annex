@@ -26,21 +26,37 @@ const StoreGamePage = () => {
  }
 
  return (
-  <div>
-   <ul>
-    {
-     <li key={gamepage._id}>
-      <div
-       className='dashimg'
-       style={{
-        backgroundImage: `url(${gamepage.img})`,
-       }}
-      ></div>
-      <h3 className='center'>{gamepage.name}</h3>
-     </li>
-    }
-   </ul>
-   <button onClick={add}>Add to cart</button>
+  <div
+   className='gamestorepage'
+   style={{
+    backgroundImage: `url(${gamepage.img})`,
+   }}
+  >
+   <div className='film'>
+    <div className='storepagecomponents'>
+     <h1 className='center'>{gamepage.name}</h1>
+     <div className='storepagecomponent1'>
+      <div className='storepagecomponent2'>
+       <div
+        className='gamestorepageimg'
+        style={{
+         backgroundImage: `url(${gamepage.img})`,
+        }}
+       ></div>
+       <p>Game Discription</p>
+      </div>
+      <div className='storepagecomponent2'>
+       <div>
+        Rating out of 5:
+        <button onClick={add} className='addcartbutton'>
+         Add to cart
+        </button>
+       </div>
+       <div>Review Comments</div>
+      </div>
+     </div>
+    </div>
+   </div>
   </div>
  );
 };

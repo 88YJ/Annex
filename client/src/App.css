@@ -350,3 +350,46 @@
  text-decoration: none;
  color: red;
 }
+.gamestorepage {
+ height: 100%;
+ width: 100%;
+ background-position: center;
+ background-size: cover;
+}
+.film {
+ height: 100%;
+ width: 100%;
+ background-color: rgb(0, 4, 17, 0.8);
+}
+.gamestorepageimg {
+ width: 95%;
+ height: 100%;
+ background-position: center;
+ background-size: cover;
+}
+.storepagecomponents {
+ height: 100%;
+ width: 100%;
+ display: grid;
+ grid-template-rows: 6% 94%;
+}
+.storepagecomponents div {
+ border: white 1px solid;
+}
+.storepagecomponent1 {
+ height: 100%;
+ width: 100%;
+ display: grid;
+ grid-template-rows: 50% 50%;
+}
+.storepagecomponent2 {
+ height: 100%;
+ width: 100%;
+ display: grid;
+ grid-template-columns: 50% 50%;
+}
+.addcartbutton {
+ position: fixed;
+ bottom: 0;
+ right: 0;
+}
