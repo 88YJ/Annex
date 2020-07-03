@@ -8,6 +8,7 @@ const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
 
 const User = require("../models/User");
+const Server = require("../models/Servers");
 
 // @route     POST api/users
 // @desc      Register a user
@@ -86,26 +87,23 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 //Get server users
-router.get("/:ids", auth, async (req, res) => {
+router.get("/:server_id", auth, async (req, res) => {
  try {
-  const userIdsList = req.params.ids.split(",");
+  const currentServer = await Server.findById(req.params.server_id);
+  const { userList } = currentServer;
 
-  const userArray = await User.find({
-   _id: { $in: userIdsList },
-  });
+  let users = [];
+  for (const id of userList) {
+   const user = await User.findById(id);
 
-  let userInfoArray = [];
-
-  userArray.forEach((user) => {
-   const { name, email } = user;
    const userInfoObject = {
-    name: name,
-    email: email,
+    name: user.name,
+    email: user.email,
    };
-   userInfoArray.push(userInfoObject);
-  });
+   users.push(userInfoObject);
+  }
 
-  res.json(userInfoArray);
+  res.json(users);
  } catch (err) {
   console.error(err.message);
   res.status(500).send("Server Err");

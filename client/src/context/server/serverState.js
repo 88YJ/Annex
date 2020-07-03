@@ -48,20 +48,43 @@ const ServerState = (props) => {
  const setCurrentServer = async (server) => {
   try {
    dispatch({ type: SET_CURRENT_SERVER, payload: server });
-   getUserList(server.userList);
-   getServerChannels(server.channelList);
+   getUserList(server._id);
+   getServerChannels(server._id);
   } catch (err) {
    console.log("Couldn't find server");
   }
  };
 
  // Get server userlist
- const getUserList = async (userIds) => {
+ const getUserList = async (serverID) => {
   try {
-   const res = await Axios.get(`/api/users/${userIds}`, config);
+   const res = await Axios.get(`/api/users/${serverID}`, config);
    dispatch({ type: GET_SERVER_USERLIST, payload: res.data });
   } catch (err) {
    console.log("No users in the server");
+  }
+ };
+
+ // Get server channels
+ const getServerChannels = async (serverID) => {
+  try {
+   const res = await Axios.get(`/api/servers/channels/all/${serverID}`, config);
+   dispatch({ type: GET_SERVER_CHANNELLIST, payload: res.data });
+  } catch (err) {
+   console.log("Failed to get channels");
+  }
+ };
+
+ const updateServerChannelList = async (channelId) => {
+  try {
+   const res = await Axios.put(
+    `/api/servers/channels/${channelId}`,
+    state.server,
+    config
+   );
+   getServerChannels(res.data._id);
+  } catch (err) {
+   console.log("Failed to create channel");
   }
  };
 
@@ -69,21 +92,10 @@ const ServerState = (props) => {
  const createChannel = async (channel) => {
   try {
    const res = await Axios.post(`/api/servers/channels`, channel, config);
+   console.log("Channel id: " + res.data._id);
+   updateServerChannelList(res.data._id);
   } catch (err) {
    console.log("Failed to create channel");
-  }
- };
-
- // Get server userlist
- const getServerChannels = async (channelIds) => {
-  try {
-   const res = await Axios.get(
-    `/api/servers/channels/all/${channelIds}`,
-    config
-   );
-   dispatch({ type: GET_SERVER_CHANNELLIST, payload: res.data });
-  } catch (err) {
-   console.log("Failed to get channels");
   }
  };
 

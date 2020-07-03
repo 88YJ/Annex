@@ -19,6 +19,7 @@ app.use("/api/servers/channels", require("./routes/channels"));
 app.use("/api/games", require("./routes/games"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/contacts", require("./routes/contacts"));
+app.use("/api/storegames", require("./routes/storegames"));
 
 const PORT = process.env.PORT || 5000;
 

@@ -11,72 +11,8 @@ const DashState = (props) => {
     name: 'Halo 4',
     img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
    },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
-   {
-    name: 'Halo 4',
-    img: 'https://cdn.wallpapersafari.com/47/20/FKDxr4.jpg',
-   },
   ],
   trendstream: [
-   {
-    name: 'Ninja',
-    img: 'https://a.espncdn.com/photo/2018/0917/r432464_1600x800cc.jpg',
-   },
-   {
-    name: 'Ninja',
-    img: 'https://a.espncdn.com/photo/2018/0917/r432464_1600x800cc.jpg',
-   },
-   {
-    name: 'Ninja',
-    img: 'https://a.espncdn.com/photo/2018/0917/r432464_1600x800cc.jpg',
-   },
-   {
-    name: 'Ninja',
-    img: 'https://a.espncdn.com/photo/2018/0917/r432464_1600x800cc.jpg',
-   },
-   {
-    name: 'Ninja',
-    img: 'https://a.espncdn.com/photo/2018/0917/r432464_1600x800cc.jpg',
-   },
    {
     name: 'Ninja',
     img: 'https://a.espncdn.com/photo/2018/0917/r432464_1600x800cc.jpg',

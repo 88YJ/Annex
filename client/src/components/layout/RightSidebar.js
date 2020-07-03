@@ -2,6 +2,7 @@ import React, { useContext, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import GameContext from '../../context/games/gameContext';
 import ServerContext from '../../context/server/serverContext';
+import StoreCartContext from '../../context/storecart/storecartContext';
 
 import AuthContext from '../../context/auth/authContext';
 
@@ -10,11 +11,15 @@ const RightSidebar = () => {
 
  const gameContext = useContext(GameContext);
 
+ const storecartContext = useContext(StoreCartContext);
+
  const serverContext = useContext(ServerContext);
 
  const { serverSidebar, serverUserList } = serverContext;
 
  const { games, gamesSidebar } = gameContext;
+
+ const { gamescart, cartSidebar } = storecartContext;
 
  useEffect(() => {
   authContext.loadUser();
@@ -34,6 +39,27 @@ const RightSidebar = () => {
         </li>
        ))}
       </ul>
+     </div>
+    </div>
+   </Fragment>
+  );
+ } else if (cartSidebar) {
+  return (
+   <Fragment>
+    <div className='cartlist'>
+     <h3>Cart:</h3>
+     <div className='cart'>
+      <ul>
+       {gamescart.map((cart, i) => (
+        <li key={i}>
+         <Link to='/'>{cart.name}</Link>
+        </li>
+       ))}
+      </ul>
+      <br />
+      <Link className='gotocart' to='/cart'>
+       Go To Cart
+      </Link>
      </div>
     </div>
    </Fragment>

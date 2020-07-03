@@ -32,7 +32,7 @@ const CreateChannelForm = () => {
    <h2>Create a Channel</h2>
    <input
     type='text'
-    placeholder='Sever Name'
+    placeholder='Channel Name'
     name='name'
     value={name}
     onChange={onChange}

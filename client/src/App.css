@@ -25,6 +25,24 @@
  display: grid;
  grid-template-columns: 250px auto;
 }
+.Navlower ul li:hover .subMenu {
+ display: block;
+ position: absolute;
+ background-color: rgb(0, 4, 17, 1);
+ margin-top: -10px;
+ margin-left: 15px;
+ padding-bottom: 0;
+ border-radius: 8px;
+ border-bottom: red 1px solid;
+ border-right: red 1px solid;
+ border-left: red 1px solid;
+}
+
+.subMenu {
+ display: none;
+ min-width: 70px;
+}
+
 .Nav h1 {
  background-color: black;
 }
@@ -52,6 +70,12 @@
 .Nav a:hover {
  border: red 1px solid;
  color: red;
+}
+
+.subMenu a {
+ font-size: 15px;
+ color: white;
+ margin: 6px;
 }
 
 .container {
@@ -176,6 +200,7 @@
 .dash {
  color: red;
  height: 100%;
+ background-color: rgb(0, 4, 17, 0.3);
 }
 .dashboard {
  height: 100%;
@@ -238,6 +263,22 @@
 }
 .dashmygamesimg:hover {
  border: gold 1px solid;
+}
+.dashmygames ul li:hover .gamesubmenu {
+ display: block;
+ position: inherit;
+ background-color: rgb(0, 4, 17, 1);
+ margin-left: 0px;
+ margin-top: 190px;
+ padding-bottom: 0;
+ text-align: center;
+ border-radius: 8px;
+}
+
+.gamesubmenu {
+ display: none;
+ min-width: 70px;
+ color: white;
 }
 
 .sticky {
@@ -305,100 +346,7 @@
  margin-left: 10px;
  padding-bottom: 12px;
 }
-
-.modal {
- display: block; /* Hidden by default */
- position: fixed; /* Stay in place */
- z-index: 1; /* Sit on top */
- padding-top: 100px; /* Location of the box */
- left: 0;
- top: 0;
- width: 100%; /* Full width */
- height: 100%; /* Full height */
- overflow: auto; /* Enable scroll if needed */
- background-color: rgb(0, 0, 0); /* Fallback color */
- background-color: rgb(0, 4, 17, 0.5); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
- background-color: #000411;
- color: red;
- margin: auto;
- padding: 20px;
- border: 1px solid #888;
- width: 30%;
- text-align: center;
-}
-
-/* The Close Button */
-.close {
- color: red;
- float: right;
- font-size: 28px;
- font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
- color: #aaaaaa;
- text-decoration: none;
- cursor: pointer;
-}
-
-.chat {
- height: 100%;
- display: grid;
- grid-template-rows: 5% 85% 10%;
- background: rgb(0, 4, 17, 0.7);
-}
-.chatbox {
- border: white 1px solid;
- color: grey;
- overflow-y: scroll;
-}
-.chatbox ul {
- text-align: left;
- padding: 5px;
- margin: 5px;
-}
-.messages {
- width: 100%;
- margin: 0;
- padding: 0;
- border: rgb(0, 0, 0, 0) 1px solid;
-}
-.messages:hover {
- background: rgba(125, 125, 126, 0.5);
-}
-.sendingmessage {
- width: 98%;
- padding: 2px;
- margin: 5px;
- background-color: black;
- color: red;
- outline: none;
-}
-
-.serverfind {
- overflow-y: scroll;
- height: 100%;
-}
-.profilefind {
- overflow-y: scroll;
- height: 100%;
-}
-.profilefind ul {
- list-style: none;
-}
-.profilefind a {
+.storepage a {
  text-decoration: none;
  color: red;
-}
-
-.profilepicture {
- height: 45px;
- width: 45px;
- background-size: cover;
- background-position: center;
 }
