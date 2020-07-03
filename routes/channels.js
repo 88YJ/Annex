@@ -3,14 +3,13 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const { check, validationResult } = require("express-validator");
 
-const User = require("../models/User");
 const Server = require("../models/Servers");
 const Channel = require("../models/Channel");
 
 //Get all channels
-router.get("/", auth, async (req, res) => {
+router.get("/all/:server_id", auth, async (req, res) => {
  try {
-  const currentServer = await Server.findById(req.params.id);
+  const currentServer = await Server.findById(req.params.server_id);
   const { channelList } = currentServer;
 
   let channels = [];
@@ -43,6 +42,7 @@ router.get("/:channel_id", auth, async (req, res) => {
  }
 });
 
+//Post a new channel to the current server
 router.post(
  "/",
  [auth, [check("name", "Name is required").not().isEmpty()]],
@@ -61,19 +61,26 @@ router.post(
     owner: owner,
    });
 
-   const channel = await newChannel.save();
-   let updatedServer = await Server.findByIdAndUpdate(owner, {
-    $addToSet: { channelList: channel._id },
-   });
-
-   updatedServer.save();
-
-   res.json(channel);
+   res.json(await newChannel.save());
   } catch (err) {
    console.error(err.message);
    res.status(500).send("Server Err");
   }
  }
 );
+
+//Update server channel list
+router.put("/:id", auth, async (req, res) => {
+ try {
+  const updatedServer = await Server.findByIdAndUpdate(req.body._id, {
+   $addToSet: { channelList: req.params.id },
+  });
+
+  res.json(updatedServer);
+ } catch (err) {
+  console.error(err.message);
+  res.status(500).send("Server Err");
+ }
+});
 
 module.exports = router;

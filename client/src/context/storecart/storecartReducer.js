@@ -1,4 +1,4 @@
-import { DISPLAY_CART_SIDEBAR, HIDE_CART_SIDEBAR, ADD_TO_CART } from '../types';
+import { DISPLAY_CART_SIDEBAR, HIDE_CART_SIDEBAR, ADD_TO_CART } from "../types";
 
 export default (state, action) => {
  switch (action.type) {

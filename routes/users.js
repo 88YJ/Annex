@@ -1,25 +1,26 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const { check, validationResult } = require('express-validator');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const { check, validationResult } = require("express-validator");
 
-const auth = require('../middleware/auth');
+const auth = require("../middleware/auth");
 
-const User = require('../models/User');
+const User = require("../models/User");
+const Server = require("../models/Servers");
 
 // @route     POST api/users
 // @desc      Register a user
 // @access    Public
 router.post(
- '/',
+ "/",
  [
-  check('name', 'Please enter Name').not().isEmpty(),
-  check('email', 'Please enter a valid Email').isEmail(),
+  check("name", "Please enter Name").not().isEmpty(),
+  check("email", "Please enter a valid Email").isEmail(),
   check(
-   'password',
-   'Please enter a password with 6 or more characters'
+   "password",
+   "Please enter a password with 6 or more characters"
   ).isLength({ min: 6 }),
  ],
  async (req, res) => {
@@ -34,7 +35,7 @@ router.post(
    let user = await User.findOne({ email });
 
    if (user) {
-    return res.status(400).json({ msg: 'User already exists' });
+    return res.status(400).json({ msg: "User already exists" });
    }
    user = new User({
     name,
@@ -56,7 +57,7 @@ router.post(
 
    jwt.sign(
     payload,
-    config.get('jwtSecret'),
+    config.get("jwtSecret"),
     {
      expiresIn: 999999,
     },
@@ -67,13 +68,13 @@ router.post(
    );
   } catch (err) {
    console.error(err.message);
-   res.status(500).send('ServerErr');
+   res.status(500).send("ServerErr");
   }
  }
 );
 
 //Update User's server list
-router.put('/:id', auth, async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
  try {
   let updatedUser = await User.findByIdAndUpdate(req.user.id, {
    $addToSet: { serverList: req.params.id },
@@ -81,41 +82,36 @@ router.put('/:id', auth, async (req, res) => {
   res.json(updatedUser);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
 //Get server users
-router.get('/:ids', auth, async (req, res) => {
+router.get("/:server_id", auth, async (req, res) => {
  try {
-  const userIdsList = req.params.ids.split(',');
+  const currentServer = await Server.findById(req.params.server_id);
+  const { userList } = currentServer;
 
-  const userArray = await User.find({
-   _id: { $in: userIdsList },
-  });
+  let users = [];
+  for (const id of userList) {
+   const user = await User.findById(id);
 
-  let userInfoArray = [];
-
-  userArray.forEach((user) => {
-   const { name, email } = user;
    const userInfoObject = {
-    name: name,
-    email: email,
+    name: user.name,
+    email: user.email,
    };
-   userInfoArray.push(userInfoObject);
-  });
+   users.push(userInfoObject);
+  }
 
-  console.log(userInfoArray);
-
-  res.json(userInfoArray);
+  res.json(users);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
 //Getting profiles
-router.get('/', auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
  try {
   const allProfiles = await User.find();
 
@@ -134,7 +130,7 @@ router.get('/', auth, async (req, res) => {
   res.json(profileInfoArray);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 

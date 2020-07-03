@@ -19,7 +19,7 @@ const CreateChannelForm = () => {
 
  const onSubmit = (e) => {
   e.preventDefault();
-  createChannel(server, channel);
+  createChannel(channel);
   setChannel({
    name: "",
    voiceChannel: false,
@@ -32,7 +32,7 @@ const CreateChannelForm = () => {
    <h2>Create a Channel</h2>
    <input
     type='text'
-    placeholder='Sever Name'
+    placeholder='Channel Name'
     name='name'
     value={name}
     onChange={onChange}

@@ -6,6 +6,7 @@ import {
  DISPLAY_SERVER_SIDEBARS,
  HIDE_SERVER_SIDEBARS,
  GET_SERVER_USERLIST,
+ GET_SERVER_CHANNELLIST,
 } from "../types";
 import Axios from "axios";
 
@@ -17,6 +18,7 @@ const ServerState = (props) => {
   serverLogo: Logo,
   serverSidebar: false,
   serverUserList: [],
+  serverChannelList: [],
  };
 
  const config = {
@@ -46,33 +48,52 @@ const ServerState = (props) => {
  const setCurrentServer = async (server) => {
   try {
    dispatch({ type: SET_CURRENT_SERVER, payload: server });
-   getUserList(server.userList);
+   getUserList(server._id);
+   getServerChannels(server._id);
   } catch (err) {
    console.log("Couldn't find server");
   }
  };
 
  // Get server userlist
- const getUserList = async (UserIds) => {
+ const getUserList = async (serverID) => {
   try {
-   const res = await Axios.get(`/api/users/${UserIds}`, config);
+   const res = await Axios.get(`/api/users/${serverID}`, config);
    dispatch({ type: GET_SERVER_USERLIST, payload: res.data });
   } catch (err) {
    console.log("No users in the server");
   }
  };
 
- //Create a channel
- const createChannel = async (server, channel) => {
+ // Get server channels
+ const getServerChannels = async (serverID) => {
   try {
-   console.log(server._id);
-   const res = await Axios.post(
-    `/api/servers/${server._id}/channels`,
-    channel,
+   const res = await Axios.get(`/api/servers/channels/all/${serverID}`, config);
+   dispatch({ type: GET_SERVER_CHANNELLIST, payload: res.data });
+  } catch (err) {
+   console.log("Failed to get channels");
+  }
+ };
+
+ const updateServerChannelList = async (channelId) => {
+  try {
+   const res = await Axios.put(
+    `/api/servers/channels/${channelId}`,
+    state.server,
     config
    );
+   getServerChannels(res.data._id);
+  } catch (err) {
+   console.log("Failed to create channel");
+  }
+ };
 
-   console.log(res);
+ //Create a channel
+ const createChannel = async (channel) => {
+  try {
+   const res = await Axios.post(`/api/servers/channels`, channel, config);
+   console.log("Channel id: " + res.data._id);
+   updateServerChannelList(res.data._id);
   } catch (err) {
    console.log("Failed to create channel");
   }
@@ -85,11 +106,13 @@ const ServerState = (props) => {
     serverLogo: state.serverLogo,
     serverSidebar: state.serverSidebar,
     serverUserList: state.serverUserList,
+    serverChannelList: state.serverChannelList,
     setCurrentServer,
     displayServerSidebars,
     hideServerSidebars,
     getUserList,
     createChannel,
+    getServerChannels,
    }}
   >
    {props.children}

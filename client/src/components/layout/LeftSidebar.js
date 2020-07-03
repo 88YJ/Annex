@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import ServerContext from "../../context/server/serverContext";
 import ModalContext from "../../context/modal/modalContext";
@@ -11,7 +11,7 @@ const LeftSidebar = () => {
 
  const modalContext = useContext(ModalContext);
 
- const { server, serverSidebar } = serverContext;
+ const { server, serverSidebar, serverChannelList } = serverContext;
 
  const { showModalWithAddChannel } = modalContext;
 
@@ -30,6 +30,11 @@ const LeftSidebar = () => {
     <div className='serverchannels'>
      <h3 className='center'>{server.name}</h3>
      <ul>
+      {serverChannelList.map((channel, i) => (
+       <li key={i}>
+        <Link to='/'>{channel.name}</Link>
+       </li>
+      ))}
       <li key='addServer' onClick={displayModal}>
        <div
         className='serverimgsmall'
