@@ -6,6 +6,7 @@ import {
  DISPLAY_SERVER_SIDEBARS,
  HIDE_SERVER_SIDEBARS,
  GET_SERVER_USERLIST,
+ GET_SERVER_CHANNELLIST,
 } from "../types";
 import Axios from "axios";
 
@@ -17,6 +18,7 @@ const ServerState = (props) => {
   serverLogo: Logo,
   serverSidebar: false,
   serverUserList: [],
+  serverChannelList: [],
  };
 
  const config = {
@@ -47,15 +49,16 @@ const ServerState = (props) => {
   try {
    dispatch({ type: SET_CURRENT_SERVER, payload: server });
    getUserList(server.userList);
+   getServerChannels(server.channelList);
   } catch (err) {
    console.log("Couldn't find server");
   }
  };
 
  // Get server userlist
- const getUserList = async (UserIds) => {
+ const getUserList = async (userIds) => {
   try {
-   const res = await Axios.get(`/api/users/${UserIds}`, config);
+   const res = await Axios.get(`/api/users/${userIds}`, config);
    dispatch({ type: GET_SERVER_USERLIST, payload: res.data });
   } catch (err) {
    console.log("No users in the server");
@@ -63,18 +66,24 @@ const ServerState = (props) => {
  };
 
  //Create a channel
- const createChannel = async (server, channel) => {
+ const createChannel = async (channel) => {
   try {
-   console.log(server._id);
-   const res = await Axios.post(
-    `/api/servers/${server._id}/channels`,
-    channel,
-    config
-   );
-
-   console.log(res);
+   const res = await Axios.post(`/api/servers/channels`, channel, config);
   } catch (err) {
    console.log("Failed to create channel");
+  }
+ };
+
+ // Get server userlist
+ const getServerChannels = async (channelIds) => {
+  try {
+   const res = await Axios.get(
+    `/api/servers/channels/all/${channelIds}`,
+    config
+   );
+   dispatch({ type: GET_SERVER_CHANNELLIST, payload: res.data });
+  } catch (err) {
+   console.log("Failed to get channels");
   }
  };
 
@@ -85,11 +94,13 @@ const ServerState = (props) => {
     serverLogo: state.serverLogo,
     serverSidebar: state.serverSidebar,
     serverUserList: state.serverUserList,
+    serverChannelList: state.serverChannelList,
     setCurrentServer,
     displayServerSidebars,
     hideServerSidebars,
     getUserList,
     createChannel,
+    getServerChannels,
    }}
   >
    {props.children}

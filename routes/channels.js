@@ -3,22 +3,33 @@ const router = express.Router();
 const auth = require("../middleware/auth");
 const { check, validationResult } = require("express-validator");
 
-const User = require("../models/User");
 const Server = require("../models/Servers");
 const Channel = require("../models/Channel");
 
 //Get all channels
-router.get("/", auth, async (req, res) => {
+router.get("/all/:channel_ids", auth, async (req, res) => {
  try {
-  const currentServer = await Server.findById(req.params.id);
-  const { channelList } = currentServer;
+  const channelIdList = req.params.channel_ids.split(",");
 
-  let channels = [];
-  for (const id of channelList) {
-   channels.push(await Channel.findById(id));
-  }
+  const channelArray = await Channel.find({
+   _id: { $in: channelIdList },
+  });
 
-  res.json(channels);
+  let channelInfoArray = [];
+
+  channelArray.forEach((channel) => {
+   const { name, voiceChannel, customazation } = channel;
+   const channelInfoObject = {
+    name: name,
+    voiceChannel: voiceChannel,
+    customazation: customazation,
+   };
+   channelInfoArray.push(channelInfoObject);
+  });
+
+  console.log(channelInfoArray);
+
+  res.json(channelInfoArray);
  } catch (err) {
   console.error(err.message);
   res.status(500).send("Server Err");
@@ -43,6 +54,7 @@ router.get("/:channel_id", auth, async (req, res) => {
  }
 });
 
+//Post a new channel to the current server
 router.post(
  "/",
  [auth, [check("name", "Name is required").not().isEmpty()]],

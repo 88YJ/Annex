@@ -15,7 +15,7 @@ app.get("/", (req, res) => res.json({ msg: "Welcome to Annex!" }));
 //Define Routes
 app.use("/api/users", require("./routes/users"));
 app.use("/api/servers", require("./routes/servers"));
-app.use("/api/servers/:id/channels", require("./routes/channels"));
+app.use("/api/servers/channels", require("./routes/channels"));
 app.use("/api/games", require("./routes/games"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/contacts", require("./routes/contacts"));

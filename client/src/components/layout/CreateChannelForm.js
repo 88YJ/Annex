@@ -19,7 +19,7 @@ const CreateChannelForm = () => {
 
  const onSubmit = (e) => {
   e.preventDefault();
-  createChannel(server, channel);
+  createChannel(channel);
   setChannel({
    name: "",
    voiceChannel: false,
