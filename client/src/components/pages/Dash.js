@@ -4,6 +4,7 @@ import AuthContext from '../../context/auth/authContext';
 import DashContext from '../../context/dash/dashContext';
 import GameContext from '../../context/games/gameContext';
 import ServerContext from '../../context/server/serverContext';
+import StoreCartContext from '../../context/storecart/storecartContext';
 
 const Dash = () => {
  const authContext = useContext(AuthContext);
@@ -11,6 +12,8 @@ const Dash = () => {
  const dashContext = useContext(DashContext);
 
  const gameContext = useContext(GameContext);
+
+ const storecartContext = useContext(StoreCartContext);
 
  const serverContext = useContext(ServerContext);
 
@@ -20,10 +23,13 @@ const Dash = () => {
 
  const { games, displayGamesSidebar, getGames } = gameContext;
 
+ const { hideCartSidebar } = storecartContext;
+
  useEffect(() => {
   authContext.loadUser();
   displayGamesSidebar();
   hideServerSidebars();
+  hideCartSidebar();
   getGames();
   // eslint-disable-next-line
  }, []);
@@ -78,8 +84,11 @@ const Dash = () => {
          style={{
           backgroundImage: `url(${game.img})`,
          }}
-        ></div>
-        <h3 className='center'>{game.name}</h3>
+        >
+         <div className='gamesubmenu'>
+          <h3>{game.name}</h3>
+         </div>
+        </div>
        </li>
       ))}
      </ul>

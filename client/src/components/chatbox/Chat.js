@@ -3,9 +3,7 @@ import queryString from 'query-string';
 import io from 'socket.io-client';
 import AuthContext from '../../context/auth/authContext';
 
-import TextContainer from './TextContainer';
 import Messages from './Messages';
-import InfoBar from './InfoBar';
 import Input from './Input';
 
 import '../chatcss/Chat.css';
@@ -67,7 +65,6 @@ const Chat = ({ location }) => {
  return (
   <div className='outerContainer'>
    <div className='container'>
-    <InfoBar room={room} />
     <Messages messages={messages} name={name} />
     <Input
      message={message}
@@ -75,7 +72,6 @@ const Chat = ({ location }) => {
      sendMessage={sendMessage}
     />
    </div>
-   <TextContainer users={users} />
   </div>
  );
 };

@@ -1,10 +1,8 @@
-import React, { useState, useContext, useEffect, Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
 
 import ServerContext from '../../context/server/serverContext';
 import io from 'socket.io-client';
 import AuthContext from '../../context/auth/authContext';
-import ChatContext from '../../context/chat/chatContext';
 
 import Messages from '../chatbox/Messages';
 import Input from '../chatbox/Input';

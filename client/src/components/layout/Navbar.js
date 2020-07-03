@@ -2,16 +2,25 @@ import React, { Fragment, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
+import ProfileContext from '../../context/profile/profileContext';
 import TwoBeLogo from './TwoBeLogo.png';
 
 const Navbar = ({ title, icon }) => {
  const authContext = useContext(AuthContext);
 
+ const profileContext = useContext(ProfileContext);
+
  const { isAuthenticated, logout, user } = authContext;
+
+ const { setCurrentProfile } = profileContext;
 
  const onLogout = () => {
   logout();
  };
+
+ function openProfile(profile) {
+  setCurrentProfile(profile);
+ }
 
  const authLinks = (
   <Fragment>
@@ -25,8 +34,8 @@ const Navbar = ({ title, icon }) => {
     <Link to='/'>{user && user.name}</Link>
     <div className='subMenu'>
      <ul>
-      <li>
-       <Link to='/'>My Profile</Link>
+      <li onClick={() => openProfile(user)}>
+       <Link to='/profilepage'>My Profile</Link>
       </li>
       <li>
        <a onClick={onLogout} href='#!'>
@@ -38,15 +47,29 @@ const Navbar = ({ title, icon }) => {
    </li>
    <li>
     <Link to='/store'>Store</Link>
+    <div className='subMenu'>
+     <ul>
+      <li>
+       <Link to='/cart'>Cart</Link>
+      </li>
+     </ul>
+    </div>
    </li>
    <li>
     <Link to='/stream'>Stream</Link>
    </li>
    <li>
-    <Link to='/findservers'>Find Servers</Link>
-   </li>
-   <li>
-    <Link to='/profilesearch'>ProfileSearch</Link>
+    <Link to='#'>Search</Link>
+    <div className='subMenu'>
+     <ul>
+      <li>
+       <Link to='/findservers'>Find Servers</Link>
+      </li>
+      <li>
+       <Link to='/profilesearch'>ProfileSearch</Link>
+      </li>
+     </ul>
+    </div>
    </li>
   </Fragment>
  );

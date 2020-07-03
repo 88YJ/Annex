@@ -1,46 +1,49 @@
 import React, { useContext, useEffect } from 'react';
 
 import AuthContext from '../../context/auth/authContext';
-import GameStoreContext from '../../context/gamestorepage/gamestoreContext';
 import StoreCartContext from '../../context/storecart/storecartContext';
+import ServerContext from '../../context/server/serverContext';
 
 const StoreGamePage = () => {
  const authContext = useContext(AuthContext);
 
- const gamestoreContext = useContext(GameStoreContext);
-
  const storecartContext = useContext(StoreCartContext);
 
- const { gamepage } = gamestoreContext;
+ const serverContext = useContext(ServerContext);
 
- const { addToCart } = storecartContext;
+ const { gamescart, buyGame, displayCartSidebar } = storecartContext;
+
+ const { hideServerSidebars } = serverContext;
 
  useEffect(() => {
   authContext.loadUser();
+  displayCartSidebar();
+  hideServerSidebars();
 
   // eslint-disable-next-line
  }, []);
 
- function add() {
-  addToCart(gamepage);
+ function buy() {
+  let game = gamescart[0];
+  buyGame(game);
  }
 
  return (
   <div>
    <ul>
-    {
-     <li key={gamepage._id}>
+    {gamescart.map((cart, i) => (
+     <li key={i}>
       <div
        className='dashimg'
        style={{
-        backgroundImage: `url(${gamepage.img})`,
+        backgroundImage: `url(${cart.img})`,
        }}
       ></div>
-      <h3 className='center'>{gamepage.name}</h3>
+      <h3 className='center'>{cart.name}</h3>
      </li>
-    }
+    ))}
    </ul>
-   <button onClick={add}>Add to cart</button>
+   <button onClick={buy}>Buy</button>
   </div>
  );
 };

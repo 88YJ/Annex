@@ -12,6 +12,8 @@ import StoreContext from '../../context/store/storeContext';
 
 import GameStoreContext from '../../context/gamestorepage/gamestoreContext';
 
+import StoreCartContext from '../../context/storecart/storecartContext';
+
 const Store = () => {
  const authContext = useContext(AuthContext);
 
@@ -23,17 +25,21 @@ const Store = () => {
 
  const gamestoreContext = useContext(GameStoreContext);
 
+ const storecartContext = useContext(StoreCartContext);
+
  const { hideServerSidebars } = serverContext;
 
- const { displayGamesSidebar, getGames } = gameContext;
+ const { getGames } = gameContext;
 
  const { storegames, getStoreGames } = storeContext;
 
  const { setCurrentGame } = gamestoreContext;
 
+ const { displayCartSidebar } = storecartContext;
+
  useEffect(() => {
   authContext.loadUser();
-  displayGamesSidebar();
+  displayCartSidebar();
   hideServerSidebars();
   getGames();
   getStoreGames();
@@ -80,7 +86,6 @@ const Store = () => {
           backgroundImage: `url(${games.img})`,
          }}
         ></div>
-        <h3 className='center wrap'>{games.name}</h3>
        </li>
       </Link>
      ))}

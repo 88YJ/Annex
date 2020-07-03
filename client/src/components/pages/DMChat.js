@@ -4,9 +4,7 @@ import io from 'socket.io-client';
 import AuthContext from '../../context/auth/authContext';
 import ProfileContext from '../../context/profile/profileContext';
 
-import TextContainer from '../chatbox/TextContainer';
 import Messages from '../chatbox/Messages';
-import InfoBar from '../chatbox/InfoBar';
 import Input from '../chatbox/Input';
 
 import '../chatcss/Chat.css';
@@ -81,7 +79,6 @@ const DMChat = ({ location }) => {
   <div>
    <div className='outerContainer'>
     <div className='container'>
-     <InfoBar room={room} />
      <Messages messages={messages} name={name} />
      <Input
       message={message}
@@ -89,7 +86,6 @@ const DMChat = ({ location }) => {
       sendMessage={sendMessage}
      />
     </div>
-    <TextContainer users={users} />
    </div>
   </div>
  );
