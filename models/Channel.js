@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const ChannelsSchema = mongoose.Schema({
  name: {
@@ -9,19 +9,19 @@ const ChannelsSchema = mongoose.Schema({
   type: Boolean,
   required: true,
  },
- customazation: {
+ customization: {
   icon: {
    type: String,
    required: true,
    default:
-    "https://www.digitalconfectioners.com/wp-content/uploads/2016/11/dc-default-profile.png",
+    'https://www.digitalconfectioners.com/wp-content/uploads/2016/11/dc-default-profile.png',
   },
  },
  owner: {
   type: mongoose.Schema.Types.ObjectId,
   required: true,
-  ref: "servers",
+  ref: 'servers',
  },
 });
 
-module.exports = mongoose.model("channel", ChannelsSchema);
+module.exports = mongoose.model('channel', ChannelsSchema);

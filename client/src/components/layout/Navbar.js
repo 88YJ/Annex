@@ -63,10 +63,10 @@ const Navbar = ({ title, icon }) => {
     <div className='subMenu'>
      <ul>
       <li>
-       <Link to='/findservers'>Find Servers</Link>
+       <Link to='/findservers'>Servers Search</Link>
       </li>
       <li>
-       <Link to='/profilesearch'>ProfileSearch</Link>
+       <Link to='/profilesearch'>Profile Search</Link>
       </li>
      </ul>
     </div>
@@ -87,10 +87,13 @@ const Navbar = ({ title, icon }) => {
 
  return (
   <div className='Nav'>
-   <h1>{title}</h1>
+   <h1>
+    {title}
+    <span className='golden'>Prototype</span>
+   </h1>
 
    <div className='Navlower'>
-    <div>Server Settings</div>
+    <div></div>
     <div>
      <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
     </div>
@@ -105,7 +108,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
- title: 'Annex Prototype',
+ title: '{Annex} ',
 };
 
 export default Navbar;

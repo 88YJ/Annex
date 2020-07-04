@@ -1,10 +1,11 @@
 import {
  SET_CURRENT_SERVER,
+ SET_CURRENT_CHANNEL,
  DISPLAY_SERVER_SIDEBARS,
  HIDE_SERVER_SIDEBARS,
  GET_SERVER_USERLIST,
  GET_SERVER_CHANNELLIST,
-} from "../types";
+} from '../types';
 
 export default (state, action) => {
  switch (action.type) {
@@ -13,6 +14,11 @@ export default (state, action) => {
     ...state,
     server: action.payload,
     serverLogo: action.payload.img,
+   };
+  case SET_CURRENT_CHANNEL:
+   return {
+    ...state,
+    channel: action.payload,
    };
   case DISPLAY_SERVER_SIDEBARS:
    return {

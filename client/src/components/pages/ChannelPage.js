@@ -20,7 +20,7 @@ const ServerPage = ({ location }) => {
 
  const serverContext = useContext(ServerContext);
 
- const { server, displayServerSidebars } = serverContext;
+ const { displayServerSidebars, channel } = serverContext;
 
  const { user } = authContext;
 
@@ -39,17 +39,17 @@ const ServerPage = ({ location }) => {
   let name;
   let profileimg;
   let room;
-
   //const { name } = queryString.parse(location.search);
   if (user) {
    name = user.name;
    profileimg = user.profilePicture;
-   room = server._id;
+   room = channel._id;
    red = false;
   } else {
    name = 'youre not supposed to be here';
    profileimg = 'lol';
    room = 'haha';
+   console.log('made it');
    red = true;
   }
 
@@ -94,9 +94,12 @@ const ServerPage = ({ location }) => {
   return <div></div>;
  } else {
   return (
-   <div className='chat' style={{ backgroundImage: `url(${server.img})` }}>
+   <div
+    className='chat'
+    style={{ backgroundImage: `url(${channel.customization.icon})` }}
+   >
     <div className='channelname'>
-     <h1>{server.name}</h1>
+     <h1>{channel.name}</h1>
     </div>
     <div className='chatbox'>
      <div className='chatcontainer'>
@@ -114,17 +117,3 @@ const ServerPage = ({ location }) => {
 };
 
 export default ServerPage;
-
-/* <ul>
-    {
-     <li key={server._id}>
-      <div
-       className='dashimg'
-       style={{
-        backgroundImage: `url(${server.img})`,
-       }}
-      ></div>
-      <h3 className='center'>{server.name}</h3>
-     </li>
-    }
-   </ul>*/

@@ -29,7 +29,7 @@ import Login from './components/auth/Login';
 import Dash from './components/pages/Dash';
 import About from './components/pages/About';
 import Game from './components/pages/Game';
-import ServerPage from './components/pages/ServerPage';
+import ChannelPage from './components/pages/ChannelPage';
 import Store from './components/pages/Store';
 import FindServers from './components/pages/FindServers';
 import ProfileSearch from './components/pages/ProfileSearch';
@@ -39,6 +39,7 @@ import DMChat from './components/pages/DMChat';
 import RedirectChat from './components/redirect/RedirectChat';
 import StoreGamePage from './components/pages/StoreGamePage';
 import Cart from './components/pages/Cart';
+import ServerLanding from './components/pages/ServerLanding';
 
 //layouts
 import Navbar from './components/layout/Navbar';
@@ -99,6 +100,10 @@ const App = () => {
                          component={RedirectChat}
                         />
                         <Route path='/chat' component={NewChat} />
+                        <Route
+                         path='/serverlanding'
+                         component={ServerLanding}
+                        />
                         <Route path='/cart' component={Cart} />
                         <Route path='/dmchat' component={DMChat} />
                         <Route exact path='/' component={Dash} />
@@ -108,7 +113,7 @@ const App = () => {
                          path='/findservers'
                          component={FindServers}
                         />
-                        <Route exact path='/server' component={ServerPage} />
+                        <Route exact path='/server' component={ChannelPage} />
                         <PrivateRoute exact path='/about' component={About} />
                         <Route exact path='/game' component={Game} />
                         <Route exact path='/register' component={Register} />
