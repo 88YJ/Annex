@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, Fragment } from "react";
+import React, { useContext, useEffect, Fragment } from 'react';
 
-import AuthContext from "../../context/auth/authContext";
-import ServerlistContext from "../../context/serverlists/serverlistContext";
-import ServerContext from "../../context/server/serverContext";
-import ModalContext from "../../context/modal/modalContext";
-import ChatContext from "../../context/chat/chatContext";
-import { refresh } from "../pages/ServerPage";
+import AuthContext from '../../context/auth/authContext';
+import ServerlistContext from '../../context/serverlists/serverlistContext';
+import ServerContext from '../../context/server/serverContext';
+import ModalContext from '../../context/modal/modalContext';
+import ChatContext from '../../context/chat/chatContext';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Serverlist = () => {
  //background = 'https://wallpaperplay.com/walls/full/e/0/3/21596.jpg';
@@ -39,7 +38,6 @@ const Serverlist = () => {
  };
 
  function openServer(server) {
-  refresh();
   setCurrentServer(server);
 
   if (!connect) {
@@ -84,7 +82,7 @@ const Serverlist = () => {
          ></div>
         </li>
         {userServerList.map((server, i) => (
-         <Link to={`/redirectchat`} key={i}>
+         <Link to={`/serverlanding`} key={i}>
           <li onClick={() => openServer(server)}>
            <div
             className='serverimgsmall'

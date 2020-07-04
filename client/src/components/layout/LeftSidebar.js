@@ -4,6 +4,7 @@ import AuthContext from "../../context/auth/authContext";
 import ServerContext from "../../context/server/serverContext";
 import ModalContext from "../../context/modal/modalContext";
 import ProfileContext from "../../context/profile/profileContext";
+import ChatContext from "../../context/chat/chatContext";
 
 const LeftSidebar = () => {
  const authContext = useContext(AuthContext);
@@ -16,9 +17,18 @@ const LeftSidebar = () => {
 
  const { getFriendsList, friendList } = profileContext;
 
- const { server, serverSidebar, serverChannelList } = serverContext;
+ const {
+  server,
+  serverSidebar,
+  serverChannelList,
+  setCurrentChannel,
+ } = serverContext;
 
  const { showModalWithAddChannel } = modalContext;
+
+ const chatContext = useContext(ChatContext);
+
+ const { setConnectTrue, connect } = chatContext;
 
  useEffect(() => {
   authContext.loadUser();
@@ -30,15 +40,27 @@ const LeftSidebar = () => {
   showModalWithAddChannel();
  };
 
+ function openChannel(channel) {
+  setCurrentChannel(channel);
+  if (!connect) {
+   setConnectTrue();
+  }
+ }
+
  if (serverSidebar) {
   return (
-   <div>
+   <div className='channellist'>
     <div className='serverchannels'>
      <h3 className='center'>{server.name}</h3>
      <ul>
+      <li>
+       <Link to='/serverlanding'>Landing Page</Link>
+      </li>
       {serverChannelList.map((channel, i) => (
        <li key={i}>
-        <Link to='/'>{channel.name}</Link>
+        <Link to='/redirectchat' onClick={() => openChannel(channel)}>
+         {channel.name}{" "}
+        </Link>
        </li>
       ))}
       <li key='addServer' onClick={displayModal}>
@@ -56,7 +78,7 @@ const LeftSidebar = () => {
  } else {
   return (
    <div>
-    <div className='serverchannels'>
+    <div className='channellist'>
      <h3 className='center'>Friends:</h3>
      <ul>
       {friendList.map((friend, i) => (
@@ -71,6 +93,7 @@ const LeftSidebar = () => {
       ))}
      </ul>
     </div>
+    <div className='serverchannels'></div>
    </div>
   );
  }

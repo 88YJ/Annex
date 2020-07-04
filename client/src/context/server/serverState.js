@@ -3,6 +3,7 @@ import ServerContext from "./serverContext";
 import serverReducer from "./serverReducer";
 import {
  SET_CURRENT_SERVER,
+ SET_CURRENT_CHANNEL,
  DISPLAY_SERVER_SIDEBARS,
  HIDE_SERVER_SIDEBARS,
  GET_SERVER_USERLIST,
@@ -15,6 +16,14 @@ import Logo from "../../components/layout/Logo.jpg";
 const ServerState = (props) => {
  const initialState = {
   server: {},
+  channel: {
+   name: "default",
+   customization: [
+    {
+     icon: "default",
+    },
+   ],
+  },
   serverLogo: Logo,
   serverSidebar: false,
   serverUserList: [],
@@ -50,6 +59,15 @@ const ServerState = (props) => {
    dispatch({ type: SET_CURRENT_SERVER, payload: server });
    getUserList(server._id);
    getServerChannels(server._id);
+  } catch (err) {
+   console.log("Couldn't find server");
+  }
+ };
+
+ // Set Current Channel
+ const setCurrentChannel = async (channel) => {
+  try {
+   dispatch({ type: SET_CURRENT_CHANNEL, payload: channel });
   } catch (err) {
    console.log("Couldn't find server");
   }
@@ -107,7 +125,9 @@ const ServerState = (props) => {
     serverSidebar: state.serverSidebar,
     serverUserList: state.serverUserList,
     serverChannelList: state.serverChannelList,
+    channel: state.channel,
     setCurrentServer,
+    setCurrentChannel,
     displayServerSidebars,
     hideServerSidebars,
     getUserList,
