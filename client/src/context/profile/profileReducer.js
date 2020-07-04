@@ -1,4 +1,8 @@
-import { SET_PROFILE } from '../types';
+import {
+ SET_PROFILE,
+ GET_INCOMING_FRIEND_REQUESTS,
+ GET_FRIENDS_LIST,
+} from "../types";
 
 export default (state, action) => {
  switch (action.type) {
@@ -6,6 +10,16 @@ export default (state, action) => {
    return {
     ...state,
     profile: action.payload,
+   };
+  case GET_INCOMING_FRIEND_REQUESTS:
+   return {
+    ...state,
+    incomingRequests: action.payload,
+   };
+  case GET_FRIENDS_LIST:
+   return {
+    ...state,
+    friendList: action.payload,
    };
   default:
    return state;

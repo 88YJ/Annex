@@ -9,7 +9,7 @@ const ChannelsSchema = mongoose.Schema({
   type: Boolean,
   required: true,
  },
- customazation: {
+ customization: {
   icon: {
    type: String,
    required: true,

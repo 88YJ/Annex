@@ -86,6 +86,94 @@ router.put("/:id", auth, async (req, res) => {
  }
 });
 
+//Send friend request
+router.put("/sendfriendrequest/:id", auth, async (req, res) => {
+ try {
+  let requestSender = await User.findByIdAndUpdate(req.user.id, {
+   $addToSet: { pendingFriendRequests: req.params.id },
+  });
+
+  let requestReceiver = await User.findByIdAndUpdate(req.params.id, {
+   $addToSet: { incomingFriendRequests: req.user.id },
+  });
+
+  res.json(requestSender);
+ } catch (err) {
+  console.error(err.message);
+  res.status(500).send("Server Err");
+ }
+});
+
+//Accept friend request
+router.put("/acceptfriendrequest/:id", auth, async (req, res) => {
+ try {
+  let currentUser = await User.findByIdAndUpdate(req.user.id, {
+   $addToSet: { friendList: req.params.id },
+   $pull: { incomingFriendRequests: req.params.id },
+  });
+
+  let friendToAdd = await User.findByIdAndUpdate(req.params.id, {
+   $addToSet: { friendList: req.user.id },
+   $pull: { pendingFriendRequests: req.user.id },
+  });
+
+  res.json(friendToAdd);
+ } catch (err) {
+  console.error(err.message);
+  res.status(500).send("Server Err");
+ }
+});
+
+router.get("/friendrequests", auth, async (req, res) => {
+ try {
+  const currentUser = await User.findById(req.user.id);
+  const { incomingFriendRequests } = currentUser;
+
+  let incomingRequests = [];
+
+  for (const id of incomingFriendRequests) {
+   const profile = await User.findById(id);
+   const profileInfoObject = {
+    _id: id,
+    name: profile.name,
+    email: profile.email,
+    profilePicture: profile.profilePicture,
+   };
+   incomingRequests.push(profileInfoObject);
+  }
+
+  res.json(incomingRequests);
+ } catch (err) {
+  console.error(err.message);
+  res.status(500).send("Server Err");
+ }
+});
+
+router.get("/friends", auth, async (req, res) => {
+ try {
+  const currentUser = await User.findById(req.user.id);
+  const { friendList } = currentUser;
+
+  let friends = [];
+
+  for (const id of friendList) {
+   const profile = await User.findById(id);
+   const profileInfoObject = {
+    _id: id,
+    name: profile.name,
+    email: profile.email,
+    profilePicture: profile.profilePicture,
+   };
+   friends.push(profileInfoObject);
+  }
+
+  res.json(friends);
+ } catch (err) {
+  console.error(err.message);
+  res.status(500).send("Server Err");
+ }
+});
+
 //Get server users
 router.get("/:server_id", auth, async (req, res) => {
  try {
@@ -95,7 +183,6 @@ router.get("/:server_id", auth, async (req, res) => {
   let users = [];
   for (const id of userList) {
    const user = await User.findById(id);
-
    const userInfoObject = {
     name: user.name,
     email: user.email,

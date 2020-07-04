@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import ServerContext from "../../context/server/serverContext";
 import ModalContext from "../../context/modal/modalContext";
+import ProfileContext from "../../context/profile/profileContext";
 
 const LeftSidebar = () => {
  const authContext = useContext(AuthContext);
@@ -11,12 +12,17 @@ const LeftSidebar = () => {
 
  const modalContext = useContext(ModalContext);
 
+ const profileContext = useContext(ProfileContext);
+
+ const { getFriendsList, friendList } = profileContext;
+
  const { server, serverSidebar, serverChannelList } = serverContext;
 
  const { showModalWithAddChannel } = modalContext;
 
  useEffect(() => {
   authContext.loadUser();
+  getFriendsList();
   // eslint-disable-next-line
  }, []);
 
@@ -51,7 +57,19 @@ const LeftSidebar = () => {
   return (
    <div>
     <div className='serverchannels'>
-     <h3 className='center'>Server:</h3>
+     <h3 className='center'>Friends:</h3>
+     <ul>
+      {friendList.map((friend, i) => (
+       <li
+        key={i}
+        style={{
+         backgroundImage: `url(${friend.profilePicture})`,
+        }}
+       >
+        <Link to='/'>{friend.name}</Link>
+       </li>
+      ))}
+     </ul>
     </div>
    </div>
   );
