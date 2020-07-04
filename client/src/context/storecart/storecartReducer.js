@@ -18,6 +18,7 @@ export default (state, action) => {
    return {
     ...state,
     gamescart: [
+     ...state.gamescart,
      {
       name: action.payload.name,
       img: action.payload.img,

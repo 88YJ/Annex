@@ -24,6 +24,7 @@ const ServerState = (props) => {
     },
    ],
   },
+  voiceChannel: {},
   serverLogo: Logo,
   serverSidebar: false,
   serverUserList: [],

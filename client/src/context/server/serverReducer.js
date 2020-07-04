@@ -5,7 +5,7 @@ import {
  HIDE_SERVER_SIDEBARS,
  GET_SERVER_USERLIST,
  GET_SERVER_CHANNELLIST,
-} from '../types';
+} from "../types";
 
 export default (state, action) => {
  switch (action.type) {

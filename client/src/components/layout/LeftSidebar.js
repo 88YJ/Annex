@@ -5,6 +5,7 @@ import ServerContext from "../../context/server/serverContext";
 import ModalContext from "../../context/modal/modalContext";
 import ProfileContext from "../../context/profile/profileContext";
 import ChatContext from "../../context/chat/chatContext";
+import VoicechatContext from "../../context/voicechat/voicechatContext";
 
 const LeftSidebar = () => {
  const authContext = useContext(AuthContext);
@@ -15,7 +16,7 @@ const LeftSidebar = () => {
 
  const profileContext = useContext(ProfileContext);
 
- const { getFriendsList, friendList } = profileContext;
+ const voicechatContext = useContext(VoicechatContext);
 
  const {
   server,
@@ -24,11 +25,15 @@ const LeftSidebar = () => {
   setCurrentChannel,
  } = serverContext;
 
- const { showModalWithAddChannel } = modalContext;
-
  const chatContext = useContext(ChatContext);
 
+ const { showModalWithAddChannel } = modalContext;
+
  const { setConnectTrue, connect } = chatContext;
+
+ const { getFriendsList, friendList } = profileContext;
+
+ const { setCurrentVoiceChannel } = voicechatContext;
 
  useEffect(() => {
   authContext.loadUser();
@@ -47,6 +52,10 @@ const LeftSidebar = () => {
   }
  }
 
+ function openVoiceChannel(channel) {
+  setCurrentVoiceChannel(channel);
+ }
+
  if (serverSidebar) {
   return (
    <div className='channellist'>
@@ -58,9 +67,15 @@ const LeftSidebar = () => {
       </li>
       {serverChannelList.map((channel, i) => (
        <li key={i}>
-        <Link to='/redirectchat' onClick={() => openChannel(channel)}>
-         {channel.name}{" "}
-        </Link>
+        {channel.voiceChannel ? (
+         <Link onClick={() => openVoiceChannel(channel.name)}>
+          {channel.name}{" "}
+         </Link>
+        ) : (
+         <Link to='/redirectchat' onClick={() => openChannel(channel)}>
+          {channel.name}{" "}
+         </Link>
+        )}
        </li>
       ))}
       <li key='addServer' onClick={displayModal}>

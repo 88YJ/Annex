@@ -26,6 +26,7 @@ router.get("/userservers", auth, async (req, res) => {
  }
 });
 
+//Get all servers
 router.get("/", auth, async (req, res) => {
  try {
   const allServers = await Server.find();

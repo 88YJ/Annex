@@ -37,6 +37,23 @@ const CreateChannelForm = () => {
     value={name}
     onChange={onChange}
    />
+   <h5>Channel Type</h5>
+   <input
+    type='radio'
+    name='voiceChannel'
+    value={true}
+    checked={voiceChannel === "true"}
+    onChange={onChange}
+   />{" "}
+   Voice Channel
+   <input
+    type='radio'
+    name='voiceChannel'
+    value={false}
+    checked={voiceChannel === "false"}
+    onChange={onChange}
+   />
+   Text Channel
    <div>
     <input type='submit' value='Create Channel' />
    </div>
