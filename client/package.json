@@ -15,6 +15,7 @@
         "react-scripts": "3.4.1",
         "react-scroll-to-bottom": "^3.0.0",
         "react-transition-group": "^4.4.1",
+        "simple-peer": "^9.7.2",
         "socket.io": "^2.3.0",
         "uuid": "^8.1.0"
     },

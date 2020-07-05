@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import ServerContext from "../../context/server/serverContext";
@@ -33,7 +33,20 @@ const LeftSidebar = () => {
 
  const { getFriendsList, friendList } = profileContext;
 
- const { setCurrentVoiceChannel } = voicechatContext;
+ const {
+  receivingCall,
+  caller,
+  userList,
+  acceptCall,
+  callPeer,
+  localID,
+  stream,
+  callAccepted,
+  userVideo,
+  partnerVideo,
+ } = voicechatContext;
+
+ //const [stream, setStream] = useState();
 
  useEffect(() => {
   authContext.loadUser();
@@ -53,8 +66,62 @@ const LeftSidebar = () => {
  }
 
  function openVoiceChannel(channel) {
-  setCurrentVoiceChannel(channel);
+  //setCurrentVoiceChannel(channel);
+  //console.log("HERE" + peerConnections.id);
  }
+
+ //const audioStream = (voiceStream) => ()
+
+ let UserVideo;
+ if (stream) {
+  UserVideo = (
+   <video
+    style={{ display: "none" }}
+    playsInline
+    muted
+    ref={userVideo}
+    autoPlay
+   />
+  );
+ }
+
+ let PartnerVideo;
+ if (callAccepted) {
+  PartnerVideo = (
+   <video playsInline style={{ display: "none" }} ref={partnerVideo} autoPlay />
+  );
+ }
+
+ let incomingCall;
+ if (receivingCall) {
+  incomingCall = (
+   <div>
+    <h1>{caller} is calling you</h1>
+    <button onClick={acceptCall}>Accept</button>
+   </div>
+  );
+ }
+
+ return (
+  <ul>
+   <li>
+    {UserVideo}
+    {PartnerVideo}
+   </li>
+   <li>
+    {Object.keys(userList).map((key) => {
+     if (key === localID) {
+      return null;
+     }
+     return <button onClick={() => callPeer(key)}>Call {key}</button>;
+    })}
+   </li>
+   <li>{incomingCall}</li>
+  </ul>
+ );
+};
+
+/*
 
  if (serverSidebar) {
   return (
@@ -68,9 +135,16 @@ const LeftSidebar = () => {
       {serverChannelList.map((channel, i) => (
        <li key={i}>
         {channel.voiceChannel ? (
-         <Link onClick={() => openVoiceChannel(channel.name)}>
-          {channel.name}{" "}
-         </Link>
+         <div>
+          <Link onClick={() => openVoiceChannel(channel)}>{channel.name} </Link>
+          <ul>
+           {userList.length >= 1 ? (
+            userList.map((user, i) => <li key={i}>{user.name}</li>)
+           ) : (
+            <div></div>
+           )}
+          </ul>
+         </div>
         ) : (
          <Link to='/redirectchat' onClick={() => openChannel(channel)}>
           {channel.name}{" "}
@@ -112,6 +186,7 @@ const LeftSidebar = () => {
    </div>
   );
  }
+ 
 };
-
+*/
 export default LeftSidebar;
