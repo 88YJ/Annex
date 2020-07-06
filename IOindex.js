@@ -11,10 +11,16 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+const videoUsers = {};
+
 app.use(cors());
 app.use(router);
 
 io.on("connect", (socket) => {
+ if (!videoUsers[socket.id]) {
+  videoUsers[socket.id] = socket.id;
+ }
+
  socket.on("join", ({ name, room, profileimg }, callback) => {
   const { error, user } = addUser({ id: socket.id, name, profileimg, room });
 
@@ -58,8 +64,23 @@ io.on("connect", (socket) => {
     .to(user.room)
     .emit("roomData", { room: user.room, users: getUsersInRoom(user.room) });
   }
+
+  delete videoUsers[socket.id];
  });
 
+ socket.emit("yourID", socket.id);
+ io.sockets.emit("allUsers", videoUsers);
+
+ socket.on("callUser", (data) => {
+  io
+   .to(data.userToCall)
+   .emit("hey", { signal: data.signalData, from: data.from });
+ });
+
+ socket.on("acceptCall", (data) => {
+  io.to(data.to).emit("callAccepted", data.signal);
+ });
+ /*
  //VOICE CHAT
  socket.on("voiceChannel", ({ name, room, profileimg }, callback) => {
   const { error, user } = addUser({ id: socket.id, name, profileimg, room });
@@ -82,6 +103,7 @@ io.on("connect", (socket) => {
  socket.on("answer", function (event) {
   socket.broadcast.to(event.room).emit("answer", event.sdp);
  });
+ */
 });
 
 server.listen(process.env.PORT || 5002, () =>
