@@ -13,6 +13,18 @@ const GamesSchema = mongoose.Schema({
   type: String,
   required: true,
  },
+ backgroundimg: {
+  type: String,
+  required: true,
+ },
+ wideimg: {
+  type: String,
+  required: true,
+ },
+ gameid: {
+  type: String,
+  required: true,
+ },
 });
 
 module.exports = mongoose.model('game', GamesSchema);

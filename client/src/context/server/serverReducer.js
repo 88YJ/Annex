@@ -5,6 +5,8 @@ import {
  HIDE_SERVER_SIDEBARS,
  GET_SERVER_USERLIST,
  GET_SERVER_CHANNELLIST,
+ GET_SERVERS,
+ GET_USER_SERVERS,
 } from '../types';
 
 export default (state, action) => {
@@ -39,6 +41,18 @@ export default (state, action) => {
    return {
     ...state,
     serverChannelList: action.payload,
+   };
+  case GET_SERVERS:
+   return {
+    ...state,
+    servers: action.payload,
+    loading: false,
+   };
+  case GET_USER_SERVERS:
+   return {
+    ...state,
+    userServerList: action.payload,
+    loading: false,
    };
   default:
    return state;

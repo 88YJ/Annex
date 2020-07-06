@@ -2,7 +2,8 @@ import {
  SET_PROFILE,
  GET_INCOMING_FRIEND_REQUESTS,
  GET_FRIENDS_LIST,
-} from "../types";
+ GET_PROFILE,
+} from '../types';
 
 export default (state, action) => {
  switch (action.type) {
@@ -20,6 +21,12 @@ export default (state, action) => {
    return {
     ...state,
     friendList: action.payload,
+   };
+  case GET_PROFILE:
+   return {
+    ...state,
+    profiles: action.payload,
+    loading: false,
    };
   default:
    return state;

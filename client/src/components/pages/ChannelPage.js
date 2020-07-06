@@ -99,7 +99,7 @@ const ServerPage = ({ location }) => {
     style={{ backgroundImage: `url(${channel.customization.icon})` }}
    >
     <div className='channelname'>
-     <h1>{channel.name}</h1>
+     <h2>{channel.name}</h2>
     </div>
     <div className='chatbox'>
      <div className='chatcontainer'>

@@ -1,19 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
-import GameStoreContext from '../../context/gamestorepage/gamestoreContext';
-import StoreCartContext from '../../context/storecart/storecartContext';
+import StoreContext from '../../context/store/storeContext';
 
 const StoreGamePage = () => {
  const authContext = useContext(AuthContext);
 
- const gamestoreContext = useContext(GameStoreContext);
+ const storeContext = useContext(StoreContext);
 
- const storecartContext = useContext(StoreCartContext);
-
- const { gamepage } = gamestoreContext;
-
- const { addToCart } = storecartContext;
+ const { addToCart, gamepage } = storeContext;
 
  useEffect(() => {
   authContext.loadUser();
@@ -29,7 +24,7 @@ const StoreGamePage = () => {
   <div
    className='gamestorepage'
    style={{
-    backgroundImage: `url(${gamepage.img})`,
+    backgroundImage: `url(${gamepage.backgroundimg})`,
    }}
   >
    <div className='film'>
@@ -46,7 +41,7 @@ const StoreGamePage = () => {
        <div
         className='gamestorepageimg'
         style={{
-         backgroundImage: `url(${gamepage.img})`,
+         backgroundImage: `url(${gamepage.wideimg})`,
         }}
        ></div>
        <div>

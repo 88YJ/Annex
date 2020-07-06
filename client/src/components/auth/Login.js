@@ -43,33 +43,45 @@ const Login = (props) => {
  };
 
  return (
-  <div className='form-container'>
-   <h1>
-    Account <span className='text-primary'>Login</span>
+  <div className='register'>
+   <h1 className='center' style={{ background: 'black' }}>
+    Account Login
    </h1>
-   <form onSubmit={onSubmit}>
-    <div className='form-group'>
-     <label htmlFor='email'>Email Address</label>
-     <input
-      type='email'
-      name='email'
-      value={email}
-      onChange={onChange}
-      required
-     />
+   <div className='registerGrid'>
+    <div></div>
+    <div className='registerloginbackground'>
+     <form onSubmit={onSubmit}>
+      <div className='form-group'>
+       <h2>Email Address:</h2>
+       <input
+        className='registerloginvalues'
+        type='email'
+        name='email'
+        value={email}
+        onChange={onChange}
+        required
+       />
+      </div>
+      <div className='form-group'>
+       <h2>Password:</h2>
+       <input
+        className='registerloginvalues'
+        type='password'
+        name='password'
+        value={password}
+        onChange={onChange}
+        required
+       />
+      </div>
+      <input
+       type='submit'
+       value='Login'
+       className='globalbutton registerbutton'
+      />
+     </form>
     </div>
-    <div className='form-group'>
-     <label htmlFor='password'>Password</label>
-     <input
-      type='password'
-      name='password'
-      value={password}
-      onChange={onChange}
-      required
-     />
-    </div>
-    <input type='submit' value='Login' className='btn btn-primary btn-block' />
-   </form>
+    <div></div>
+   </div>
   </div>
  );
 };

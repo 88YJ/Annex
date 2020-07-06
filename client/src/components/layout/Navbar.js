@@ -5,21 +5,21 @@ import AuthContext from '../../context/auth/authContext';
 import ProfileContext from '../../context/profile/profileContext';
 import TwoBeLogo from './TwoBeLogo.png';
 
-const Navbar = ({ title, icon }) => {
+const Navbar = ({ title }) => {
  const authContext = useContext(AuthContext);
 
  const profileContext = useContext(ProfileContext);
 
  const { isAuthenticated, logout, user } = authContext;
 
- const { setCurrentProfile } = profileContext;
+ const { getIdProfile } = profileContext;
 
  const onLogout = () => {
   logout();
  };
 
  function openProfile(profile) {
-  setCurrentProfile(profile);
+  getIdProfile(profile);
  }
 
  const authLinks = (
@@ -76,6 +76,9 @@ const Navbar = ({ title, icon }) => {
 
  const guestLinks = (
   <Fragment>
+   <li>
+    <Link to='/'>Dash</Link>
+   </li>
    <li>
     <Link to='/register'>Register</Link>
    </li>

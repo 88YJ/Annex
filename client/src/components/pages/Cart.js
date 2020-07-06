@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from 'react';
 
 import AuthContext from '../../context/auth/authContext';
-import StoreCartContext from '../../context/storecart/storecartContext';
+import StoreContext from '../../context/store/storeContext';
 import ServerContext from '../../context/server/serverContext';
 
 const StoreGamePage = () => {
  const authContext = useContext(AuthContext);
 
- const storecartContext = useContext(StoreCartContext);
+ const storeContext = useContext(StoreContext);
 
  const serverContext = useContext(ServerContext);
 
- const { gamescart, buyGame, displayCartSidebar } = storecartContext;
+ const { gamescart, buyGame, displayCartSidebar } = storeContext;
 
  const { hideServerSidebars } = serverContext;
 
@@ -29,21 +29,28 @@ const StoreGamePage = () => {
  }
 
  return (
-  <div>
+  <div className='cartpage'>
    <ul>
     {gamescart.map((cart, i) => (
      <li key={i}>
+      <h3 className='center'>{cart.name}</h3>
       <div
-       className='dashimg'
+       className='cartimg'
        style={{
-        backgroundImage: `url(${cart.img})`,
+        backgroundImage: `url(${cart.wideimg})`,
        }}
       ></div>
-      <h3 className='center'>{cart.name}</h3>
+      <h3>Price: $60.00</h3>
+      <button className='globalbutton'>Remove From Cart</button>
      </li>
     ))}
    </ul>
-   <button onClick={buy}>Buy</button>
+   <div>
+    <button onClick={buy} className='globalbutton'>
+     Buy
+    </button>
+    <h3>Total: $60.00</h3>
+   </div>
   </div>
  );
 };

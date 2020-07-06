@@ -1,4 +1,4 @@
-import { GET_GAMES, DISPLAY_GAMES_SIDEBAR } from "../types";
+import { GET_GAMES, DISPLAY_GAMES_SIDEBAR, CURRENT_MY_GAME } from '../types';
 
 export default (state, action) => {
  switch (action.type) {
@@ -7,6 +7,11 @@ export default (state, action) => {
     ...state,
     games: action.payload,
     loading: false,
+   };
+  case CURRENT_MY_GAME:
+   return {
+    ...state,
+    myGame: action.payload,
    };
   case DISPLAY_GAMES_SIDEBAR:
    return {

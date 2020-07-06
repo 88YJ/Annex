@@ -10,10 +10,6 @@ import ServerContext from '../../context/server/serverContext';
 
 import StoreContext from '../../context/store/storeContext';
 
-import GameStoreContext from '../../context/gamestorepage/gamestoreContext';
-
-import StoreCartContext from '../../context/storecart/storecartContext';
-
 const Store = () => {
  const authContext = useContext(AuthContext);
 
@@ -23,19 +19,16 @@ const Store = () => {
 
  const serverContext = useContext(ServerContext);
 
- const gamestoreContext = useContext(GameStoreContext);
-
- const storecartContext = useContext(StoreCartContext);
-
  const { hideServerSidebars } = serverContext;
 
  const { getGames } = gameContext;
 
- const { storegames, getStoreGames } = storeContext;
-
- const { setCurrentGame } = gamestoreContext;
-
- const { displayCartSidebar } = storecartContext;
+ const {
+  storegames,
+  getStoreGames,
+  displayCartSidebar,
+  setCurrentGame,
+ } = storeContext;
 
  useEffect(() => {
   authContext.loadUser();
