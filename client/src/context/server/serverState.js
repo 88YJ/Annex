@@ -8,6 +8,8 @@ import {
  HIDE_SERVER_SIDEBARS,
  GET_SERVER_USERLIST,
  GET_SERVER_CHANNELLIST,
+ GET_SERVERS,
+ GET_USER_SERVERS,
 } from "../types";
 import Axios from "axios";
 
@@ -29,6 +31,8 @@ const ServerState = (props) => {
   serverSidebar: false,
   serverUserList: [],
   serverChannelList: [],
+  servers: [],
+  userServerList: null,
  };
 
  const config = {
@@ -118,6 +122,79 @@ const ServerState = (props) => {
   }
  };
 
+ /////////////////////////////////////////////////////////////////Find Servers State
+ //Get Servers
+ const getServers = async () => {
+  try {
+   const res = await Axios.get("/api/servers/");
+
+   dispatch({ type: GET_SERVERS, payload: res.data });
+  } catch (err) {
+   console.log("no servers to display");
+  }
+ };
+
+ //Create Server                                        Rashad look at this one!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ /*const createServer = async (server) => {
+  const config = {
+   headers: {
+    'Content-Type': 'application/json',
+   },
+  };
+  try {
+   const resServer = await Axios.post('/api/servers', server, config);
+
+   const resUser = await Axios.put(
+    `api/users/${resServer.data._id}`,
+    server,
+    config
+   );
+
+   getServers();
+  } catch (err) {
+   console.log('Failed to create server');
+  }
+ };*/
+ /////////////////////////////////////////////////////////ServerList State
+ //Get Servers
+ const getUserServers = async () => {
+  try {
+   const res = await Axios.get("/api/servers/userservers");
+
+   dispatch({ type: GET_USER_SERVERS, payload: res.data });
+  } catch (err) {
+   console.log("no servers to display");
+  }
+ };
+
+ const updateUserServerList = async (server) => {
+  try {
+   const res = await Axios.put(`api/users/${server._id}`, server, config);
+   getUserServers();
+  } catch (err) {
+   console.log("Failed to update server list");
+  }
+ };
+
+ const updateServerUserList = async (server) => {
+  try {
+   const res = await Axios.put(`api/servers/${server._id}`, server, config);
+   updateUserServerList(server);
+  } catch (err) {
+   console.log("Failed to update user list");
+  }
+ };
+
+ //Create Server
+ const createServer = async (server) => {
+  try {
+   const res = await Axios.post("/api/servers", server, config);
+   updateUserServerList(res.data);
+  } catch (err) {
+   console.log("Failed to create server");
+  }
+ };
+
  return (
   <ServerContext.Provider
    value={{
@@ -127,6 +204,12 @@ const ServerState = (props) => {
     serverUserList: state.serverUserList,
     serverChannelList: state.serverChannelList,
     channel: state.channel,
+    servers: state.servers,
+    userServerList: state.userServerList,
+    getUserServers,
+    updateServerUserList,
+    getServers,
+    createServer,
     setCurrentServer,
     setCurrentChannel,
     displayServerSidebars,

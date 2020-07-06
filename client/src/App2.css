@@ -1,3 +1,28 @@
+.register {
+ height: 100%;
+ background: rgb(0, 4, 17, 0.8);
+}
+.registerGrid {
+ display: grid;
+ grid-template-columns: auto 300px auto;
+ color: grey;
+
+ height: 100%;
+}
+.registerGrid h2 {
+ margin-top: 10px;
+}
+.registerloginvalues {
+ min-width: 290px;
+ background: black;
+ color: white;
+ outline: none;
+ border: white 1px solid;
+}
+.registerbutton {
+ margin-top: 10px;
+}
+
 .cartlist {
  color: red;
  border-left: #384d48 1px solid;
@@ -119,28 +144,26 @@
 
 .input {
  border: none;
- border-radius: 0;
- padding: 0%;
+ outline: none;
+ border-radius: 0px;
+ padding: 0;
+ margin: 1px;
  width: 80%;
  font-size: 1.2em;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
- outline: none;
-}
-
 .sendButton {
  color: white;
+ outline: none;
  text-transform: uppercase;
  text-decoration: none;
  background: #000411;
  padding: 10px;
  display: inline-block;
- border: rgb(0, 0, 0, 0) 1px solid;
  border-top: 1px solid #384d48;
- border-left: 1px solid #384d48;
+ border-left: 1px solid #929c9a;
+ border-bottom: rgb(0, 0, 0, 0) 1px solid;
+ border-right: rgb(0, 0, 0, 0) 1px solid;
  width: 20%;
 }
 .sendButton:hover {
@@ -270,4 +293,139 @@ select:focus {
 .landingpageinnerbody {
  background-color: rgb(0, 4, 17, 0.7);
  font-size: 20px;
+}
+
+.profilebackground {
+ height: 100%;
+ width: 100%;
+ background-position: center;
+ background-size: cover;
+}
+.profilefilm {
+ height: 100%;
+ width: 100%;
+ background-color: rgb(0, 4, 17, 0.5);
+}
+.profileMaster {
+ display: grid;
+ grid-template-rows: 120px auto;
+ height: 100%;
+ width: 100%;
+}
+.profileHeader {
+ display: grid;
+ grid-template-columns: 120px 300px auto 90px 110px;
+ height: 100%;
+ width: 100%;
+ background-color: rgb(0, 0, 0, 0.9);
+}
+.profileImgDisplay {
+ height: 100px;
+ width: 100px;
+ border-radius: 50px;
+ background-position: center;
+ margin: 5px;
+ background-size: cover;
+}
+
+.profileSubMaster {
+ height: 100%;
+ display: grid;
+ grid-template-rows: 210px auto;
+ overflow-y: scroll;
+}
+.screenshot {
+ height: 140px;
+ width: 240px;
+ background-size: cover;
+ background-position: center;
+ padding: 10px;
+ margin: 10px;
+ border: grey 1px solid;
+}
+.profilescreenshots {
+ border-top: #384d48 1px solid;
+ border-bottom: #384d48 1px solid;
+ background-color: rgb(0, 4, 17, 0.5);
+ height: 100%;
+ width: 100%;
+}
+.profilescreenshots ul {
+ display: inline-flex;
+}
+.profilescreenshots li {
+ float: left;
+}
+
+.profileBody {
+ display: grid;
+ grid-template-columns: auto minmax(auto, 1450px);
+ height: 150%;
+}
+
+.profiletabs {
+ background-color: rgb(0, 4, 17, 0.5);
+ border-right: #384d48 1px solid;
+}
+.profiletabs ul {
+ color: white;
+ margin: 5px;
+ padding: 0;
+}
+.profiletabs li {
+ width: 100px;
+}
+.profiletabs li:hover {
+ background-color: grey;
+ cursor: pointer;
+ width: 100px;
+}
+.friendrequests ul {
+ margin: 0px;
+ padding: 0px;
+}
+.friendrequests li {
+ margin: 5px;
+ padding: 0px;
+ background: black;
+ width: 190px;
+}
+
+.myGameBanner {
+ display: grid;
+ grid-template-columns: auto minmax(auto, 1420px) auto;
+}
+
+.myGamepage {
+ color: white;
+ height: 100%;
+ width: 100%;
+ display: grid;
+ grid-template-rows: 200px 80px auto;
+}
+.myGameimg {
+ background-size: cover;
+ background-position: center;
+}
+.myGameHeader {
+ background: #000411;
+}
+.myGameBody {
+ display: grid;
+ grid-template-columns: 50% auto;
+}
+.myGamelists ul {
+ background: black;
+ margin: 0;
+ padding: 0;
+ width: 30%;
+ height: 100%;
+ overflow-y: scroll;
+}
+.myGamelists li {
+ margin: 5px;
+}
+.myGamelists a {
+ text-decoration: none;
+ color: white;
 }

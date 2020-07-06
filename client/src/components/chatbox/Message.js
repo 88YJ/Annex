@@ -8,7 +8,7 @@ const Message = ({ message: { text, user, profileimg }, name }) => {
  const trimmedName = name.trim().toLowerCase();
 
  if (user === trimmedName) {
-  isSentByCurrentUser = true;
+  //isSentByCurrentUser = true;
  }
 
  return isSentByCurrentUser ? (

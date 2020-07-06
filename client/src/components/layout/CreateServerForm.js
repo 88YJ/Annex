@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
-import ServerlistContext from "../../context/serverlists/serverlistContext";
+import React, { useState, useContext } from 'react';
+import ServerContext from '../../context/server/serverContext';
 
 const CreateServerForm = () => {
- const serverlistContext = useContext(ServerlistContext);
+ const serverContext = useContext(ServerContext);
  const [server, setServer] = useState({
-  name: "",
-  img: "",
+  name: '',
+  img: '',
  });
 
  const { name, img } = server;
@@ -15,10 +15,10 @@ const CreateServerForm = () => {
 
  const onSubmit = (e) => {
   e.preventDefault();
-  serverlistContext.createServer(server);
+  serverContext.createServer(server);
   setServer({
-   name: "",
-   img: "",
+   name: '',
+   img: '',
   });
  };
 

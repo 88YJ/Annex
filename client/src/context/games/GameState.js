@@ -1,17 +1,24 @@
-import React, { useReducer, useContext } from "react";
-import uuid from "uuid";
-import GameContext from "./gameContext";
-import gameReducer from "./gameReducer";
-import { GET_GAMES, DISPLAY_GAMES_SIDEBAR } from "../types";
-import Axios from "axios";
+import React, { useReducer, useContext } from 'react';
+import uuid from 'uuid';
+import GameContext from './gameContext';
+import gameReducer from './gameReducer';
+import { GET_GAMES, DISPLAY_GAMES_SIDEBAR, CURRENT_MY_GAME } from '../types';
+import Axios from 'axios';
 
 const GameState = (props) => {
  const initialState = {
   games: null,
   gamesSidebar: false,
+  myGame: null,
  };
 
  const [state, dispatch] = useReducer(gameReducer, initialState);
+
+ const config = {
+  headers: {
+   'Content-Type': 'application/json',
+  },
+ };
 
  const displayGamesSidebar = async () => {
   try {
@@ -24,10 +31,20 @@ const GameState = (props) => {
  //Get Games
  const getGames = async () => {
   try {
-   const res = await Axios.get("/api/games");
+   const res = await Axios.get('/api/users/myGames/get');
    dispatch({ type: GET_GAMES, payload: res.data });
   } catch (err) {
-   console.log("no games to display");
+   console.log('no games to display');
+  }
+ };
+
+ const setMyGame = async (game) => {
+  try {
+   const res = await Axios.get(`/api/storegames/mygames/${game._id}`, config);
+   console.log('gameid' + res.data.name);
+   dispatch({ type: CURRENT_MY_GAME, payload: res.data });
+  } catch (err) {
+   console.log('no profiles to display');
   }
  };
 
@@ -36,8 +53,10 @@ const GameState = (props) => {
    value={{
     games: state.games,
     gamesSidebar: state.gamesSidebar,
+    myGame: state.myGame,
     displayGamesSidebar,
     getGames,
+    setMyGame,
    }}
   >
    {props.children}

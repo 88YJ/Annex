@@ -65,7 +65,7 @@
  text-decoration: none;
  font-size: 25px;
  margin: 10px;
- border: rgb(0, 0, 0) 1px solid;
+ border: rgb(0, 0, 0, 0) 1px solid;
 }
 .Nav a:hover {
  border: red 1px solid;
@@ -131,19 +131,61 @@
  padding: 0;
  margin: 0;
  margin-left: 2px;
+ margin-top: 3px;
 }
 .games li {
+ margin-top: 2px;
  float: center;
+ height: 80px;
 }
 
 .games li a {
  display: block;
  color: white;
  text-decoration: none;
- font-size: 17px;
+ font-size: 12px;
+ height: 15px;
+ width: 20px;
 }
 .games li a:hover {
- background-color: grey;
+ color: white;
+}
+.bannerfilm {
+ height: 100%;
+}
+.bannerfilm:hover {
+ background-color: rgb(0, 4, 17, 0.8);
+}
+.bannerfilm:hover .gamesubmenu {
+ display: block;
+ position: absolute;
+ background-color: rgb(0, 4, 17, 0.7);
+ margin-top: 18px;
+ margin-left: 0px;
+ padding-bottom: 0;
+}
+
+.gamesubmenu {
+ display: none;
+ min-width: 70px;
+}
+.gamesubmenu li {
+ float: left;
+ margin-left: 2px;
+ padding: 0px;
+ padding-left: 2px;
+ height: 40px;
+}
+.gamesubmenu li:hover {
+ background-color: black;
+}
+.bannerfilm p {
+ color: white;
+ opacity: 0;
+ font-size: 18px;
+}
+.bannerfilm:hover p {
+ opacity: 1;
 }
 
 .channellist {
@@ -446,6 +488,7 @@
 }
 .addcartbutton:hover {
  border: red 1px solid;
+ background: black;
  color: red;
  cursor: pointer;
 }
@@ -471,4 +514,102 @@
 .reviews ul {
  height: 92%;
  overflow-y: scroll;
+}
+.cartpage {
+ height: 100%;
+ display: grid;
+ grid-template-columns: 50% 50%;
+ background: rgb(0, 4, 17, 0.8);
+}
+.cartpage ul {
+ height: 50%;
+ width: 90%;
+}
+.cartpage li {
+ height: 100%;
+}
+.cartimg {
+ height: 75%;
+ background-position: center;
+ background-size: cover;
+}
+
+.friendlist {
+ color: red;
+ border-right: #384d48 1px solid;
+ background-color: rgb(0, 4, 17, 0.8);
+ font-size: 1.3rem;
+ font-weight: bold;
+ text-align: center;
+ height: 100%;
+}
+.friends {
+ font-size: 1.3rem;
+ font-weight: bold;
+ text-align: left;
+ height: 100%;
+}
+.friends ul {
+ list-style: none;
+ padding: 0;
+ margin: 0;
+ margin-left: 2px;
+ margin-top: 5px;
+}
+.friends li {
+ float: center;
+ margin-top: 2px;
+}
+
+.friends li a {
+ display: block;
+ color: white;
+ text-decoration: none;
+ font-size: 20px;
+}
+.friendlist ul li:hover .friendlistsubmenu {
+ display: block;
+ position: absolute;
+ background-color: rgb(0, 4, 17, 0.7);
+ margin-top: -66px;
+ margin-left: 105px;
+ padding-bottom: 0;
+}
+
+.friendlistsubmenu {
+ display: none;
+ min-width: 70px;
+}
+.friendlistsubmenu li {
+ float: left;
+ margin-left: 2px;
+ padding: 0px;
+ padding-left: 2px;
+}
+.friendlistsubmenu li:hover {
+ background-color: black;
+}
+.banner {
+ background-position: center;
+ background-size: cover;
+}
+
+.globalbutton {
+ outline: none;
+ position: relative;
+ text-transform: uppercase;
+ text-decoration: none;
+ background: #000411;
+ color: white;
+ padding: 10px;
+ display: inline-block;
+ border: grey 1px solid;
+ min-width: 100px;
+ margin: 3px;
+}
+.globalbutton:hover {
+ border: red 1px solid;
+ background: black;
+ color: red;
+ cursor: pointer;
 }

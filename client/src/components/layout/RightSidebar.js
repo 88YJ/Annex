@@ -2,7 +2,8 @@ import React, { useContext, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import GameContext from '../../context/games/gameContext';
 import ServerContext from '../../context/server/serverContext';
-import StoreCartContext from '../../context/storecart/storecartContext';
+import StoreContext from '../../context/store/storeContext';
+import ProfileContext from '../../context/profile/profileContext';
 
 import AuthContext from '../../context/auth/authContext';
 
@@ -11,31 +12,56 @@ const RightSidebar = () => {
 
  const gameContext = useContext(GameContext);
 
- const storecartContext = useContext(StoreCartContext);
+ const storeContext = useContext(StoreContext);
 
  const serverContext = useContext(ServerContext);
 
+ const profileContext = useContext(ProfileContext);
+
+ const { isAuthenticated } = authContext;
+
  const { serverSidebar, serverUserList } = serverContext;
 
- const { games, gamesSidebar } = gameContext;
+ const { games, gamesSidebar, setMyGame } = gameContext;
 
- const { gamescart, cartSidebar } = storecartContext;
+ const { gamescart, cartSidebar } = storeContext;
+
+ const { getIdProfile } = profileContext;
 
  useEffect(() => {
   authContext.loadUser();
   // eslint-disable-next-line
  }, []);
 
- if (serverSidebar) {
+ function openProfile(user) {
+  getIdProfile(user);
+ }
+ function openGame(game) {
+  setMyGame(game);
+ }
+
+ if (serverSidebar && isAuthenticated) {
   return (
    <Fragment>
-    <div className='gamelist'>
-     <h3>Users:</h3>
-     <div className='games'>
+    <div className='friendlist'>
+     <h3 style={{ background: 'black' }}>Users:</h3>
+     <div className='friends'>
       <ul>
        {serverUserList.map((user, i) => (
-        <li key={i}>
-         <Link to='/'>{user.name}</Link>
+        <li
+         key={i}
+         className='banner'
+         style={{
+          backgroundImage: `url(${user.profileBanner})`,
+         }}
+        >
+         <div
+          className='profilepicture'
+          style={{ backgroundImage: `url('${user.profilePicture}')` }}
+         ></div>
+         <Link to='/profilepage' onClick={() => openProfile(user)}>
+          <p style={{ background: 'rgb(0,0,0,.5)' }}>{user.name}</p>
+         </Link>
         </li>
        ))}
       </ul>
@@ -43,11 +69,11 @@ const RightSidebar = () => {
     </div>
    </Fragment>
   );
- } else if (cartSidebar) {
+ } else if (cartSidebar && isAuthenticated) {
   return (
    <Fragment>
     <div className='cartlist'>
-     <h3>Cart:</h3>
+     <h3 style={{ background: 'black' }}>Cart:</h3>
      <div className='cart'>
       <ul>
        {gamescart.map((cart, i) => (
@@ -64,12 +90,12 @@ const RightSidebar = () => {
     </div>
    </Fragment>
   );
- } else if (gamesSidebar) {
+ } else if (gamesSidebar && isAuthenticated) {
   if (games == null) {
    return (
     <Fragment>
      <div className='gamelist'>
-      <h3>Games:</h3>
+      <h3 style={{ background: 'black' }}>Games:</h3>
      </div>
     </Fragment>
    );
@@ -77,12 +103,34 @@ const RightSidebar = () => {
    return (
     <Fragment>
      <div className='gamelist'>
-      <h3>Games:</h3>
+      <h3 style={{ background: 'black' }}>Games:</h3>
       <div className='games'>
        <ul>
         {games.map((game, i) => (
-         <li key={i}>
-          <Link to='/'>{game.name}</Link>
+         <li
+          key={i}
+          className='banner'
+          style={{
+           backgroundImage: `url(${game.banner})`,
+          }}
+         >
+          <div className='bannerfilm'>
+           <p>{game.name}</p>
+           <div className='gamesubmenu'>
+            <li>
+             <Link
+              to='/game'
+              className='globalbutton'
+              onClick={() => openGame(game)}
+             >
+              Game Page
+             </Link>
+            </li>
+            <li>
+             <button className='globalbutton'>Play</button>
+            </li>
+           </div>
+          </div>
          </li>
         ))}
        </ul>
@@ -91,14 +139,16 @@ const RightSidebar = () => {
     </Fragment>
    );
   }
- } else {
+ } else if (isAuthenticated) {
   return (
    <Fragment>
     <div className='gamelist'>
-     <h3>Error:</h3>
+     <h3 style={{ background: 'black' }}>Error:</h3>
     </div>
    </Fragment>
   );
+ } else {
+  return <div className='gamelist'></div>;
  }
 };
 

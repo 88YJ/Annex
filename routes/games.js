@@ -31,12 +31,15 @@ router.post(
    return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, img } = req.body;
+  const { name, img, backgroundimg, wideimg, gameid } = req.body;
 
   try {
    const newGame = new Game({
     name,
     img,
+    backgroundimg,
+    wideimg,
+    gameid,
     user: req.user.id,
    });
 

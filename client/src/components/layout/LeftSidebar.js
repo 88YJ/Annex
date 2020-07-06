@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import ServerContext from "../../context/server/serverContext";
@@ -18,6 +18,12 @@ const LeftSidebar = () => {
 
  const voicechatContext = useContext(VoicechatContext);
 
+ const chatContext = useContext(ChatContext);
+
+ const { getFriendsList, friendList, getIdProfile } = profileContext;
+
+ const { isAuthenticated, user } = authContext;
+
  const {
   server,
   serverSidebar,
@@ -25,15 +31,9 @@ const LeftSidebar = () => {
   setCurrentChannel,
  } = serverContext;
 
- const { user } = authContext;
-
- const chatContext = useContext(ChatContext);
-
  const { showModalWithAddChannel } = modalContext;
 
  const { setConnectTrue, connect } = chatContext;
-
- const { getFriendsList, friendList } = profileContext;
 
  const {
   receivingCall,
@@ -65,6 +65,25 @@ const LeftSidebar = () => {
   if (!connect) {
    setConnectTrue();
   }
+ }
+ function openDM(friend) {
+  let connection = [user._id, friend._id];
+  let members = [user.name, friend.name];
+  let channelID = connection.sort();
+  let channel = {
+   name: members.toString(),
+   _id: channelID.toString(),
+   customization: {
+    icon: friend.profilePicture,
+   },
+  };
+  setCurrentChannel(channel);
+  if (!connect) {
+   setConnectTrue();
+  }
+ }
+ function openProfile(profile) {
+  getIdProfile(profile);
  }
 
  function openVoiceChannel(channel) {
@@ -111,11 +130,13 @@ const LeftSidebar = () => {
   );
  }
 
- if (serverSidebar) {
+ if (serverSidebar && isAuthenticated) {
   return (
    <div className='channellist'>
     <div className='serverchannels'>
-     <h3 className='center'>{server.name}</h3>
+     <h3 className='center' style={{ background: "black" }}>
+      {server.name}
+     </h3>
      <ul>
       <li>
        <Link to='/serverlanding'>Landing Page</Link>
@@ -139,40 +160,67 @@ const LeftSidebar = () => {
     </div>
    </div>
   );
- } else {
+ } else if (isAuthenticated) {
   return (
    <div>
-    <div className='channellist'>
-     <h3 className='center'>Friends:</h3>
-     <ul>
-      <li style={{ display: "none" }}>
-       {UserVideo}
-       {PartnerVideo}
-      </li>
-      {friendList.map((friend, i) => (
-       <li
-        key={i}
-        style={{
-         backgroundImage: `url(${friend.profilePicture})`,
-        }}
-       >
-        <Link to='/'>{friend.name}</Link>
+    <div className='friendlist'>
+     <h3 className='center' style={{ background: "black" }}>
+      Friends:
+     </h3>
+     <div className='friends'>
+      <ul>
+       <li style={{ display: "none" }}>
+        {UserVideo}
+        {PartnerVideo}
        </li>
-      ))}
-      <li>
-       {Object.keys(userList).map((key) => {
-        if (key === localID) {
-         return null;
-        }
-        return <button onClick={() => callPeer(key)}>Call {key}</button>;
-       })}
-      </li>
-      <li>{incomingCall}</li>
-     </ul>
+       {friendList.map((friend, i) => (
+        <li
+         key={i}
+         className='banner'
+         style={{
+          backgroundImage: `url(${friend.profileBanner})`,
+         }}
+        >
+         <div
+          className='profilepicture'
+          style={{ backgroundImage: `url('${friend.profilePicture}')` }}
+         ></div>
+         <Link to='#'>
+          <p style={{ background: "rgb(0,0,0,.5)" }}>{friend.name}</p>
+         </Link>
+         <div className='friendlistsubmenu'>
+          <ul>
+           <li>
+            <Link to='/redirectchat' onClick={() => openDM(friend)}>
+             Message
+            </Link>
+           </li>
+           <li>
+            <Link to='/profilepage' onClick={() => openProfile(friend)}>
+             Profile
+            </Link>
+           </li>
+          </ul>
+         </div>
+        </li>
+       ))}
+       <li>
+        {Object.keys(userList).map((key) => {
+         if (key === localID) {
+          return null;
+         }
+         return <button onClick={() => callPeer(key)}>Call {key}</button>;
+        })}
+       </li>
+       <li>{incomingCall}</li>
+      </ul>
+     </div>
     </div>
     <div className='serverchannels'></div>
    </div>
   );
+ } else {
+  return <div className='friendlist'></div>;
  }
 };
 /*

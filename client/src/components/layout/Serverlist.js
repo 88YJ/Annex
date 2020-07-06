@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, Fragment } from 'react';
 
 import AuthContext from '../../context/auth/authContext';
-import ServerlistContext from '../../context/serverlists/serverlistContext';
 import ServerContext from '../../context/server/serverContext';
 import ModalContext from '../../context/modal/modalContext';
 import ChatContext from '../../context/chat/chatContext';
@@ -17,14 +16,17 @@ const Serverlist = () => {
 
  const authContext = useContext(AuthContext);
 
- const serverlistContext = useContext(ServerlistContext);
-
  const modalContext = useContext(ModalContext);
 
  const serverContext = useContext(ServerContext);
 
- const { setCurrentServer, serverLogo } = serverContext;
- const { userServerList, getUserServers } = serverlistContext;
+ const {
+  setCurrentServer,
+  serverLogo,
+  userServerList,
+  getUserServers,
+ } = serverContext;
+
  const { showModalWithAddServer } = modalContext;
 
  useEffect(() => {
@@ -56,7 +58,7 @@ const Serverlist = () => {
       }}
      ></div>
      <div className='bottomlists'></div>
-     <div>Stream</div>
+     <div className='rightbottom'>Stream</div>
     </div>
    </Fragment>
   );

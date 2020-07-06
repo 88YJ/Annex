@@ -1,19 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 
 import AuthContext from '../../context/auth/authContext';
-import FindserversContext from '../../context/findservers/findserversContext';
-import ServerlistContext from '../../context/serverlists/serverlistContext';
+import ServerContext from '../../context/server/serverContext';
 
 const FindServers = () => {
  const authContext = useContext(AuthContext);
 
- const findserversContext = useContext(FindserversContext);
+ const serverContext = useContext(ServerContext);
 
- const serverlistContext = useContext(ServerlistContext);
-
- const { updateServerUserList, getUserServers } = serverlistContext;
-
- const { servers, getServers } = findserversContext;
+ const { servers, getServers, updateServerUserList } = serverContext;
 
  useEffect(() => {
   authContext.loadUser();
