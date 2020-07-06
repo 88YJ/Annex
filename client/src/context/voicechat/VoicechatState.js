@@ -41,6 +41,9 @@ const VoicechatState = (props) => {
  state.partnerVideo = useRef();
  const socket = useRef();
 
+ const authContext = useContext(AuthContext);
+ const { user } = authContext;
+
  useEffect(() => {
   socket.current = io.connect(ENDPOINT);
 

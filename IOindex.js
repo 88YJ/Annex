@@ -71,6 +71,10 @@ io.on("connect", (socket) => {
  socket.emit("yourID", socket.id);
  io.sockets.emit("allUsers", videoUsers);
 
+ socket.on("name", (name, id) => {
+  console.log(name);
+ });
+
  socket.on("callUser", (data) => {
   io
    .to(data.userToCall)
@@ -80,30 +84,6 @@ io.on("connect", (socket) => {
  socket.on("acceptCall", (data) => {
   io.to(data.to).emit("callAccepted", data.signal);
  });
- /*
- //VOICE CHAT
- socket.on("voiceChannel", ({ name, room, profileimg }, callback) => {
-  const { error, user } = addUser({ id: socket.id, name, profileimg, room });
-
-  if (error) return callback(error);
-
-  console.log("Joined room: ", room);
-  socket.join(room);
-  io.emit("joined");
- });
-
- socket.on("candidate", function (event) {
-  socket.broadcast.to(event.room).emit("candidate", event);
- });
-
- socket.on("offer", function (event) {
-  socket.broadcast.to(event.room).emit("offer", event.sdp);
- });
-
- socket.on("answer", function (event) {
-  socket.broadcast.to(event.room).emit("answer", event.sdp);
- });
- */
 });
 
 server.listen(process.env.PORT || 5002, () =>

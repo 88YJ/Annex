@@ -25,6 +25,8 @@ const LeftSidebar = () => {
   setCurrentChannel,
  } = serverContext;
 
+ const { user } = authContext;
+
  const chatContext = useContext(ChatContext);
 
  const { showModalWithAddChannel } = modalContext;
@@ -69,6 +71,13 @@ const LeftSidebar = () => {
   //setCurrentVoiceChannel(channel);
   //console.log("HERE" + peerConnections.id);
  }
+ let name;
+ //const { name } = queryString.parse(location.search);
+ if (user) {
+  name = user.name;
+ } else {
+  name = "youre not supposed to be here";
+ }
 
  //const audioStream = (voiceStream) => ()
 
@@ -102,27 +111,6 @@ const LeftSidebar = () => {
   );
  }
 
- return (
-  <ul>
-   <li>
-    {UserVideo}
-    {PartnerVideo}
-   </li>
-   <li>
-    {Object.keys(userList).map((key) => {
-     if (key === localID) {
-      return null;
-     }
-     return <button onClick={() => callPeer(key)}>Call {key}</button>;
-    })}
-   </li>
-   <li>{incomingCall}</li>
-  </ul>
- );
-};
-
-/*
-
  if (serverSidebar) {
   return (
    <div className='channellist'>
@@ -134,22 +122,9 @@ const LeftSidebar = () => {
       </li>
       {serverChannelList.map((channel, i) => (
        <li key={i}>
-        {channel.voiceChannel ? (
-         <div>
-          <Link onClick={() => openVoiceChannel(channel)}>{channel.name} </Link>
-          <ul>
-           {userList.length >= 1 ? (
-            userList.map((user, i) => <li key={i}>{user.name}</li>)
-           ) : (
-            <div></div>
-           )}
-          </ul>
-         </div>
-        ) : (
-         <Link to='/redirectchat' onClick={() => openChannel(channel)}>
-          {channel.name}{" "}
-         </Link>
-        )}
+        <Link to='/redirectchat' onClick={() => openChannel(channel)}>
+         {channel.name}{" "}
+        </Link>
        </li>
       ))}
       <li key='addServer' onClick={displayModal}>
@@ -170,6 +145,10 @@ const LeftSidebar = () => {
     <div className='channellist'>
      <h3 className='center'>Friends:</h3>
      <ul>
+      <li style={{ display: "none" }}>
+       {UserVideo}
+       {PartnerVideo}
+      </li>
       {friendList.map((friend, i) => (
        <li
         key={i}
@@ -180,13 +159,60 @@ const LeftSidebar = () => {
         <Link to='/'>{friend.name}</Link>
        </li>
       ))}
+      <li>
+       {Object.keys(userList).map((key) => {
+        if (key === localID) {
+         return null;
+        }
+        return <button onClick={() => callPeer(key)}>Call {key}</button>;
+       })}
+      </li>
+      <li>{incomingCall}</li>
      </ul>
     </div>
     <div className='serverchannels'></div>
    </div>
   );
  }
- 
 };
+/*
+
+ return (
+  <ul>
+   <li>
+    {UserVideo}
+    {PartnerVideo}
+   </li>
+   <li>
+    {Object.keys(userList).map((key) => {
+     if (key === localID) {
+      return null;
+     }
+     return <button onClick={() => callPeer(key)}>Call {key}</button>;
+    })}
+   </li>
+   <li>{incomingCall}</li>
+  </ul>
+ );
+};
+
+
+
+{channel.voiceChannel ? (
+    <div>
+     <Link onClick={() => openVoiceChannel(channel)}>{channel.name} </Link>
+     <ul>
+      {userList.length >= 1 ? (
+       userList.map((user, i) => <li key={i}>{user.name}</li>)
+      ) : (
+       <div></div>
+      )}
+     </ul>
+    </div>
+   ) : (
+    <Link to='/redirectchat' onClick={() => openChannel(channel)}>
+     {channel.name}{" "}
+    </Link>
+   )}
 */
 export default LeftSidebar;
