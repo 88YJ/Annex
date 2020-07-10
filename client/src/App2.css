@@ -25,7 +25,7 @@
 
 .cartlist {
  color: red;
- border-left: #384d48 1px solid;
+ border-left: #384d48 3px solid;
  background-color: rgb(0, 4, 17, 0.8);
  font-size: 1.3rem;
  font-weight: bold;
@@ -387,8 +387,7 @@
 .friendrequests li {
  margin: 5px;
  padding: 0px;
- background: black;
- width: 190px;
+ width: 300px;
 }
 
 .myGameBanner {
@@ -414,11 +413,17 @@
  display: grid;
  grid-template-columns: 50% auto;
 }
+
+.myGamelists {
+ display: grid;
+ grid-template-columns: 40% 60%;
+}
 .myGamelists ul {
- background: black;
+ border-right: #384d48 3px solid;
+ background-color: rgb(0, 0, 0, 0.5);
  margin: 0;
  padding: 0;
- width: 30%;
+ width: 100%;
  height: 100%;
  overflow-y: scroll;
 }
@@ -428,4 +433,59 @@
 .myGamelists a {
  text-decoration: none;
  color: white;
+}
+
+.stream {
+ height: 100%;
+ width: 100%;
+ overflow-y: scroll;
+}
+.streamgrid {
+ height: 100%;
+ width: 100%;
+ display: grid;
+ grid-template-rows: 90% 10%;
+}
+
+.streamvideo {
+ height: 100%;
+ width: 100%;
+ background-position: center;
+ background-size: cover;
+}
+.footerbackground {
+ height: 100%;
+ width: 100%;
+ background-position: center;
+ background-size: cover;
+}
+.streamfooter {
+ height: 100%;
+ width: 100%;
+ display: grid;
+ grid-template-columns: 225px auto 225px;
+}
+.rightstreamfooter {
+ height: 100%;
+ width: 100%;
+ background-color: rgb(0, 4, 17, 0.7);
+}
+.leftstreamfooter {
+ height: 100%;
+ width: 100%;
+ background-color: rgb(0, 4, 17, 0.7);
+}
+
+.streambelowbackground {
+ height: 680px;
+ width: 100%;
+ background-position: center;
+ background-size: cover;
+}
+.streambelow {
+ height: 680px;
+ width: 100%;
+ background-color: rgb(0, 4, 17, 0.7);
+ display: grid;
+ grid-template-rows: 15% 85%;
 }

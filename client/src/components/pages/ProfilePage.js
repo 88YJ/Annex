@@ -99,7 +99,7 @@ const ProfilePage = () => {
 
       <div className='profileSubMaster'>
        <div className='profilescreenshots'>
-        <h2 className='center sticky'>Showcase Screenshots</h2>
+        <h2 className='center sticky'>Showcase</h2>
         <ul>
          {user.screenShots.map((screenShot, i) => (
           <li
@@ -214,7 +214,7 @@ const ProfilePage = () => {
 
       <div className='profileSubMaster'>
        <div className='profilescreenshots'>
-        <h2 className='center sticky'>Showcase Screenshots</h2>
+        <h2 className='center sticky'>Showcase</h2>
         {profile.screenShots ? (
          <ul>
           {profile.screenShots.map((screenShot, i) => (
@@ -248,6 +248,9 @@ const ProfilePage = () => {
           </li>
           <li>
            <h4>ScreenShots</h4>
+          </li>
+          <li>
+           <h4>Achievements</h4>
           </li>
           <li>
            <h4>Reviews</h4>

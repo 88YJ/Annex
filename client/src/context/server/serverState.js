@@ -1,6 +1,6 @@
-import React, { useReducer } from "react";
-import ServerContext from "./serverContext";
-import serverReducer from "./serverReducer";
+import React, { useReducer } from 'react';
+import ServerContext from './serverContext';
+import serverReducer from './serverReducer';
 import {
  SET_CURRENT_SERVER,
  SET_CURRENT_CHANNEL,
@@ -10,19 +10,19 @@ import {
  GET_SERVER_CHANNELLIST,
  GET_SERVERS,
  GET_USER_SERVERS,
-} from "../types";
-import Axios from "axios";
+} from '../types';
+import Axios from 'axios';
 
-import Logo from "../../components/layout/Logo.jpg";
+import Logo from '../../components/layout/Logo.jpg';
 
 const ServerState = (props) => {
  const initialState = {
   server: {},
   channel: {
-   name: "default",
+   name: 'default',
    customization: [
     {
-     icon: "default",
+     icon: 'default',
     },
    ],
   },
@@ -37,7 +37,7 @@ const ServerState = (props) => {
 
  const config = {
   headers: {
-   "Content-Type": "application/json",
+   'Content-Type': 'application/json',
   },
  };
  const [state, dispatch] = useReducer(serverReducer, initialState);
@@ -84,7 +84,7 @@ const ServerState = (props) => {
    const res = await Axios.get(`/api/users/${serverID}`, config);
    dispatch({ type: GET_SERVER_USERLIST, payload: res.data });
   } catch (err) {
-   console.log("No users in the server");
+   console.log('No users in the server');
   }
  };
 
@@ -94,7 +94,7 @@ const ServerState = (props) => {
    const res = await Axios.get(`/api/servers/channels/all/${serverID}`, config);
    dispatch({ type: GET_SERVER_CHANNELLIST, payload: res.data });
   } catch (err) {
-   console.log("Failed to get channels");
+   console.log('Failed to get channels');
   }
  };
 
@@ -107,7 +107,7 @@ const ServerState = (props) => {
    );
    getServerChannels(res.data._id);
   } catch (err) {
-   console.log("Failed to create channel");
+   console.log('Failed to create channel');
   }
  };
 
@@ -115,10 +115,10 @@ const ServerState = (props) => {
  const createChannel = async (channel) => {
   try {
    const res = await Axios.post(`/api/servers/channels`, channel, config);
-   console.log("Channel id: " + res.data._id);
+   console.log('Channel id: ' + res.data._id);
    updateServerChannelList(res.data._id);
   } catch (err) {
-   console.log("Failed to create channel");
+   console.log('Failed to create channel');
   }
  };
 
@@ -126,11 +126,11 @@ const ServerState = (props) => {
  //Get Servers
  const getServers = async () => {
   try {
-   const res = await Axios.get("/api/servers/");
+   const res = await Axios.get('/api/servers/');
 
    dispatch({ type: GET_SERVERS, payload: res.data });
   } catch (err) {
-   console.log("no servers to display");
+   console.log('no servers to display');
   }
  };
 
@@ -159,11 +159,11 @@ const ServerState = (props) => {
  //Get Servers
  const getUserServers = async () => {
   try {
-   const res = await Axios.get("/api/servers/userservers");
+   const res = await Axios.get('/api/servers/userservers');
 
    dispatch({ type: GET_USER_SERVERS, payload: res.data });
   } catch (err) {
-   console.log("no servers to display");
+   console.log('no servers to display');
   }
  };
 
@@ -172,7 +172,7 @@ const ServerState = (props) => {
    const res = await Axios.put(`api/users/${server._id}`, server, config);
    getUserServers();
   } catch (err) {
-   console.log("Failed to update server list");
+   console.log('Failed to update server list');
   }
  };
 
@@ -181,17 +181,17 @@ const ServerState = (props) => {
    const res = await Axios.put(`api/servers/${server._id}`, server, config);
    updateUserServerList(server);
   } catch (err) {
-   console.log("Failed to update user list");
+   console.log('Failed to update user list');
   }
  };
 
  //Create Server
  const createServer = async (server) => {
   try {
-   const res = await Axios.post("/api/servers", server, config);
+   const res = await Axios.post('/api/servers', server, config);
    updateUserServerList(res.data);
   } catch (err) {
-   console.log("Failed to create server");
+   console.log('Failed to create server');
   }
  };
 

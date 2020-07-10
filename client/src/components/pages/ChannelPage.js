@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-
+import { Redirect } from 'react-router-dom';
 import ServerContext from '../../context/server/serverContext';
 import io from 'socket.io-client';
 import AuthContext from '../../context/auth/authContext';
@@ -49,7 +49,6 @@ const ServerPage = ({ location }) => {
    name = 'youre not supposed to be here';
    profileimg = 'lol';
    room = 'haha';
-   console.log('made it');
    red = true;
   }
 
@@ -65,6 +64,12 @@ const ServerPage = ({ location }) => {
    }
   });
  }, [ENDPOINT, location.search]);
+
+ if (user) {
+  red = false;
+ } else {
+  red = true;
+ }
 
  useEffect(() => {
   socket.on('message', (message) => {
@@ -86,12 +91,14 @@ const ServerPage = ({ location }) => {
 
  useEffect(() => {
   authContext.loadUser();
-  displayServerSidebars();
+  if (!channel.customization.dm) {
+   displayServerSidebars();
+  }
   // eslint-disable-next-line
  }, []);
  if (red) {
   console.log('nothing to return');
-  return <div></div>;
+  return <Redirect to='/' />;
  } else {
   return (
    <div

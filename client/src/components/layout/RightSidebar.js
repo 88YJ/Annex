@@ -43,9 +43,9 @@ const RightSidebar = () => {
  if (serverSidebar && isAuthenticated) {
   return (
    <Fragment>
-    <div className='friendlist'>
+    <div className='serveruserlist'>
      <h3 style={{ background: 'black' }}>Users:</h3>
-     <div className='friends'>
+     <div className='serverusers'>
       <ul>
        {serverUserList.map((user, i) => (
         <li
@@ -115,20 +115,22 @@ const RightSidebar = () => {
           }}
          >
           <div className='bannerfilm'>
-           <p>{game.name}</p>
+           <p style={{ fontSize: '16px' }}>{game.name}</p>
            <div className='gamesubmenu'>
-            <li>
-             <Link
-              to='/game'
-              className='globalbutton'
-              onClick={() => openGame(game)}
-             >
-              Game Page
-             </Link>
-            </li>
-            <li>
-             <button className='globalbutton'>Play</button>
-            </li>
+            <ul>
+             <li>
+              <Link
+               to='/game'
+               className='globalbutton'
+               onClick={() => openGame(game)}
+              >
+               Game Page
+              </Link>
+             </li>
+             <li>
+              <button className='globalbutton'>Play</button>
+             </li>
+            </ul>
            </div>
           </div>
          </li>

@@ -106,9 +106,7 @@ const Dash = () => {
  } else if (isAuthenticated) {
   return (
    <div className='dashboard'>
-    <h1 className='center' style={{ color: 'white' }}>
-     Dashboard!
-    </h1>
+    <h1 className='center'>Dashboard!</h1>
     <div className='dashGrid'>
      <div className='trendstream'>
       <h2 className='sticky'>Trending Streams For You!</h2>

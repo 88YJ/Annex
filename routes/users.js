@@ -77,7 +77,6 @@ router.post(
 
 //Update User's game list
 router.put('/myGames/:id', auth, async (req, res) => {
- console.log(req.params);
  try {
   let updatedUser = await User.findByIdAndUpdate(req.user.id, {
    $addToSet: { myGames: req.params.id },
@@ -108,7 +107,6 @@ router.get('/myGames/get', auth, async (req, res) => {
    };
    games.push(gameInfoObject);
   }
-  console.log(games);
   res.json(games);
  } catch (err) {
   console.error(err.message);
@@ -210,6 +208,7 @@ router.get('/friends', auth, async (req, res) => {
     profilePicture: profile.profilePicture,
     profileBanner: profile.profileBanner,
     screenShots: profile.screenShots,
+    backgroundPicture: profile.backgroundPicture,
    };
    friends.push(profileInfoObject);
   }

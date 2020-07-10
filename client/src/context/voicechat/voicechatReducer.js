@@ -8,7 +8,7 @@ import {
  SET_CALLER,
  SET_CALLER_SIGNAL,
  SET_CALL_ACCEPTED,
-} from "../types";
+} from '../types';
 
 export default (state, action) => {
  switch (action.type) {
