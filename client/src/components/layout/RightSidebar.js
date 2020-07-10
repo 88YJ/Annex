@@ -76,16 +76,24 @@ const RightSidebar = () => {
      <h3 style={{ background: 'black' }}>Cart:</h3>
      <div className='cart'>
       <ul>
-       {gamescart.map((cart, i) => (
-        <li key={i}>
-         <Link to='/'>{cart.name}</Link>
-        </li>
-       ))}
+       {gamescart !== null ? (
+        gamescart.map((cart, i) => (
+         <li key={i}>
+          <Link to='/'>{cart.name}</Link>
+         </li>
+        ))
+       ) : (
+        <li />
+       )}
       </ul>
       <br />
-      <Link className='gotocart' to='/cart'>
-       Go To Cart
-      </Link>
+      {gamescart !== null ? (
+       <Link className='gotocart' to='/cart'>
+        Go To Cart
+       </Link>
+      ) : (
+       <div />
+      )}
      </div>
     </div>
    </Fragment>

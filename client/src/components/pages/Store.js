@@ -69,16 +69,16 @@ const Store = () => {
        />
       </li>
       <li>
+       <Link to='#'>Clear Filter</Link>
+      </li>
+      <li>
        <Link to='#'>Selected For You</Link>
       </li>
       <li>
-       <Link to='#'>Games</Link>
+       <Link to='#'>Popular Games</Link>
       </li>
       <li>
        <Link to='#'>Community</Link>
-      </li>
-      <li>
-       <Link to='#'>Mods</Link>
       </li>
      </ul>
     </div>

@@ -21,7 +21,7 @@ const StoreState = (props) => {
  const initialState = {
   storegames: [],
   filtered: null,
-  gamescart: [],
+  gamescart: null,
   gamepage: {},
   cartSidebar: false,
  };

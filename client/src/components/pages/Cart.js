@@ -27,7 +27,7 @@ const StoreGamePage = () => {
   let game = gamescart[0];
   buyGame(game);
  }
- if (gamescart.length > 0) {
+ if (gamescart !== null) {
   return (
    <div className='cartpage'>
     <ul>

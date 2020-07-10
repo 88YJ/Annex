@@ -41,6 +41,7 @@
 .subMenu {
  display: none;
  min-width: 70px;
+ z-index: 10;
 }
 
 .Nav h1 {
@@ -496,7 +497,6 @@
 .addcartbutton:hover {
  border: red 1px solid;
  background: black;
- color: red;
  cursor: pointer;
 }
 .storegamename {
