@@ -1,5 +1,6 @@
 import {
  GET_STORE_GAMES,
+ FILTER_STORE_GAMES,
  DISPLAY_CART_SIDEBAR,
  HIDE_CART_SIDEBAR,
  ADD_TO_CART,
@@ -13,6 +14,14 @@ export default (state, action) => {
     ...state,
     storegames: action.payload,
     loading: false,
+   };
+  case FILTER_STORE_GAMES:
+   return {
+    ...state,
+    filtered: state.storegames.filter((game) => {
+     const regex = new RegExp(`${action.payload}`, 'gi');
+     return game.name.match(regex);
+    }),
    };
   case DISPLAY_CART_SIDEBAR:
    return {

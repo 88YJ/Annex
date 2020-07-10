@@ -7,6 +7,7 @@ import {
  HIDE_CART_SIDEBAR,
  ADD_TO_CART,
  SET_STORE_GAME,
+ FILTER_STORE_GAMES,
 } from '../types';
 import Axios from 'axios';
 
@@ -19,6 +20,7 @@ const StoreState = (props) => {
 
  const initialState = {
   storegames: [],
+  filtered: null,
   gamescart: [],
   gamepage: {},
   cartSidebar: false,
@@ -30,6 +32,14 @@ const StoreState = (props) => {
   try {
    const res = await Axios.get('/api/storegames');
    dispatch({ type: GET_STORE_GAMES, payload: res.data });
+  } catch (err) {
+   console.log('no games to display');
+  }
+ };
+
+ const filterStoreGames = async (text) => {
+  try {
+   dispatch({ type: FILTER_STORE_GAMES, payload: text });
   } catch (err) {
    console.log('no games to display');
   }
@@ -97,12 +107,14 @@ const StoreState = (props) => {
     gamescart: state.gamescart,
     cartSidebar: state.cartSidebar,
     gamepage: state.gamepage,
+    filtered: state.filtered,
     setCurrentGame,
     displayCartSidebar,
     hideCartSidebar,
     addToCart,
     buyGame,
     getStoreGames,
+    filterStoreGames,
    }}
   >
    {props.children}
