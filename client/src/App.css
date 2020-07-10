@@ -182,9 +182,6 @@
  padding-left: 2px;
  height: 40px;
 }
-.gamesubmenu li:hover {
- background-color: black;
-}
 .bannerfilm p {
  color: white;
  opacity: 0;
