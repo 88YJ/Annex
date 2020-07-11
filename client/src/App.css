@@ -235,8 +235,7 @@
  grid-template-columns: 250px minmax(auto, 1450px) 250px;
  border-top: #384d48 2px solid;
  height: 150px;
- background-color: #000411;
- opacity: 0.8;
+ background-color: rgb(0, 4, 17, 0.9);
 }
 .footer div {
  color: red;
@@ -677,4 +676,9 @@
  background: black;
  color: red;
  cursor: pointer;
+}
+
+.streampreview {
+ height: 100%;
+ width: 100%;
 }

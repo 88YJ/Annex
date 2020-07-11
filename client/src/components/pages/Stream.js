@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState, useRef } from "react";
 
 const Stream = () => {
+ const streamingVideo = useRef();
+
+ const [stream, setStream] = useState();
+ const [peerConnection, setPeerConnection] = useState();
+
+ let StreamingVideo;
+ if (stream) {
+  StreamingVideo = <video playsInline ref={streamingVideo} autoPlay />;
+ }
+
  return (
   <div className='stream'>
    <div className='streamgrid'>
-    <div
-     className='streamvideo'
-     style={{
-      backgroundImage: `url('https://images.gamersyde.com/image_stream-23809-2670_0002.jpg')`,
-     }}
-    ></div>
+    <div className='streamvideo'>{StreamingVideo}</div>
     <div
      className='footerbackground'
      style={{
@@ -28,7 +33,7 @@ const Stream = () => {
       </div>
       <div></div>
       <div className='rightstreamfooter'>
-       <button className='globalbutton'>Follow</button>{' '}
+       <button className='globalbutton'>Follow</button>{" "}
        <button className='globalbutton'>Subscribe!</button>
       </div>
      </div>

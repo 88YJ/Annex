@@ -24,6 +24,7 @@ export default (state, action) => {
     show: false,
     addServer: false,
     addChannel: false,
+    startStream: false,
    };
   default:
    return state;

@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
-import ServerContext from '../../context/server/serverContext';
-import ModalContext from '../../context/modal/modalContext';
-import ProfileContext from '../../context/profile/profileContext';
-import ChatContext from '../../context/chat/chatContext';
-import VoicechatContext from '../../context/voicechat/voicechatContext';
-import SimplePeer from 'simple-peer';
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
+import ServerContext from "../../context/server/serverContext";
+import ModalContext from "../../context/modal/modalContext";
+import ProfileContext from "../../context/profile/profileContext";
+import ChatContext from "../../context/chat/chatContext";
+import VoicechatContext from "../../context/voicechat/voicechatContext";
+import SimplePeer from "simple-peer";
 
 let acc = false;
 
@@ -41,16 +41,14 @@ const LeftSidebar = () => {
  const {
   receivingCall,
   caller,
-  userList,
   acceptCall,
-  localID,
   stream,
   callAccepted,
   userVideo,
   partnerVideo,
   joinvoice,
   setReceivingCall,
-  partner,
+  startVoiceStream,
  } = voicechatContext;
 
  //const [stream, setStream] = useState();
@@ -98,6 +96,7 @@ const LeftSidebar = () => {
   //console.log("HERE" + peerConnections.id);
  }
  function voicejoin(channel) {
+  //startVoiceStream(channel);
   joinvoice(channel);
  }
 
@@ -106,7 +105,7 @@ const LeftSidebar = () => {
  if (user) {
   name = user.name;
  } else {
-  name = 'youre not supposed to be here';
+  name = "youre not supposed to be here";
  }
 
  //const audioStream = (voiceStream) => ()
@@ -115,7 +114,7 @@ const LeftSidebar = () => {
  if (stream) {
   UserVideo = (
    <video
-    style={{ display: 'none' }}
+    style={{ display: "none" }}
     playsInline
     muted
     ref={userVideo}
@@ -127,7 +126,7 @@ const LeftSidebar = () => {
  let PartnerVideo;
  if (callAccepted) {
   PartnerVideo = (
-   <video playsInline style={{ display: 'none' }} ref={partnerVideo} autoPlay />
+   <video playsInline style={{ display: "none" }} ref={partnerVideo} autoPlay />
   );
  }
 
@@ -144,7 +143,7 @@ const LeftSidebar = () => {
    acc = true;
    setTimeout(() => {
     setReceivingCall(false);
-    console.log('accepting call');
+    console.log("accepting call");
     acceptCall();
    }, 1000);
   }
@@ -154,11 +153,11 @@ const LeftSidebar = () => {
   return (
    <div className='channellist'>
     <div className='serverchannels'>
-     <h3 className='center' style={{ background: 'black' }}>
+     <h3 className='center' style={{ background: "black" }}>
       {server.name}
      </h3>
      <ul>
-      <li style={{ display: 'none' }}>
+      <li style={{ display: "none" }}>
        {UserVideo}
        {PartnerVideo}
       </li>
@@ -173,7 +172,7 @@ const LeftSidebar = () => {
        </li>
       ))}
       <li>
-       <Link to='#' onClick={() => voicejoin('channeltest')}>
+       <Link to='#' onClick={() => voicejoin("channeltest")}>
         Channel Test
        </Link>
       </li>
@@ -193,7 +192,7 @@ const LeftSidebar = () => {
   return (
    <div>
     <div className='friendlist'>
-     <h3 className='center' style={{ background: 'black' }}>
+     <h3 className='center' style={{ background: "black" }}>
       Friends:
      </h3>
      <div className='friends'>
@@ -211,7 +210,7 @@ const LeftSidebar = () => {
           style={{ backgroundImage: `url('${friend.profilePicture}')` }}
          ></div>
          <Link to='#'>
-          <p style={{ background: 'rgb(0,0,0,.5)' }}>{friend.name}</p>
+          <p style={{ background: "rgb(0,0,0,.5)" }}>{friend.name}</p>
          </Link>
          <div className='friendlistsubmenu'>
           <ul>

@@ -1,11 +1,17 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, {
+ useContext,
+ useEffect,
+ useState,
+ useRef,
+ Fragment,
+} from "react";
 
-import AuthContext from '../../context/auth/authContext';
-import ServerContext from '../../context/server/serverContext';
-import ModalContext from '../../context/modal/modalContext';
-import ChatContext from '../../context/chat/chatContext';
+import AuthContext from "../../context/auth/authContext";
+import ServerContext from "../../context/server/serverContext";
+import ModalContext from "../../context/modal/modalContext";
+import ChatContext from "../../context/chat/chatContext";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Serverlist = () => {
  //background = 'https://wallpaperplay.com/walls/full/e/0/3/21596.jpg';
@@ -29,6 +35,9 @@ const Serverlist = () => {
 
  const { showModalWithAddServer } = modalContext;
 
+ const [stream, setStream] = useState();
+ const userVideo = useRef();
+
  useEffect(() => {
   authContext.loadUser();
   getUserServers();
@@ -39,12 +48,32 @@ const Serverlist = () => {
   showModalWithAddServer();
  };
 
+ const startStream = async () => {
+  try {
+   await navigator.mediaDevices.getDisplayMedia().then((stream) => {
+    setStream(stream);
+    if (userVideo.current) {
+     userVideo.current.srcObject = stream;
+    }
+   });
+  } catch (err) {
+   console.error("Error: " + err);
+  }
+ };
+
  function openServer(server) {
   setCurrentServer(server);
 
   if (!connect) {
    setConnectTrue();
   }
+ }
+
+ let UserVideo;
+ if (stream) {
+  UserVideo = (
+   <video className='streampreview' playsInline ref={userVideo} autoPlay />
+  );
  }
 
  if (userServerList == null) {
@@ -98,7 +127,18 @@ const Serverlist = () => {
        </ul>
       </div>
      </div>
-     <div className='rightbottom'>Stream</div>
+     <div className='rightbottom'>
+      {UserVideo ? (
+       UserVideo
+      ) : (
+       <Fragment>
+        <h3>Stream</h3>
+        <button className='globalbutton' onClick={startStream}>
+         Start Stream
+        </button>
+       </Fragment>
+      )}
+     </div>
     </div>
    </Fragment>
   );

@@ -20,7 +20,7 @@ const ModalState = (props) => {
   try {
    dispatch({ type: SHOW_MODAL_WITH_ADD_SERVER });
   } catch (err) {
-   console.log("Couldn't display modal");
+   console.log("Couldn't display modal with add server");
   }
  };
 
@@ -29,7 +29,7 @@ const ModalState = (props) => {
   try {
    dispatch({ type: SHOW_MODAL_WITH_ADD_CHANNEL });
   } catch (err) {
-   console.log("Couldn't display modal");
+   console.log("Couldn't display modal with add channel");
   }
  };
 
