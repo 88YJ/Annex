@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 import ProfileContext from './profileContext';
 import profileReducer from './profileReducer';
 import {

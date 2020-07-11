@@ -1,8 +1,6 @@
 import React, { useReducer } from 'react';
 import DashContext from './dashContext';
 import dashReducer from './dashReducer';
-import { GET_DASH } from '../types';
-import Axios from 'axios';
 
 const DashState = (props) => {
  const initialState = {

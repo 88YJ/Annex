@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import ServerContext from "../../context/server/serverContext";
@@ -39,7 +39,6 @@ const LeftSidebar = () => {
 
  const {
   receivingCall,
-  caller,
   acceptCall,
   stream,
   callAccepted,
@@ -47,7 +46,6 @@ const LeftSidebar = () => {
   partnerVideo,
   joinvoice,
   setReceivingCall,
-  startVoiceStream,
  } = voicechatContext;
 
  //const [stream, setStream] = useState();
@@ -90,24 +88,10 @@ const LeftSidebar = () => {
   getIdProfile(profile);
  }
 
- function openVoiceChannel(channel) {
-  //setCurrentVoiceChannel(channel);
-  //console.log("HERE" + peerConnections.id);
- }
  function voicejoin(channel) {
   //startVoiceStream(channel);
   joinvoice(channel);
  }
-
- let name;
- //const { name } = queryString.parse(location.search);
- if (user) {
-  name = user.name;
- } else {
-  name = "youre not supposed to be here";
- }
-
- //const audioStream = (voiceStream) => ()
 
  let UserVideo;
  if (stream) {
@@ -129,15 +113,7 @@ const LeftSidebar = () => {
   );
  }
 
- let incomingCall;
  if (receivingCall) {
-  incomingCall = (
-   <div>
-    <h1>{caller.name} is calling you</h1>
-    <button onClick={acceptCall}>Accept</button>
-   </div>
-  );
-
   if (!acc) {
    acc = true;
    setTimeout(() => {
@@ -206,7 +182,9 @@ const LeftSidebar = () => {
         >
          <div
           className='profilepicture'
-          style={{ backgroundImage: `url('${friend.profilePicture}')` }}
+          style={{
+           backgroundImage: `url('${friend.profilePicture}')`,
+          }}
          ></div>
          <Link to='#'>
           <p style={{ background: "rgb(0,0,0,.5)" }}>{friend.name}</p>

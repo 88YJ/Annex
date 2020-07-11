@@ -1,5 +1,4 @@
-import React, { useReducer, useContext } from 'react';
-import uuid from 'uuid';
+import React, { useReducer } from 'react';
 import GameContext from './gameContext';
 import gameReducer from './gameReducer';
 import { GET_GAMES, DISPLAY_GAMES_SIDEBAR, CURRENT_MY_GAME } from '../types';

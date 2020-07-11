@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, Fragment, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import TwoBeLogo from '../layout/TwoBeLogo.png';
 
 import AuthContext from '../../context/auth/authContext';
 

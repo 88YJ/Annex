@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import ProfileContext from '../../context/profile/profileContext';
-import TwoBeLogo from './TwoBeLogo.png';
 
 const Navbar = ({ title }) => {
  const authContext = useContext(AuthContext);
