@@ -44,6 +44,8 @@ const Serverlist = () => {
   getUserServers,
  } = serverContext;
 
+ const { user } = authContext;
+
  const { showModalWithAddServer } = modalContext;
 
  const [stream, setStream] = useState();
@@ -51,9 +53,21 @@ const Serverlist = () => {
  const userVideo = useRef();
  const socket = useRef();
 
+ useEffect(() => {
+  authContext.loadUser();
+  getUserServers();
+  // eslint-disable-next-line
+ }, []);
+
  socket.current = io.connect(ENDPOINT);
 
- socket.current.on("viewer", (id) => {
+ socket.current.on("viewer", (socketId, id) => {
+  if (peerConnections[id]) {
+   console.log("VIEWER ALREADY HAS A CONNECTION");
+   peerConnections[id].close();
+   delete peerConnections[id];
+  }
+
   const peerConnection = new RTCPeerConnection(config);
 
   //Add the stream to the connection
@@ -62,8 +76,13 @@ const Serverlist = () => {
   //Send the found ICE candidate to server
   peerConnection.onicecandidate = (event) => {
    if (event.candidate) {
-    socket.current.emit("candidate", id, event.candidate);
+    socket.current.emit("candidate", socketId, event.candidate);
    }
+  };
+
+  const broadcasterInfo = {
+   name: user.name,
+   profilePicture: user.profilePicture,
   };
 
   //Send a connection offer to the client using setLocalDescription() as config for the connection
@@ -73,14 +92,19 @@ const Serverlist = () => {
     peerConnection.setLocalDescription(sdp);
    })
    .then(() => {
-    socket.current.emit("offer", id, peerConnection.localDescription);
+    socket.current.emit(
+     "offer",
+     socketId,
+     peerConnection.localDescription,
+     broadcasterInfo
+    );
    });
 
   setPeerConnections((peerConnections[id] = peerConnection)); //Saving to the peerConnections object
+  console.log(peerConnections);
  });
 
  socket.current.on("answer", (id, description) => {
-  console.log(peerConnections);
   peerConnections.setRemoteDescription(description);
  });
 
@@ -88,11 +112,12 @@ const Serverlist = () => {
   peerConnections.addIceCandidate(new RTCIceCandidate(candidate));
  });
 
- useEffect(() => {
-  authContext.loadUser();
-  getUserServers();
-  // eslint-disable-next-line
- }, []);
+ socket.current.on("disconnectPeer", (id) => {
+  if (peerConnections[id]) {
+   peerConnections[id].close();
+   delete peerConnections[id];
+  }
+ });
 
  const displayModal = () => {
   showModalWithAddServer();

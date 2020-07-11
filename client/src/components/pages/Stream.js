@@ -1,5 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import io from "socket.io-client";
+
+import AuthContext from "../../context/auth/authContext";
 
 const ENDPOINT = ":5002";
 
@@ -12,19 +14,23 @@ const config = {
 };
 
 const Stream = () => {
+ const authContext = useContext(AuthContext);
+
+ const { user } = authContext;
  const streamingVideo = useRef();
  const socket = useRef();
 
- const [stream, setStream] = useState();
+ const [broadcaster, setBroadcaster] = useState();
  const [peerConnection, setPeerConnection] = useState();
 
  useEffect(() => {
   let incomingStream = new MediaStream();
 
   socket.current = io.connect(ENDPOINT);
+
   const RTCConnection = new RTCPeerConnection(config);
 
-  socket.current.on("offer", (id, description) => {
+  socket.current.on("offer", (id, description, broadcaster) => {
    //Send a connection answer to the request of the broadcaster
    RTCConnection.setRemoteDescription(description)
     .then(() => RTCConnection.createAnswer())
@@ -43,7 +49,7 @@ const Stream = () => {
     incomingStream.addTrack(event.streams[0].getTracks()[0]);
    };
 
-   setStream(incomingStream);
+   setBroadcaster(broadcaster);
 
    RTCConnection.onicecandidate = (event) => {
     if (event.candidate) {
@@ -59,11 +65,15 @@ const Stream = () => {
   });
 
   socket.current.on("connect", () => {
-   socket.current.emit("viewer");
+   if (user) {
+    socket.current.emit("viewer", user._id);
+   }
   });
 
   socket.current.on("broadcaster", () => {
-   socket.current.emit("viewer");
+   if (user) {
+    socket.current.emit("viewer", user._id);
+   }
   });
 
   socket.current.on("disconnectPeer", () => {
@@ -96,10 +106,14 @@ const Stream = () => {
        <div
         className='profilepicture'
         style={{
-         backgroundImage: `url('https://ubistatic19-a.akamaihd.net/ubicomstatic/en-GB/global/media/Header_1600x1000_264197.jpg')`,
+         backgroundImage: `url(${
+          broadcaster
+           ? broadcaster.profilePicture
+           : "https://ubistatic19-a.akamaihd.net/ubicomstatic/en-GB/global/media/Header_1600x1000_264197.jpg"
+         })`,
         }}
        ></div>
-       <h2>YourName</h2>
+       <h2>{broadcaster ? broadcaster.name : "Unknown"}</h2>
       </div>
       <div></div>
       <div className='rightstreamfooter'>

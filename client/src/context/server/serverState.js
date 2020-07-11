@@ -122,7 +122,6 @@ const ServerState = (props) => {
   }
  };
 
- /////////////////////////////////////////////////////////////////Find Servers State
  //Get Servers
  const getServers = async () => {
   try {
@@ -134,33 +133,10 @@ const ServerState = (props) => {
   }
  };
 
- //Create Server                                        Rashad look at this one!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- /*const createServer = async (server) => {
-  const config = {
-   headers: {
-    'Content-Type': 'application/json',
-   },
-  };
-  try {
-   const resServer = await Axios.post('/api/servers', server, config);
-
-   const resUser = await Axios.put(
-    `api/users/${resServer.data._id}`,
-    server,
-    config
-   );
-
-   getServers();
-  } catch (err) {
-   console.log('Failed to create server');
-  }
- };*/
- /////////////////////////////////////////////////////////ServerList State
  //Get Servers
  const getUserServers = async () => {
   try {
    const res = await Axios.get("/api/servers/userservers");
-
    dispatch({ type: GET_USER_SERVERS, payload: res.data });
   } catch (err) {
    console.log("no servers to display");

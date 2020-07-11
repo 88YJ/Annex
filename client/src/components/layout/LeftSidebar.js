@@ -45,6 +45,7 @@ const LeftSidebar = () => {
   userVideo,
   partnerVideo,
   joinvoice,
+  userList,
   setReceivingCall,
  } = voicechatContext;
 
@@ -219,27 +220,6 @@ const LeftSidebar = () => {
 export default LeftSidebar;
 
 /*
-
- return (
-  <ul>
-   <li>
-    {UserVideo}
-    {PartnerVideo}
-   </li>
-   <li>
-    {Object.keys(userList).map((key) => {
-     if (key === localID) {
-      return null;
-     }
-     return <button onClick={() => callPeer(key)}>Call {key}</button>;
-    })}
-   </li>
-   <li>{incomingCall}</li>
-  </ul>
- );
-};
-
-
 
 {channel.voiceChannel ? (
     <div>

@@ -13,8 +13,6 @@ const io = socketio(server);
 
 const videoUsers = {};
 
-let userarray = [];
-
 let broadcaster;
 
 app.use(cors());
@@ -115,17 +113,18 @@ io.on("connect", (socket) => {
   socket.broadcast.emit("broadcaster");
  });
 
- socket.on("viewer", () => {
-  socket.to(broadcaster).emit("viewer", socket.id); //Seding viewer socket id to broadcaster
+ socket.on("viewer", (id) => {
+  socket.to(broadcaster).emit("viewer", socket.id, id); //Seding viewer socket id to broadcaster
  });
 
  socket.on("disconnect", () => {
+  console.log("Socket disconnected");
   socket.to(broadcaster).emit("disconnectPeer", socket.id);
  });
 
  //SEND AND RECIEVE OFFER/ANSWER
- socket.on("offer", (id, message) => {
-  socket.to(id).emit("offer", socket.id, message);
+ socket.on("offer", (id, message, broadcaster) => {
+  socket.to(id).emit("offer", socket.id, message, broadcaster);
  });
 
  socket.on("answer", (id, message) => {

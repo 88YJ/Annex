@@ -1,8 +1,8 @@
-import React, { Fragment, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
-import ProfileContext from '../../context/profile/profileContext';
+import React, { Fragment, useContext } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
+import ProfileContext from "../../context/profile/profileContext";
 
 const Navbar = ({ title }) => {
  const authContext = useContext(AuthContext);
@@ -55,7 +55,7 @@ const Navbar = ({ title }) => {
     </div>
    </li>
    <li>
-    <Link to='/stream'>Stream</Link>
+    <Link to='/redirectstream'>Stream</Link>
    </li>
    <li>
     <Link to='#'>Community</Link>
@@ -110,7 +110,7 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
- title: '{Annex} ',
+ title: "{Annex} ",
 };
 
 export default Navbar;
