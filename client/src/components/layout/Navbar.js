@@ -59,7 +59,7 @@ const Navbar = ({ title }) => {
     <Link to='/stream'>Stream</Link>
    </li>
    <li>
-    <Link to='#'>Search</Link>
+    <Link to='#'>Community</Link>
     <div className='subMenu'>
      <ul>
       <li>

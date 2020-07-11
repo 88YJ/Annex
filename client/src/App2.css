@@ -334,6 +334,37 @@
  grid-template-rows: 210px auto;
  overflow-y: scroll;
 }
+.profilebodycenter {
+ height: 100%;
+ width: 100%;
+}
+.profilelist1 {
+ overflow-y: scroll;
+ display: flexbox;
+ height: 50%;
+ width: 100%;
+ margin: 2px;
+ padding: 2px;
+}
+.profilelist1 li {
+ margin-left: 20px;
+ margin-top: 20px;
+ float: left;
+ opacity: 0.8;
+ background-size: cover;
+ background-position: center;
+ height: 100px;
+ width: 300px;
+}
+
+.profilecomments ul {
+ border: #384d48 1px solid;
+ margin: 0;
+ padding: 0;
+}
+.profilecomments li {
+ background-color: rgb(0, 4, 17, 0.5);
+}
 .screenshot {
  height: 140px;
  width: 240px;

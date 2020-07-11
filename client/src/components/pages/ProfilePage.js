@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import ProfileContext from '../../context/profile/profileContext';
 import ServerContext from '../../context/server/serverContext';
@@ -61,11 +61,9 @@ const ProfilePage = () => {
   }
  }
 
- if (!profile || !user) {
-  return <div></div>;
- }
-
- if (profile._id === user._id) {
+ if (!user || !profile) {
+  return <Redirect to='/' />;
+ } else if (profile._id === user._id) {
   return (
    <div
     className='profilebackground'
@@ -126,6 +124,9 @@ const ProfilePage = () => {
           </li>
           <li>
            <h4>Inventory</h4>
+          </li>
+          <li>
+           <h4>Achievements</h4>
           </li>
           <li>
            <h4>ScreenShots</h4>
@@ -263,7 +264,136 @@ const ProfilePage = () => {
           </li>
          </ul>
         </div>
-        <div className='profilebodycenter'></div>
+        <div className='profilebodycenter'>
+         <h1 className='center' style={{ background: 'rgb(0,0,0,.8)' }}>
+          Recent Activity
+         </h1>
+         <ul className='profilelist1'>
+          <li
+           style={{
+            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+           }}
+          >
+           <h2 className='center' style={{ marginTop: '30px' }}>
+            Completed Campagian On Legendary!
+           </h2>
+          </li>
+          <li
+           style={{
+            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+           }}
+          >
+           <h2 className='center' style={{ marginTop: '30px' }}>
+            Completed Campagian On Legendary!
+           </h2>
+          </li>
+          <li
+           style={{
+            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+           }}
+          >
+           <h2 className='center' style={{ marginTop: '30px' }}>
+            Completed Campagian On Legendary!
+           </h2>
+          </li>
+          <li
+           style={{
+            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+           }}
+          >
+           <h2 className='center' style={{ marginTop: '30px' }}>
+            Completed Campagian On Legendary!
+           </h2>
+          </li>
+          <li
+           style={{
+            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+           }}
+          >
+           <h2 className='center' style={{ marginTop: '30px' }}>
+            Completed Campagian On Legendary!
+           </h2>
+          </li>
+          <li
+           style={{
+            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+           }}
+          >
+           <h2 className='center' style={{ marginTop: '30px' }}>
+            Completed Campagian On Legendary!
+           </h2>
+          </li>
+          <li
+           style={{
+            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+           }}
+          >
+           <h2 className='center' style={{ marginTop: '30px' }}>
+            Completed Campagian On Legendary!
+           </h2>
+          </li>
+          <li
+           style={{
+            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+           }}
+          >
+           <h2 className='center' style={{ marginTop: '30px' }}>
+            Completed Campagian On Legendary!
+           </h2>
+          </li>
+         </ul>
+         <div className='profilecomments'>
+          <h1 className='center' style={{ background: 'rgb(0,0,0,.8)' }}>
+           Profile Comments
+          </h1>
+          <ul>
+           <li>
+            <h5>
+             User: <span style={{ color: 'red' }}>BabyJesus</span>
+            </h5>
+            <p style={{ color: 'white' }}>
+             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+             quidem quasi fuga laudantium ipsam ut earum laborum laboriosam,
+             consectetur reiciendis odit voluptates? Velit voluptates, non sunt
+             dicta animi repudiandae voluptatibus?
+            </p>
+           </li>
+           <li>
+            <h5>
+             User: <span style={{ color: 'red' }}>Rejis</span>
+            </h5>
+            <p style={{ color: 'white' }}>
+             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+             quidem quasi fuga laudantium ipsam ut earum laborum laboriosam,
+             consectetur reiciendis odit voluptates? Velit voluptates, non sunt
+             dicta animi repudiandae voluptatibus?
+            </p>
+           </li>
+           <li>
+            <h5>
+             User: <span style={{ color: 'red' }}>Parathax</span>
+            </h5>
+            <p style={{ color: 'white' }}>
+             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+             quidem quasi fuga laudantium ipsam ut earum laborum laboriosam,
+             consectetur reiciendis odit voluptates? Velit voluptates, non sunt
+             dicta animi repudiandae voluptatibus?
+            </p>
+           </li>
+           <li>
+            <h5>
+             User: <span style={{ color: 'red' }}>Flipster</span>
+            </h5>
+            <p style={{ color: 'white' }}>
+             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+             quidem quasi fuga laudantium ipsam ut earum laborum laboriosam,
+             consectetur reiciendis odit voluptates? Velit voluptates, non sunt
+             dicta animi repudiandae voluptatibus?
+            </p>
+           </li>
+          </ul>
+         </div>
+        </div>
        </div>
       </div>
      </div>

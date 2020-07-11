@@ -103,7 +103,7 @@ const Game = () => {
        <h2>Game News:</h2>
        <ul>
         <li>
-         <h4>04/25/3001</h4>
+         <h4 style={{ color: 'red' }}>04/25/3001</h4>
          <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
           magnam neque sed facere laboriosam iusto repudiandae et eius eos
@@ -112,7 +112,7 @@ const Game = () => {
          </p>
         </li>
         <li>
-         <h4>07/05/3001</h4>
+         <h4 style={{ color: 'red' }}>07/05/3001</h4>
          <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
           magnam neque sed facere laboriosam iusto repudiandae et eius eos
@@ -121,7 +121,7 @@ const Game = () => {
          </p>
         </li>
         <li>
-         <h4>12/31/3001</h4>
+         <h4 style={{ color: 'red' }}>12/31/3001</h4>
          <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
           magnam neque sed facere laboriosam iusto repudiandae et eius eos
@@ -137,7 +137,7 @@ const Game = () => {
        <h2>Patch Notes:</h2>
        <ul>
         <li>
-         <h4>7.05</h4>
+         <h4 style={{ color: 'red' }}>7.05</h4>
          <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis
           repellat modi perferendis impedit soluta aliquid unde ea nihil ex
@@ -146,7 +146,7 @@ const Game = () => {
          </p>
         </li>
         <li>
-         <h4>7.06</h4>
+         <h4 style={{ color: 'red' }}>7.06</h4>
          <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis
           repellat modi perferendis impedit soluta aliquid unde ea nihil ex

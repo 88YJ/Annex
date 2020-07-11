@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import ServerContext from '../../context/server/serverContext';
 import io from 'socket.io-client';
@@ -20,9 +21,9 @@ const ServerLanding = () => {
   displayServerSidebars();
   // eslint-disable-next-line
  }, []);
- if (red) {
+ if (!authContext.user) {
   console.log('nothing to return');
-  return <div></div>;
+  return <Redirect to='/' />;
  } else {
   return (
    <div
