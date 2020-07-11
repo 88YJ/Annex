@@ -8,14 +8,14 @@ import {
  SET_CALLER,
  SET_CALLER_SIGNAL,
  SET_CALL_ACCEPTED,
-} from '../types';
+} from "../types";
 
 export default (state, action) => {
  switch (action.type) {
   case SET_CURRENT_VOICE_CHANNEL:
    return {
     ...state,
-    voiceChannel: action.payload,
+    channelID: action.payload,
    };
   case UPDATE_PEER_CONNECTIONS:
    return {
@@ -24,10 +24,19 @@ export default (state, action) => {
    };
 
   case UPDATE_VOICE_CHAT_USERLIST:
-   return {
-    ...state,
-    userList: action.payload,
-   };
+   let alreadyInChannel = false;
+   state.userList.forEach((user) => {
+    if (user.id == action.payload.id) {
+     alreadyInChannel = true;
+     return;
+    }
+   });
+   if (!alreadyInChannel) {
+    return {
+     ...state,
+     userList: [...state.userList, action.payload],
+    };
+   }
   case UPDATE_LOCAL_ID:
    return {
     ...state,

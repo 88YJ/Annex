@@ -11,6 +11,7 @@ import {
  SET_CALLER,
  SET_CALLER_SIGNAL,
  SET_CALL_ACCEPTED,
+ SET_CURRENT_VOICE_CHANNEL,
 } from "../types";
 //import {} from "../types";
 //import Axios from "axios";
@@ -29,7 +30,7 @@ const VoicechatState = (props) => {
   userList: [
    {
     name: "yay",
-    id: "randomid",
+    id: "empty",
     profileimg:
      "https://hdwallpaperim.com/wp-content/uploads/2017/08/22/101488-anime_girls-music-headphones-anime-748x421.jpg",
    },
@@ -39,6 +40,7 @@ const VoicechatState = (props) => {
   caller: {},
   callerSignal: {},
   callAccepted: false,
+  channelID: "",
  };
 
  const [state, dispatch] = useReducer(voicechatReducer, initialState);
@@ -101,19 +103,6 @@ const VoicechatState = (props) => {
       callPeer(newUser);
      }, 3000 * me);
     }
-
-    if (users.length > 1) {
-     //callPeer(newUser);
-    }
-   },
-   []
-  );
-
-  socket.current.on(
-   "newUser",
-   (id) => {
-    console.log(state.userList.length);
-    console.log("newUser" + id.userid);
    },
    []
   );
@@ -133,6 +122,12 @@ const VoicechatState = (props) => {
   room = channel;
   console.log(channel);
   socket.current.emit("joinvoice", { name, room, profileimg });
+
+  try {
+   dispatch({ type: SET_CURRENT_VOICE_CHANNEL, payload: channel._id });
+  } catch (err) {
+   console.log("Couldn't set current channel");
+  }
  }
 
  const setLocalID = (id) => {
@@ -145,7 +140,7 @@ const VoicechatState = (props) => {
 
  const setUserList = (users) => {
   try {
-   dispatch({ type: UPDATE_VOICE_CHAT_USERLIST, payload: users });
+   dispatch({ type: UPDATE_VOICE_CHAT_USERLIST, payload: users[0] });
   } catch (err) {
    console.log("Couldn't update userlist");
   }
@@ -280,6 +275,7 @@ const VoicechatState = (props) => {
     caller: state.caller,
     callerSignal: state.callerSignal,
     callAccepted: state.callAccepted,
+    channelID: state.channelID,
     startVoiceStream,
     acceptCall,
     joinvoice,

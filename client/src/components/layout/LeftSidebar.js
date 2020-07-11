@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import ServerContext from "../../context/server/serverContext";
@@ -47,6 +47,7 @@ const LeftSidebar = () => {
   joinvoice,
   userList,
   setReceivingCall,
+  channelID,
  } = voicechatContext;
 
  //const [stream, setStream] = useState();
@@ -142,16 +143,30 @@ const LeftSidebar = () => {
       </li>
       {serverChannelList.map((channel, i) => (
        <li key={i}>
-        <Link to='/redirectchat' onClick={() => openChannel(channel)}>
-         {channel.name}
-        </Link>
+        {channel.voiceChannel ? (
+         <div>
+          <Link onClick={() => voicejoin(channel)}>{channel.name} </Link>
+          <ul>
+           {userList.length >= 1 && channelID === channel._id ? (
+            userList.map((user, i) =>
+             user.id == "empty" ? (
+              <Fragment></Fragment>
+             ) : (
+              <li key={i}>{user.name}</li>
+             )
+            )
+           ) : (
+            <div></div>
+           )}
+          </ul>
+         </div>
+        ) : (
+         <Link to='/redirectchat' onClick={() => openChannel(channel)}>
+          {channel.name}{" "}
+         </Link>
+        )}
        </li>
       ))}
-      <li>
-       <Link to='#' onClick={() => voicejoin("channeltest")}>
-        Channel Test
-       </Link>
-      </li>
       <li key='addServer' onClick={displayModal}>
        <div
         className='serverimgsmall'
