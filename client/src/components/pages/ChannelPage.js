@@ -25,8 +25,6 @@ const ServerPage = ({ location }) => {
  const { user } = authContext;
 
  const [name, setName] = useState('');
- const [room, setRoom] = useState('');
- const [profileimg, setprofileimg] = useState('');
  const [users, setUsers] = useState('');
  const [message, setMessage] = useState('');
  const [messages, setMessages] = useState([]);
@@ -53,10 +51,6 @@ const ServerPage = ({ location }) => {
   }
 
   socket = io(ENDPOINT);
-
-  setRoom(room);
-  setName(name);
-  setprofileimg(profileimg);
 
   socket.emit('join', { name, room, profileimg }, (error) => {
    if (error) {

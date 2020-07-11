@@ -29,8 +29,6 @@ import Store from './components/pages/Store';
 import FindServers from './components/pages/FindServers';
 import ProfileSearch from './components/pages/ProfileSearch';
 import ProfilePage from './components/pages/ProfilePage';
-import NewChat from './components/chatbox/Chat';
-import DMChat from './components/pages/DMChat';
 import RedirectChat from './components/redirect/RedirectChat';
 import StoreGamePage from './components/pages/StoreGamePage';
 import Cart from './components/pages/Cart';
@@ -91,10 +89,8 @@ const App = () => {
                      path='/redirectchat'
                      component={RedirectChat}
                     />
-                    <Route path='/chat' component={NewChat} />
                     <Route path='/serverlanding' component={ServerLanding} />
                     <Route path='/cart' component={Cart} />
-                    <Route path='/dmchat' component={DMChat} />
                     <Route exact path='/' component={Dash} />
                     <Route exact path='/store' component={Store} />
                     <Route exact path='/findservers' component={FindServers} />

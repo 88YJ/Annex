@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import ServerContext from '../../context/server/serverContext';
@@ -6,7 +6,6 @@ import ModalContext from '../../context/modal/modalContext';
 import ProfileContext from '../../context/profile/profileContext';
 import ChatContext from '../../context/chat/chatContext';
 import VoicechatContext from '../../context/voicechat/voicechatContext';
-import SimplePeer from 'simple-peer';
 
 let acc = false;
 
@@ -40,17 +39,13 @@ const LeftSidebar = () => {
 
  const {
   receivingCall,
-  caller,
-  userList,
   acceptCall,
-  localID,
   stream,
   callAccepted,
   userVideo,
   partnerVideo,
   joinvoice,
   setReceivingCall,
-  partner,
  } = voicechatContext;
 
  //const [stream, setStream] = useState();
@@ -93,23 +88,9 @@ const LeftSidebar = () => {
   getIdProfile(profile);
  }
 
- function openVoiceChannel(channel) {
-  //setCurrentVoiceChannel(channel);
-  //console.log("HERE" + peerConnections.id);
- }
  function voicejoin(channel) {
   joinvoice(channel);
  }
-
- let name;
- //const { name } = queryString.parse(location.search);
- if (user) {
-  name = user.name;
- } else {
-  name = 'youre not supposed to be here';
- }
-
- //const audioStream = (voiceStream) => ()
 
  let UserVideo;
  if (stream) {
@@ -131,15 +112,7 @@ const LeftSidebar = () => {
   );
  }
 
- let incomingCall;
  if (receivingCall) {
-  incomingCall = (
-   <div>
-    <h1>{caller.name} is calling you</h1>
-    <button onClick={acceptCall}>Accept</button>
-   </div>
-  );
-
   if (!acc) {
    acc = true;
    setTimeout(() => {

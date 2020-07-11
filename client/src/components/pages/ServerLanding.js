@@ -2,10 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import ServerContext from '../../context/server/serverContext';
-import io from 'socket.io-client';
 import AuthContext from '../../context/auth/authContext';
-
-let red = false;
 
 const ServerLanding = () => {
  const authContext = useContext(AuthContext);
@@ -13,8 +10,6 @@ const ServerLanding = () => {
  const serverContext = useContext(ServerContext);
 
  const { server, displayServerSidebars } = serverContext;
-
- const { user } = authContext;
 
  useEffect(() => {
   authContext.loadUser();

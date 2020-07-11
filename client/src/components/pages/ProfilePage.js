@@ -274,8 +274,11 @@ const ProfilePage = () => {
             backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
            }}
           >
-           <h2 className='center' style={{ marginTop: '30px' }}>
-            Completed Campagian On Legendary!
+           <h2
+            className='center'
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+           >
+            Legendary
            </h2>
           </li>
           <li
@@ -283,62 +286,83 @@ const ProfilePage = () => {
             backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
            }}
           >
-           <h2 className='center' style={{ marginTop: '30px' }}>
-            Completed Campagian On Legendary!
+           <h2
+            className='center'
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+           >
+            Head Hunter
            </h2>
           </li>
           <li
            style={{
-            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+            backgroundImage: `url('https://cdn.survivetheark.com/uploads/monthly_2017_07/ark.jpg.eb6143cfedcd05eda8126deef02b7385.jpg')`,
            }}
           >
-           <h2 className='center' style={{ marginTop: '30px' }}>
-            Completed Campagian On Legendary!
+           <h2
+            className='center'
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+           >
+            Rex Master
            </h2>
           </li>
           <li
            style={{
-            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+            backgroundImage: `url('https://i.redd.it/vjw22nfxlns11.jpg')`,
            }}
           >
-           <h2 className='center' style={{ marginTop: '30px' }}>
-            Completed Campagian On Legendary!
+           <h2
+            className='center'
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+           >
+            Portal Jumper
            </h2>
           </li>
           <li
            style={{
-            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+            backgroundImage: `url('https://steam.cryotank.net/wp-content/gallery/monsterhunterworld/Monster-Hunter-World-01-HD.png')`,
            }}
           >
-           <h2 className='center' style={{ marginTop: '30px' }}>
-            Completed Campagian On Legendary!
+           <h2
+            className='center'
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+           >
+            Monster Slayer
            </h2>
           </li>
           <li
            style={{
-            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+            backgroundImage: `url('https://savegameonline.com/wp-content/uploads/2013/02/witcher-3-banner-1.png')`,
            }}
           >
-           <h2 className='center' style={{ marginTop: '30px' }}>
-            Completed Campagian On Legendary!
+           <h2
+            className='center'
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+           >
+            Brewer
            </h2>
           </li>
           <li
            style={{
-            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+            backgroundImage: `url('https://www.f-covers.com/cover/another-skyrim-facebook-cover-timeline-banner-for-fb.jpg')`,
            }}
           >
-           <h2 className='center' style={{ marginTop: '30px' }}>
-            Completed Campagian On Legendary!
+           <h2
+            className='center'
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+           >
+            World Eater Down
            </h2>
           </li>
           <li
            style={{
-            backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
+            backgroundImage: `url('https://www.f-covers.com/cover/another-skyrim-facebook-cover-timeline-banner-for-fb.jpg')`,
            }}
           >
-           <h2 className='center' style={{ marginTop: '30px' }}>
-            Completed Campagian On Legendary!
+           <h2
+            className='center'
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+           >
+            Sweet Roll Master
            </h2>
           </li>
          </ul>
@@ -363,10 +387,10 @@ const ProfilePage = () => {
              User: <span style={{ color: 'red' }}>Rejis</span>
             </h5>
             <p style={{ color: 'white' }}>
-             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-             quidem quasi fuga laudantium ipsam ut earum laborum laboriosam,
-             consectetur reiciendis odit voluptates? Velit voluptates, non sunt
-             dicta animi repudiandae voluptatibus?
+             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores
+             facere pariatur nemo culpa, itaque maxime nulla blanditiis
+             reprehenderit eaque ratione! Culpa totam commodi iusto dicta
+             maiores non consequuntur quod expedita?
             </p>
            </li>
            <li>
@@ -374,10 +398,10 @@ const ProfilePage = () => {
              User: <span style={{ color: 'red' }}>Parathax</span>
             </h5>
             <p style={{ color: 'white' }}>
-             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-             quidem quasi fuga laudantium ipsam ut earum laborum laboriosam,
-             consectetur reiciendis odit voluptates? Velit voluptates, non sunt
-             dicta animi repudiandae voluptatibus?
+             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus
+             deserunt possimus veniam adipisci, quis quam rem ea vero, sunt nemo
+             repudiandae provident officia assumenda voluptate? Doloremque non
+             repellat adipisci vel?
             </p>
            </li>
            <li>
@@ -385,10 +409,10 @@ const ProfilePage = () => {
              User: <span style={{ color: 'red' }}>Flipster</span>
             </h5>
             <p style={{ color: 'white' }}>
-             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
-             quidem quasi fuga laudantium ipsam ut earum laborum laboriosam,
-             consectetur reiciendis odit voluptates? Velit voluptates, non sunt
-             dicta animi repudiandae voluptatibus?
+             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti
+             labore asperiores minima voluptas, exercitationem, itaque eveniet
+             magni nisi natus, accusantium iste odit? Beatae eligendi eius
+             ratione quo vitae dolores numquam.
             </p>
            </li>
           </ul>
