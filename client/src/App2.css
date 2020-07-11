@@ -173,7 +173,13 @@
 }
 
 .serverfind {
- overflow-y: scroll;
+ height: 100%;
+}
+.serverfind li {
+ border: #384d48 1px solid;
+ width: 20%;
+}
+.profilesearch {
  height: 100%;
 }
 .profilefind {
@@ -181,7 +187,16 @@
  height: 100%;
 }
 .profilefind ul {
+ margin: 0;
+ padding: 0;
  list-style: none;
+ width: 50%;
+}
+.profilefind li {
+ border-bottom: #384d48 3px solid;
+}
+.profilefind li:hover {
+ border-bottom: #f4ac32 3px solid;
 }
 .profilefind a {
  text-decoration: none;
@@ -355,6 +370,7 @@
  background-position: center;
  height: 100px;
  width: 300px;
+ border: #384d48 1px solid;
 }
 .profilecomments ul {
  border: #384d48 1px solid;

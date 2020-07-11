@@ -17,21 +17,27 @@ const ProfileSearch = () => {
  }
 
  return (
-  <div className='serverfind'>
-   <div className='serverfind'>
-    <h3>Users:</h3>
+  <div className='profilesearch'>
+   <div className='profilesearch'>
+    <h1>Users:</h1>
     <div className='profilefind'>
      <ul>
       {profiles.map((profile, i) => (
-       <Link to='/profilepage' key={i}>
-        <li onClick={() => openProfile(profile)}>
+       <Link to='/profilepage' key={i} onClick={() => openProfile(profile)}>
+        <li
+         className='banner'
+         style={{ backgroundImage: `url(${profile.profileBanner})` }}
+        >
+         <br />
+         <br />
          <div
           className='serverimgsmall'
           style={{
            backgroundImage: `url(${profile.profilePicture})`,
+           border: 'black 3px solid',
           }}
          ></div>
-         <h3>{profile.name}</h3>
+         <h2 style={{ backgroundColor: 'rgb(0,0,0, .8)' }}>{profile.name}</h2>
         </li>
        </Link>
       ))}

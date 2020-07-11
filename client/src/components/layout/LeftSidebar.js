@@ -181,7 +181,9 @@ const LeftSidebar = () => {
         >
          <div
           className='profilepicture'
-          style={{ backgroundImage: `url('${friend.profilePicture}')` }}
+          style={{
+           backgroundImage: `url('${friend.profilePicture}')`,
+          }}
          ></div>
          <Link to='#'>
           <p style={{ background: 'rgb(0,0,0,.5)' }}>{friend.name}</p>

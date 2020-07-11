@@ -52,7 +52,7 @@ const ProfilePage = () => {
    name: members.toString(),
    _id: channelID.toString(),
    customization: {
-    icon: friend.profilePicture,
+    icon: friend.backgroundPicture,
    },
   };
   setCurrentChannel(channel);
@@ -76,9 +76,9 @@ const ProfilePage = () => {
         className='profileImgDisplay'
         style={{ backgroundImage: `url(${profile.profilePicture})` }}
        ></div>
-       <div>
-        <h1>{profile.name}</h1>
-        <h4>Brandon Location: United States </h4>
+       <div style={{ color: 'white' }}>
+        <h1 style={{ color: 'red' }}>{profile.name}</h1>
+        <h4 style={{ color: 'red' }}>Brandon Location: United States </h4>
         <p>
          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex voluptatem
          voluptates
@@ -97,7 +97,9 @@ const ProfilePage = () => {
 
       <div className='profileSubMaster'>
        <div className='profilescreenshots'>
-        <h2 className='center sticky'>Showcase</h2>
+        <h2 className='center sticky' style={{ background: 'rgb(0,0,0,.8)' }}>
+         Showcase
+        </h2>
         <ul>
          {user.screenShots.map((screenShot, i) => (
           <li
@@ -129,7 +131,7 @@ const ProfilePage = () => {
            <h4>Achievements</h4>
           </li>
           <li>
-           <h4>ScreenShots</h4>
+           <h4>Screenshots</h4>
           </li>
           <li>
            <h4>Reviews</h4>
@@ -190,9 +192,9 @@ const ProfilePage = () => {
         className='profileImgDisplay'
         style={{ backgroundImage: `url(${profile.profilePicture})` }}
        ></div>
-       <div>
-        <h1>{profile.name}</h1>
-        <h4>Brandon Location: United States </h4>
+       <div style={{ color: 'white' }}>
+        <h1 style={{ color: 'red' }}>{profile.name}</h1>
+        <h4 style={{ color: 'red' }}>Brandon Location: United States </h4>
         <p>
          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex voluptatem
          voluptates
@@ -215,7 +217,9 @@ const ProfilePage = () => {
 
       <div className='profileSubMaster'>
        <div className='profilescreenshots'>
-        <h2 className='center sticky'>Showcase</h2>
+        <h2 className='center sticky' style={{ background: 'rgb(0,0,0,.8)' }}>
+         Showcase
+        </h2>
         {profile.screenShots ? (
          <ul>
           {profile.screenShots.map((screenShot, i) => (
@@ -248,7 +252,7 @@ const ProfilePage = () => {
            <h4>Inventory</h4>
           </li>
           <li>
-           <h4>ScreenShots</h4>
+           <h4>Screenshots</h4>
           </li>
           <li>
            <h4>Achievements</h4>
@@ -265,7 +269,15 @@ const ProfilePage = () => {
          </ul>
         </div>
         <div className='profilebodycenter'>
-         <h1 className='center' style={{ background: 'rgb(0,0,0,.8)' }}>
+         <h1
+          className='center'
+          style={{
+           background: 'rgb(0,0,0,.8)',
+           borderTop: '#384d48 1px solid',
+           borderBottom: '#384d48 1px solid',
+           marginTop: '1px',
+          }}
+         >
           Recent Activity
          </h1>
          <ul className='profilelist1'>
@@ -367,7 +379,13 @@ const ProfilePage = () => {
           </li>
          </ul>
          <div className='profilecomments'>
-          <h1 className='center' style={{ background: 'rgb(0,0,0,.8)' }}>
+          <h1
+           className='center'
+           style={{
+            background: 'rgb(0,0,0,.8)',
+            borderTop: '#384d48 1px solid',
+           }}
+          >
            Profile Comments
           </h1>
           <ul>

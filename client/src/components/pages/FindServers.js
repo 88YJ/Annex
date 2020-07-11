@@ -21,20 +21,23 @@ const FindServers = () => {
  }
 
  return (
-  <div className='serverfind'>
+  <div>
    <div className='serverfind'>
-    <h3>Servers:</h3>
+    <h1>Servers:</h1>
     <div className='serverfind'>
      <ul>
       {servers.map((server, i) => (
-       <li key={i} onClick={() => joinServer(server)}>
+       <li key={i}>
         <div
          className='serverimgsmall'
          style={{
           backgroundImage: `url(${server.img})`,
          }}
         ></div>
-        <h3>{server.name}</h3>
+        <button className='globalbutton' onClick={() => joinServer(server)}>
+         Join Server
+        </button>
+        <h2 style={{ backgroundColor: 'rgb(0,0,0, .5)' }}>{server.name}</h2>
        </li>
       ))}
      </ul>

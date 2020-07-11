@@ -658,6 +658,10 @@
  background-position: center;
  background-size: cover;
 }
+.profilebanner {
+ background-position: center;
+ background-size: contain;
+}
 
 .globalbutton {
  outline: none;
