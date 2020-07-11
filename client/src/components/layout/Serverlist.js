@@ -10,8 +10,19 @@ import AuthContext from "../../context/auth/authContext";
 import ServerContext from "../../context/server/serverContext";
 import ModalContext from "../../context/modal/modalContext";
 import ChatContext from "../../context/chat/chatContext";
+import io from "socket.io-client";
 
 import { Link } from "react-router-dom";
+
+const config = {
+ iceServers: [
+  {
+   urls: ["stun:stun.l.google.com:19302"],
+  },
+ ],
+};
+
+const ENDPOINT = ":5002";
 
 const Serverlist = () => {
  //background = 'https://wallpaperplay.com/walls/full/e/0/3/21596.jpg';
@@ -36,7 +47,46 @@ const Serverlist = () => {
  const { showModalWithAddServer } = modalContext;
 
  const [stream, setStream] = useState();
+ const [peerConnections, setPeerConnections] = useState({});
  const userVideo = useRef();
+ const socket = useRef();
+
+ socket.current = io.connect(ENDPOINT);
+
+ socket.current.on("viewer", (id) => {
+  const peerConnection = new RTCPeerConnection(config);
+
+  //Add the stream to the connection
+  stream.getTracks().forEach((track) => peerConnection.addTrack(track, stream));
+
+  //Send the found ICE candidate to server
+  peerConnection.onicecandidate = (event) => {
+   if (event.candidate) {
+    socket.current.emit("candidate", id, event.candidate);
+   }
+  };
+
+  //Send a connection offer to the client using setLocalDescription() as config for the connection
+  peerConnection
+   .createOffer()
+   .then((sdp) => {
+    peerConnection.setLocalDescription(sdp);
+   })
+   .then(() => {
+    socket.current.emit("offer", id, peerConnection.localDescription);
+   });
+
+  setPeerConnections((peerConnections[id] = peerConnection)); //Saving to the peerConnections object
+ });
+
+ socket.current.on("answer", (id, description) => {
+  console.log(peerConnections);
+  peerConnections.setRemoteDescription(description);
+ });
+
+ socket.current.on("candidate", (id, candidate) => {
+  peerConnections.addIceCandidate(new RTCIceCandidate(candidate));
+ });
 
  useEffect(() => {
   authContext.loadUser();
@@ -52,8 +102,10 @@ const Serverlist = () => {
   try {
    await navigator.mediaDevices.getDisplayMedia().then((stream) => {
     setStream(stream);
+    console.log(stream);
     if (userVideo.current) {
      userVideo.current.srcObject = stream;
+     socket.current.emit("broadcaster");
     }
    });
   } catch (err) {

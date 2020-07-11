@@ -1,15 +1,85 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import io from "socket.io-client";
+
+const ENDPOINT = ":5002";
+
+const config = {
+ iceServers: [
+  {
+   urls: ["stun:stun.l.google.com:19302"],
+  },
+ ],
+};
 
 const Stream = () => {
  const streamingVideo = useRef();
+ const socket = useRef();
 
  const [stream, setStream] = useState();
  const [peerConnection, setPeerConnection] = useState();
 
- let StreamingVideo;
- if (stream) {
-  StreamingVideo = <video playsInline ref={streamingVideo} autoPlay />;
- }
+ useEffect(() => {
+  let incomingStream = new MediaStream();
+
+  socket.current = io.connect(ENDPOINT);
+  const RTCConnection = new RTCPeerConnection(config);
+
+  socket.current.on("offer", (id, description) => {
+   //Send a connection answer to the request of the broadcaster
+   RTCConnection.setRemoteDescription(description)
+    .then(() => RTCConnection.createAnswer())
+    .then((sdp) => {
+     RTCConnection.setLocalDescription(sdp);
+    })
+    .then(() => {
+     socket.current.emit("answer", id, RTCConnection.localDescription);
+    });
+
+   if (streamingVideo.current) {
+    streamingVideo.current.srcObject = incomingStream;
+   }
+   //After the connection is established we get the video stream
+   RTCConnection.ontrack = (event) => {
+    incomingStream.addTrack(event.streams[0].getTracks()[0]);
+   };
+
+   setStream(incomingStream);
+
+   RTCConnection.onicecandidate = (event) => {
+    if (event.candidate) {
+     socket.current.emit("candidate", id, event.candidate);
+    }
+   };
+  });
+
+  socket.current.on("candidate", (id, candidate) => {
+   RTCConnection.addIceCandidate(new RTCIceCandidate(candidate)).catch((err) =>
+    console.error(err)
+   );
+  });
+
+  socket.current.on("connect", () => {
+   socket.current.emit("viewer");
+  });
+
+  socket.current.on("broadcaster", () => {
+   socket.current.emit("viewer");
+  });
+
+  socket.current.on("disconnectPeer", () => {
+   peerConnection.close();
+  });
+
+  window.onunload = window.onbeforeunload = () => {
+   socket.current.close();
+  };
+
+  setPeerConnection(RTCConnection);
+ }, []);
+
+ let StreamingVideo = (
+  <video playsInline className='streampreview' ref={streamingVideo} autoPlay />
+ );
 
  return (
   <div className='stream'>

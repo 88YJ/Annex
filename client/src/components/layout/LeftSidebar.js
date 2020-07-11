@@ -6,7 +6,6 @@ import ModalContext from "../../context/modal/modalContext";
 import ProfileContext from "../../context/profile/profileContext";
 import ChatContext from "../../context/chat/chatContext";
 import VoicechatContext from "../../context/voicechat/voicechatContext";
-import SimplePeer from "simple-peer";
 
 let acc = false;
 
