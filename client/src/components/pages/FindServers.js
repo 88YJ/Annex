@@ -21,8 +21,8 @@ const FindServers = () => {
  }
 
  return (
-  <div>
-   <div className='serverfind'>
+  <div className='serversearch'>
+   <div className='serversearch'>
     <h1>Servers:</h1>
     <div className='serverfind'>
      <ul>

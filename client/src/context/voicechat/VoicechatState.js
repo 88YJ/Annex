@@ -1,8 +1,8 @@
-import React, { useReducer, useContext, useEffect, useRef } from "react";
-import VoicechatContext from "./voicechatContext";
-import voicechatReducer from "./voicechatReducer";
-import io from "socket.io-client";
-import Peer from "simple-peer";
+import React, { useReducer, useContext, useEffect, useRef } from 'react';
+import VoicechatContext from './voicechatContext';
+import voicechatReducer from './voicechatReducer';
+import io from 'socket.io-client';
+import Peer from 'simple-peer';
 import {
  SET_VOICE_STREAM,
  UPDATE_VOICE_CHAT_USERLIST,
@@ -11,27 +11,27 @@ import {
  SET_CALLER,
  SET_CALLER_SIGNAL,
  SET_CALL_ACCEPTED,
-} from "../types";
+} from '../types';
 //import {} from "../types";
 //import Axios from "axios";
 
-import AuthContext from "../../context/auth/authContext";
+import AuthContext from '../../context/auth/authContext';
 
 //let socket;
 
-const ENDPOINT = ":5002";
+const ENDPOINT = ':5002';
 
 const VoicechatState = (props) => {
  const initialState = {
   userVideo: {},
   partnerVideo: {},
-  localID: "",
+  localID: '',
   userList: [
    {
-    name: "yay",
-    id: "randomid",
+    name: 'yay',
+    id: 'randomid',
     profileimg:
-     "https://hdwallpaperim.com/wp-content/uploads/2017/08/22/101488-anime_girls-music-headphones-anime-748x421.jpg",
+     'https://hdwallpaperim.com/wp-content/uploads/2017/08/22/101488-anime_girls-music-headphones-anime-748x421.jpg',
    },
   ],
   stream: {},
@@ -60,17 +60,17 @@ const VoicechatState = (props) => {
  if (user) {
   name = user.name;
   profileimg = user.profilePicture;
-  room = "somethingrandom";
+  room = 'somethingrandom';
  } else {
-  name = "place holder";
-  profileimg = "placeholder";
-  room = "somethingrandom";
+  name = 'place holder';
+  profileimg = 'placeholder';
+  room = 'somethingrandom';
  }
 
  useEffect(() => {
   socket.current = io.connect(ENDPOINT);
 
-  socket.current.on("yourID", (id) => {
+  socket.current.on('yourID', (id) => {
    setLocalID(id);
    myid = id;
   });
@@ -86,16 +86,16 @@ const VoicechatState = (props) => {
    });
 
   socket.current.on(
-   "allUsers",
+   'allUsers',
    ({ users, newUser }) => {
     setUserList(users);
     if (me == 0) {
      me = users.length;
     }
 
-    console.log("my num" + me);
+    console.log('my num' + me);
     if (myid == newUser) {
-     console.log("match");
+     console.log('match');
     } else {
      setTimeout(() => {
       callPeer(newUser);
@@ -110,15 +110,15 @@ const VoicechatState = (props) => {
   );
 
   socket.current.on(
-   "newUser",
+   'newUser',
    (id) => {
     console.log(state.userList.length);
-    console.log("newUser" + id.userid);
+    console.log('newUser' + id.userid);
    },
    []
   );
 
-  socket.current.on("hey", (data) => {
+  socket.current.on('hey', (data) => {
    setCaller(data.from);
    setCallerSignal(data.signal);
    callerD = data.signal;
@@ -132,7 +132,7 @@ const VoicechatState = (props) => {
   console.log(streamport);
   room = channel;
   console.log(channel);
-  socket.current.emit("joinvoice", { name, room, profileimg });
+  socket.current.emit('joinvoice', { name, room, profileimg });
  }
 
  const setLocalID = (id) => {
@@ -199,44 +199,44 @@ const VoicechatState = (props) => {
    config: {
     iceServers: [
      {
-      url: "stun:stun.services.mozilla.com",
+      url: 'stun:stun.services.mozilla.com',
      },
      {
-      url: "stun:stun.l.google.com:19302",
+      url: 'stun:stun.l.google.com:19302',
      },
     ],
    },
    stream: streamport,
   });
   let ok = true;
-  peer.on("signal", (data) => {
+  peer.on('signal', (data) => {
    console.log(
-    "signal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    'signal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
    );
    if (ok) {
     ok = false;
-    socket.current.emit("callUser", {
+    socket.current.emit('callUser', {
      userToCall: id,
      signalData: data,
      //from: user.name,
     });
    }
   });
-  peer.on("stream", (stream) => {
+  peer.on('stream', (stream) => {
    console.log(stream);
    if (state.partnerVideo.current) {
     state.partnerVideo.current.srcObject = stream;
    }
   });
 
-  socket.current.on("callAccepted", (signal) => {
+  socket.current.on('callAccepted', (signal) => {
    setCallAccepted(true);
    peer.signal(signal);
   });
  }
 
  const acceptCall = () => {
-  console.log("accepted");
+  console.log('accepted');
   setCallAccepted(true);
   const peer = new Peer({
    initiator: false,
@@ -245,23 +245,23 @@ const VoicechatState = (props) => {
   });
   let ok1 = true;
   let ok2 = true;
-  peer.on("signal", (data) => {
+  peer.on('signal', (data) => {
    console.log(
-    "acceptsignal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    'acceptsignal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
    );
    if (ok1 && ok2) {
     ok1 = false;
-    socket.current.emit("acceptCall", { signal: data, to: state.caller.id });
-    console.log("accept call 1" + data);
+    socket.current.emit('acceptCall', { signal: data, to: state.caller.id });
+    console.log('accept call 1' + data);
    } else if (ok2) {
     ok2 = false;
-    socket.current.emit("acceptCall", { signal: data, to: state.caller.id });
-    console.log("accept call 2" + data);
+    socket.current.emit('acceptCall', { signal: data, to: state.caller.id });
+    console.log('accept call 2' + data);
    }
   });
 
-  peer.on("stream", (stream) => {
-   console.log("THIS IS THE STREAM" + stream);
+  peer.on('stream', (stream) => {
+   console.log('THIS IS THE STREAM' + stream);
    state.partnerVideo.current.srcObject = stream;
   });
 
