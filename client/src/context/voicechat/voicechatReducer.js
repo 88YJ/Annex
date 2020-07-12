@@ -24,19 +24,10 @@ export default (state, action) => {
    };
 
   case UPDATE_VOICE_CHAT_USERLIST:
-   let alreadyInChannel = false;
-   state.userList.forEach((user) => {
-    if (user.id == action.payload.id) {
-     alreadyInChannel = true;
-     return;
-    }
-   });
-   if (!alreadyInChannel) {
-    return {
-     ...state,
-     userList: [...state.userList, action.payload],
-    };
-   }
+   return {
+    ...state,
+    userList: action.payload,
+   };
   case UPDATE_LOCAL_ID:
    return {
     ...state,

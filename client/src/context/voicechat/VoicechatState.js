@@ -91,6 +91,7 @@ const VoicechatState = (props) => {
    "allUsers",
    ({ users, newUser }) => {
     setUserList(users);
+    console.log(users);
     if (me == 0) {
      me = users.length;
     }
@@ -118,9 +119,7 @@ const VoicechatState = (props) => {
  function startVoiceStream() {}
 
  function joinvoice(channel) {
-  console.log(streamport);
-  room = channel;
-  console.log(channel);
+  room = channel._id;
   socket.current.emit("joinvoice", { name, room, profileimg });
 
   try {
@@ -140,7 +139,7 @@ const VoicechatState = (props) => {
 
  const setUserList = (users) => {
   try {
-   dispatch({ type: UPDATE_VOICE_CHAT_USERLIST, payload: users[0] });
+   dispatch({ type: UPDATE_VOICE_CHAT_USERLIST, payload: users });
   } catch (err) {
    console.log("Couldn't update userlist");
   }

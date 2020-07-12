@@ -145,7 +145,7 @@ const ServerState = (props) => {
 
  const updateUserServerList = async (server) => {
   try {
-   const res = await Axios.put(`api/users/${server._id}`, server, config);
+   await Axios.put(`api/users/${server._id}`, server, config);
    getUserServers();
   } catch (err) {
    console.log("Failed to update server list");
@@ -154,7 +154,7 @@ const ServerState = (props) => {
 
  const updateServerUserList = async (server) => {
   try {
-   const res = await Axios.put(`api/servers/${server._id}`, server, config);
+   await Axios.put(`api/servers/${server._id}`, server, config);
    updateUserServerList(server);
   } catch (err) {
    console.log("Failed to update user list");

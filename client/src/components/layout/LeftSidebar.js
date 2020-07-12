@@ -92,6 +92,7 @@ const LeftSidebar = () => {
 
  function voicejoin(channel) {
   //startVoiceStream(channel);
+  console.log(channel);
   joinvoice(channel);
  }
 
@@ -125,6 +126,11 @@ const LeftSidebar = () => {
    }, 1000);
   }
  }
+ let voiceChannels = [];
+
+ function addToVoiceChannelList(channel) {
+  voiceChannels.push(channel);
+ }
 
  if (serverSidebar && isAuthenticated) {
   return (
@@ -142,28 +148,41 @@ const LeftSidebar = () => {
        <Link to='/serverlanding'>Landing Page</Link>
       </li>
       {serverChannelList.map((channel, i) => (
-       <li key={i}>
+       <Fragment key={i}>
         {channel.voiceChannel ? (
-         <div>
-          <Link onClick={() => voicejoin(channel)}>{channel.name} </Link>
-          <ul>
-           {userList.length >= 1 && channelID === channel._id ? (
-            userList.map((user, i) =>
-             user.id == "empty" ? (
-              <Fragment></Fragment>
-             ) : (
+         <Fragment>{addToVoiceChannelList(channel)}</Fragment>
+        ) : (
+         <li key={i}>
+          <Link to='/redirectchat' onClick={() => openChannel(channel)}>
+           {channel.name}
+          </Link>
+         </li>
+        )}
+       </Fragment>
+      ))}
+      {voiceChannels.map((channel, i) => (
+       <li key={i}>
+        <Link to='#' onClick={() => voicejoin(channel)}>
+         {channel.name}{" "}
+        </Link>
+        {userList.length >= 1 && channelID === channel._id ? (
+         userList.map((user, i) => (
+          <Fragment>
+           {user ? (
+            user.id === "empty" ? (
+             <Fragment key={i}></Fragment>
+            ) : (
+             <ul key={i}>
               <li key={i}>{user.name}</li>
-             )
+             </ul>
             )
            ) : (
-            <div></div>
+            <Fragment></Fragment>
            )}
-          </ul>
-         </div>
+          </Fragment>
+         ))
         ) : (
-         <Link to='/redirectchat' onClick={() => openChannel(channel)}>
-          {channel.name}{" "}
-         </Link>
+         <Fragment></Fragment>
         )}
        </li>
       ))}
@@ -236,20 +255,21 @@ export default LeftSidebar;
 
 /*
 
-{channel.voiceChannel ? (
-    <div>
-     <Link onClick={() => openVoiceChannel(channel)}>{channel.name} </Link>
-     <ul>
-      {userList.length >= 1 ? (
-       userList.map((user, i) => <li key={i}>{user.name}</li>)
-      ) : (
-       <div></div>
-      )}
-     </ul>
-    </div>
-   ) : (
-    <Link to='/redirectchat' onClick={() => openChannel(channel)}>
-     {channel.name}{" "}
-    </Link>
-   )}
+<div>
+            {voiceChannels.push(channel)}
+          <Link onClick={() => voicejoin(channel)}>{channel.name} </Link>
+          <ul>
+           {userList.length >= 1 && channelID === channel._id ? (
+            userList.map((user, i) =>
+             user.id == "empty" ? (
+              <Fragment></Fragment>
+             ) : (
+              <li key={i}>{user.name}</li>
+             )
+            )
+           ) : (
+            <div></div>
+           )}
+          </ul>
+         </div>
 */

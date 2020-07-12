@@ -49,7 +49,7 @@ let background = null;
 
 if (localStorage.token) {
  setAuthToken(localStorage.token);
- console.log("profile pic" + localStorage.profilepic);
+ //console.log("profile pic" + localStorage.profilepic);
 
  background = localStorage.profilepic;
 } else {
