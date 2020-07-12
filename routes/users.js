@@ -1,28 +1,28 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const { check, validationResult } = require('express-validator');
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const { check, validationResult } = require("express-validator");
 
-const auth = require('../middleware/auth');
+const auth = require("../middleware/auth");
 
-const User = require('../models/User');
-const Server = require('../models/Servers');
-const Game = require('../models/Games');
-const StoreGames = require('../models/StoreGames');
+const User = require("../models/User");
+const Server = require("../models/Servers");
+const Game = require("../models/Games");
+const StoreGames = require("../models/StoreGames");
 
 // @route     POST api/users
 // @desc      Register a user
 // @access    Public
 router.post(
- '/',
+ "/",
  [
-  check('name', 'Please enter Name').not().isEmpty(),
-  check('email', 'Please enter a valid Email').isEmail(),
+  check("name", "Please enter Name").not().isEmpty(),
+  check("email", "Please enter a valid Email").isEmail(),
   check(
-   'password',
-   'Please enter a password with 6 or more characters'
+   "password",
+   "Please enter a password with 6 or more characters"
   ).isLength({ min: 6 }),
  ],
  async (req, res) => {
@@ -37,7 +37,7 @@ router.post(
    let user = await User.findOne({ email });
 
    if (user) {
-    return res.status(400).json({ msg: 'User already exists' });
+    return res.status(400).json({ msg: "User already exists" });
    }
    user = new User({
     name,
@@ -59,7 +59,7 @@ router.post(
 
    jwt.sign(
     payload,
-    config.get('jwtSecret'),
+    config.get("jwtSecret"),
     {
      expiresIn: 999999,
     },
@@ -70,13 +70,13 @@ router.post(
    );
   } catch (err) {
    console.error(err.message);
-   res.status(500).send('ServerErr');
+   res.status(500).send("ServerErr");
   }
  }
 );
 
 //Update User's game list
-router.put('/myGames/:id', auth, async (req, res) => {
+router.put("/myGames/:id", auth, async (req, res) => {
  try {
   let updatedUser = await User.findByIdAndUpdate(req.user.id, {
    $addToSet: { myGames: req.params.id },
@@ -84,12 +84,12 @@ router.put('/myGames/:id', auth, async (req, res) => {
   res.json(updatedUser);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
 //Get user games
-router.get('/myGames/get', auth, async (req, res) => {
+router.get("/myGames/get", auth, async (req, res) => {
  try {
   const currentUser = await User.findById(req.user.id);
   const { myGames } = currentUser;
@@ -110,12 +110,43 @@ router.get('/myGames/get', auth, async (req, res) => {
   res.json(games);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
 //Update User's server list
-router.put('/:id', auth, async (req, res) => {
+router.put("/editProfile", auth, async (req, res) => {
+ try {
+  let updatedUser;
+  const { profilePicture, background, banner } = req.body;
+
+  if (/\S/.test(profilePicture)) {
+   console.log("Profile Picture Updated");
+   updatedUser = await User.findByIdAndUpdate(req.user.id, {
+    profilePicture: profilePicture,
+   });
+  }
+  if (/\S/.test(background)) {
+   console.log("Background Updated");
+   updatedUser = await User.findByIdAndUpdate(req.user.id, {
+    backgroundPicture: background,
+   });
+  }
+  if (/\S/.test(banner)) {
+   console.log("Banner Updated");
+   updatedUser = await User.findByIdAndUpdate(req.user.id, {
+    profileBanner: banner,
+   });
+  }
+  res.json(updatedUser);
+ } catch (err) {
+  console.error(err.message);
+  res.status(500).send("Server Err");
+ }
+});
+
+//Update User's server list
+router.put("/:id", auth, async (req, res) => {
  try {
   let updatedUser = await User.findByIdAndUpdate(req.user.id, {
    $addToSet: { serverList: req.params.id },
@@ -123,12 +154,12 @@ router.put('/:id', auth, async (req, res) => {
   res.json(updatedUser);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
 //Send friend request
-router.put('/sendfriendrequest/:id', auth, async (req, res) => {
+router.put("/sendfriendrequest/:id", auth, async (req, res) => {
  try {
   let requestSender = await User.findByIdAndUpdate(req.user.id, {
    $addToSet: { pendingFriendRequests: req.params.id },
@@ -141,12 +172,12 @@ router.put('/sendfriendrequest/:id', auth, async (req, res) => {
   res.json(requestSender);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
 //Accept friend request
-router.put('/acceptfriendrequest/:id', auth, async (req, res) => {
+router.put("/acceptfriendrequest/:id", auth, async (req, res) => {
  try {
   let currentUser = await User.findByIdAndUpdate(req.user.id, {
    $addToSet: { friendList: req.params.id },
@@ -161,11 +192,11 @@ router.put('/acceptfriendrequest/:id', auth, async (req, res) => {
   res.json(friendToAdd);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
-router.get('/friendrequests', auth, async (req, res) => {
+router.get("/friendrequests", auth, async (req, res) => {
  try {
   const currentUser = await User.findById(req.user.id);
   const { incomingFriendRequests } = currentUser;
@@ -188,11 +219,11 @@ router.get('/friendrequests', auth, async (req, res) => {
   res.json(incomingRequests);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
-router.get('/friends', auth, async (req, res) => {
+router.get("/friends", auth, async (req, res) => {
  try {
   const currentUser = await User.findById(req.user.id);
   const { friendList } = currentUser;
@@ -216,12 +247,12 @@ router.get('/friends', auth, async (req, res) => {
   res.json(friends);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
 //Get server users
-router.get('/:server_id', auth, async (req, res) => {
+router.get("/:server_id", auth, async (req, res) => {
  try {
   const currentServer = await Server.findById(req.params.server_id);
   const { userList } = currentServer;
@@ -243,12 +274,12 @@ router.get('/:server_id', auth, async (req, res) => {
   res.json(users);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 
 //Getting profiles
-router.get('/', auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
  try {
   const allProfiles = await User.find();
 
@@ -278,11 +309,11 @@ router.get('/', auth, async (req, res) => {
   res.json(profileInfoArray);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 //Getting profiles
-router.get('/profile/:id', auth, async (req, res) => {
+router.get("/profile/:id", auth, async (req, res) => {
  try {
   const profile = await User.findById(req.params.id);
 
@@ -307,7 +338,7 @@ router.get('/profile/:id', auth, async (req, res) => {
   res.json(profileInfo);
  } catch (err) {
   console.error(err.message);
-  res.status(500).send('Server Err');
+  res.status(500).send("Server Err");
  }
 });
 

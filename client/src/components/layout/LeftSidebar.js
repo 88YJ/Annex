@@ -252,24 +252,3 @@ const LeftSidebar = () => {
 };
 
 export default LeftSidebar;
-
-/*
-
-<div>
-            {voiceChannels.push(channel)}
-          <Link onClick={() => voicejoin(channel)}>{channel.name} </Link>
-          <ul>
-           {userList.length >= 1 && channelID === channel._id ? (
-            userList.map((user, i) =>
-             user.id == "empty" ? (
-              <Fragment></Fragment>
-             ) : (
-              <li key={i}>{user.name}</li>
-             )
-            )
-           ) : (
-            <div></div>
-           )}
-          </ul>
-         </div>
-*/

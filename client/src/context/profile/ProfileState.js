@@ -1,13 +1,13 @@
-import React, { useReducer } from 'react';
-import ProfileContext from './profileContext';
-import profileReducer from './profileReducer';
+import React, { useReducer } from "react";
+import ProfileContext from "./profileContext";
+import profileReducer from "./profileReducer";
 import {
  SET_PROFILE,
  GET_INCOMING_FRIEND_REQUESTS,
  GET_FRIENDS_LIST,
  GET_PROFILE,
-} from '../types';
-import Axios from 'axios';
+} from "../types";
+import Axios from "axios";
 
 const ProfileState = (props) => {
  const initialState = {
@@ -20,7 +20,7 @@ const ProfileState = (props) => {
 
  const config = {
   headers: {
-   'Content-Type': 'application/json',
+   "Content-Type": "application/json",
   },
  };
  // Make DM Channel for Friend
@@ -28,7 +28,7 @@ const ProfileState = (props) => {
 
  const getIncomingFriendRequests = async () => {
   try {
-   const res = await Axios.get('api/users/friendrequests', config);
+   const res = await Axios.get("api/users/friendrequests", config);
    dispatch({ type: GET_INCOMING_FRIEND_REQUESTS, payload: res.data });
   } catch (err) {
    console.log("Couldn't load friend requests");
@@ -37,7 +37,7 @@ const ProfileState = (props) => {
 
  const getFriendsList = async () => {
   try {
-   const res = await Axios.get('api/users/friends', config);
+   const res = await Axios.get("api/users/friends", config);
    dispatch({ type: GET_FRIENDS_LIST, payload: res.data });
   } catch (err) {
    console.log("Couldn't load friend list");
@@ -49,7 +49,6 @@ const ProfileState = (props) => {
    const res = await Axios.put(
     `api/users/sendfriendrequest/${state.profile._id}`
    );
-   //getIncomingFriendRequests();
   } catch (err) {
    console.log("Couldn't send a friend request");
   }
@@ -69,23 +68,32 @@ const ProfileState = (props) => {
  //Get Profiles
  const getProfiles = async () => {
   try {
-   const res = await Axios.get('/api/users/');
+   const res = await Axios.get("/api/users/");
 
    dispatch({ type: GET_PROFILE, payload: res.data });
    getIdProfile();
   } catch (err) {
-   console.log('no profiles to display');
+   console.log("no profiles to display");
   }
  };
+
  //ID Get Profiles
  const getIdProfile = async (profile) => {
   try {
    const res = await Axios.get(`/api/users/profile/${profile._id}`, config);
-   console.log('logged' + res.data);
+   console.log("logged" + res.data);
    dispatch({ type: SET_PROFILE, payload: res.data });
    getIncomingFriendRequests();
   } catch (err) {
-   console.log('no profiles to display');
+   console.log("no profiles to display");
+  }
+ };
+
+ const editProfile = async (info) => {
+  try {
+   const res = await Axios.put("/api/users/editProfile", info, config);
+  } catch (err) {
+   console.log("Couldn't edit profile");
   }
  };
 
@@ -102,6 +110,7 @@ const ProfileState = (props) => {
     acceptFriendRequest,
     createDMChannel,
     getIdProfile,
+    editProfile,
    }}
   >
    {props.children}

@@ -5,6 +5,7 @@ import {
  SHOW_MODAL_WITH_ADD_SERVER,
  HIDE_MODAL,
  SHOW_MODAL_WITH_ADD_CHANNEL,
+ SHOW_MODAL_WITH_EDIT_PROFILE,
 } from "../types";
 
 const ModalState = (props) => {
@@ -12,6 +13,7 @@ const ModalState = (props) => {
   show: false,
   addServer: false,
   addChannel: false,
+  editProfile: false,
  };
  const [state, dispatch] = useReducer(modalReducer, initialState);
 
@@ -33,6 +35,14 @@ const ModalState = (props) => {
   }
  };
 
+ const showModalWithEditProfile = async () => {
+  try {
+   dispatch({ type: SHOW_MODAL_WITH_EDIT_PROFILE });
+  } catch (err) {
+   console.log("Couldn't display modal with add channel");
+  }
+ };
+
  // Hide Modal
  const hideModal = async () => {
   try {
@@ -48,8 +58,10 @@ const ModalState = (props) => {
     show: state.show,
     addServer: state.addServer,
     addChannel: state.addChannel,
+    editProfile: state.editProfile,
     showModalWithAddServer,
     showModalWithAddChannel,
+    showModalWithEditProfile,
     hideModal,
    }}
   >

@@ -1,6 +1,7 @@
 import {
  SHOW_MODAL_WITH_ADD_SERVER,
  SHOW_MODAL_WITH_ADD_CHANNEL,
+ SHOW_MODAL_WITH_EDIT_PROFILE,
  HIDE_MODAL,
 } from "../types";
 
@@ -18,6 +19,12 @@ export default (state, action) => {
     show: true,
     addChannel: true,
    };
+  case SHOW_MODAL_WITH_EDIT_PROFILE:
+   return {
+    ...state,
+    show: true,
+    editProfile: true,
+   };
   case HIDE_MODAL:
    return {
     ...state,
@@ -25,6 +32,7 @@ export default (state, action) => {
     addServer: false,
     addChannel: false,
     startStream: false,
+    editProfile: false,
    };
   default:
    return state;
