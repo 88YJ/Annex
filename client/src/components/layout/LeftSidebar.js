@@ -173,7 +173,7 @@ const LeftSidebar = () => {
              <Fragment key={i}></Fragment>
             ) : (
              <ul key={i}>
-              <li key={i}>{user.name}</li>
+              <li>{user.name}</li>
              </ul>
             )
            ) : (
