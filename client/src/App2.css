@@ -482,6 +482,7 @@
  padding: 0px;
 }
 .friendrequests li {
+ height: auto;
  margin: 5px;
  padding: 0px;
  width: 300px;

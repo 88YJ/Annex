@@ -189,6 +189,7 @@ const ProfilePage = () => {
               }}
              ></div>
              <button
+              style={{ height: 'auto', width: 'auto' }}
               className='globalbutton'
               onClick={() => OnFriendRequestAccept(request._id)}
              >
