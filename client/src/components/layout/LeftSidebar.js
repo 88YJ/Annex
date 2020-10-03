@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, Fragment } from "react";
-import { Link } from "react-router-dom";
-import AuthContext from "../../context/auth/authContext";
-import ServerContext from "../../context/server/serverContext";
-import ModalContext from "../../context/modal/modalContext";
-import ProfileContext from "../../context/profile/profileContext";
-import ChatContext from "../../context/chat/chatContext";
-import VoicechatContext from "../../context/voicechat/voicechatContext";
+import React, { useContext, useEffect, Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import AuthContext from '../../context/auth/authContext';
+import ServerContext from '../../context/server/serverContext';
+import ModalContext from '../../context/modal/modalContext';
+import ProfileContext from '../../context/profile/profileContext';
+import ChatContext from '../../context/chat/chatContext';
+import VoicechatContext from '../../context/voicechat/voicechatContext';
 
 let acc = false;
 
@@ -100,7 +100,7 @@ const LeftSidebar = () => {
  if (stream) {
   UserVideo = (
    <video
-    style={{ display: "none" }}
+    style={{ display: 'none' }}
     playsInline
     muted
     ref={userVideo}
@@ -112,7 +112,7 @@ const LeftSidebar = () => {
  let PartnerVideo;
  if (callAccepted) {
   PartnerVideo = (
-   <video playsInline style={{ display: "none" }} ref={partnerVideo} autoPlay />
+   <video playsInline style={{ display: 'none' }} ref={partnerVideo} autoPlay />
   );
  }
 
@@ -121,7 +121,7 @@ const LeftSidebar = () => {
    acc = true;
    setTimeout(() => {
     setReceivingCall(false);
-    console.log("accepting call");
+    console.log('accepting call');
     acceptCall();
    }, 1000);
   }
@@ -136,11 +136,11 @@ const LeftSidebar = () => {
   return (
    <div className='channellist'>
     <div className='serverchannels'>
-     <h3 className='center' style={{ background: "black" }}>
+     <h3 className='sidebarheaders' style={{ background: 'black' }}>
       {server.name}
      </h3>
      <ul>
-      <li style={{ display: "none" }}>
+      <li style={{ display: 'none' }}>
        {UserVideo}
        {PartnerVideo}
       </li>
@@ -163,13 +163,13 @@ const LeftSidebar = () => {
       {voiceChannels.map((channel, i) => (
        <li key={i}>
         <Link to='#' onClick={() => voicejoin(channel)}>
-         {channel.name}{" "}
+         {channel.name}{' '}
         </Link>
         {userList.length >= 1 && channelID === channel._id ? (
          userList.map((user, i) => (
           <Fragment>
            {user ? (
-            user.id === "empty" ? (
+            user.id === 'empty' ? (
              <Fragment key={i}></Fragment>
             ) : (
              <ul key={i}>
@@ -202,7 +202,7 @@ const LeftSidebar = () => {
   return (
    <div>
     <div className='friendlist'>
-     <h3 className='center' style={{ background: "black" }}>
+     <h3 className='sidebarheaders' style={{ background: 'black' }}>
       Friends:
      </h3>
      <div className='friends'>
@@ -222,7 +222,7 @@ const LeftSidebar = () => {
           }}
          ></div>
          <Link to='#'>
-          <p style={{ background: "rgb(0,0,0,.5)" }}>{friend.name}</p>
+          <p style={{ background: 'rgb(0,0,0,.5)' }}>{friend.name}</p>
          </Link>
          <div className='friendlistsubmenu'>
           <ul>

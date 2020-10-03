@@ -33,20 +33,29 @@ const StoreGamePage = () => {
     <ul>
      {gamescart.map((cart, i) => (
       <li key={i}>
-       <h3 className='center'>{cart.name}</h3>
+       <h3 className='storeheaders'>{cart.name}</h3>
        <div
         className='cartimg'
         style={{
          backgroundImage: `url(${cart.wideimg})`,
         }}
        ></div>
-       <h3>Price: $60.00</h3>
-       <button className='globalbutton'>Remove From Cart</button>
+       <h3 className='storeheaders'>Price: $60.00</h3>
+       <button
+        style={{ height: 'auto', width: 'auto' }}
+        className='globalbutton'
+       >
+        Remove From Cart
+       </button>
       </li>
      ))}
     </ul>
     <div>
-     <button onClick={buy} className='globalbutton'>
+     <button
+      style={{ height: 'auto', width: 'auto' }}
+      onClick={buy}
+      className='globalbutton'
+     >
       Buy
      </button>
      <h3>Total: $60.00</h3>

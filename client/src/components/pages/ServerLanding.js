@@ -33,8 +33,11 @@ const ServerLanding = () => {
     <div className='center'>
      <div className='center'>
       <div className='landingpageinnerheader'>
-       <h2>Welcome To the Server!!</h2> <br />{' '}
-       <h2>Please take a look at our rules!</h2>
+       <h2 className='center landingpageheader'>Welcome To the Server!!</h2>{' '}
+       <br />{' '}
+       <h2 className='center landingpageheader'>
+        Please take a look at our rules!
+       </h2>
       </div>
      </div>
      <div className='landingpageinnerbody'>

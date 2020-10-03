@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import AutoHideFollowButton from 'react-scroll-to-bottom/lib/ScrollToBottom/AutoHideFollowButton';
 import AuthContext from '../../context/auth/authContext';
 import StoreContext from '../../context/store/storeContext';
 
@@ -35,11 +36,17 @@ const StoreGamePage = () => {
        <Link
         to='/store'
         className='globalbutton'
-        style={{ position: 'absolute', color: 'white', textAlign: 'center' }}
+        style={{
+         position: 'absolute',
+         width: 'auto',
+         height: 'auto',
+         color: 'white',
+         textAlign: 'center',
+        }}
        >
         Back
        </Link>
-       <h1 className='center'>{gamepage.name}</h1>
+       <h1 className='storeheaders'>{gamepage.name}</h1>
       </div>
 
       <div className='storepagecomponent1'>
@@ -51,7 +58,7 @@ const StoreGamePage = () => {
          }}
         ></div>
         <div>
-         <h2>Game Desc:</h2>{' '}
+         <h2 className='storeheaders'>Game Desc:</h2>{' '}
          <p style={{ color: 'white' }}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, esse.
           Eius et dolorem aspernatur vitae laudantium magnam vero natus ab
@@ -83,7 +90,7 @@ const StoreGamePage = () => {
          </div>
         </div>
         <div className='reviews'>
-         <h2>Review Comments:</h2>
+         <h2 className='storeheaders'>Review Comments:</h2>
          <ul>
           <li>
            <h5>

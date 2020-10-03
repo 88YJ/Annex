@@ -18,9 +18,13 @@
  color: white;
  outline: none;
  border: white 1px solid;
+ height: auto;
 }
 .registerbutton {
  margin-top: 10px;
+}
+.form-group {
+ height: auto;
 }
 
 .cartlist {
@@ -40,6 +44,15 @@
  text-align: left;
  height: 100%;
 }
+.cart ul {
+ height: auto;
+ padding: 0;
+ margin: 0;
+}
+.cart li {
+ height: auto;
+ float: center;
+}
 .gotocart {
  text-decoration: none;
  color: red;
@@ -47,14 +60,6 @@
 .gotocart:hover {
  background-color: grey;
 }
-.cart ul {
- padding: 0;
- margin: 0;
-}
-.cart li {
- float: center;
-}
-
 .cart li a {
  display: block;
  color: white;
@@ -96,6 +101,7 @@
  float: right;
  font-size: 28px;
  font-weight: bold;
+ height: auto;
 }
 
 .close:hover,
@@ -107,6 +113,7 @@
 
 .chat {
  height: 100%;
+ width: 100%;
  display: grid;
  grid-template-rows: 6% 94%;
  background: rgb(0, 4, 17, 0.7);
@@ -134,6 +141,9 @@
  overflow: auto;
  flex: auto;
  height: 100%;
+}
+.messagediv {
+ height: auto;
 }
 
 .form {
@@ -227,11 +237,12 @@
  color: white;
  display: inline-block;
  max-width: 80%;
- height: 10%;
+ width: auto;
+ height: auto;
 }
 
 .messageText {
- width: 100%;
+ height: auto;
  letter-spacing: 0;
  float: left;
  font-size: 1.1em;
@@ -244,8 +255,10 @@
 
 .messageContainer {
  display: flex;
+ width: auto;
+ height: auto;
  justify-content: flex-end;
- padding: 0 1%;
+ padding: 0;
  margin-top: 3px;
 }
 .messageContainer:hover {
@@ -253,6 +266,7 @@
 }
 
 .sentText {
+ width: auto;
  display: flex;
  align-items: center;
  font-family: Helvetica;
@@ -305,15 +319,41 @@
 }
 .landingpageheader {
  background-color: rgb(0, 4, 17, 0.7);
+ height: 40px;
+ width: 100%;
 }
 .landingpageinnerheader {
  background-color: rgb(0, 4, 17, 0.7);
+ width: 100%;
+ height: auto;
 }
 .landingpageinnerbody {
  background-color: rgb(0, 4, 17, 0.7);
  font-size: 20px;
+ height: auto;
+ width: 100%;
 }
 
+.profileheaderL {
+ height: 40px;
+ text-align: left;
+ width: auto;
+}
+.profileheaderR {
+ height: 40px;
+ text-align: right;
+ width: auto;
+}
+.profileheaderC {
+ height: 30px;
+ text-align: center;
+ width: auto;
+}
+.profileheaderT {
+ height: 20px;
+ text-align: center;
+ width: auto;
+}
 .profilebackground {
  height: 100%;
  width: 100%;
@@ -373,16 +413,19 @@
  background-size: cover;
  background-position: center;
  height: 100px;
- width: 300px;
+ width: 280px;
  border: #384d48 1px solid;
 }
 .profilecomments ul {
  border: #384d48 1px solid;
  margin: 0;
  padding: 0;
+ width: 100%;
 }
 .profilecomments li {
  background-color: rgb(0, 4, 17, 0.7);
+ height: auto;
+ width: auto;
 }
 .screenshot {
  height: 140px;
@@ -401,6 +444,7 @@
  width: 100%;
 }
 .profilescreenshots ul {
+ width: auto;
  display: inline-flex;
 }
 .profilescreenshots li {
@@ -423,6 +467,7 @@
  padding: 0;
 }
 .profiletabs li {
+ height: auto;
  width: 100px;
 }
 .profiletabs li:hover {
@@ -431,6 +476,8 @@
  width: 100px;
 }
 .friendrequests ul {
+ height: 100%;
+ width: 100%;
  margin: 0px;
  padding: 0px;
 }
@@ -440,6 +487,14 @@
  width: 300px;
 }
 
+.myGamepageHeader {
+ text-align: center;
+ height: 40px;
+}
+.myGamepageHeaderL {
+ text-align: left;
+ height: 40px;
+}
 .myGameBanner {
  display: grid;
  grid-template-columns: auto minmax(auto, 1420px) auto;
@@ -478,11 +533,23 @@
  overflow-y: scroll;
 }
 .myGamelists li {
+ height: auto;
+ width: auto;
  margin: 5px;
 }
 .myGamelists a {
  text-decoration: none;
  color: white;
+}
+.gameNews ul {
+ height: auto;
+ width: auto;
+}
+.gameNews ul li {
+ margin: 0;
+ padding: 0;
+ height: auto;
+ width: auto;
 }
 
 .stream {

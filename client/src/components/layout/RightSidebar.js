@@ -44,7 +44,9 @@ const RightSidebar = () => {
   return (
    <Fragment>
     <div className='serveruserlist'>
-     <h3 style={{ background: 'black' }}>Users:</h3>
+     <h3 className='sidebarheaders' style={{ background: 'black' }}>
+      Users:
+     </h3>
      <div className='serverusers'>
       <ul>
        {serverUserList.map((user, i) => (
@@ -73,7 +75,9 @@ const RightSidebar = () => {
   return (
    <Fragment>
     <div className='cartlist'>
-     <h3 style={{ background: 'black' }}>Cart:</h3>
+     <h3 className='sidebarheaders' style={{ background: 'black' }}>
+      Cart:
+     </h3>
      <div className='cart'>
       <ul>
        {gamescart !== null ? (
@@ -86,7 +90,6 @@ const RightSidebar = () => {
         <li />
        )}
       </ul>
-      <br />
       {gamescart !== null ? (
        <Link className='gotocart' to='/cart'>
         Go To Cart
@@ -103,7 +106,9 @@ const RightSidebar = () => {
    return (
     <Fragment>
      <div className='gamelist'>
-      <h3 style={{ background: 'black' }}>Games:</h3>
+      <h3 className='sidebarheaders' style={{ background: 'black' }}>
+       Games:
+      </h3>
      </div>
     </Fragment>
    );
@@ -111,7 +116,9 @@ const RightSidebar = () => {
    return (
     <Fragment>
      <div className='gamelist'>
-      <h3 style={{ background: 'black' }}>Games:</h3>
+      <h3 className='sidebarheaders' style={{ background: 'black' }}>
+       Games:
+      </h3>
       <div className='games'>
        <ul>
         {games.map((game, i) => (
@@ -123,7 +130,7 @@ const RightSidebar = () => {
           }}
          >
           <div className='bannerfilm'>
-           <p style={{ fontSize: '16px' }}>{game.name}</p>
+           <p style={{ fontSize: '16px', height: 20 }}>{game.name}</p>
            <div className='gamesubmenu'>
             <ul>
              <li>

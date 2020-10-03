@@ -24,8 +24,9 @@ const CreateServerForm = () => {
 
  return (
   <form onSubmit={onSubmit}>
-   <h2>Create a Server</h2>
+   <h2 className='GeneralHeaders'>Create a Server</h2>
    <input
+    className='GeneralHeaders'
     type='text'
     placeholder='Sever Name'
     name='name'
@@ -33,6 +34,7 @@ const CreateServerForm = () => {
     onChange={onChange}
    />
    <input
+    className='GeneralHeaders'
     type='url'
     placeholder='Image URL'
     name='img'
@@ -40,7 +42,11 @@ const CreateServerForm = () => {
     onChange={onChange}
    />
    <div>
-    <input type='submit' value='Create Server' />
+    <input
+     className='GeneralHeaders globalbutton'
+     type='submit'
+     value='Create Server'
+    />
    </div>
   </form>
  );

@@ -38,19 +38,38 @@ const Game = () => {
      <div></div>
     </div>
     <div className='myGameHeader'>
-     <h1 className='center' style={{ background: 'black', color: 'red' }}>
+     <h1
+      className='myGamepageHeader'
+      style={{ background: 'black', color: 'red' }}
+     >
       {myGame.name}
      </h1>
-     <button onClick={download} className='globalbutton'>
+     <button
+      style={{ height: 'auto', width: 'auto' }}
+      onClick={download}
+      className='globalbutton'
+     >
       Download
      </button>
-     <button onClick={download} className='globalbutton'>
+     <button
+      style={{ height: 'auto', width: 'auto' }}
+      onClick={download}
+      className='globalbutton'
+     >
       Store Page
      </button>
-     <button onClick={download} className='globalbutton'>
+     <button
+      style={{ height: 'auto', width: 'auto' }}
+      onClick={download}
+      className='globalbutton'
+     >
       Forum
      </button>
-     <button onClick={download} className='globalbutton'>
+     <button
+      style={{ height: 'auto', width: 'auto' }}
+      onClick={download}
+      className='globalbutton'
+     >
       Support
      </button>
     </div>
@@ -58,7 +77,7 @@ const Game = () => {
      <div className='myGamelists'>
       <ul className='myGamelistL'>
        <li>
-        <h3>Friends to play with:</h3>
+        <h3 className='myGamepageHeader'>Friends to play with:</h3>
        </li>
        {friendList.map((friend, i) => (
         <li
@@ -99,35 +118,41 @@ const Game = () => {
       </ul>
      </div>
      <div>
-      <div>
-       <h2>Game News:</h2>
+      <div className='gameNews'>
+       <h2 className='myGamepageHeaderL'>Game News:</h2>
        <ul>
         <li>
-         <h4 style={{ color: 'red' }}>04/25/3001</h4>
          <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
           magnam neque sed facere laboriosam iusto repudiandae et eius eos
           soluta recusandae reiciendis numquam, quo dolores veritatis. Ad
           laborum incidunt officia.
          </p>
+         <h4 className='myGamepageHeaderL' style={{ color: 'red' }}>
+          04/25/3001
+         </h4>
         </li>
         <li>
-         <h4 style={{ color: 'red' }}>07/05/3001</h4>
          <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
           magnam neque sed facere laboriosam iusto repudiandae et eius eos
           soluta recusandae reiciendis numquam, quo dolores veritatis. Ad
           laborum incidunt officia.
          </p>
+         <h4 className='myGamepageHeaderL' style={{ color: 'red' }}>
+          07/05/3001
+         </h4>
         </li>
         <li>
-         <h4 style={{ color: 'red' }}>12/31/3001</h4>
          <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
           magnam neque sed facere laboriosam iusto repudiandae et eius eos
           soluta recusandae reiciendis numquam, quo dolores veritatis. Ad
           laborum incidunt officia.
          </p>
+         <h4 className='myGamepageHeaderL' style={{ color: 'red' }}>
+          12/31/3001
+         </h4>
         </li>
        </ul>
       </div>

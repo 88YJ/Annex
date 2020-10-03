@@ -1,8 +1,8 @@
-import React, { Fragment, useContext } from "react";
-import ModalContext from "../../context/modal/modalContext";
-import CreateServerForm from "./CreateServerForm";
-import CreateChannelForm from "./CreateChannelForm";
-import EditProfileForm from "./EditProfileForm";
+import React, { Fragment, useContext } from 'react';
+import ModalContext from '../../context/modal/modalContext';
+import CreateServerForm from './CreateServerForm';
+import CreateChannelForm from './CreateChannelForm';
+import EditProfileForm from './EditProfileForm';
 
 const Modal = () => {
  const modalContext = useContext(ModalContext);
@@ -15,7 +15,7 @@ const Modal = () => {
 
  const customContent = (content) => (
   <div className='modal'>
-   <div className='modal-content'>
+   <div style={{ height: 'auto' }} className='modal-content'>
     <span className='close' onClick={onHideModal}>
      &times;
     </span>

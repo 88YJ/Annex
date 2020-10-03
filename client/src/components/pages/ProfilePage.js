@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
-import AuthContext from "../../context/auth/authContext";
-import ProfileContext from "../../context/profile/profileContext";
-import ServerContext from "../../context/server/serverContext";
-import ChatContext from "../../context/chat/chatContext";
-import ModalContext from "../../context/modal/modalContext";
+import React, { useContext, useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import AuthContext from '../../context/auth/authContext';
+import ProfileContext from '../../context/profile/profileContext';
+import ServerContext from '../../context/server/serverContext';
+import ChatContext from '../../context/chat/chatContext';
+import ModalContext from '../../context/modal/modalContext';
 
 const ProfilePage = () => {
  const authContext = useContext(AuthContext);
@@ -85,29 +85,45 @@ const ProfilePage = () => {
         className='profileImgDisplay'
         style={{ backgroundImage: `url(${profile.profilePicture})` }}
        ></div>
-       <div style={{ color: "white" }}>
-        <h1 style={{ color: "red" }}>{profile.name}</h1>
-        <h4 style={{ color: "red" }}>Location: United States </h4>
-        <p>
+       <div style={{ color: 'white' }}>
+        <h1 className='profileheaderL' style={{ color: 'red' }}>
+         {profile.name}
+        </h1>
+        <h4 className='profileheaderL' style={{ color: 'red' }}>
+         Location: United States{' '}
+        </h4>
+        <p className='profileheaderL'>
          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex voluptatem
          voluptates
         </p>
        </div>
        <div></div>
        <div>
-        <h3>Level: 150</h3>
-        <h3>Years: 0</h3>
+        <h3 className='profileheaderR'>Level: 150</h3>
+        <h3 className='profileheaderR'>Years: 0</h3>
        </div>
        <div>
-        <button className='globalbutton' onClick={() => editProfile()}>
+        <button
+         className='globalbutton'
+         style={{ height: 'auto', width: 'auto' }}
+         onClick={() => editProfile()}
+        >
          Edit
         </button>
-        <button className='globalbutton'>Requests</button>
+        <button
+         className='globalbutton'
+         style={{ height: 'auto', width: 'auto' }}
+        >
+         Requests
+        </button>
        </div>
       </div>
       <div className='profileSubMaster'>
        <div className='profilescreenshots'>
-        <h2 className='center sticky' style={{ background: "rgb(0,0,0,.8)" }}>
+        <h2
+         className='profileheaderC sticky'
+         style={{ background: 'rgb(0,0,0,.8)' }}
+        >
          Showcase
         </h2>
         <ul>
@@ -126,31 +142,31 @@ const ProfilePage = () => {
         <div className='profiletabs'>
          <ul>
           <li>
-           <h2>Online</h2>
+           <h2 className='profileheaderC'>Online</h2>
           </li>
           <li>
-           <h4>Friends</h4>
+           <h4 className='profileheaderT'>Friends</h4>
           </li>
           <li>
-           <h4>Games</h4>
+           <h4 className='profileheaderT'>Games</h4>
           </li>
           <li>
-           <h4>Inventory</h4>
+           <h4 className='profileheaderT'>Inventory</h4>
           </li>
           <li>
-           <h4>Achievements</h4>
+           <h4 className='profileheaderT'>Achievements</h4>
           </li>
           <li>
-           <h4>Screenshots</h4>
+           <h4 className='profileheaderT'>Screenshots</h4>
           </li>
           <li>
-           <h4>Reviews</h4>
+           <h4 className='profileheaderT'>Reviews</h4>
           </li>
           <li>
-           <h4>Artwork</h4>
+           <h4 className='profileheaderT'>Artwork</h4>
           </li>
           <li>
-           <h4>Groups</h4>
+           <h4 className='profileheaderT'>Groups</h4>
           </li>
          </ul>
         </div>
@@ -202,32 +218,48 @@ const ProfilePage = () => {
         className='profileImgDisplay'
         style={{ backgroundImage: `url(${profile.profilePicture})` }}
        ></div>
-       <div style={{ color: "white" }}>
-        <h1 style={{ color: "red" }}>{profile.name}</h1>
-        <h4 style={{ color: "red" }}>Brandon Location: United States </h4>
-        <p>
+       <div style={{ color: 'white' }}>
+        <h1 className='profileheaderL' style={{ color: 'red' }}>
+         {profile.name}
+        </h1>
+        <h4 className='profileheaderL' style={{ color: 'red' }}>
+         Brandon Location: United States{' '}
+        </h4>
+        <p className='profileheaderL'>
          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex voluptatem
          voluptates
         </p>
        </div>
        <div></div>
        <div>
-        <h3>Level: 150</h3>
-        <h3>Years: 0</h3>
+        <h3 className='profileheaderR'>Level: 150</h3>
+        <h3 className='profileheaderR'>Years: 0</h3>
        </div>
        <div>
-        <button className='globalbutton' onClick={onSendFriendRequest}>
+        <button
+         style={{ height: 'auto', width: 'auto' }}
+         className='globalbutton'
+         onClick={onSendFriendRequest}
+        >
          Add Friend
         </button>
         <Link to='redirectchat' onClick={() => openDM(profile)}>
-         <button className='globalbutton'>Chat</button>
+         <button
+          style={{ height: 'auto', width: 'auto' }}
+          className='globalbutton'
+         >
+          Chat
+         </button>
         </Link>
        </div>
       </div>
 
       <div className='profileSubMaster'>
        <div className='profilescreenshots'>
-        <h2 className='center sticky' style={{ background: "rgb(0,0,0,.8)" }}>
+        <h2
+         className='profileheaderC sticky'
+         style={{ background: 'rgb(0,0,0,.8)' }}
+        >
          Showcase
         </h2>
         {profile.screenShots ? (
@@ -280,12 +312,14 @@ const ProfilePage = () => {
         </div>
         <div className='profilebodycenter'>
          <h1
-          className='center'
+          className='profileheaderC'
           style={{
-           background: "rgb(0,0,0,.8)",
-           borderTop: "#384d48 1px solid",
-           borderBottom: "#384d48 1px solid",
-           marginTop: "1px",
+           background: 'rgb(0,0,0,.8)',
+           borderTop: '#384d48 1px solid',
+           borderBottom: '#384d48 1px solid',
+           marginTop: '1px',
+           textAlign: 'center',
+           height: '50',
           }}
          >
           Recent Activity
@@ -298,7 +332,7 @@ const ProfilePage = () => {
           >
            <h2
             className='center'
-            style={{ marginTop: "70px", backgroundColor: "rgb(0,0,0,.9)" }}
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
            >
             Legendary
            </h2>
@@ -310,7 +344,7 @@ const ProfilePage = () => {
           >
            <h2
             className='center'
-            style={{ marginTop: "70px", backgroundColor: "rgb(0,0,0,.9)" }}
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
            >
             Head Hunter
            </h2>
@@ -322,7 +356,7 @@ const ProfilePage = () => {
           >
            <h2
             className='center'
-            style={{ marginTop: "70px", backgroundColor: "rgb(0,0,0,.9)" }}
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
            >
             Rex Master
            </h2>
@@ -334,7 +368,7 @@ const ProfilePage = () => {
           >
            <h2
             className='center'
-            style={{ marginTop: "70px", backgroundColor: "rgb(0,0,0,.9)" }}
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
            >
             Portal Jumper
            </h2>
@@ -346,7 +380,7 @@ const ProfilePage = () => {
           >
            <h2
             className='center'
-            style={{ marginTop: "70px", backgroundColor: "rgb(0,0,0,.9)" }}
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
            >
             Monster Slayer
            </h2>
@@ -358,7 +392,7 @@ const ProfilePage = () => {
           >
            <h2
             className='center'
-            style={{ marginTop: "70px", backgroundColor: "rgb(0,0,0,.9)" }}
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
            >
             Brewer
            </h2>
@@ -370,7 +404,7 @@ const ProfilePage = () => {
           >
            <h2
             className='center'
-            style={{ marginTop: "70px", backgroundColor: "rgb(0,0,0,.9)" }}
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
            >
             World Eater Down
            </h2>
@@ -382,7 +416,7 @@ const ProfilePage = () => {
           >
            <h2
             className='center'
-            style={{ marginTop: "70px", backgroundColor: "rgb(0,0,0,.9)" }}
+            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
            >
             Sweet Roll Master
            </h2>
@@ -390,58 +424,58 @@ const ProfilePage = () => {
          </ul>
          <div className='profilecomments'>
           <h1
-           className='center'
+           className='profileheaderC'
            style={{
-            background: "rgb(0,0,0,.8)",
-            borderTop: "#384d48 1px solid",
+            background: 'rgb(0,0,0,.8)',
+            borderTop: '#384d48 1px solid',
            }}
           >
            Profile Comments
           </h1>
           <ul>
            <li>
-            <h5>
-             User: <span style={{ color: "red" }}>BabyJesus</span>
-            </h5>
-            <p style={{ color: "white" }}>
+            <p className='profileheaderL' style={{ color: 'white' }}>
              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
              quidem quasi fuga laudantium ipsam ut earum laborum laboriosam,
              consectetur reiciendis odit voluptates? Velit voluptates, non sunt
              dicta animi repudiandae voluptatibus?
             </p>
+            <h5 className='profileheaderL'>
+             User: <span style={{ color: 'red' }}>BabyJesus</span>
+            </h5>
            </li>
            <li>
-            <h5>
-             User: <span style={{ color: "red" }}>Rejis</span>
-            </h5>
-            <p style={{ color: "white" }}>
+            <p className='profileheaderL' style={{ color: 'white' }}>
              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores
              facere pariatur nemo culpa, itaque maxime nulla blanditiis
              reprehenderit eaque ratione! Culpa totam commodi iusto dicta
              maiores non consequuntur quod expedita?
             </p>
+            <h5 className='profileheaderL'>
+             User: <span style={{ color: 'red' }}>Rejis</span>
+            </h5>
            </li>
            <li>
-            <h5>
-             User: <span style={{ color: "red" }}>Parathax</span>
-            </h5>
-            <p style={{ color: "white" }}>
+            <p className='profileheaderL' style={{ color: 'white' }}>
              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus
              deserunt possimus veniam adipisci, quis quam rem ea vero, sunt nemo
              repudiandae provident officia assumenda voluptate? Doloremque non
              repellat adipisci vel?
             </p>
+            <h5 className='profileheaderL'>
+             User: <span style={{ color: 'red' }}>Parathax</span>
+            </h5>
            </li>
            <li>
-            <h5>
-             User: <span style={{ color: "red" }}>Flipster</span>
-            </h5>
-            <p style={{ color: "white" }}>
+            <p className='profileheaderL' style={{ color: 'white' }}>
              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti
              labore asperiores minima voluptas, exercitationem, itaque eveniet
              magni nisi natus, accusantium iste odit? Beatae eligendi eius
              ratione quo vitae dolores numquam.
             </p>
+            <h5 className='profileheaderL'>
+             User: <span style={{ color: 'red' }}>Flipster</span>
+            </h5>
            </li>
           </ul>
          </div>

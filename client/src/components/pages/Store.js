@@ -56,7 +56,6 @@ const Store = () => {
  return (
   <Fragment>
    <div className='storeNav'>
-    <div></div>
     <div>
      <ul>
       <li>

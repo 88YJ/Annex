@@ -4,25 +4,25 @@ import React, {
  useState,
  useRef,
  Fragment,
-} from "react";
+} from 'react';
 
-import AuthContext from "../../context/auth/authContext";
-import ServerContext from "../../context/server/serverContext";
-import ModalContext from "../../context/modal/modalContext";
-import ChatContext from "../../context/chat/chatContext";
-import io from "socket.io-client";
+import AuthContext from '../../context/auth/authContext';
+import ServerContext from '../../context/server/serverContext';
+import ModalContext from '../../context/modal/modalContext';
+import ChatContext from '../../context/chat/chatContext';
+import io from 'socket.io-client';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const config = {
  iceServers: [
   {
-   urls: ["stun:stun.l.google.com:19302"],
+   urls: ['stun:stun.l.google.com:19302'],
   },
  ],
 };
 
-const ENDPOINT = ":5002";
+const ENDPOINT = ':5002';
 
 const Serverlist = () => {
  //background = 'https://wallpaperplay.com/walls/full/e/0/3/21596.jpg';
@@ -61,9 +61,9 @@ const Serverlist = () => {
 
  socket.current = io.connect(ENDPOINT);
 
- socket.current.on("viewer", (socketId, id) => {
+ socket.current.on('viewer', (socketId, id) => {
   if (peerConnections[id]) {
-   console.log("VIEWER ALREADY HAS A CONNECTION");
+   console.log('VIEWER ALREADY HAS A CONNECTION');
    peerConnections[id].close();
    delete peerConnections[id];
   }
@@ -76,7 +76,7 @@ const Serverlist = () => {
   //Send the found ICE candidate to server
   peerConnection.onicecandidate = (event) => {
    if (event.candidate) {
-    socket.current.emit("candidate", socketId, event.candidate);
+    socket.current.emit('candidate', socketId, event.candidate);
    }
   };
 
@@ -93,7 +93,7 @@ const Serverlist = () => {
    })
    .then(() => {
     socket.current.emit(
-     "offer",
+     'offer',
      socketId,
      peerConnection.localDescription,
      broadcasterInfo
@@ -104,15 +104,15 @@ const Serverlist = () => {
   console.log(peerConnections);
  });
 
- socket.current.on("answer", (id, description) => {
+ socket.current.on('answer', (id, description) => {
   peerConnections.setRemoteDescription(description);
  });
 
- socket.current.on("candidate", (id, candidate) => {
+ socket.current.on('candidate', (id, candidate) => {
   peerConnections.addIceCandidate(new RTCIceCandidate(candidate));
  });
 
- socket.current.on("disconnectPeer", (id) => {
+ socket.current.on('disconnectPeer', (id) => {
   if (peerConnections[id]) {
    peerConnections[id].close();
    delete peerConnections[id];
@@ -130,11 +130,11 @@ const Serverlist = () => {
     console.log(stream);
     if (userVideo.current) {
      userVideo.current.srcObject = stream;
-     socket.current.emit("broadcaster");
+     socket.current.emit('broadcaster');
     }
    });
   } catch (err) {
-   console.error("Error: " + err);
+   console.error('Error: ' + err);
   }
  };
 
