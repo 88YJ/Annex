@@ -48,6 +48,7 @@ import Modal from './components/layout/Modal';
 import DefaultBackground from './components/layout/Annexbackground.png';
 
 let background = null;
+let sidebarwidth = 250;
 
 if (localStorage.token) {
  setAuthToken(localStorage.token);
@@ -81,7 +82,12 @@ const App = () => {
                  backgroundImage: `url(${background})`,
                 }}
                >
-                <div className='grid'>
+                <div
+                 className='grid'
+                 style={{
+                  gridTemplateColumns: `60px 250px auto ${sidebarwidth}px`,
+                 }}
+                >
                  <Navbar />
                  <LeftSidebar />
                  <div className='browser'>

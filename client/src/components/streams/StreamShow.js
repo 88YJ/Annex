@@ -47,6 +47,7 @@ class StreamShow extends Component {
      ref={this.videoRef}
      style={{ width: '100%', height: 'auto' }}
      controls={true}
+     autoPlay={true}
     />
     <h1>{this.props.stream.title}</h1>
     <h5>{this.props.stream.description}</h5>
