@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const { Console } = require('console');
+const cors = require('cors');
 
 const app = express();
 
@@ -8,6 +9,8 @@ const app = express();
 connectDB();
 
 //Init Middleware
+
+app.use(cors({ origin: true }));
 app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => res.json({ msg: 'Welcome to Annex!' }));
