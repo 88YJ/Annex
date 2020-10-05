@@ -1,13 +1,3 @@
-const path = require('path'); // on top
-
-// Serve Static assests if in production
-if (process.env.NODE_ENV === 'production') {
- app.use(express.static('client/build')); // change this if your dir structure is different
- app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
- });
-}
-
 const express = require('express');
 const connectDB = require('./config/db');
 const { Console } = require('console');
