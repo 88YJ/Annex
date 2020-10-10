@@ -143,7 +143,12 @@ const RightSidebar = () => {
               </Link>
              </li>
              <li>
-              <button className='globalbutton'>Play</button>
+              <button
+               style={{ height: 'auto', width: 'auto' }}
+               className='globalbutton'
+              >
+               Play
+              </button>
              </li>
             </ul>
            </div>
