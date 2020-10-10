@@ -9,7 +9,7 @@ import AlertState from './context/alert/AlertState';
 import GameState from './context/games/GameState';
 import DashState from './context/dash/DashState';
 import ModalState from './context/modal/ModalState';
-import ServerState from './context/server/ServerState';
+import ServerState from './context/server/serverState';
 import ChatState from './context/chat/ChatState';
 import ProfileState from './context/profile/ProfileState';
 import StoreState from './context/store/StoreState';

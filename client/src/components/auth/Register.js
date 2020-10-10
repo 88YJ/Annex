@@ -49,7 +49,7 @@ const Register = (props) => {
 
  return (
   <div className='register'>
-   <h1 className='center' style={{ background: 'black' }}>
+   <h1 className='sidebarheaders' style={{ background: 'black' }}>
     Account Register
    </h1>
    <div className='registerGrid'>
@@ -57,8 +57,9 @@ const Register = (props) => {
     <div className='registerloginbackground'>
      <form onSubmit={onSubmit}>
       <div className='form-group'>
-       <h2>Name:</h2>
+       <h2 className='sidebarheaders'>Name:</h2>
        <input
+        style={{ height: 'auto', width: 'auto' }}
         className='registerloginvalues'
         type='text'
         name='name'
@@ -68,8 +69,9 @@ const Register = (props) => {
        />
       </div>
       <div className='form-group'>
-       <h2>Email Address:</h2>
+       <h2 className='sidebarheaders'>Email Address:</h2>
        <input
+        style={{ height: 'auto', width: 'auto' }}
         className='registerloginvalues'
         type='email'
         name='email'
@@ -79,8 +81,9 @@ const Register = (props) => {
        />
       </div>
       <div className='form-group'>
-       <h2>Password:</h2>
+       <h2 className='sidebarheaders'>Password:</h2>
        <input
+        style={{ height: 'auto', width: 'auto' }}
         className='registerloginvalues'
         type='password'
         name='password'
@@ -91,8 +94,9 @@ const Register = (props) => {
        />
       </div>
       <div className='form-group'>
-       <h2>Confirm Password:</h2>
+       <h2 className='sidebarheaders'>Confirm Password:</h2>
        <input
+        style={{ height: 'auto', width: 'auto' }}
         className='registerloginvalues'
         type='password'
         name='password2'
@@ -103,6 +107,7 @@ const Register = (props) => {
        />
       </div>
       <input
+       style={{ height: 'auto', width: 'auto' }}
        type='submit'
        value='Register'
        className='globalbutton registerbutton'

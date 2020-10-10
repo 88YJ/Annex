@@ -54,6 +54,7 @@ const Login = (props) => {
       <div className='form-group'>
        <h2 className='sidebarheaders'>Email Address:</h2>
        <input
+        style={{ height: 'auto', width: 'auto' }}
         className='registerloginvalues'
         type='email'
         name='email'
@@ -65,6 +66,7 @@ const Login = (props) => {
       <div className='form-group'>
        <h2 className='sidebarheaders'>Password:</h2>
        <input
+        style={{ height: 'auto', width: 'auto' }}
         className='registerloginvalues'
         type='password'
         name='password'
