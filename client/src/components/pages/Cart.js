@@ -29,18 +29,22 @@ const StoreGamePage = () => {
  }
  if (gamescart !== null) {
   return (
-   <div className='cartpage'>
+   <div className='store-Cartpage'>
     <ul>
      {gamescart.map((cart, i) => (
       <li key={i}>
-       <h3 className='storeheaders'>{cart.name}</h3>
+       <h3 className='store-Gamepage-Headers' style={{ color: 'red' }}>
+        {cart.name}
+       </h3>
        <div
-        className='cartimg'
+        className='store-Cartpage-Img'
         style={{
          backgroundImage: `url(${cart.wideimg})`,
         }}
        ></div>
-       <h3 className='storeheaders'>Price: $60.00</h3>
+       <h3 className='store-Gamepage-Headers' style={{ color: 'red' }}>
+        Price: $60.00
+       </h3>
        <button
         style={{ height: 'auto', width: 'auto' }}
         className='globalbutton'
@@ -58,7 +62,7 @@ const StoreGamePage = () => {
      >
       Buy
      </button>
-     <h3>Total: $60.00</h3>
+     <h3 style={{ color: 'red' }}>Total: $60.00</h3>
     </div>
    </div>
   );

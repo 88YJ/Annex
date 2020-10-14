@@ -134,78 +134,79 @@ const LeftSidebar = () => {
 
  if (serverSidebar && isAuthenticated) {
   return (
-   <div className='channellist'>
-    <div className='serverchannels'>
-     <h3 className='sidebarheaders' style={{ background: 'black' }}>
-      {server.name}
-     </h3>
-     <ul>
-      <li style={{ display: 'none' }}>
-       {UserVideo}
-       {PartnerVideo}
-      </li>
-      <li>
-       <Link to='/serverlanding'>Landing Page</Link>
-      </li>
-      {serverChannelList.map((channel, i) => (
-       <Fragment key={i}>
-        {channel.voiceChannel ? (
-         <Fragment>{addToVoiceChannelList(channel)}</Fragment>
-        ) : (
-         <li key={i}>
-          <Link to='/redirectchat' onClick={() => openChannel(channel)}>
-           {channel.name}
-          </Link>
-         </li>
-        )}
-       </Fragment>
-      ))}
-      {voiceChannels.map((channel, i) => (
-       <li key={i}>
-        <Link to='#' onClick={() => voicejoin(channel)}>
-         {channel.name}{' '}
-        </Link>
-        {userList.length >= 1 && channelID === channel._id ? (
-         userList.map((user, i) => (
-          <Fragment>
-           {user ? (
-            user.id === 'empty' ? (
-             <Fragment key={i}></Fragment>
-            ) : (
-             <ul key={i}>
-              <li>{user.name}</li>
-             </ul>
-            )
+   <div className='L-Sidebar-Serverchannels'>
+    <h3
+     className='sidebarheaders'
+     style={{ background: 'black', color: 'red' }}
+    >
+     {server.name}
+    </h3>
+    <ul>
+     <li style={{ display: 'none' }}>
+      {UserVideo}
+      {PartnerVideo}
+     </li>
+     <li>
+      <Link to='/serverlanding'>Landing Page</Link>
+     </li>
+     {serverChannelList.map((channel, i) => (
+      <Fragment key={i}>
+       {channel.voiceChannel ? (
+        <Fragment>{addToVoiceChannelList(channel)}</Fragment>
+       ) : (
+        <li key={i}>
+         <Link to='/redirectchat' onClick={() => openChannel(channel)}>
+          {channel.name}
+         </Link>
+        </li>
+       )}
+      </Fragment>
+     ))}
+     {voiceChannels.map((channel, i) => (
+      <li key={i}>
+       <Link to='#' onClick={() => voicejoin(channel)}>
+        {channel.name}{' '}
+       </Link>
+       {userList.length >= 1 && channelID === channel._id ? (
+        userList.map((user, i) => (
+         <Fragment>
+          {user ? (
+           user.id === 'empty' ? (
+            <Fragment key={i}></Fragment>
            ) : (
-            <Fragment></Fragment>
-           )}
-          </Fragment>
-         ))
-        ) : (
-         <Fragment></Fragment>
-        )}
-       </li>
-      ))}
-      <li key='addServer' onClick={displayModal}>
-       <div
-        className='serverimgsmall'
-        style={{
-         backgroundImage: "url('https://img.icons8.com/cotton/2x/plus.png')",
-        }}
-       ></div>
+            <ul key={i}>
+             <li>{user.name}</li>
+            </ul>
+           )
+          ) : (
+           <Fragment></Fragment>
+          )}
+         </Fragment>
+        ))
+       ) : (
+        <Fragment></Fragment>
+       )}
       </li>
-     </ul>
-    </div>
+     ))}
+     <li key='addServer' onClick={displayModal}>
+      <div
+       className='L-Sidebar-AddChannel'
+       style={{
+        backgroundImage: "url('https://img.icons8.com/cotton/2x/plus.png')",
+       }}
+      ></div>
+     </li>
+    </ul>
    </div>
   );
  } else if (isAuthenticated) {
   return (
    <div>
-    <div className='friendlist'>
+    <div className='L-Sidebar-Friendlist'>
      <h3 className='sidebarheaders' style={{ background: 'black' }}>
       Friends:
      </h3>
-     <div className='friends'>
+     <div className='Friendlist-Friends'>
       <ul>
        {friendList.map((friend, i) => (
         <li
@@ -224,7 +225,7 @@ const LeftSidebar = () => {
          <Link to='#'>
           <p style={{ background: 'rgb(0,0,0,.5)' }}>{friend.name}</p>
          </Link>
-         <div className='friendlistsubmenu'>
+         <div className='Friendlist-Submenu'>
           <ul>
            <li>
             <Link to='/redirectchat' onClick={() => openDM(friend)}>
@@ -247,7 +248,7 @@ const LeftSidebar = () => {
    </div>
   );
  } else {
-  return <div className='friendlist'></div>;
+  return <div className='L-Sidebar-Friendlist'></div>;
  }
 };
 

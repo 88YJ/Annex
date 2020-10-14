@@ -3,7 +3,7 @@ import React from 'react';
 const Input = ({ setMessage, sendMessage, message }) => (
  <form className='form'>
   <input
-   className='input'
+   className='chat-Input'
    type='text'
    placeholder='Type some trash talk..'
    value={message}

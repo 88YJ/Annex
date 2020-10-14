@@ -48,24 +48,39 @@ const Navbar = ({ title }) => {
  };
 
  function openServer(server) {
+  changesidebar(false);
   setCurrentServer(server);
+ }
+
+ function changesidebar(stream) {
+  if (stream) {
+   document
+    .getElementsByTagName('div')[3]
+    .setAttribute('class', 'app-mainGridStream');
+  } else {
+   document
+    .getElementsByTagName('div')[3]
+    .setAttribute('class', 'app-mainGrid');
+  }
  }
 
  const authLinks = (
   <Fragment>
    <li>
-    <Link to='/'>
+    <Link onClick={() => changesidebar(false)} to='/'>
      <div
-      className='navpicture'
+      className='NavIcons'
       style={{ backgroundImage: `url(${user && user.profilePicture})` }}
      >
-      <div className='subMenu'>
+      <div className='NavSubMenus'>
        <ul>
         <li onClick={() => openProfile(user)}>
-         <Link to='/profilepage'>My Profile</Link>
+         <Link onClick={() => changesidebar(false)} to='/profilepage'>
+          My Profile
+         </Link>
         </li>
         <li>
-         <a onClick={onLogout} href='#!'>
+         <a onClick={() => changesidebar(false)} onClick={onLogout} href='#!'>
           <span>Logout</span>
          </a>
         </li>
@@ -75,26 +90,29 @@ const Navbar = ({ title }) => {
     </Link>
    </li>
    <li>
-    <Link to='/store'>
+    <Link onClick={() => changesidebar(false)} to='/store'>
      <div
-      className='navicons'
+      className='NavIcons'
       style={{
        backgroundImage: `url("https://png.pngtree.com/png-vector/20190329/ourlarge/pngtree-vector-shopping-cart-icon-png-image_889692.jpg")`,
       }}
-     ></div>
+     >
+      <div className='NavSubMenus'>
+       <ul>
+        <li>
+         <Link onClick={() => changesidebar(false)} to='/cart'>
+          Cart
+         </Link>
+        </li>
+       </ul>
+      </div>
+     </div>
     </Link>
-    <div className='subMenu'>
-     <ul>
-      <li>
-       <Link to='/cart'>Cart</Link>
-      </li>
-     </ul>
-    </div>
    </li>
    <li>
-    <Link to='/redirectstream'>
+    <Link onClick={() => changesidebar(true)} to='/redirectstream'>
      <div
-      className='navicons'
+      className='NavIcons'
       style={{
        backgroundImage: `url("https://faithvox.s3.amazonaws.com/wp-content/uploads/sites/5/2016/09/05195814/live.jpg")`,
       }}
@@ -102,9 +120,9 @@ const Navbar = ({ title }) => {
     </Link>
    </li>
    <li>
-    <Link to='/redirectstream'>
+    <Link onClick={() => changesidebar(false)} to='#'>
      <div
-      className='navicons'
+      className='NavIcons'
       style={{
        backgroundImage: `url(${SearchIcon})`,
       }}
@@ -121,7 +139,7 @@ const Navbar = ({ title }) => {
     onClick={displayModal}
    >
     <div
-     className='navicons'
+     className='NavIcons'
      style={{
       backgroundImage: `url(${PlusIcon})`,
      }}
@@ -147,35 +165,27 @@ const Navbar = ({ title }) => {
  if (userServerList !== null) {
   return (
    <div className='Nav'>
-    <div className='Navlower'>
-     <div>
-      <ul>
-       {isAuthenticated ? authLinks : guestLinks}
-       {userServerList.map((server, i) => (
-        <Link to={`/serverlanding`} key={i}>
-         <li onClick={() => openServer(server)}>
-          <div
-           className='navpicture'
-           style={{
-            backgroundImage: `url(${server.img})`,
-           }}
-          ></div>
-         </li>
-        </Link>
-       ))}
-      </ul>
-     </div>
-    </div>
+    <ul>
+     {isAuthenticated ? authLinks : guestLinks}
+     {userServerList.map((server, i) => (
+      <Link to={`/serverlanding`} key={i}>
+       <li onClick={() => openServer(server)}>
+        <div
+         className='NavIcons'
+         style={{
+          backgroundImage: `url(${server.img})`,
+         }}
+        ></div>
+       </li>
+      </Link>
+     ))}
+    </ul>
    </div>
   );
  } else {
   return (
    <div className='Nav'>
-    <div className='Navlower'>
-     <div>
-      <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
-     </div>
-    </div>
+    <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
    </div>
   );
  }

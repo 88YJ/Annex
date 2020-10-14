@@ -43,11 +43,14 @@ const RightSidebar = () => {
  if (serverSidebar && isAuthenticated) {
   return (
    <Fragment>
-    <div className='serveruserlist'>
-     <h3 className='sidebarheaders' style={{ background: 'black' }}>
+    <div className='R-Sidebar-ServerUserlist'>
+     <h3
+      className='sidebarheaders'
+      style={{ background: 'black', color: 'red' }}
+     >
       Users:
      </h3>
-     <div className='serverusers'>
+     <div className='R-Sidebar-ServerUsers'>
       <ul>
        {serverUserList.map((user, i) => (
         <li
@@ -74,11 +77,14 @@ const RightSidebar = () => {
  } else if (cartSidebar && isAuthenticated) {
   return (
    <Fragment>
-    <div className='cartlist'>
-     <h3 className='sidebarheaders' style={{ background: 'black' }}>
+    <div className='R-Sidebar-Cartlist'>
+     <h3
+      className='sidebarheaders'
+      style={{ background: 'black', color: 'red' }}
+     >
       Cart:
      </h3>
-     <div className='cart'>
+     <div className='cartlist-Items'>
       <ul>
        {gamescart !== null ? (
         gamescart.map((cart, i) => (
@@ -91,7 +97,11 @@ const RightSidebar = () => {
        )}
       </ul>
       {gamescart !== null ? (
-       <Link className='gotocart' to='/cart'>
+       <Link
+        style={{ height: 'auto', width: 'auto' }}
+        className='globalbutton'
+        to='/cart'
+       >
         Go To Cart
        </Link>
       ) : (
@@ -105,7 +115,7 @@ const RightSidebar = () => {
   if (games == null) {
    return (
     <Fragment>
-     <div className='gamelist'>
+     <div className='R-Sidebar-Gamelist'>
       <h3 className='sidebarheaders' style={{ background: 'black' }}>
        Games:
       </h3>
@@ -115,11 +125,14 @@ const RightSidebar = () => {
   } else {
    return (
     <Fragment>
-     <div className='gamelist'>
-      <h3 className='sidebarheaders' style={{ background: 'black' }}>
+     <div className='R-Sidebar-Gamelist'>
+      <h3
+       className='sidebarheaders'
+       style={{ background: 'black', color: 'red' }}
+      >
        Games:
       </h3>
-      <div className='games'>
+      <div className='gamelist-Games'>
        <ul>
         {games.map((game, i) => (
          <li
@@ -129,9 +142,9 @@ const RightSidebar = () => {
            backgroundImage: `url(${game.banner})`,
           }}
          >
-          <div className='bannerfilm'>
+          <div className='banner-Film'>
            <p style={{ fontSize: '16px', height: 20 }}>{game.name}</p>
-           <div className='gamesubmenu'>
+           <div className='games-Submenu'>
             <ul>
              <li>
               <Link
@@ -164,13 +177,13 @@ const RightSidebar = () => {
  } else if (isAuthenticated) {
   return (
    <Fragment>
-    <div className='gamelist'>
+    <div className='R-Sidebar-Gamelist'>
      <h3 style={{ background: 'black' }}>Error:</h3>
     </div>
    </Fragment>
   );
  } else {
-  return <div className='gamelist'></div>;
+  return <div className='R-Sidebar-Gamelist'></div>;
  }
 };
 

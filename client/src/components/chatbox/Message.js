@@ -2,7 +2,7 @@ import React from 'react';
 
 import ReactEmoji from 'react-emoji';
 
-const Message = ({ message: { text, user, profileimg }, name }) => {
+const Message = ({ message: { text, user, profileimg, time }, name }) => {
  let isSentByCurrentUser = false;
 
  const trimmedName = name.trim().toLowerCase();
@@ -12,22 +12,22 @@ const Message = ({ message: { text, user, profileimg }, name }) => {
  }
 
  return isSentByCurrentUser ? (
-  <div className='messageContainer justifyEnd'>
-   <p className='sentText pr-10'>{trimmedName}</p>
-   <div className='messageBox backgroundBlue'>
-    <p className='messageText colorWhite'>{ReactEmoji.emojify(text)}</p>
+  <div className='messageContainer'>
+   <p className='sentText'>{trimmedName}</p>
+   <div className='chat-MessageBox'>
+    <p className='chat-MessageText'>{ReactEmoji.emojify(text)}</p>
    </div>
   </div>
  ) : (
-  <div className='messageContainer justifyStart'>
+  <div className='chat-MessageContainer'>
    <div
     className='serverimgsmall'
     style={{ backgroundImage: `url(${profileimg})` }}
    ></div>
-   <p className='sentText pl-10 '>{user}</p>
+   <p className='chat-SentText'>{user}</p>
 
-   <div className='messageBox backgroundLight'>
-    <p className='messageText colorDark'>{ReactEmoji.emojify(text)}</p>
+   <div className='chat-MessageBox'>
+    <p className='chat-MessageText'>{ReactEmoji.emojify(text)}</p>
    </div>
   </div>
  );

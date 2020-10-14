@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import './App.css';
-import './App2.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //States
@@ -77,56 +76,45 @@ const App = () => {
                <Alerts />
                <Modal />
                <div
-                className='img'
+                className='app-background'
                 style={{
                  backgroundImage: `url(${background})`,
                 }}
                >
-                <div
-                 className='grid'
-                 style={{
-                  gridTemplateColumns: `60px 250px auto ${sidebarwidth}px`,
-                 }}
-                >
+                <div className='app-mainGrid'>
                  <Navbar />
                  <LeftSidebar />
-                 <div className='browser'>
-                  <div className='dash'>
-                   <Switch>
-                    <Route
-                     exact
-                     path='/redirectchat'
-                     component={RedirectChat}
-                    />
-                    <Route
-                     exact
-                     path='/redirectstream'
-                     component={RedirectStream}
-                    />
-                    <Route path='/serverlanding' component={ServerLanding} />
-                    <Route path='/cart' component={Cart} />
-                    <Route exact path='/' component={Dash} />
-                    <Route exact path='/store' component={Store} />
-                    <Route exact path='/findservers' component={FindServers} />
-                    <Route exact path='/server' component={ChannelPage} />
-                    <PrivateRoute exact path='/about' component={About} />
-                    <Route exact path='/game' component={Game} />
-                    <Route exact path='/register' component={Register} />
-                    <Route exact path='/login' component={Login} />
-                    <Route
-                     exact
-                     path='/profilesearch'
-                     component={ProfileSearch}
-                    />
-                    <Route exact path='/profilepage' component={ProfilePage} />
-                    <Route
-                     exact
-                     path='/storegamepage'
-                     component={StoreGamePage}
-                    />
-                    <Route path='/streamtest/:id' component={StreamShow} />
-                   </Switch>
-                  </div>
+                 <div className='app-browser'>
+                  <Switch>
+                   <Route exact path='/redirectchat' component={RedirectChat} />
+                   <Route
+                    exact
+                    path='/redirectstream'
+                    component={RedirectStream}
+                   />
+                   <Route path='/serverlanding' component={ServerLanding} />
+                   <Route path='/cart' component={Cart} />
+                   <Route exact path='/' component={Dash} />
+                   <Route exact path='/store' component={Store} />
+                   <Route exact path='/findservers' component={FindServers} />
+                   <Route exact path='/server' component={ChannelPage} />
+                   <PrivateRoute exact path='/about' component={About} />
+                   <Route exact path='/game' component={Game} />
+                   <Route exact path='/register' component={Register} />
+                   <Route exact path='/login' component={Login} />
+                   <Route
+                    exact
+                    path='/profilesearch'
+                    component={ProfileSearch}
+                   />
+                   <Route exact path='/profilepage' component={ProfilePage} />
+                   <Route
+                    exact
+                    path='/storegamepage'
+                    component={StoreGamePage}
+                   />
+                   <Route path='/streamtest/:id' component={StreamShow} />
+                  </Switch>
                  </div>
                  <RightSidebar />
                 </div>

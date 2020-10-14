@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Redirect } from "react-router-dom";
-import ServerContext from "../../context/server/serverContext";
-import io from "socket.io-client";
-import AuthContext from "../../context/auth/authContext";
+import React, { useState, useContext, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import ServerContext from '../../context/server/serverContext';
+import io from 'socket.io-client';
+import AuthContext from '../../context/auth/authContext';
 
-import Messages from "../chatbox/Messages";
-import Input from "../chatbox/Input";
+import Messages from '../chatbox/Messages';
+import Input from '../chatbox/Input';
 
 let socket;
 
@@ -24,11 +24,11 @@ const ServerPage = ({ location }) => {
 
  const { user } = authContext;
 
- const [name, setName] = useState("");
- const [users, setUsers] = useState("");
- const [message, setMessage] = useState("");
+ const [name, setName] = useState('');
+ const [users, setUsers] = useState('');
+ const [message, setMessage] = useState('');
  const [messages, setMessages] = useState([]);
- const ENDPOINT = ":5002";
+ const ENDPOINT = ':5002';
 
  useEffect(() => {
   if (socket) {
@@ -43,16 +43,16 @@ const ServerPage = ({ location }) => {
    room = channel._id;
    red = false;
   } else {
-   name = "youre not supposed to be here";
-   profileimg = "lol";
-   room = "haha";
+   name = 'youre not supposed to be here';
+   profileimg = 'lol';
+   room = 'haha';
    red = true;
   }
   setName(name);
 
   socket = io(ENDPOINT);
 
-  socket.emit("join", { name, room, profileimg }, (error) => {
+  socket.emit('join', { name, room, profileimg }, (error) => {
    if (error) {
     alert(error);
    }
@@ -66,11 +66,11 @@ const ServerPage = ({ location }) => {
  }
 
  useEffect(() => {
-  socket.on("message", (message) => {
+  socket.on('message', (message) => {
    setMessages((messages) => [...messages, message]);
   });
 
-  socket.on("roomData", ({ users }) => {
+  socket.on('roomData', ({ users }) => {
    setUsers(users);
   });
  }, []);
@@ -79,7 +79,7 @@ const ServerPage = ({ location }) => {
   event.preventDefault();
 
   if (message) {
-   socket.emit("sendMessage", message, () => setMessage(""));
+   socket.emit('sendMessage', message, () => setMessage(''));
   }
  };
 
@@ -91,7 +91,7 @@ const ServerPage = ({ location }) => {
   // eslint-disable-next-line
  }, []);
  if (red) {
-  console.log("nothing to return");
+  console.log('nothing to return');
   return <Redirect to='/' />;
  } else {
   return (
@@ -99,11 +99,11 @@ const ServerPage = ({ location }) => {
     className='chat'
     style={{ backgroundImage: `url(${channel.customization.icon})` }}
    >
-    <div className='channelname'>
-     <h2>{channel.name}</h2>
+    <div className='chat-Channelname'>
+     <h2 style={{ color: 'red' }}>{channel.name}</h2>
     </div>
-    <div className='chatbox'>
-     <div className='chatcontainer'>
+    <div className='chat-Box'>
+     <div className='chat-Container'>
       <Messages messages={messages} name={name} />
       <Input
        message={message}

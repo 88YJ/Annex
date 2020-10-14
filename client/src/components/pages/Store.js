@@ -55,41 +55,62 @@ const Store = () => {
 
  return (
   <Fragment>
-   <div className='storeNav'>
-    <div>
-     <ul>
-      <li>
-       <input
-        type={text}
-        onChange={onChange}
-        className='GamesSearch'
-        placeholder='Search Games'
-       />
-      </li>
-      <li>
-       <Link to='#'>Clear Filter</Link>
-      </li>
-      <li>
-       <Link to='#'>Selected For You</Link>
-      </li>
-      <li>
-       <Link to='#'>Popular Games</Link>
-      </li>
-      <li>
-       <Link to='#'>Community</Link>
-      </li>
-     </ul>
-    </div>
-    <div></div>
+   <div className='store-Nav'>
+    <ul>
+     <li>
+      <input
+       type={text}
+       onChange={onChange}
+       className='store-Searchbar'
+       placeholder='Search Games'
+      />
+     </li>
+     <li>
+      <Link
+       to='#'
+       style={{ height: 'auto', width: 'auto' }}
+       className='globalbutton'
+      >
+       Clear Filter
+      </Link>
+     </li>
+     <li>
+      <Link
+       to='#'
+       style={{ height: 'auto', width: 'auto' }}
+       className='globalbutton'
+      >
+       Selected For You
+      </Link>
+     </li>
+     <li>
+      <Link
+       to='#'
+       style={{ height: 'auto', width: 'auto' }}
+       className='globalbutton'
+      >
+       Popular Games
+      </Link>
+     </li>
+     <li>
+      <Link
+       to='#'
+       style={{ height: 'auto', width: 'auto' }}
+       className='globalbutton'
+      >
+       Community
+      </Link>
+     </li>
+    </ul>
    </div>
-   <div className='storepage'>
+   <div className='store-Listpage'>
     <ul>
      {filtered !== null
       ? filtered.map((games, i) => (
          <Link to='/storegamepage' key={i}>
           <li onClick={() => openGamePage(games)}>
            <div
-            className='dashmygamesimg'
+            className='store-GamesImg'
             style={{
              backgroundImage: `url(${games.img})`,
             }}
@@ -101,7 +122,7 @@ const Store = () => {
          <Link to='/storegamepage' key={i}>
           <li onClick={() => openGamePage(games)}>
            <div
-            className='dashmygamesimg'
+            className='store-GamesImg'
             style={{
              backgroundImage: `url(${games.img})`,
             }}
