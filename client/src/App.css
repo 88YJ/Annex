@@ -72,6 +72,28 @@
  color: red;
  cursor: pointer;
 }
+.globalHeader {
+ text-align: center;
+ height: auto;
+}
+.globalHeaderL {
+ text-align: left;
+ height: auto;
+}
+.globalHeaderR {
+ text-align: right;
+ height: auto;
+}
+.profilepicture {
+ height: 43px;
+ width: 43px;
+ background-size: cover;
+ background-position: center;
+ border-radius: 20px;
+}
+.profilepicture:hover {
+ border-radius: 16px;
+}
 
 /*Component Css */
 
@@ -198,7 +220,353 @@
  color: white;
  margin: 6px;
 }
+
+/*register & login Css */
+
+.register-login {
+ height: 100%;
+ background: rgb(0, 4, 17, 0.8);
+}
+.register-login-Form {
+ height: auto;
+}
+.register-login-Grid {
+ display: grid;
+ grid-template-columns: auto 300px auto;
+ color: grey;
+
+ height: 100%;
+}
+.register-login-Values {
+ min-width: 290px;
+ background: black;
+ color: white;
+ outline: none;
+ border: white 1px solid;
+ height: auto;
+}
+
 /*Browser Css */
+
+/*Server Pages */
+.server-Landingpageimg {
+ display: grid;
+ grid-row: 10% 30% 50% 10%;
+ height: 100%;
+ width: 100%;
+ background-position: center;
+ background-size: cover;
+}
+/*Chat */
+.chat {
+ height: 100%;
+ width: 100%;
+ display: grid;
+ grid-template-rows: 6% 94%;
+ background: rgb(0, 4, 17, 0.7);
+ background-size: cover;
+}
+.chat-Box {
+ border-top: #384d48 1px solid;
+ color: grey;
+}
+.chat-Container {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ background: rgb(0, 4, 17, 0.7);
+ height: 100%;
+ width: 100%;
+}
+.chat-Channelname {
+ text-align: center;
+ font-size: 18px;
+ background: rgb(0, 0, 0, 1);
+}
+.chat-Messages {
+ padding: 1% 0;
+ overflow: auto;
+ flex: auto;
+ height: 100%;
+}
+.chat-MessageDiv {
+ height: auto;
+}
+.chat-MessageBox {
+ background: #f3f3f3;
+ margin-top: 2%;
+ margin-left: 1%;
+ border-radius: 8px;
+ padding: 5px 20px;
+ color: white;
+ display: inline-block;
+ max-width: 80%;
+ width: auto;
+ height: auto;
+}
+.chat-MessageText {
+ height: auto;
+ letter-spacing: 0;
+ float: left;
+ font-size: 1.1em;
+ word-wrap: break-word;
+ color: black;
+}
+.chat-MessageContainer {
+ display: flex;
+ width: auto;
+ height: auto;
+ justify-content: flex-end;
+ padding: 0;
+ margin-top: 3px;
+}
+.chat-MessageContainer:hover {
+ background: rgb(0, 4, 17, 0.7);
+}
+.chat-SentText {
+ width: auto;
+ display: flex;
+ align-items: center;
+ font-family: Helvetica;
+ color: red;
+ letter-spacing: 0.3px;
+}
+.form {
+ display: flex;
+
+ height: 8%;
+}
+.chat-Input {
+ border: none;
+ outline: none;
+ border-radius: 16px;
+ padding: 0;
+ margin: 1px;
+ width: 100%;
+ font-size: 1.2em;
+}
+.sendButton {
+ color: white;
+ outline: none;
+ text-transform: uppercase;
+ text-decoration: none;
+ background: #000411;
+ padding: 10px;
+ display: inline-block;
+ border-top: 1px solid #384d48;
+ border-left: 1px solid #929c9a;
+ border-bottom: rgb(0, 0, 0, 0) 1px solid;
+ border-right: rgb(0, 0, 0, 0) 1px solid;
+ width: 20%;
+}
+.sendButton:hover {
+ border: red 1px solid;
+ color: red;
+ cursor: pointer;
+}
+
+/*Profile Page */
+
+.profile-Background {
+ height: 100%;
+ width: 100%;
+ background-position: center;
+ background-size: cover;
+}
+.profile-Film {
+ height: 100%;
+ width: 100%;
+ background-color: rgb(0, 4, 17, 0.5);
+}
+.profile-Master {
+ display: grid;
+ grid-template-rows: 120px auto;
+ height: 100%;
+ width: 100%;
+}
+.profile-SubMaster {
+ height: 100%;
+ display: grid;
+ grid-template-rows: 210px auto;
+ overflow-y: scroll;
+}
+.profile-Header {
+ display: grid;
+ grid-template-columns: 120px 300px auto 90px 110px;
+ height: 100%;
+ width: 100%;
+ background-color: rgb(0, 0, 0, 0.9);
+}
+.profile-DisplayPicture {
+ height: 100px;
+ width: 100px;
+ border-radius: 50px;
+ background-position: center;
+ margin: 5px;
+ background-size: cover;
+}
+.profile-Screenshots-Container {
+ border-top: #384d48 1px solid;
+ border-bottom: #384d48 1px solid;
+ background-color: rgb(0, 4, 17, 0.5);
+ height: 100%;
+ width: 100%;
+ z-index: 1;
+}
+.profile-Screenshots-Container ul {
+ width: auto;
+ display: inline-flex;
+}
+.profile-Screenshots-Container li {
+ float: left;
+}
+.profile-Screenshots {
+ height: 140px;
+ width: 240px;
+ background-size: cover;
+ background-position: center;
+ padding: 10px;
+ margin: 10px;
+ border: grey 1px solid;
+}
+.profile-Body {
+ display: grid;
+ grid-template-columns: auto minmax(auto, 1450px);
+ height: 100%;
+ overflow-y: scroll;
+}
+.profile-Body-Center {
+ height: 100%;
+ width: 100%;
+}
+.profile-Tabs {
+ background-color: rgb(0, 4, 17, 0.5);
+ border-right: #384d48 1px solid;
+}
+.profile-Tabs ul {
+ color: white;
+ margin: 5px;
+ padding: 0;
+}
+.profile-Tabs li {
+ height: auto;
+ width: 100px;
+ border-bottom: #384d48 1px solid;
+}
+.profile-Tabs li:hover {
+ background-color: grey;
+ cursor: pointer;
+ width: 100px;
+}
+.profile-Friendrequests ul {
+ height: 100%;
+ width: 100%;
+ margin: 0px;
+ padding: 0px;
+}
+.profile-Friendrequests li {
+ height: auto;
+ margin: 5px;
+ padding: 0px;
+ width: 300px;
+}
+.profile-Achievementslist {
+ overflow-y: scroll;
+ display: flexbox;
+ height: 50%;
+ width: 100%;
+ margin: 2px;
+ padding: 2px;
+}
+.profile-Achievementslist li {
+ margin-left: 20px;
+ margin-top: 20px;
+ background-color: rgba(0, 0, 0, 0.7);
+ float: left;
+ background-size: cover;
+ background-position: center;
+ height: 100px;
+ width: 280px;
+ border: #384d48 1px solid;
+}
+.profile-Comments ul {
+ border: #384d48 1px solid;
+ margin: 0;
+ padding: 0;
+ width: 100%;
+}
+.profile-Comments li {
+ background-color: rgb(0, 4, 17, 0.7);
+ padding: 2px;
+ height: auto;
+ width: auto;
+}
+
+/*Game Page */
+
+.Gamepage {
+ color: white;
+ height: 100%;
+ width: 100%;
+ display: grid;
+ grid-template-rows: 200px 80px auto;
+}
+.Gamepage-Banner {
+ display: grid;
+ grid-template-columns: auto minmax(auto, 1420px) auto;
+}
+.Gamepage-Img {
+ background-size: cover;
+ background-position: center;
+}
+.Gamepage-Nav {
+ background: #000411;
+ border-bottom: #384d48 2px solid;
+ z-index: 1;
+}
+.Gamepage-Body {
+ display: grid;
+ grid-template-columns: 50% auto;
+}
+.Gamepage-Lists {
+ display: grid;
+ grid-template-columns: 40% 60%;
+}
+.Gamepage-Lists ul {
+ border-right: #384d48 2px solid;
+ background-color: rgb(0, 0, 0, 0.5);
+ margin: 0;
+ padding: 0;
+ width: 100%;
+ height: 100%;
+ overflow-y: scroll;
+}
+.Gamepage-Lists li {
+ height: auto;
+ width: auto;
+ margin: 5px;
+}
+.Gamepage-Lists a {
+ text-decoration: none;
+ color: white;
+}
+.Gamepage-News {
+ background-color: rgb(0, 0, 0, 0.5);
+ border-left: #384d48 2px solid;
+}
+.Gamepage-News ul {
+ height: auto;
+ width: auto;
+}
+.Gamepage-News ul li {
+ background-color: rgb(0, 0, 0, 0.8);
+ border: #384d48 2px solid;
+ border-top: 0px;
+ margin: 0;
+ padding: 2px;
+ height: auto;
+ width: auto;
+}
 
 /*Store */
 .store-Nav {
@@ -209,7 +577,6 @@
  z-index: 1;
  width: 100%;
 }
-
 .store-Nav ul {
  display: block;
  margin: 0;
@@ -293,10 +660,6 @@
  background-color: black;
  color: red;
 }
-.store-Gamepage-MainHeader {
- text-align: center;
- height: auto;
-}
 .store-Gamepage-Grid {
  height: 100%;
  width: 100%;
@@ -322,10 +685,6 @@
  height: 100%;
  width: 100%;
  position: relative;
-}
-.store-Gamepage-Headers {
- text-align: left;
- height: auto;
 }
 .store-Gamepage-Reviews {
  height: 100%;
@@ -366,12 +725,6 @@
  overflow-y: scroll;
  overflow-x: hidden;
 }
-.dashboard-Headers {
- text-align: center;
- height: auto;
- color: red;
-}
-
 .dashboard-Grid {
  height: 550px;
  display: grid;
@@ -452,10 +805,6 @@
 }
 
 /*Sidebars*/
-.sidebarheaders {
- text-align: center;
- height: auto;
-}
 .banner {
  background-position: center;
  background-size: cover;
@@ -690,7 +1039,7 @@
  overflow-x: hidden;
 }
 .Friendlist-Friends ul {
- height: 100%;
+ height: 96%;
  width: auto;
  overflow-y: scroll;
  list-style: none;
@@ -740,148 +1089,7 @@
  background-color: black;
 }
 
-/*Chat */
-.chat {
- height: 100%;
- width: 100%;
- display: grid;
- grid-template-rows: 6% 94%;
- background: rgb(0, 4, 17, 0.7);
- background-size: cover;
-}
-.chat-Box {
- border-top: #384d48 1px solid;
- color: grey;
-}
-.chat-Container {
- display: flex;
- flex-direction: column;
- justify-content: space-between;
- background: rgb(0, 4, 17, 0.7);
- height: 100%;
- width: 100%;
-}
-.chat-Channelname {
- text-align: center;
- font-size: 18px;
- background: rgb(0, 0, 0, 1);
-}
-.chat-Messages {
- padding: 1% 0;
- overflow: auto;
- flex: auto;
- height: 100%;
-}
-.chat-MessageDiv {
- height: auto;
-}
-.chat-MessageBox {
- background: #f3f3f3;
- margin-top: 2%;
- margin-left: 1%;
- border-radius: 8px;
- padding: 5px 20px;
- color: white;
- display: inline-block;
- max-width: 80%;
- width: auto;
- height: auto;
-}
-
-.chat-MessageText {
- height: auto;
- letter-spacing: 0;
- float: left;
- font-size: 1.1em;
- word-wrap: break-word;
- color: black;
-}
-
-.chat-MessageContainer {
- display: flex;
- width: auto;
- height: auto;
- justify-content: flex-end;
- padding: 0;
- margin-top: 3px;
-}
-.chat-MessageContainer:hover {
- background: rgb(0, 4, 17, 0.7);
-}
-.chat-SentText {
- width: auto;
- display: flex;
- align-items: center;
- font-family: Helvetica;
- color: red;
- letter-spacing: 0.3px;
-}
-.form {
- display: flex;
-
- height: 8%;
-}
-
-.chat-Input {
- border: none;
- outline: none;
- border-radius: 0px;
- padding: 0;
- margin: 1px;
- width: 80%;
- font-size: 1.2em;
-}
-
-.sendButton {
- color: white;
- outline: none;
- text-transform: uppercase;
- text-decoration: none;
- background: #000411;
- padding: 10px;
- display: inline-block;
- border-top: 1px solid #384d48;
- border-left: 1px solid #929c9a;
- border-bottom: rgb(0, 0, 0, 0) 1px solid;
- border-right: rgb(0, 0, 0, 0) 1px solid;
- width: 20%;
-}
-.sendButton:hover {
- border: red 1px solid;
- color: red;
- cursor: pointer;
-}
-
 /*////////////////*/
-
-.register {
- height: 100%;
- background: rgb(0, 4, 17, 0.8);
-}
-.registerGrid {
- display: grid;
- grid-template-columns: auto 300px auto;
- color: grey;
-
- height: 100%;
-}
-.registerGrid h2 {
- margin-top: 10px;
-}
-.registerloginvalues {
- min-width: 290px;
- background: black;
- color: white;
- outline: none;
- border: white 1px solid;
- height: auto;
-}
-.registerbutton {
- margin-top: 10px;
-}
-.form-group {
- height: auto;
-}
 
 .serversearch {
  height: 100%;
@@ -916,260 +1124,4 @@
 .profilefind a {
  text-decoration: none;
  color: red;
-}
-
-.profilepicture {
- height: 43px;
- width: 43px;
- background-size: cover;
- background-position: center;
- border-radius: 20px;
-}
-.profilepicture:hover {
- border-radius: 16px;
-}
-.wrap {
- word-wrap: inherit;
-}
-.landingpageimg {
- display: grid;
- grid-row: 10% 30% 50% 10%;
- height: 100%;
- width: 100%;
- background-position: center;
- background-size: cover;
-}
-.landingpageheader {
- background-color: rgb(0, 4, 17, 0.7);
- height: 40px;
- width: 100%;
-}
-.landingpageinnerheader {
- background-color: rgb(0, 4, 17, 0.7);
- width: 100%;
- height: auto;
-}
-.landingpageinnerbody {
- background-color: rgb(0, 4, 17, 0.7);
- font-size: 20px;
- height: auto;
- width: 100%;
-}
-
-.profileheaderL {
- height: 40px;
- text-align: left;
- width: auto;
-}
-.profileheaderR {
- height: 40px;
- text-align: right;
- width: auto;
-}
-.profileheaderC {
- height: 30px;
- text-align: center;
- width: auto;
-}
-.profileheaderT {
- height: 20px;
- text-align: center;
- width: auto;
-}
-.profilebackground {
- height: 100%;
- width: 100%;
- background-position: center;
- background-size: cover;
-}
-.profilefilm {
- height: 100%;
- width: 100%;
- background-color: rgb(0, 4, 17, 0.5);
-}
-.profileMaster {
- display: grid;
- grid-template-rows: 120px auto;
- height: 100%;
- width: 100%;
-}
-.profileHeader {
- display: grid;
- grid-template-columns: 120px 300px auto 90px 110px;
- height: 100%;
- width: 100%;
- background-color: rgb(0, 0, 0, 0.9);
-}
-.profileImgDisplay {
- height: 100px;
- width: 100px;
- border-radius: 50px;
- background-position: center;
- margin: 5px;
- background-size: cover;
-}
-
-.profileSubMaster {
- height: 100%;
- display: grid;
- grid-template-rows: 210px auto;
- overflow-y: scroll;
-}
-.profilebodycenter {
- height: 100%;
- width: 100%;
-}
-.profilelist1 {
- overflow-y: scroll;
- display: flexbox;
- height: 50%;
- width: 100%;
- margin: 2px;
- padding: 2px;
-}
-.profilelist1 li {
- margin-left: 20px;
- margin-top: 20px;
- background-color: rgba(0, 0, 0, 0.7);
- float: left;
- background-size: cover;
- background-position: center;
- height: 100px;
- width: 280px;
- border: #384d48 1px solid;
-}
-.profilecomments ul {
- border: #384d48 1px solid;
- margin: 0;
- padding: 0;
- width: 100%;
-}
-.profilecomments li {
- background-color: rgb(0, 4, 17, 0.7);
- height: auto;
- width: auto;
-}
-.screenshot {
- height: 140px;
- width: 240px;
- background-size: cover;
- background-position: center;
- padding: 10px;
- margin: 10px;
- border: grey 1px solid;
-}
-.profilescreenshots {
- border-top: #384d48 1px solid;
- border-bottom: #384d48 1px solid;
- background-color: rgb(0, 4, 17, 0.5);
- height: 100%;
- width: 100%;
-}
-.profilescreenshots ul {
- width: auto;
- display: inline-flex;
-}
-.profilescreenshots li {
- float: left;
-}
-
-.profileBody {
- display: grid;
- grid-template-columns: auto minmax(auto, 1450px);
- height: 150%;
-}
-
-.profiletabs {
- background-color: rgb(0, 4, 17, 0.5);
- border-right: #384d48 1px solid;
-}
-.profiletabs ul {
- color: white;
- margin: 5px;
- padding: 0;
-}
-.profiletabs li {
- height: auto;
- width: 100px;
-}
-.profiletabs li:hover {
- background-color: grey;
- cursor: pointer;
- width: 100px;
-}
-.friendrequests ul {
- height: 100%;
- width: 100%;
- margin: 0px;
- padding: 0px;
-}
-.friendrequests li {
- height: auto;
- margin: 5px;
- padding: 0px;
- width: 300px;
-}
-
-.myGamepageHeader {
- text-align: center;
- height: 40px;
-}
-.myGamepageHeaderL {
- text-align: left;
- height: 40px;
-}
-.myGameBanner {
- display: grid;
- grid-template-columns: auto minmax(auto, 1420px) auto;
-}
-
-.myGamepage {
- color: white;
- height: 100%;
- width: 100%;
- display: grid;
- grid-template-rows: 200px 80px auto;
-}
-.myGameimg {
- background-size: cover;
- background-position: center;
-}
-.myGameHeader {
- background: #000411;
-}
-.myGameBody {
- display: grid;
- grid-template-columns: 50% auto;
-}
-.myGamelists {
- display: grid;
- grid-template-columns: 40% 60%;
-}
-.myGamelists ul {
- border-right: #384d48 3px solid;
- background-color: rgb(0, 0, 0, 0.5);
- margin: 0;
- padding: 0;
- width: 100%;
- height: 100%;
- overflow-y: scroll;
-}
-.myGamelists li {
- height: auto;
- width: auto;
- margin: 5px;
-}
-.myGamelists a {
- text-decoration: none;
- color: white;
-}
-.gameNews ul {
- height: auto;
- width: auto;
-}
-.gameNews ul li {
- margin: 0;
- padding: 0;
- height: auto;
- width: auto;
 }

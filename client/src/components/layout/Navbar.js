@@ -7,6 +7,8 @@ import ModalContext from '../../context/modal/modalContext';
 import ServerContext from '../../context/server/serverContext';
 import PlusIcon from './Plusicon.png';
 import SearchIcon from './SearchIcon.png';
+import CartIcon from './CartIcon.png';
+import StreamIcon from './StreamIcon.png';
 
 const Navbar = ({ title }) => {
  const authContext = useContext(AuthContext);
@@ -94,7 +96,7 @@ const Navbar = ({ title }) => {
      <div
       className='NavIcons'
       style={{
-       backgroundImage: `url("https://png.pngtree.com/png-vector/20190329/ourlarge/pngtree-vector-shopping-cart-icon-png-image_889692.jpg")`,
+       backgroundImage: `url(${CartIcon})`,
       }}
      >
       <div className='NavSubMenus'>
@@ -114,7 +116,7 @@ const Navbar = ({ title }) => {
      <div
       className='NavIcons'
       style={{
-       backgroundImage: `url("https://faithvox.s3.amazonaws.com/wp-content/uploads/sites/5/2016/09/05195814/live.jpg")`,
+       backgroundImage: `url(${StreamIcon})`,
       }}
      ></div>
     </Link>
@@ -131,6 +133,7 @@ const Navbar = ({ title }) => {
    </li>
    <li
     style={{
+     marginTop: '3px',
      borderBottom: 'red 1px solid',
      paddingBottom: '4px',
      cursor: 'pointer',

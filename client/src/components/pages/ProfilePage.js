@@ -75,32 +75,36 @@ const ProfilePage = () => {
  } else if (profile._id === user._id) {
   return (
    <div
-    className='profilebackground'
+    className='profile-Background'
     style={{ backgroundImage: `url(${user.backgroundPicture})` }}
    >
-    <div className='profilefilm'>
-     <div className='profileMaster'>
-      <div className='profileHeader'>
+    <div className='profile-Film'>
+     <div className='profile-Master'>
+      <div className='profile-Header'>
        <div
-        className='profileImgDisplay'
+        className='profile-DisplayPicture'
         style={{ backgroundImage: `url(${profile.profilePicture})` }}
        ></div>
        <div style={{ color: 'white' }}>
-        <h1 className='profileheaderL' style={{ color: 'red' }}>
+        <h1 className='globalHeaderL' style={{ color: 'red' }}>
          {profile.name}
         </h1>
-        <h4 className='profileheaderL' style={{ color: 'red' }}>
+        <h4 className='globalHeaderL' style={{ color: 'red' }}>
          Location: United States{' '}
         </h4>
-        <p className='profileheaderL'>
+        <p className='globalHeaderL'>
          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex voluptatem
          voluptates
         </p>
        </div>
        <div></div>
        <div>
-        <h3 className='profileheaderR'>Level: 150</h3>
-        <h3 className='profileheaderR'>Years: 0</h3>
+        <h3 className='globalHeaderR' style={{ color: 'red' }}>
+         Level: 150
+        </h3>
+        <h3 className='globalHeaderR' style={{ color: 'red' }}>
+         Years: 0
+        </h3>
        </div>
        <div>
         <button
@@ -118,11 +122,11 @@ const ProfilePage = () => {
         </button>
        </div>
       </div>
-      <div className='profileSubMaster'>
-       <div className='profilescreenshots'>
+      <div className='profile-SubMaster'>
+       <div className='profile-Screenshots-Container'>
         <h2
-         className='profileheaderC sticky'
-         style={{ background: 'rgb(0,0,0,.8)' }}
+         className='globalHeader sticky'
+         style={{ background: 'rgb(0,0,0,.8)', color: 'red' }}
         >
          Showcase
         </h2>
@@ -130,7 +134,7 @@ const ProfilePage = () => {
          {user.screenShots.map((screenShot, i) => (
           <li
            key={i}
-           className='screenshot'
+           className='profile-Screenshots'
            style={{
             backgroundImage: `url(${screenShot})`,
            }}
@@ -138,40 +142,40 @@ const ProfilePage = () => {
          ))}
         </ul>
        </div>
-       <div className='profileBody'>
-        <div className='profiletabs'>
+       <div className='profile-Body'>
+        <div className='profile-Tabs'>
          <ul>
           <li>
-           <h2 className='profileheaderC'>Online</h2>
+           <h2 className='globalHeader'>Online</h2>
           </li>
           <li>
-           <h4 className='profileheaderT'>Friends</h4>
+           <h4 className='globalHeader'>Friends</h4>
           </li>
           <li>
-           <h4 className='profileheaderT'>Games</h4>
+           <h4 className='globalHeader'>Games</h4>
           </li>
           <li>
-           <h4 className='profileheaderT'>Inventory</h4>
+           <h4 className='globalHeader'>Inventory</h4>
           </li>
           <li>
-           <h4 className='profileheaderT'>Achievements</h4>
+           <h4 className='globalHeader'>Achievements</h4>
           </li>
           <li>
-           <h4 className='profileheaderT'>Screenshots</h4>
+           <h4 className='globalHeader'>Screenshots</h4>
           </li>
           <li>
-           <h4 className='profileheaderT'>Reviews</h4>
+           <h4 className='globalHeader'>Reviews</h4>
           </li>
           <li>
-           <h4 className='profileheaderT'>Artwork</h4>
+           <h4 className='globalHeader'>Artwork</h4>
           </li>
           <li>
-           <h4 className='profileheaderT'>Groups</h4>
+           <h4 className='globalHeader'>Groups</h4>
           </li>
          </ul>
         </div>
-        <div className='profilebodycenter'>
-         <div className='friendrequests'>
+        <div className='profile-Body-Center'>
+         <div className='profile-Friendrequests'>
           <ul>
            {incomingRequests.map((request, i) => (
             <li
@@ -183,7 +187,7 @@ const ProfilePage = () => {
             >
              <h4>{request.name}</h4>
              <div
-              className='serverimgsmall'
+              className='profilepicture'
               style={{
                backgroundImage: `url(${request.profilePicture})`,
               }}
@@ -209,32 +213,36 @@ const ProfilePage = () => {
  } else {
   return (
    <div
-    className='profilebackground'
+    className='profile-Background'
     style={{ backgroundImage: `url(${profile.backgroundPicture})` }}
    >
-    <div className='profilefilm'>
-     <div className='profileMaster'>
-      <div className='profileHeader'>
+    <div className='profile-Film'>
+     <div className='profile-Master'>
+      <div className='profile-Header'>
        <div
-        className='profileImgDisplay'
+        className='profile-DisplayPicture'
         style={{ backgroundImage: `url(${profile.profilePicture})` }}
        ></div>
        <div style={{ color: 'white' }}>
-        <h1 className='profileheaderL' style={{ color: 'red' }}>
+        <h1 className='globalHeaderL' style={{ color: 'red' }}>
          {profile.name}
         </h1>
-        <h4 className='profileheaderL' style={{ color: 'red' }}>
+        <h4 className='globalHeaderL' style={{ color: 'red' }}>
          Brandon Location: United States{' '}
         </h4>
-        <p className='profileheaderL'>
+        <p className='globalHeaderL'>
          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex voluptatem
          voluptates
         </p>
        </div>
        <div></div>
        <div>
-        <h3 className='profileheaderR'>Level: 150</h3>
-        <h3 className='profileheaderR'>Years: 0</h3>
+        <h3 className='globalHeaderR' style={{ color: 'red' }}>
+         Level: 150
+        </h3>
+        <h3 className='globalHeaderR' style={{ color: 'red' }}>
+         Years: 0
+        </h3>
        </div>
        <div>
         <button
@@ -255,11 +263,11 @@ const ProfilePage = () => {
        </div>
       </div>
 
-      <div className='profileSubMaster'>
-       <div className='profilescreenshots'>
+      <div className='profile-SubMaster'>
+       <div className='profile-Screenshots-Container'>
         <h2
-         className='profileheaderC sticky'
-         style={{ background: 'rgb(0,0,0,.8)' }}
+         className='globalHeader sticky'
+         style={{ background: 'rgb(0,0,0,.8)', color: 'red' }}
         >
          Showcase
         </h2>
@@ -268,7 +276,7 @@ const ProfilePage = () => {
           {profile.screenShots.map((screenShot, i) => (
            <li
             key={i}
-            className='screenshot'
+            className='profile-Screenshots'
             style={{
              backgroundImage: `url(${screenShot})`,
             }}
@@ -279,41 +287,41 @@ const ProfilePage = () => {
          <div></div>
         )}
        </div>
-       <div className='profileBody'>
-        <div className='profiletabs'>
+       <div className='profile-Body'>
+        <div className='profile-Tabs'>
          <ul>
           <li>
-           <h2>Online</h2>
+           <h2 className='globalHeader sticky'>Online</h2>
           </li>
           <li>
-           <h4>Friends</h4>
+           <h4 className='globalHeader sticky'>Friends</h4>
           </li>
           <li>
-           <h4>Games</h4>
+           <h4 className='globalHeader sticky'>Games</h4>
           </li>
           <li>
-           <h4>Inventory</h4>
+           <h4 className='globalHeader sticky'>Inventory</h4>
           </li>
           <li>
-           <h4>Screenshots</h4>
+           <h4 className='globalHeader sticky'>Screenshots</h4>
           </li>
           <li>
-           <h4>Achievements</h4>
+           <h4 className='globalHeader sticky'>Achievements</h4>
           </li>
           <li>
-           <h4>Reviews</h4>
+           <h4 className='globalHeader sticky'>Reviews</h4>
           </li>
           <li>
-           <h4>Artwork</h4>
+           <h4 className='globalHeader sticky'>Artwork</h4>
           </li>
           <li>
-           <h4>Groups</h4>
+           <h4 className='globalHeader sticky'>Groups</h4>
           </li>
          </ul>
         </div>
-        <div className='profilebodycenter'>
+        <div className='profile-Body-Center'>
          <h1
-          className='profileheaderC'
+          className='globalHeader'
           style={{
            background: 'rgb(0,0,0,.8)',
            borderTop: '#384d48 1px solid',
@@ -321,19 +329,24 @@ const ProfilePage = () => {
            marginTop: '1px',
            textAlign: 'center',
            height: '50',
+           color: 'red',
           }}
          >
           Recent Activity
          </h1>
-         <ul className='profilelist1'>
+         <ul className='profile-Achievementslist'>
           <li
            style={{
             backgroundImage: `url('https://i.pinimg.com/originals/f6/5a/57/f65a578cbfe3a0526b80b8a21254a984.jpg')`,
            }}
           >
            <h2
-            className='center'
-            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+            className='globalHeader'
+            style={{
+             marginTop: '70px',
+             backgroundColor: 'rgb(0,0,0,.9)',
+             color: 'red',
+            }}
            >
             Legendary
            </h2>
@@ -344,8 +357,12 @@ const ProfilePage = () => {
            }}
           >
            <h2
-            className='center'
-            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+            className='globalHeader'
+            style={{
+             marginTop: '70px',
+             backgroundColor: 'rgb(0,0,0,.9)',
+             color: 'red',
+            }}
            >
             Head Hunter
            </h2>
@@ -356,8 +373,12 @@ const ProfilePage = () => {
            }}
           >
            <h2
-            className='center'
-            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+            className='globalHeader'
+            style={{
+             marginTop: '70px',
+             backgroundColor: 'rgb(0,0,0,.9)',
+             color: 'red',
+            }}
            >
             Rex Master
            </h2>
@@ -368,8 +389,12 @@ const ProfilePage = () => {
            }}
           >
            <h2
-            className='center'
-            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+            className='globalHeader'
+            style={{
+             marginTop: '70px',
+             backgroundColor: 'rgb(0,0,0,.9)',
+             color: 'red',
+            }}
            >
             Portal Jumper
            </h2>
@@ -380,8 +405,12 @@ const ProfilePage = () => {
            }}
           >
            <h2
-            className='center'
-            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+            className='globalHeader'
+            style={{
+             marginTop: '70px',
+             backgroundColor: 'rgb(0,0,0,.9)',
+             color: 'red',
+            }}
            >
             Monster Slayer
            </h2>
@@ -392,8 +421,12 @@ const ProfilePage = () => {
            }}
           >
            <h2
-            className='center'
-            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+            className='globalHeader'
+            style={{
+             marginTop: '70px',
+             backgroundColor: 'rgb(0,0,0,.9)',
+             color: 'red',
+            }}
            >
             Brewer
            </h2>
@@ -404,8 +437,12 @@ const ProfilePage = () => {
            }}
           >
            <h2
-            className='center'
-            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+            className='globalHeader'
+            style={{
+             marginTop: '70px',
+             backgroundColor: 'rgb(0,0,0,.9)',
+             color: 'red',
+            }}
            >
             World Eater Down
            </h2>
@@ -416,65 +453,70 @@ const ProfilePage = () => {
            }}
           >
            <h2
-            className='center'
-            style={{ marginTop: '70px', backgroundColor: 'rgb(0,0,0,.9)' }}
+            className='globalHeader'
+            style={{
+             marginTop: '70px',
+             backgroundColor: 'rgb(0,0,0,.9)',
+             color: 'red',
+            }}
            >
             Sweet Roll Master
            </h2>
           </li>
          </ul>
-         <div className='profilecomments'>
+         <div className='profile-Comments'>
           <h1
-           className='profileheaderC'
+           className='globalHeader'
            style={{
             background: 'rgb(0,0,0,.8)',
             borderTop: '#384d48 1px solid',
+            color: 'red',
            }}
           >
            Profile Comments
           </h1>
           <ul>
            <li>
-            <p className='profileheaderL' style={{ color: 'white' }}>
+            <p className='globalHeaderL' style={{ color: 'white' }}>
              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
              quidem quasi fuga laudantium ipsam ut earum laborum laboriosam,
              consectetur reiciendis odit voluptates? Velit voluptates, non sunt
              dicta animi repudiandae voluptatibus?
             </p>
-            <h5 className='profileheaderL'>
+            <h5 className='globalHeaderL' style={{ color: 'grey' }}>
              User: <span style={{ color: 'red' }}>BabyJesus</span>
             </h5>
            </li>
            <li>
-            <p className='profileheaderL' style={{ color: 'white' }}>
+            <p className='globalHeaderL' style={{ color: 'white' }}>
              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores
              facere pariatur nemo culpa, itaque maxime nulla blanditiis
              reprehenderit eaque ratione! Culpa totam commodi iusto dicta
              maiores non consequuntur quod expedita?
             </p>
-            <h5 className='profileheaderL'>
+            <h5 className='globalHeaderL' style={{ color: 'grey' }}>
              User: <span style={{ color: 'red' }}>Rejis</span>
             </h5>
            </li>
            <li>
-            <p className='profileheaderL' style={{ color: 'white' }}>
+            <p className='globalHeaderL' style={{ color: 'white' }}>
              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus
              deserunt possimus veniam adipisci, quis quam rem ea vero, sunt nemo
              repudiandae provident officia assumenda voluptate? Doloremque non
              repellat adipisci vel?
             </p>
-            <h5 className='profileheaderL'>
+            <h5 className='globalHeaderL' style={{ color: 'grey' }}>
              User: <span style={{ color: 'red' }}>Parathax</span>
             </h5>
            </li>
            <li>
-            <p className='profileheaderL' style={{ color: 'white' }}>
+            <p className='globalHeaderL' style={{ color: 'white' }}>
              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti
              labore asperiores minima voluptas, exercitationem, itaque eveniet
              magni nisi natus, accusantium iste odit? Beatae eligendi eius
              ratione quo vitae dolores numquam.
             </p>
-            <h5 className='profileheaderL'>
+            <h5 className='globalHeaderL' style={{ color: 'grey' }}>
              User: <span style={{ color: 'red' }}>Flipster</span>
             </h5>
            </li>

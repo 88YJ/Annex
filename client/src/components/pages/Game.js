@@ -28,20 +28,17 @@ const Game = () => {
   return <Redirect to='/' />;
  } else if (myGame) {
   return (
-   <div className='myGamepage'>
-    <div className='myGameBanner'>
+   <div className='Gamepage'>
+    <div className='Gamepage-Banner'>
      <div></div>
      <div
-      className='myGameimg'
+      className='Gamepage-Img'
       style={{ backgroundImage: `url(${myGame.banner})` }}
      ></div>
      <div></div>
     </div>
-    <div className='myGameHeader'>
-     <h1
-      className='myGamepageHeader'
-      style={{ background: 'black', color: 'red' }}
-     >
+    <div className='Gamepage-Nav'>
+     <h1 className='globalHeader' style={{ background: 'black', color: 'red' }}>
       {myGame.name}
      </h1>
      <button
@@ -73,11 +70,11 @@ const Game = () => {
       Support
      </button>
     </div>
-    <div className='myGameBody'>
-     <div className='myGamelists'>
-      <ul className='myGamelistL'>
+    <div className='Gamepage-Body'>
+     <div className='Gamepage-Lists'>
+      <ul>
        <li>
-        <h3 className='myGamepageHeader'>Friends to play with:</h3>
+        <h3 className='globalHeader'>Friends to play with:</h3>
        </li>
        {friendList.map((friend, i) => (
         <li
@@ -95,7 +92,7 @@ const Game = () => {
         </li>
        ))}
       </ul>
-      <ul className='myGamelistR'>
+      <ul>
        <li>
         <h3>Friend Achievements:</h3>
        </li>
@@ -118,8 +115,8 @@ const Game = () => {
       </ul>
      </div>
      <div>
-      <div className='gameNews'>
-       <h2 className='myGamepageHeaderL'>Game News:</h2>
+      <div className='Gamepage-News'>
+       <h2 className='globalHeaderL'>Game News:</h2>
        <ul>
         <li>
          <p>
@@ -128,7 +125,7 @@ const Game = () => {
           soluta recusandae reiciendis numquam, quo dolores veritatis. Ad
           laborum incidunt officia.
          </p>
-         <h4 className='myGamepageHeaderL' style={{ color: 'red' }}>
+         <h4 className='globalHeaderL' style={{ color: 'red' }}>
           04/25/3001
          </h4>
         </li>
@@ -139,7 +136,7 @@ const Game = () => {
           soluta recusandae reiciendis numquam, quo dolores veritatis. Ad
           laborum incidunt officia.
          </p>
-         <h4 className='myGamepageHeaderL' style={{ color: 'red' }}>
+         <h4 className='globalHeaderL' style={{ color: 'red' }}>
           07/05/3001
          </h4>
         </li>
@@ -150,7 +147,7 @@ const Game = () => {
           soluta recusandae reiciendis numquam, quo dolores veritatis. Ad
           laborum incidunt officia.
          </p>
-         <h4 className='myGamepageHeaderL' style={{ color: 'red' }}>
+         <h4 className='globalHeaderL' style={{ color: 'red' }}>
           12/31/3001
          </h4>
         </li>

@@ -31,7 +31,7 @@ const StoreGamePage = () => {
     }}
    >
     <div className='store-Gamepage-Film'>
-     <div className='store-Gamepage-Header'>
+     <div className='globalHeaderL'>
       <Link
        to='/store'
        className='globalbutton'
@@ -45,7 +45,7 @@ const StoreGamePage = () => {
       >
        Back
       </Link>
-      <h1 className='store-Gamepage-MainHeader'>{gamepage.name}</h1>
+      <h1 className='globalHeader'>{gamepage.name}</h1>
      </div>
 
      <div className='store-Gamepage-Grid'>
@@ -57,7 +57,7 @@ const StoreGamePage = () => {
         }}
        ></div>
        <div>
-        <h2 className='store-Gamepage-Headers'>Game Desc:</h2>{' '}
+        <h2 className='globalHeaderL'>Game Desc:</h2>{' '}
         <p style={{ color: 'white' }}>
          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, esse.
          Eius et dolorem aspernatur vitae laudantium magnam vero natus ab
@@ -72,13 +72,13 @@ const StoreGamePage = () => {
       <div className='store-Gamepage-Components'>
        <div className='store-Gamepage-Subcomponents'>
         <div>
-         <h2 className='store-Gamepage-Headers'>
+         <h2 className='globalHeaderL'>
           Ratings: <span style={{ color: 'red' }}>4.5</span>
          </h2>
-         <h3 className='store-Gamepage-Headers'>
+         <h3 className='globalHeaderL'>
           Recent Ratings: <span style={{ color: 'red' }}>4.1</span>
          </h3>
-         <h4 className='store-Gamepage-Headers'>
+         <h4 className='globalHeaderL'>
           Our Ratings: <span style={{ color: 'red' }}>5</span>
          </h4>
         </div>
@@ -93,10 +93,10 @@ const StoreGamePage = () => {
         </div>
        </div>
        <div className='store-Gamepage-Reviews'>
-        <h2 className='store-Gamepage-Headers'>Review Comments:</h2>
+        <h2 className='globalHeaderL'>Review Comments:</h2>
         <ul>
          <li>
-          <h5 className='store-Gamepage-Headers'>
+          <h5 className='globaHeaderL'>
            User: <span style={{ color: 'red' }}>BabyJesus</span>
           </h5>
           <p style={{ color: 'white' }}>
@@ -107,7 +107,7 @@ const StoreGamePage = () => {
           </p>
          </li>
          <li>
-          <h5 className='store-Gamepage-Headers'>
+          <h5 className='globalHeaderL'>
            User: <span style={{ color: 'red' }}>Rejis</span>
           </h5>
           <p style={{ color: 'white' }}>
@@ -118,7 +118,7 @@ const StoreGamePage = () => {
           </p>
          </li>
          <li>
-          <h5 className='store-Gamepage-Headers'>
+          <h5 className='globalHeaderL'>
            User: <span style={{ color: 'red' }}>Parathax</span>
           </h5>
           <p style={{ color: 'white' }}>
@@ -129,7 +129,7 @@ const StoreGamePage = () => {
           </p>
          </li>
          <li>
-          <h5 className='store-Gamepage-Headers'>
+          <h5 className='globalHeaderL'>
            User: <span style={{ color: 'red' }}>Flipster</span>
           </h5>
           <p style={{ color: 'white' }}>
@@ -140,7 +140,7 @@ const StoreGamePage = () => {
           </p>
          </li>
          <li>
-          <h5 className='store-Gamepage-Headers'>
+          <h5 className='globalHeaderL'>
            User: <span style={{ color: 'red' }}>Commissar</span>
           </h5>
           <p style={{ color: 'white' }}>

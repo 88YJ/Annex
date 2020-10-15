@@ -44,10 +44,7 @@ const RightSidebar = () => {
   return (
    <Fragment>
     <div className='R-Sidebar-ServerUserlist'>
-     <h3
-      className='sidebarheaders'
-      style={{ background: 'black', color: 'red' }}
-     >
+     <h3 className='globalHeader' style={{ background: 'black', color: 'red' }}>
       Users:
      </h3>
      <div className='R-Sidebar-ServerUsers'>
@@ -78,10 +75,7 @@ const RightSidebar = () => {
   return (
    <Fragment>
     <div className='R-Sidebar-Cartlist'>
-     <h3
-      className='sidebarheaders'
-      style={{ background: 'black', color: 'red' }}
-     >
+     <h3 className='globalHeader' style={{ background: 'black', color: 'red' }}>
       Cart:
      </h3>
      <div className='cartlist-Items'>
@@ -116,7 +110,7 @@ const RightSidebar = () => {
    return (
     <Fragment>
      <div className='R-Sidebar-Gamelist'>
-      <h3 className='sidebarheaders' style={{ background: 'black' }}>
+      <h3 className='globalHeader' style={{ background: 'black' }}>
        Games:
       </h3>
      </div>
@@ -127,7 +121,7 @@ const RightSidebar = () => {
     <Fragment>
      <div className='R-Sidebar-Gamelist'>
       <h3
-       className='sidebarheaders'
+       className='globalHeader'
        style={{ background: 'black', color: 'red' }}
       >
        Games:

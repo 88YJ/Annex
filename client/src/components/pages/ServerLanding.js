@@ -22,31 +22,39 @@ const ServerLanding = () => {
  } else {
   return (
    <div
-    className='landingpageimg'
+    className='server-Landingpageimg'
     style={{
      backgroundImage: `url(${server.img})`,
     }}
    >
     <div>
-     <h1 className='center landingpageheader'>{server.name}</h1>
+     <h1
+      className='globalHeader'
+      style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)', color: 'red' }}
+     >
+      {server.name}
+     </h1>
     </div>
-    <div className='center'>
-     <div className='center'>
-      <div className='landingpageinnerheader'>
-       <h2 className='center landingpageheader'>Welcome To the Server!!</h2>{' '}
+    <div>
+     <div>
+      <div>
+       <h2
+        className='globalHeader'
+        style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)', color: 'red' }}
+       >
+        Welcome To the Server!!
+       </h2>{' '}
        <br />{' '}
-       <h2 className='center landingpageheader'>
+       <h2
+        className='globalHeader'
+        style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)', color: 'red' }}
+       >
         Please take a look at our rules!
        </h2>
       </div>
      </div>
-     <div className='landingpageinnerbody'>
-      Rule1: Don't talk about fightclub <br />
-      Rule2: Don't talk about fightclub <br />
-      Rule3:Don't break any of the previous rules
-     </div>
     </div>
-    <div></div>
+    <div className='globalHeader'></div>
    </div>
   );
  }

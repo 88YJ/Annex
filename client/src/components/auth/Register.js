@@ -48,19 +48,19 @@ const Register = (props) => {
  };
 
  return (
-  <div className='register'>
-   <h1 className='sidebarheaders' style={{ background: 'black' }}>
+  <div className='register-login'>
+   <h1 className='globalHeader' style={{ background: 'black' }}>
     Account Register
    </h1>
-   <div className='registerGrid'>
+   <div className='register-login-Grid'>
     <div></div>
-    <div className='registerloginbackground'>
+    <div>
      <form onSubmit={onSubmit}>
-      <div className='form-group'>
-       <h2 className='sidebarheaders'>Name:</h2>
+      <div className='register-login-Form'>
+       <h2 className='globalHeader'>Name:</h2>
        <input
         style={{ height: 'auto', width: 'auto' }}
-        className='registerloginvalues'
+        className='register-login-Values'
         type='text'
         name='name'
         value={name}
@@ -68,11 +68,11 @@ const Register = (props) => {
         required
        />
       </div>
-      <div className='form-group'>
-       <h2 className='sidebarheaders'>Email Address:</h2>
+      <div className='register-login-Form'>
+       <h2 className='globalHeader'>Email Address:</h2>
        <input
         style={{ height: 'auto', width: 'auto' }}
-        className='registerloginvalues'
+        className='register-login-Values'
         type='email'
         name='email'
         value={email}
@@ -80,11 +80,11 @@ const Register = (props) => {
         required
        />
       </div>
-      <div className='form-group'>
-       <h2 className='sidebarheaders'>Password:</h2>
+      <div className='register-login-Form'>
+       <h2 className='globalHeader'>Password:</h2>
        <input
         style={{ height: 'auto', width: 'auto' }}
-        className='registerloginvalues'
+        className='register-login-Values'
         type='password'
         name='password'
         value={password}
@@ -93,11 +93,11 @@ const Register = (props) => {
         minLength='6'
        />
       </div>
-      <div className='form-group'>
-       <h2 className='sidebarheaders'>Confirm Password:</h2>
+      <div className='register-login-Form'>
+       <h2 className='globalHeader'>Confirm Password:</h2>
        <input
         style={{ height: 'auto', width: 'auto' }}
-        className='registerloginvalues'
+        className='register-login-Values'
         type='password'
         name='password2'
         value={password2}
@@ -107,10 +107,10 @@ const Register = (props) => {
        />
       </div>
       <input
-       style={{ height: 'auto', width: 'auto' }}
+       style={{ height: 'auto', width: 'auto', marginTop: '6px' }}
        type='submit'
        value='Register'
-       className='globalbutton registerbutton'
+       className='globalbutton'
       />
      </form>
     </div>

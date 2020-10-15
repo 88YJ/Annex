@@ -135,10 +135,7 @@ const LeftSidebar = () => {
  if (serverSidebar && isAuthenticated) {
   return (
    <div className='L-Sidebar-Serverchannels'>
-    <h3
-     className='sidebarheaders'
-     style={{ background: 'black', color: 'red' }}
-    >
+    <h3 className='globalHeader' style={{ background: 'black', color: 'red' }}>
      {server.name}
     </h3>
     <ul>
@@ -203,7 +200,7 @@ const LeftSidebar = () => {
   return (
    <div>
     <div className='L-Sidebar-Friendlist'>
-     <h3 className='sidebarheaders' style={{ background: 'black' }}>
+     <h3 className='globalHeader' style={{ background: 'black' }}>
       Friends:
      </h3>
      <div className='Friendlist-Friends'>

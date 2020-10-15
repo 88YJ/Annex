@@ -43,12 +43,14 @@ const Dash = () => {
  if (games !== null && isAuthenticated) {
   return (
    <div className='dashboard'>
-    <h1 className='dashboard-Headers' style={{ color: 'white' }}>
+    <h1 className='globalHeader' style={{ color: 'white' }}>
      Dashboard!
     </h1>
     <div className='dashboard-Grid'>
      <div className='dashboard-Trending'>
-      <h2 className='sticky dashboard-Headers'>Trending Streams For You!</h2>
+      <h2 className='sticky globalHeader' style={{ color: 'red' }}>
+       Trending Streams For You!
+      </h2>
       <ul>
        {trendstream.map((trendstream, i) => (
         <li key={i}>
@@ -58,13 +60,17 @@ const Dash = () => {
            backgroundImage: `url(${trendstream.img})`,
           }}
          ></div>
-         <h3 className='dashboard-Headers'>{trendstream.name}</h3>
+         <h3 className='globalHeader' style={{ color: 'red' }}>
+          {trendstream.name}
+         </h3>
         </li>
        ))}
       </ul>
      </div>
      <div className='dashboard-Trending'>
-      <h2 className='sticky dashboard-Headers'>Trending Games For You!</h2>
+      <h2 className='sticky globalHeader' style={{ color: 'red' }}>
+       Trending Games For You!
+      </h2>
       <ul>
        {trendgames.map((trendgames, i) => (
         <li key={i}>
@@ -74,14 +80,18 @@ const Dash = () => {
            backgroundImage: `url(${trendgames.img})`,
           }}
          ></div>
-         <h3 className='dashboard-Headers'>{trendgames.name}</h3>
+         <h3 className='globalHeader' style={{ color: 'red' }}>
+          {trendgames.name}
+         </h3>
         </li>
        ))}
       </ul>
      </div>
     </div>
     <div className='dashboard-Games'>
-     <h2 className='sticky dashboard-Headers'>My Games</h2>
+     <h2 className='sticky globalHeader' style={{ color: 'red' }}>
+      My Games
+     </h2>
      <ul>
       {games.map((game) => (
        <li key={game._id}>
@@ -106,10 +116,14 @@ const Dash = () => {
  } else if (isAuthenticated) {
   return (
    <div className='dashboard'>
-    <h1 className='dashboard-Headers'>Dashboard!</h1>
+    <h1 className='globalHeader' style={{ color: 'red' }}>
+     Dashboard!
+    </h1>
     <div className='dashGrid'>
      <div className='dashboard-Trending'>
-      <h2 className='sticky dashboard-Headers'>Trending Streams For You!</h2>
+      <h2 className='sticky globalHeader' style={{ color: 'red' }}>
+       Trending Streams For You!
+      </h2>
       <ul>
        {trendstream.map((trendstream, i) => (
         <li key={i}>
@@ -119,13 +133,17 @@ const Dash = () => {
            backgroundImage: `url(${trendstream.img})`,
           }}
          ></div>
-         <h3 className='dashboard-Headers'>{trendstream.name}</h3>
+         <h3 className='globalHeader' style={{ color: 'red' }}>
+          {trendstream.name}
+         </h3>
         </li>
        ))}
       </ul>
      </div>
      <div className='dashboard-Trending'>
-      <h2 className='sticky dashboard-Headers'>Trending Games For You!</h2>
+      <h2 className='sticky globalHeader' style={{ color: 'red' }}>
+       Trending Games For You!
+      </h2>
       <ul>
        {trendgames.map((trendgames, i) => (
         <li key={i}>
@@ -135,7 +153,9 @@ const Dash = () => {
            backgroundImage: `url(${trendgames.img})`,
           }}
          ></div>
-         <h3 className='dashboard-Headers'>{trendgames.name}</h3>
+         <h3 className='globalHeader' style={{ color: 'red' }}>
+          {trendgames.name}
+         </h3>
         </li>
        ))}
       </ul>
@@ -149,12 +169,14 @@ const Dash = () => {
  } else {
   return (
    <div className='dashboard'>
-    <h1 className='dashboard-Headers' style={{ color: 'white' }}>
+    <h1 className='globalHeader' style={{ color: 'white' }}>
      Dashboard!
     </h1>
     <div className='dashGrid'>
      <div className='dashboard-Trending'>
-      <h2 className='sticky dashboard-Headers'>Trending Streams</h2>
+      <h2 className='sticky globalHeader' style={{ color: 'red' }}>
+       Trending Streams
+      </h2>
       <ul>
        {trendstream.map((trendstream, i) => (
         <li key={i}>
@@ -164,13 +186,17 @@ const Dash = () => {
            backgroundImage: `url(${trendstream.img})`,
           }}
          ></div>
-         <h3 className='dashboard-Headers'>{trendstream.name}</h3>
+         <h3 className='globalHeader' style={{ color: 'red' }}>
+          {trendstream.name}
+         </h3>
         </li>
        ))}
       </ul>
      </div>
      <div className='dashboard-Trending'>
-      <h2 className='sticky dashboard-Headers'>Trending Games</h2>
+      <h2 className='sticky globalHeader' style={{ color: 'red' }}>
+       Trending Games
+      </h2>
       <ul>
        {trendgames.map((trendgames, i) => (
         <li key={i}>
@@ -180,7 +206,9 @@ const Dash = () => {
            backgroundImage: `url(${trendgames.img})`,
           }}
          ></div>
-         <h3 className='dashboard-Headers'>{trendgames.name}</h3>
+         <h3 className='globalHeader' style={{ color: 'red' }}>
+          {trendgames.name}
+         </h3>
         </li>
        ))}
       </ul>
