@@ -36,6 +36,7 @@ import Cart from './components/pages/Cart';
 import ServerLanding from './components/pages/ServerLanding';
 import Stream from './components/pages/Stream';
 import StreamShow from './components/streams/StreamShow';
+import StreamAWS from './components/StreamAWS/Stream'
 
 //layouts
 import Navbar from './components/layout/Navbar';
@@ -114,6 +115,7 @@ const App = () => {
                     component={StoreGamePage}
                    />
                    <Route path='/streamtest/:id' component={StreamShow} />
+                   <Route path='/streamtesting' component={StreamAWS} />
                   </Switch>
                  </div>
                  <RightSidebar />

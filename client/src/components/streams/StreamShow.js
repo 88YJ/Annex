@@ -42,15 +42,29 @@ class StreamShow extends Component {
   }
 
   return (
-   <div>
+   <div style={{ backgroundColor: 'black' }}>
     <video
      ref={this.videoRef}
      style={{ width: '100%', height: 'auto' }}
      controls={true}
      autoPlay={true}
     />
-    <h1>{this.props.stream.title}</h1>
-    <h5>{this.props.stream.description}</h5>
+    <div
+     style={{
+      backgroundImage: `url('https://i.pinimg.com/originals/94/9a/89/949a8992f9829eedcb60b7f7c0b2faf6.png')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      height: '150px',
+      width: 'auto',
+     }}
+    >
+     <h1 className='globalHeaderL' style={{ color: 'red' }}>
+      {this.props.stream.title}
+     </h1>
+     <h4 className='globalHeaderL' style={{ color: 'red' }}>
+      {this.props.stream.description}
+     </h4>
+    </div>
    </div>
   );
  }
