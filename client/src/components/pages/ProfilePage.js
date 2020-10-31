@@ -6,7 +6,13 @@ import ServerContext from '../../context/server/serverContext';
 import ChatContext from '../../context/chat/chatContext';
 import ModalContext from '../../context/modal/modalContext';
 
+import Card from '../app-components/Card';
+import Arrow from '../layout/Arrow.png';
+
 const ProfilePage = () => {
+ var screenshotlist = [];
+ var otherscreenshots = [];
+
  const authContext = useContext(AuthContext);
 
  const profileContext = useContext(ProfileContext);
@@ -31,7 +37,7 @@ const ProfilePage = () => {
 
  const { user } = authContext;
 
- const { showModalWithEditProfile } = modalContext;
+ const { showModalWithEditProfile, showModalWithScreenshot } = modalContext;
 
  useEffect(() => {
   authContext.loadUser();
@@ -47,6 +53,10 @@ const ProfilePage = () => {
 
  function OnFriendRequestAccept(request) {
   acceptFriendRequest(request);
+ }
+
+ function openScreenshot(link) {
+  showModalWithScreenshot(link);
  }
 
  function editProfile() {
@@ -70,9 +80,31 @@ const ProfilePage = () => {
   }
  }
 
+ var screenshotRef = React.createRef();
+
+ function nextClick() {
+  let slide;
+  slide = screenshotRef.current;
+
+  slide.scrollLeft += slide.offsetWidth;
+  if (slide.scrollLeft >= slide.scrollWidth - slide.offsetWidth) {
+   slide.scrollLeft = 0;
+  }
+ }
+ function prevClick() {
+  let slide;
+  slide = screenshotRef.current;
+
+  slide.scrollLeft -= slide.offsetWidth;
+  if (slide.scrollLeft <= 0) {
+   slide.scrollLeft = slide.scrollWidth;
+  }
+ }
+
  if (!user || !profile) {
   return <Redirect to='/' />;
  } else if (profile._id === user._id) {
+  screenshotlist = user.screenShots;
   return (
    <div
     className='profile-Background'
@@ -130,17 +162,23 @@ const ProfilePage = () => {
         >
          Showcase
         </h2>
-        <ul>
-         {user.screenShots.map((screenShot, i) => (
-          <li
-           key={i}
-           className='profile-Screenshots'
-           style={{
-            backgroundImage: `url(${screenShot})`,
-           }}
-          ></li>
-         ))}
-        </ul>
+        <div className='wrapper'>
+         <div className='trendy' ref={screenshotRef}>
+          <Card
+           data={screenshotlist}
+           screenshot={true}
+           SSLink={openScreenshot}
+          />
+         </div>
+         <div className='row'>
+          <div className='prev' onClick={() => prevClick()}>
+           <img src={Arrow} alt='' />
+          </div>
+          <div className='next' onClick={() => nextClick()}>
+           <img src={Arrow} alt='' />
+          </div>
+         </div>
+        </div>
        </div>
        <div className='profile-Body'>
         <div className='profile-Tabs'>
@@ -211,6 +249,7 @@ const ProfilePage = () => {
    </div>
   );
  } else {
+  otherscreenshots = profile.screenShots;
   return (
    <div
     className='profile-Background'
@@ -272,17 +311,23 @@ const ProfilePage = () => {
          Showcase
         </h2>
         {profile.screenShots ? (
-         <ul>
-          {profile.screenShots.map((screenShot, i) => (
-           <li
-            key={i}
-            className='profile-Screenshots'
-            style={{
-             backgroundImage: `url(${screenShot})`,
-            }}
-           ></li>
-          ))}
-         </ul>
+         <div className='wrapper'>
+          <div className='trendy' ref={screenshotRef}>
+           <Card
+            data={otherscreenshots}
+            screenshot={true}
+            SSLink={openScreenshot}
+           />
+          </div>
+          <div className='row'>
+           <div className='prev' onClick={() => prevClick()}>
+            <img src={Arrow} alt='' />
+           </div>
+           <div className='next' onClick={() => nextClick()}>
+            <img src={Arrow} alt='' />
+           </div>
+          </div>
+         </div>
         ) : (
          <div></div>
         )}

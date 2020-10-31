@@ -2,8 +2,9 @@ import {
  SHOW_MODAL_WITH_ADD_SERVER,
  SHOW_MODAL_WITH_ADD_CHANNEL,
  SHOW_MODAL_WITH_EDIT_PROFILE,
+ SHOW_MODAL_WITH_SCREENSHOT,
  HIDE_MODAL,
-} from "../types";
+} from '../types';
 
 export default (state, action) => {
  switch (action.type) {
@@ -25,6 +26,13 @@ export default (state, action) => {
     show: true,
     editProfile: true,
    };
+  case SHOW_MODAL_WITH_SCREENSHOT:
+   return {
+    ...state,
+    show: true,
+    screenShot: true,
+    screenShotLink: action.payload,
+   };
   case HIDE_MODAL:
    return {
     ...state,
@@ -33,6 +41,7 @@ export default (state, action) => {
     addChannel: false,
     startStream: false,
     editProfile: false,
+    screenShot: false,
    };
   default:
    return state;

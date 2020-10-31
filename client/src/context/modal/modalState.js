@@ -1,12 +1,13 @@
-import React, { useReducer } from "react";
-import ModalContext from "./modalContext";
-import modalReducer from "./modalReducer";
+import React, { useReducer } from 'react';
+import ModalContext from './modalContext';
+import modalReducer from './modalReducer';
 import {
  SHOW_MODAL_WITH_ADD_SERVER,
  HIDE_MODAL,
  SHOW_MODAL_WITH_ADD_CHANNEL,
  SHOW_MODAL_WITH_EDIT_PROFILE,
-} from "../types";
+ SHOW_MODAL_WITH_SCREENSHOT,
+} from '../types';
 
 const ModalState = (props) => {
  const initialState = {
@@ -14,6 +15,8 @@ const ModalState = (props) => {
   addServer: false,
   addChannel: false,
   editProfile: false,
+  screenShot: false,
+  screenShotLink: null,
  };
  const [state, dispatch] = useReducer(modalReducer, initialState);
 
@@ -42,6 +45,14 @@ const ModalState = (props) => {
    console.log("Couldn't display modal with add channel");
   }
  };
+ const showModalWithScreenshot = async (link) => {
+  console.log(link);
+  try {
+   dispatch({ type: SHOW_MODAL_WITH_SCREENSHOT, payload: link });
+  } catch (err) {
+   console.log("Couldn't display modal with screenshot");
+  }
+ };
 
  // Hide Modal
  const hideModal = async () => {
@@ -59,9 +70,12 @@ const ModalState = (props) => {
     addServer: state.addServer,
     addChannel: state.addChannel,
     editProfile: state.editProfile,
+    screenShot: state.screenShot,
+    screenShotLink: state.screenShotLink,
     showModalWithAddServer,
     showModalWithAddChannel,
     showModalWithEditProfile,
+    showModalWithScreenshot,
     hideModal,
    }}
   >

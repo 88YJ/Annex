@@ -122,6 +122,7 @@
  border: 1px solid #888;
  width: 30%;
  text-align: center;
+ width: 50%;
 }
 
 /* The Close Button */
@@ -397,7 +398,7 @@
 .profile-SubMaster {
  height: 100%;
  display: grid;
- grid-template-rows: 210px auto;
+ grid-template-rows: 240px auto;
  overflow-y: scroll;
 }
 .profile-Header {
