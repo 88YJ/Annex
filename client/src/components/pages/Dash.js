@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 import DashContext from '../../context/dash/dashContext';
@@ -6,7 +6,13 @@ import GameContext from '../../context/games/gameContext';
 import ServerContext from '../../context/server/serverContext';
 import StoreContext from '../../context/store/storeContext';
 
+import Card from '../app-components/Card';
+import Arrow from '../layout/Arrow.png';
+
 const Dash = () => {
+ var trendingstreams = [];
+ var trendinggames = [];
+
  const authContext = useContext(AuthContext);
 
  const dashContext = useContext(DashContext);
@@ -27,6 +33,8 @@ const Dash = () => {
 
  const { isAuthenticated } = authContext;
 
+ console.log(trendstream);
+
  useEffect(() => {
   authContext.loadUser();
   displayGamesSidebar();
@@ -40,7 +48,45 @@ const Dash = () => {
   setMyGame(game);
  }
 
+ var streamRef = React.createRef();
+ var gamesRef = React.createRef();
+ function getData() {
+  trendingstreams = trendstream;
+  trendinggames = trendgames;
+ }
+
+ function nextClick(reference) {
+  let slide;
+
+  if (reference == 'stream') {
+   slide = streamRef.current;
+  } else if (reference == 'game') {
+   slide = gamesRef.current;
+  }
+
+  slide.scrollLeft += slide.offsetWidth;
+  if (slide.scrollLeft >= slide.scrollWidth - slide.offsetWidth) {
+   slide.scrollLeft = 0;
+  }
+ }
+ function prevClick(reference) {
+  let slide;
+
+  if (reference == 'stream') {
+   slide = streamRef.current;
+  } else if (reference == 'game') {
+   slide = gamesRef.current;
+  }
+
+  slide.scrollLeft -= slide.offsetWidth;
+  if (slide.scrollLeft <= 0) {
+   slide.scrollLeft = slide.scrollWidth;
+  }
+ }
+
  if (games !== null && isAuthenticated) {
+  getData();
+
   return (
    <div className='dashboard'>
     <h1 className='globalHeader' style={{ color: 'white' }}>
@@ -51,41 +97,37 @@ const Dash = () => {
       <h2 className='sticky globalHeader' style={{ color: 'red' }}>
        Trending Streams For You!
       </h2>
-      <ul>
-       {trendstream.map((trendstream, i) => (
-        <li key={i}>
-         <div
-          className='dashboard-TrendImg'
-          style={{
-           backgroundImage: `url(${trendstream.img})`,
-          }}
-         ></div>
-         <h3 className='globalHeader' style={{ color: 'red' }}>
-          {trendstream.name}
-         </h3>
-        </li>
-       ))}
-      </ul>
+      <div className='wrapper'>
+       <div className='trendy' ref={streamRef}>
+        <Card data={trendingstreams} />
+       </div>
+       <div className='row'>
+        <div className='prev' onClick={() => prevClick('stream')}>
+         <img src={Arrow} alt='' />
+        </div>
+        <div className='next' onClick={() => nextClick('stream')}>
+         <img src={Arrow} alt='' />
+        </div>
+       </div>
+      </div>
      </div>
      <div className='dashboard-Trending'>
       <h2 className='sticky globalHeader' style={{ color: 'red' }}>
        Trending Games For You!
       </h2>
-      <ul>
-       {trendgames.map((trendgames, i) => (
-        <li key={i}>
-         <div
-          className='dashboard-TrendImg'
-          style={{
-           backgroundImage: `url(${trendgames.img})`,
-          }}
-         ></div>
-         <h3 className='globalHeader' style={{ color: 'red' }}>
-          {trendgames.name}
-         </h3>
-        </li>
-       ))}
-      </ul>
+      <div className='wrapper'>
+       <div className='trendy' ref={gamesRef}>
+        <Card data={trendinggames} />
+       </div>
+       <div className='row'>
+        <div className='prev' onClick={() => prevClick('game')}>
+         <img src={Arrow} alt='' />
+        </div>
+        <div className='next' onClick={() => nextClick('game')}>
+         <img src={Arrow} alt='' />
+        </div>
+       </div>
+      </div>
      </div>
     </div>
     <div className='dashboard-Games'>
@@ -124,41 +166,37 @@ const Dash = () => {
       <h2 className='sticky globalHeader' style={{ color: 'red' }}>
        Trending Streams For You!
       </h2>
-      <ul>
-       {trendstream.map((trendstream, i) => (
-        <li key={i}>
-         <div
-          className='dashboard-TrendImg'
-          style={{
-           backgroundImage: `url(${trendstream.img})`,
-          }}
-         ></div>
-         <h3 className='globalHeader' style={{ color: 'red' }}>
-          {trendstream.name}
-         </h3>
-        </li>
-       ))}
-      </ul>
+      <div className='wrapper'>
+       <div className='trendy' ref={streamRef}>
+        <Card data={trendingstreams} />
+       </div>
+       <div className='row'>
+        <div className='prev' onClick={() => prevClick('stream')}>
+         <img src={Arrow} alt='' />
+        </div>
+        <div className='next' onClick={() => nextClick('stream')}>
+         <img src={Arrow} alt='' />
+        </div>
+       </div>
+      </div>
      </div>
      <div className='dashboard-Trending'>
       <h2 className='sticky globalHeader' style={{ color: 'red' }}>
        Trending Games For You!
       </h2>
-      <ul>
-       {trendgames.map((trendgames, i) => (
-        <li key={i}>
-         <div
-          className='dashboard-TrendImg'
-          style={{
-           backgroundImage: `url(${trendgames.img})`,
-          }}
-         ></div>
-         <h3 className='globalHeader' style={{ color: 'red' }}>
-          {trendgames.name}
-         </h3>
-        </li>
-       ))}
-      </ul>
+      <div className='wrapper'>
+       <div className='trendy' ref={gamesRef}>
+        <Card data={trendinggames} />
+       </div>
+       <div className='row'>
+        <div className='prev' onClick={() => prevClick('game')}>
+         <img src={Arrow} alt='' />
+        </div>
+        <div className='next' onClick={() => nextClick('game')}>
+         <img src={Arrow} alt='' />
+        </div>
+       </div>
+      </div>
      </div>
     </div>
     <div className='dashboard-Games'>
@@ -167,58 +205,7 @@ const Dash = () => {
    </div>
   );
  } else {
-  return (
-   <div className='dashboard'>
-    <h1 className='globalHeader' style={{ color: 'white' }}>
-     Dashboard!
-    </h1>
-    <div className='dashGrid'>
-     <div className='dashboard-Trending'>
-      <h2 className='sticky globalHeader' style={{ color: 'red' }}>
-       Trending Streams
-      </h2>
-      <ul>
-       {trendstream.map((trendstream, i) => (
-        <li key={i}>
-         <div
-          className='dashboard-TrendImg'
-          style={{
-           backgroundImage: `url(${trendstream.img})`,
-          }}
-         ></div>
-         <h3 className='globalHeader' style={{ color: 'red' }}>
-          {trendstream.name}
-         </h3>
-        </li>
-       ))}
-      </ul>
-     </div>
-     <div className='dashboard-Trending'>
-      <h2 className='sticky globalHeader' style={{ color: 'red' }}>
-       Trending Games
-      </h2>
-      <ul>
-       {trendgames.map((trendgames, i) => (
-        <li key={i}>
-         <div
-          className='dashboard-TrendImg'
-          style={{
-           backgroundImage: `url(${trendgames.img})`,
-          }}
-         ></div>
-         <h3 className='globalHeader' style={{ color: 'red' }}>
-          {trendgames.name}
-         </h3>
-        </li>
-       ))}
-      </ul>
-     </div>
-    </div>
-    <div className='dashboard-Games'>
-     <ul></ul>
-    </div>
-   </div>
-  );
+  return <div className='dashboard'></div>;
  }
 };
 

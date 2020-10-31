@@ -55,6 +55,47 @@ const DashState = (props) => {
     img:
      'https://image.cnbcfm.com/api/v1/image/106091661-1566476702259drlupo-rogue-2.jpg?v=1566476731&w=678&h=381',
    },
+   {
+    name: 'Lost in our Stars',
+    img: 'https://wallpaperaccess.com/full/1584309.jpg',
+   },
+   {
+    name: 'Music On Demand',
+    img:
+     'https://lh3.googleusercontent.com/proxy/yyZmI1VCxXIcn-CyAKfozBwyc5eH28r9pRhDhvNJYfqlbToiThQP4UgQH6bigFBC2wVb1wIUKeudBHMF1JnCnWATA62AhfNFIimoGMYoC7iSeQsU0Ley95Xin3imEa8GW7INUHcdRWBPfj5kuQ',
+   },
+   {
+    name: 'April',
+    img: 'https://wallpaperaccess.com/full/44729.jpg',
+   },
+   {
+    name: 'Ninja',
+    img: 'https://a.espncdn.com/photo/2018/0917/r432464_1600x800cc.jpg',
+   },
+   {
+    name: 'Shroud',
+    img:
+     'https://img1.looper.com/img/gallery/how-much-did-shroud-really-make-from-mixer/intro-1593116396.jpg',
+   },
+   {
+    name: 'Dr. Disrespect',
+    img:
+     'https://cdn1.dotesports.com/wp-content/uploads/2019/11/13100524/drdisrespect-screengrab.jpg',
+   },
+   {
+    name: 'Summit1g',
+    img:
+     'https://cdn1.dotesports.com/wp-content/uploads/2018/12/26150907/summit1g.png',
+   },
+   {
+    name: 'Dr. Lupo',
+    img:
+     'https://image.cnbcfm.com/api/v1/image/106091661-1566476702259drlupo-rogue-2.jpg?v=1566476731&w=678&h=381',
+   },
+   {
+    name: 'Lost in our Stars',
+    img: 'https://wallpaperaccess.com/full/1584309.jpg',
+   },
   ],
  };
 
