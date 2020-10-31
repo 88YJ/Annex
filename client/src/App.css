@@ -102,7 +102,7 @@
 .modal {
  display: block; /* Hidden by default */
  position: fixed; /* Stay in place */
- z-index: 1; /* Sit on top */
+ z-index: 10; /* Sit on top */
  padding-top: 100px; /* Location of the box */
  left: 0;
  top: 0;
@@ -187,39 +187,48 @@
 .NavIcons:hover {
  border-radius: 16px;
 }
-.NavIcons:hover .NavSubMenus {
- display: block;
+.NavIcons ul {
  position: absolute;
- background-color: rgb(0, 4, 17, 1);
- margin-top: 0px;
- margin-left: 46px;
- padding-bottom: 0;
+ left: 48px;
+ height: 35px;
+ max-width: 0;
  border-radius: 8px;
- border: red 1px solid;
+ border: #384d48 1px solid;
+ overflow: hidden;
+ -webkit-transition: max-width 0.6s ease-in;
+ transition: max-width 0.6s ease-in;
+ visibility: hidden;
 }
-.NavSubMenus {
- height: auto;
- width: auto;
- display: none;
- z-index: 10;
-}
-.NavSubMenus ul {
- width: auto;
-}
-.NavSubMenus ul li {
- width: auto;
+.NavIcons ul li {
+ display: block;
+ list-style-type: none;
  float: left;
- border: #384d48 solid 1px;
+ z-index: 50;
+ background-color: rgb(0, 4, 17, 1);
+ border: rgb(0, 0, 0, 0) solid 1px;
+ border-left: #384d48 1px solid;
+ height: 100%;
+ width: auto;
+ box-sizing: border-box;
+ overflow: hidden;
 }
-.NavSubMenus ul li:hover {
- background-color: black;
- border: red solid 1px;
-}
-.NavSubMenus a {
+.NavIcons ul li a {
+ border-radius: 0px;
+ height: 100%;
  width: auto;
  font-size: 15px;
  color: white;
  margin: 6px;
+ white-space: nowrap;
+}
+.NavIcons ul li:hover {
+ border-radius: 8px;
+ background-color: black;
+ border: red solid 1px;
+}
+.NavIcons:hover > ul {
+ visibility: visible;
+ max-width: 800px;
 }
 
 /*register & login Css */
@@ -793,7 +802,6 @@
 }
 .card h2 {
  position: relative;
- text-transform: uppercase;
  height: auto;
  width: 100%;
  color: red;
@@ -1179,39 +1187,27 @@
  background-color: black;
 }
 
-/*////////////////*/
-
-.serversearch {
+/* Search Page */
+.search {
+ display: grid;
  height: 100%;
+ width: 100%;
+ grid-template-columns: 50% 50%;
 }
-.serverfind {
- height: 92%;
- overflow-y: scroll;
-}
-.serverfind li {
- border: #384d48 1px solid;
- width: 20%;
-}
-.profilesearch {
- height: 100%;
-}
-.profilefind {
- overflow-y: scroll;
- height: 92%;
-}
-.profilefind ul {
- margin: 0;
+.search ul {
+ width: 90%;
  padding: 0;
+ margin: 0;
  list-style: none;
- width: 50%;
+ overflow-y: scroll;
 }
-.profilefind li {
- border-bottom: #384d48 3px solid;
+.search li {
+ height: 80px;
+ width: 100%;
+ margin-top: 5px;
 }
-.profilefind li:hover {
- border-bottom: #f4ac32 3px solid;
-}
-.profilefind a {
+.search a {
  text-decoration: none;
- color: red;
+ color: white;
 }
+/*////////////////*/

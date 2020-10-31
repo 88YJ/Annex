@@ -36,7 +36,7 @@ const UserSchema = mongoose.Schema({
  },
  backgroundPicture: {
   type: String,
-  default: 'https://cdn.wallpapersafari.com/16/42/BYjicP.jpg',
+  default: 'null',
  },
  friendList: [
   {

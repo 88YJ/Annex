@@ -74,20 +74,18 @@ const Navbar = ({ title }) => {
       className='NavIcons'
       style={{ backgroundImage: `url(${user && user.profilePicture})` }}
      >
-      <div className='NavSubMenus'>
-       <ul>
-        <li onClick={() => openProfile(user)}>
-         <Link onClick={() => changesidebar(false)} to='/profilepage'>
-          My Profile
-         </Link>
-        </li>
-        <li>
-         <a onClick={() => changesidebar(false)} onClick={onLogout} href='#!'>
-          <span>Logout</span>
-         </a>
-        </li>
-       </ul>
-      </div>
+      <ul>
+       <li onClick={() => openProfile(user)}>
+        <Link onClick={() => changesidebar(false)} to='/profilepage'>
+         My Profile
+        </Link>
+       </li>
+       <li>
+        <a onClick={() => changesidebar(false)} onClick={onLogout} href='#!'>
+         <span>Logout</span>
+        </a>
+       </li>
+      </ul>
      </div>
     </Link>
    </li>
@@ -99,15 +97,13 @@ const Navbar = ({ title }) => {
        backgroundImage: `url(${CartIcon})`,
       }}
      >
-      <div className='NavSubMenus'>
-       <ul>
-        <li>
-         <Link onClick={() => changesidebar(false)} to='/cart'>
-          Cart
-         </Link>
-        </li>
-       </ul>
-      </div>
+      <ul>
+       <li>
+        <Link onClick={() => changesidebar(false)} to='/cart'>
+         Cart
+        </Link>
+       </li>
+      </ul>
      </div>
     </Link>
    </li>
@@ -122,7 +118,7 @@ const Navbar = ({ title }) => {
     </Link>
    </li>
    <li>
-    <Link onClick={() => changesidebar(false)} to='#'>
+    <Link onClick={() => changesidebar(false)} to='/search'>
      <div
       className='NavIcons'
       style={{

@@ -26,8 +26,7 @@ import About from './components/pages/About';
 import Game from './components/pages/Game';
 import ChannelPage from './components/pages/ChannelPage';
 import Store from './components/pages/Store';
-import FindServers from './components/pages/FindServers';
-import ProfileSearch from './components/pages/ProfileSearch';
+import Search from './components/pages/Search';
 import ProfilePage from './components/pages/ProfilePage';
 import RedirectChat from './components/redirect/RedirectChat';
 import RedirectStream from './components/redirect/RedirectStream';
@@ -36,16 +35,15 @@ import Cart from './components/pages/Cart';
 import ServerLanding from './components/pages/ServerLanding';
 import Stream from './components/pages/Stream';
 import StreamShow from './components/streams/StreamShow';
-import StreamAWS from './components/StreamAWS/Stream'
+import StreamAWS from './components/StreamAWS/Stream';
 
 //layouts
 import Navbar from './components/layout/Navbar';
 import Alerts from './components/layout/Alerts';
-import Serverlist from './components/layout/Serverlist';
 import RightSidebar from './components/layout/RightSidebar';
 import LeftSidebar from './components/layout/LeftSidebar';
 import Modal from './components/layout/Modal';
-import DefaultBackground from './components/layout/Annexbackground.png';
+import DefaultBackground from './components/layout/DefaultBackground.png';
 
 let background = null;
 let sidebarwidth = 250;
@@ -53,8 +51,11 @@ let sidebarwidth = 250;
 if (localStorage.token) {
  setAuthToken(localStorage.token);
  //console.log("profile pic" + localStorage.profilepic);
-
- background = localStorage.profilepic;
+ if (localStorage.profilepic !== 'null') {
+  background = localStorage.profilepic;
+ } else {
+  background = DefaultBackground;
+ }
 } else {
  background = DefaultBackground;
 }
@@ -97,17 +98,12 @@ const App = () => {
                    <Route path='/cart' component={Cart} />
                    <Route exact path='/' component={Dash} />
                    <Route exact path='/store' component={Store} />
-                   <Route exact path='/findservers' component={FindServers} />
+                   <Route exact path='/search' component={Search} />
                    <Route exact path='/server' component={ChannelPage} />
                    <PrivateRoute exact path='/about' component={About} />
                    <Route exact path='/game' component={Game} />
                    <Route exact path='/register' component={Register} />
                    <Route exact path='/login' component={Login} />
-                   <Route
-                    exact
-                    path='/profilesearch'
-                    component={ProfileSearch}
-                   />
                    <Route exact path='/profilepage' component={ProfilePage} />
                    <Route
                     exact
