@@ -33,8 +33,6 @@ const Dash = () => {
 
  const { isAuthenticated } = authContext;
 
- console.log(trendstream);
-
  useEffect(() => {
   authContext.loadUser();
   displayGamesSidebar();
@@ -137,12 +135,13 @@ const Dash = () => {
      <ul>
       {games.map((game) => (
        <li key={game._id}>
-        <Link to='/game' onClick={() => openGame(game)}>
+        <Link to='/game'>
          <div
           className='dashboard-GamesImg'
           style={{
            backgroundImage: `url(${game.img})`,
           }}
+          onClick={() => openGame(game)}
          >
           <div className='dashboard-Game-Submenu'>
            <h3>{game.name}</h3>

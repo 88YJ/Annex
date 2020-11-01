@@ -61,8 +61,7 @@ const DashState = (props) => {
    },
    {
     name: 'Music On Demand',
-    img:
-     'https://lh3.googleusercontent.com/proxy/yyZmI1VCxXIcn-CyAKfozBwyc5eH28r9pRhDhvNJYfqlbToiThQP4UgQH6bigFBC2wVb1wIUKeudBHMF1JnCnWATA62AhfNFIimoGMYoC7iSeQsU0Ley95Xin3imEa8GW7INUHcdRWBPfj5kuQ',
+    img: 'https://wallpapercave.com/wp/EB4mmfb.jpg',
    },
    {
     name: 'April',
