@@ -1,0 +1,779 @@
+* {
+  margin: 0;
+  overflow-y: hidden;
+  height: 100%;
+  width: 100%;
+ }
+ 
+ ::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent; /* make scrollbar transparent */
+ }
+ 
+ .App {
+  height: 100%;
+  width: 100%;
+ }
+ 
+ .img {
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background-size: cover;
+ }
+ 
+ .grid {
+  display: grid;
+  grid-template-columns: 60px 250px auto 250px;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+ }
+ .GeneralHeaders {
+  width: auto;
+  height: 40px;
+ }
+ .Nav {
+  background-color: #000411;
+  color: red;
+  margin-top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  width: 60px;
+  display: block;
+  border-right: #384d48 2px solid;
+ }
+ .Nav ul {
+  list-style: none;
+  margin: 0;
+  margin-left: 8px;
+  padding: 0;
+  overflow: auto;
+ }
+ .Nav li {
+  float: center;
+  margin-bottom: 2px;
+  height: 47px;
+  width: 47px;
+ }
+ .Nav li:first-child {
+  padding-left: 0%;
+ }
+ .Nav a {
+  height: auto;
+  width: auto;
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  margin: 0;
+  border: rgb(0, 0, 0, 0) 1px solid;
+ }
+ .Nav a:hover {
+  color: red;
+ }
+ 
+ .Navlower ul li:hover .subMenu {
+  display: block;
+  position: absolute;
+  background-color: rgb(0, 4, 17, 1);
+  height: 45px;
+  width: auto;
+  margin-top: 0px;
+  margin-left: 40px;
+  padding-bottom: 0;
+  border-radius: 8px;
+  border-bottom: red 1px solid;
+  border-right: red 1px solid;
+  border-left: red 1px solid;
+ }
+ .subMenu a {
+  font-size: 15px;
+  color: white;
+  margin: 6px;
+ }
+ .subMenu {
+  display: none;
+  min-width: 70px;
+  z-index: 10;
+ }
+ .subMenu ul li {
+  width: auto;
+  float: left;
+ }
+ 
+ .navpicture {
+  height: 45px;
+  width: 45px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+ }
+ .navpicture:hover {
+  border-radius: 16px;
+ }
+ .navicons {
+  height: 43px;
+  width: 43px;
+  background-size: cover;
+  background-position: center;
+  background-color: white;
+  border: #384d48 1px solid;
+  border-radius: 20px;
+ }
+ .navicons:hover {
+  border-radius: 16px;
+ }
+ 
+ .container {
+  border: rgb(0, 0, 0) 1px solid;
+  background: black;
+  height: 100rem;
+ }
+ /*dont know what this is yet*/
+ 
+ .browser {
+  background-color: rgb(0, 4, 17, 0.5);
+  height: 100%;
+  width: auto;
+ }
+ .center {
+  text-align: center;
+ }
+ 
+ .sidebarheaders {
+  text-align: center;
+  height: 40px;
+ }
+ 
+ .gamelist {
+  color: red;
+  border-left: #384d48 2px solid;
+  background-color: rgb(0, 4, 17, 0.8);
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  height: 100%;
+ }
+ .games {
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: left;
+  height: 100%;
+ }
+ .games ul {
+  height: 96%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 2px;
+  margin-top: 3px;
+  overflow-y: scroll;
+ }
+ .games li {
+  margin-top: 2px;
+  float: center;
+  height: 80px;
+ }
+ .games li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  height: 15px;
+  width: 20px;
+ }
+ .games li a:hover {
+  color: white;
+ }
+ .bannerfilm {
+  height: 100%;
+ }
+ .bannerfilm:hover {
+  background-color: rgb(0, 4, 17, 0.8);
+ }
+ .bannerfilm:hover .gamesubmenu {
+  display: block;
+  position: relative;
+  margin-top: 10px;
+  margin-left: 0px;
+  padding-bottom: 0;
+ }
+ 
+ .gamesubmenu {
+  display: none;
+  width: auto;
+  height: auto;
+  min-width: 70px;
+ }
+ .gamesubmenu ul {
+  height: auto;
+  width: auto;
+ }
+ .gamesubmenu li {
+  text-decoration: none;
+  float: left;
+  margin-left: 0px;
+  padding: 0px;
+  padding-left: 0px;
+  height: 40px;
+  width: auto;
+ }
+ .gamesubmenu a {
+  height: auto;
+  width: auto;
+ }
+ .bannerfilm p {
+  color: white;
+  opacity: 0;
+  font-size: 18px;
+ }
+ .bannerfilm:hover p {
+  opacity: 1;
+ }
+ 
+ .channellist {
+  color: red;
+  border-right: #384d48 2px solid;
+  background-color: rgb(0, 4, 17, 0.8);
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  height: 100%;
+ }
+ .serverchannels {
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: left;
+  height: 100%;
+ }
+ .serverchannels ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 2px;
+  margin-top: 5px;
+ }
+ .serverchannels li {
+  height: auto;
+  float: center;
+  margin-top: 2px;
+ }
+ 
+ .serverchannels li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+ }
+ .serverchannels li a:hover {
+  background-color: grey;
+ }
+ 
+ .footer {
+  display: grid;
+  position: relative;
+  grid-template-columns: 250px minmax(auto, 1450px) 250px;
+  border-top: #384d48 2px solid;
+  height: 150px;
+  background-color: rgb(0, 4, 17, 0.9);
+ }
+ .footer div {
+  color: red;
+ }
+ .serverimg {
+  height: auto;
+  width: auto;
+  background-size: cover;
+  border-right: #384d48 2px solid;
+ }
+ .rightbottom {
+  border-left: #384d48 2px solid;
+ }
+ 
+ .serverimgsmall {
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  padding: 5px;
+  margin: 5px;
+ }
+ .serverimgsmall:hover {
+  border-radius: 40%;
+  cursor: pointer;
+ }
+ 
+ .servers {
+  z-index: 1;
+ }
+ .servers ul {
+  display: inline-flex;
+ }
+ .servers li {
+  float: left;
+ }
+ 
+ .dash {
+  color: red;
+  height: 100%;
+  background-color: rgb(0, 4, 17, 0.3);
+  border-left: #384d48 2px solid;
+ }
+ .dashboard {
+  height: 100%;
+  overflow-y: scroll;
+ }
+ .dashboardheaders {
+  text-align: center;
+  height: 30px;
+ }
+ 
+ .dashGrid {
+  height: 60%;
+  display: grid;
+  grid-template-rows: 49% 49%;
+ }
+ .dashimg {
+  height: 140px;
+  width: 240px;
+  background-size: cover;
+  background-position: center;
+  padding: 10px;
+  margin: 10px;
+  border: grey 1px solid;
+ }
+ .dashimg:hover {
+  border: gold 1px solid;
+ }
+ .trendstream {
+  height: 100%;
+  border-bottom: #384d48 2px solid;
+ }
+ .trendstream ul {
+  display: inline-flex;
+  width: auto;
+  height: auto;
+ }
+ .trendstream li {
+  float: left;
+ }
+ .trendgames {
+  border-bottom: #384d48 2px solid;
+  height: 100%;
+ }
+ .trendgames ul {
+  display: inline-flex;
+  width: auto;
+  height: auto;
+ }
+ .trendgames li {
+  float: left;
+ }
+ .dashmygames {
+  height: auto;
+ }
+ .dashmygames ul {
+  display: flexbox;
+  list-style: none;
+  width: auto;
+  height: auto;
+ }
+ .dashmygames li {
+  float: left;
+  margin-left: 10px;
+  width: auto;
+  height: auto;
+ }
+ .dashmygames a {
+  text-decoration: none;
+ }
+ 
+ .dashmygamesimg {
+  height: 240px;
+  width: 140px;
+  background-size: cover;
+  background-position: center;
+  padding: 5px;
+  margin: 10px;
+  border: grey 1px solid;
+ }
+ .dashmygamesimg:hover {
+  border: gold 1px solid;
+ }
+ .dashmygames ul li:hover .gamesubmenu {
+  display: block;
+  position: inherit;
+  background-color: rgb(0, 4, 17, 1);
+  margin-left: 0px;
+  margin-top: 190px;
+  padding-bottom: 0;
+  text-align: center;
+  border-radius: 8px;
+ }
+ 
+ .gamesubmenu {
+  display: none;
+  min-width: 70px;
+  color: white;
+ }
+ 
+ .sticky {
+  text-align: center;
+  position: sticky;
+  left: 0;
+ }
+ 
+ .storeNav {
+  overflow-x: hidden;
+  display: grid;
+  grid-template-columns: 630px auto;
+  background-color: #000411;
+  margin-top: 0;
+  height: 40px;
+  z-index: 1;
+  width: 100%;
+  border-bottom: #384d48 1px solid;
+ }
+ 
+ .storeNav ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  margin: 0px;
+ }
+ .storeNav li {
+  width: auto;
+  display: inline-block;
+  padding: 0;
+  margin: 1px;
+ }
+ .storeNav li:first-child {
+  margin-left: 0px;
+ }
+ .storeNav a {
+  padding-top: 10px;
+  height: 25px;
+  border: #384d48 1px solid;
+  width: 110px;
+  display: block;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 15px;
+ }
+ .storeNav a:hover {
+  border: red 1px solid;
+  background-color: black;
+ }
+ .GamesSearch {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 0;
+ }
+ .storepage {
+  overflow-y: scroll;
+  height: 96%;
+ }
+ .storepage ul {
+  height: 100%;
+  width: 100%;
+  display: flexbox;
+  overflow-y: scroll;
+ }
+ .storepage li {
+  width: auto;
+  height: auto;
+  float: left;
+  margin-left: 10px;
+  padding-bottom: 12px;
+ }
+ .storepage a {
+  text-decoration: none;
+  color: red;
+ }
+ .gamestorepage {
+  color: grey;
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+ }
+ .film {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0, 4, 17, 0.9);
+ }
+ .gamestorepageimg {
+  width: 99%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+ }
+ .storeheaders {
+  text-align: center;
+  height: 40px;
+ }
+ .storepagecomponents {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 6% 94%;
+ }
+ .storepagecomponents div {
+  border: none;
+ }
+ .storepagecomponent1 {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 50% 50%;
+ }
+ .storepagecomponent2 {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+ }
+ .storesubcomponent {
+  display: grid;
+  grid-template-rows: 85% 15%;
+  height: 100%;
+  width: 100%;
+  position: relative;
+ }
+ .footerbutton {
+  border: none;
+ }
+ .addcartbutton {
+  width: auto;
+  height: auto;
+  outline: none;
+  position: relative;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #000411;
+  color: white;
+  padding: 10px;
+  display: inline-block;
+  border: grey 1px solid;
+  margin-left: 10px;
+ }
+ .addcartbutton:hover {
+  border: red 1px solid;
+  background: black;
+  cursor: pointer;
+ }
+ .storegamename {
+  height: auto;
+  background-color: black;
+  color: red;
+ }
+ .storegamename a {
+  list-style: none;
+  text-decoration: none;
+  color: red;
+  border: #384d48 1px solid;
+ }
+ .storegamename a:hover {
+  list-style: none;
+  text-decoration: none;
+  color: white;
+  border: red 1px solid;
+ }
+ .reviews {
+  height: 100%;
+ }
+ .reviews ul {
+  height: 92%;
+  width: auto;
+  overflow-y: scroll;
+ }
+ 
+ .reviews li {
+  height: auto;
+  width: auto;
+ }
+ .cartpage {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background: rgb(0, 4, 17, 0.8);
+ }
+ .cartpage ul {
+  height: 50%;
+  width: 90%;
+ }
+ .cartpage li {
+  height: 100%;
+ }
+ .cartimg {
+  height: 75%;
+  background-position: center;
+  background-size: cover;
+ }
+ 
+ .friendlist {
+  color: red;
+  border-right: #384d48 2px solid;
+  background-color: rgb(0, 4, 17, 0.8);
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  height: 100%;
+ }
+ .friends {
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: left;
+  height: 100%;
+ }
+ .friends ul {
+  height: 100%;
+  overflow-y: scroll;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 2px;
+  margin-top: 5px;
+ }
+ .friends li {
+  height: 65px;
+  float: center;
+  margin-top: 2px;
+ }
+ 
+ .friends li a {
+  height: 30px;
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+ }
+ .friendlist ul li:hover .friendlistsubmenu {
+  display: block;
+  margin-top: -76px;
+  margin-left: 100px;
+  padding-bottom: 0;
+ }
+ 
+ .friendlistsubmenu {
+  height: 35px;
+  width: auto;
+  position: relative;
+  display: none;
+  min-width: 70px;
+ }
+ .friendlistsubmenu li {
+  height: 25px;
+  width: auto;
+  background-color: rgb(0, 4, 17, 0.7);
+  border: rgb(0, 4, 17, 0) 1px solid;
+  float: left;
+  margin-left: 2px;
+  padding: 0px;
+  padding-left: 2px;
+ }
+ .friendlistsubmenu li:hover {
+  border: red 1px solid;
+  background-color: black;
+ }
+ 
+ .serveruserlist {
+  color: red;
+  border-left: #384d48 2px solid;
+  background-color: rgb(0, 4, 17, 0.8);
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  height: 100%;
+ }
+ .serverusers {
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: left;
+  height: 100%;
+ }
+ .serverusers ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: 2px;
+  margin-top: 5px;
+ }
+ .serverusers li {
+  height: auto;
+  float: center;
+  margin-top: 2px;
+ }
+ 
+ .serverusers li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+ }
+ .serveruserlist ul li:hover .serveruserlistsubmenu {
+  display: block;
+  position: absolute;
+  background-color: rgb(0, 4, 17, 0.7);
+  margin-top: -66px;
+  margin-left: 105px;
+  padding-bottom: 0;
+ }
+ 
+ .serveruserlistsubmenu {
+  display: none;
+  min-width: 70px;
+ }
+ .serveruserlistsubmenu li {
+  float: left;
+  margin-left: 2px;
+  padding: 0px;
+  padding-left: 2px;
+ }
+ .serveruserlistsubmenu li:hover {
+  background-color: black;
+ }
+ .banner {
+  background-position: center;
+  background-size: cover;
+ }
+ .profilebanner {
+  background-position: center;
+  background-size: contain;
+ }
+ 
+ .globalbutton {
+  outline: none;
+  position: relative;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #000411;
+  color: white;
+  padding: 10px;
+  display: inline-block;
+  border: grey 1px solid;
+  min-width: 100px;
+  margin: 3px;
+ }
+ .globalbutton:hover {
+  border: red 1px solid;
+  background: black;
+  color: red;
+  cursor: pointer;
+ }
+ 
+ .streampreview {
+  height: 100%;
+  width: 100%;
+ }
+ 

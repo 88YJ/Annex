@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://brand123:brand123@contactkeeper-edahp.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jwtSecret": "sgtsiscute"
+   }
