@@ -1,0 +1,1 @@
+export const CAPTURE_FRIENDS = 'CAPTURE_FRIENDS';

@@ -21,28 +21,32 @@ export const Header = () => {
 
   let navigationLinks;
 
+  function changesidebar() {
+    document.getElementsByTagName('div')[3].setAttribute('class', 'app-mainGrid');
+  }
+
   if (isLoggedIn) {
     navigationLinks = (
       <Fragment>
-        <li>
+        <li onClick={() => changesidebar()}>
           <Link to='/'>
             <div className='NavIcons' style={{ backgroundImage: `url(${user.profilePicture})` }} />
           </Link>
           <SubMenu type={SHOW__HOME_SUBMENU} />
         </li>
-        <li>
+        <li onClick={() => changesidebar()}>
           <Link to='/store'>
             <div className='NavIcons' style={{ backgroundImage: `url(${CartIcon})` }} />
           </Link>
           <SubMenu type={SHOW_SHOP_SUBMENU} />
         </li>
         <li>
-          <Link to='/'>
+          <Link to='/stream'>
             <div className='NavIcons' style={{ backgroundImage: `url(${StreamIcon})` }} />
           </Link>
           <SubMenu type={SHOW_STREAM_SUBMENU} />
         </li>
-        <li>
+        <li onClick={() => changesidebar()}>
           <Link to='/'>
             <div className='NavIcons' style={{ backgroundImage: `url(${SearchIcon})` }} />
           </Link>

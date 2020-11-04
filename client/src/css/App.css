@@ -191,6 +191,7 @@
 }
 .NavSubMenu {
   position: absolute;
+  z-index: 50;
   top: 0;
   left: 58px;
   height: 100%;

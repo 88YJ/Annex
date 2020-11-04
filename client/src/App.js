@@ -9,12 +9,14 @@ import { ServerProvider } from './pages/server/context';
 import { ChatProvider } from './pages/chat/context';
 import { DashProvider } from './pages/dashboard/context';
 import { SideBarProvider } from './components/sidebar/context';
+import { ProfileProvider } from './components/profile/context';
 
 //Import Pages
 import { Register } from './pages/authentication/Register';
 import { Login } from './pages/authentication/Login';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { ServerLanding } from './pages/server/ServerLanding';
+import { Stream } from './pages/stream/Stream';
 
 //Import Components
 import { Header } from './components/header/Header';
@@ -46,26 +48,29 @@ function App() {
           <ChatProvider>
             <DashProvider>
               <SideBarProvider>
-                <Router>
-                  <Fragment>
-                    <div className='app-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
-                      <div className='app-mainGrid'>
-                        <Header />
-                        <SideBar type={SHOW_LEFT_SIDEBAR} />
-                        <VoiceChat />
-                        <div className='app-browser'>
-                          <Switch>
-                            <Route exact path='/' component={Dashboard} />
-                            <Route exact path='/register' component={Register} />
-                            <Route exact path='/login' component={Login} />
-                            <Route path='/server/:server_id' component={ServerLanding} />
-                          </Switch>
+                <ProfileProvider>
+                  <Router>
+                    <Fragment>
+                      <div className='app-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
+                        <div className='app-mainGrid'>
+                          <Header />
+                          <SideBar type={SHOW_LEFT_SIDEBAR} />
+                          <VoiceChat />
+                          <div className='app-browser'>
+                            <Switch>
+                              <Route exact path='/' component={Dashboard} />
+                              <Route exact path='/register' component={Register} />
+                              <Route exact path='/login' component={Login} />
+                              <Route path='/server/:server_id' component={ServerLanding} />
+                              <Route path='/stream' component={Stream} />
+                            </Switch>
+                          </div>
+                          <SideBar type={SHOW_RIGHT_SIDEBAR} />
                         </div>
-                        <SideBar type={SHOW_RIGHT_SIDEBAR} />
                       </div>
-                    </div>
-                  </Fragment>
-                </Router>
+                    </Fragment>
+                  </Router>
+                </ProfileProvider>
               </SideBarProvider>
             </DashProvider>
           </ChatProvider>

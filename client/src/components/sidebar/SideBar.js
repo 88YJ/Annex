@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
 import { ChannelList } from './ChannelList';
+import { FriendList } from './FriendList';
 import { SHOW_RIGHT_SIDEBAR, SHOW_LEFT_SIDEBAR } from './context/types';
 import { useSideBarState } from './context';
 
+import { useProfileDispatch, useProfileState, getFriends } from '../profile/context';
+
 export const SideBar = (props) => {
   const { LeftChannellist, LeftFriends, RightGames, RightUserlist } = useSideBarState();
+
+  const { FriendsLoaded } = useProfileState();
+  const profileDispatch = useProfileDispatch();
+
+  useEffect(() => {
+    if (!FriendsLoaded) {
+      getFriends(profileDispatch);
+    }
+  }, []);
 
   const { type } = props;
 
@@ -13,7 +26,7 @@ export const SideBar = (props) => {
       if (LeftFriends) {
         return (
           <>
-            <div>Loading..</div>
+            <FriendList />
           </>
         );
       } else if (LeftChannellist) {

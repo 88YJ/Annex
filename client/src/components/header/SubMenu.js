@@ -19,7 +19,7 @@ export const SubMenu = (props) => {
             </h1>
             <ul>
               <li>
-                <Link to='/'>My Profile</Link>
+                <Link to='/yay'>My Profile</Link>
               </li>
               <li>
                 <Link to='#'>Community</Link>
