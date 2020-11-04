@@ -12,6 +12,9 @@ import SearchIcon from '../../images/SearchIcon.png';
 import StreamIcon from '../../images/StreamIcon.png';
 import CartIcon from '../../images/CartIcon.png';
 
+//Import Types
+import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types';
+
 export const Header = () => {
   const { user, isLoggedIn } = useAuthState();
   const authDispatch = useAuthDispatch();
@@ -25,27 +28,23 @@ export const Header = () => {
           <Link to='/'>
             <div className='NavIcons' style={{ backgroundImage: `url(${user.profilePicture})` }} />
           </Link>
-          <SubMenu type={'Home'} />
+          <SubMenu type={SHOW__HOME_SUBMENU} />
         </li>
         <li>
           <Link to='/store'>
             <div className='NavIcons' style={{ backgroundImage: `url(${CartIcon})` }} />
           </Link>
-          <SubMenu type={'Shop'} />
+          <SubMenu type={SHOW_SHOP_SUBMENU} />
         </li>
         <li>
           <Link to='/'>
             <div className='NavIcons' style={{ backgroundImage: `url(${StreamIcon})` }} />
           </Link>
+          <SubMenu type={SHOW_STREAM_SUBMENU} />
         </li>
         <li>
           <Link to='/'>
-            <div
-              className='NavIcons'
-              style={{
-                backgroundImage: `url(${SearchIcon})`,
-              }}
-            ></div>
+            <div className='NavIcons' style={{ backgroundImage: `url(${SearchIcon})` }} />
           </Link>
         </li>
         <li style={{ marginTop: '3px', borderBottom: 'red 1px solid', paddingBottom: '4px', cursor: 'pointer' }} key='addServer' /*onClick={displayModal}*/>

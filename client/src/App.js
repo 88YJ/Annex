@@ -8,6 +8,7 @@ import { AuthProvider } from './pages/authentication/context';
 import { ServerProvider } from './pages/server/context';
 import { ChatProvider } from './pages/chat/context';
 import { DashProvider } from './pages/dashboard/context';
+import { SideBarProvider } from './components/sidebar/context';
 
 //Import Pages
 import { Register } from './pages/authentication/Register';
@@ -19,6 +20,9 @@ import { ServerLanding } from './pages/server/ServerLanding';
 import { Header } from './components/header/Header';
 import { SideBar } from './components/sidebar/SideBar';
 import { VoiceChat } from './components/sidebar/VoiceChat';
+
+//Import Types
+import { SHOW_RIGHT_SIDEBAR, SHOW_LEFT_SIDEBAR } from './components/sidebar/context/types';
 
 import DefaultBackground from './images/DefaultBackground.png';
 
@@ -41,26 +45,28 @@ function App() {
         <ServerProvider>
           <ChatProvider>
             <DashProvider>
-              <Router>
-                <Fragment>
-                  <div className='app-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
-                    <div className='app-mainGrid'>
-                      <Header />
-                      <SideBar />
-                      <VoiceChat />
-                      <div className='app-browser'>
-                        <Switch>
-                          <Route exact path='/' component={Dashboard} />
-                          <Route exact path='/register' component={Register} />
-                          <Route exact path='/login' component={Login} />
-                          <Route path='/server/:server_id' component={ServerLanding} />
-                        </Switch>
+              <SideBarProvider>
+                <Router>
+                  <Fragment>
+                    <div className='app-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
+                      <div className='app-mainGrid'>
+                        <Header />
+                        <SideBar type={SHOW_LEFT_SIDEBAR} />
+                        <VoiceChat />
+                        <div className='app-browser'>
+                          <Switch>
+                            <Route exact path='/' component={Dashboard} />
+                            <Route exact path='/register' component={Register} />
+                            <Route exact path='/login' component={Login} />
+                            <Route path='/server/:server_id' component={ServerLanding} />
+                          </Switch>
+                        </div>
+                        <SideBar type={SHOW_RIGHT_SIDEBAR} />
                       </div>
-                      <SideBar />
                     </div>
-                  </div>
-                </Fragment>
-              </Router>
+                  </Fragment>
+                </Router>
+              </SideBarProvider>
             </DashProvider>
           </ChatProvider>
         </ServerProvider>

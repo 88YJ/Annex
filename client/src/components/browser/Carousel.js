@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from './Card';
 import Arrow from '../../images/Arrow.png';
+import { SHOW_GAMES, SHOW_STREAMS } from './types/types';
 
 export const Carousel = () => {
   var streamRef = React.createRef();
@@ -43,7 +44,7 @@ export const Carousel = () => {
         </h2>
         <div className='wrapper'>
           <div className='trendy' ref={streamRef}>
-            <Card type={'streams'} />
+            <Card type={SHOW_STREAMS} />
           </div>
           <div className='row'>
             <div className='prev' onClick={() => prevClick('stream')}>
@@ -61,7 +62,7 @@ export const Carousel = () => {
         </h2>
         <div className='wrapper'>
           <div className='trendy' ref={gamesRef}>
-            <Card type={'games'} />
+            <Card type={SHOW_GAMES} />
           </div>
           <div className='row'>
             <div className='prev' onClick={() => prevClick('game')}>
