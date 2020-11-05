@@ -24,5 +24,5 @@ export const ProfilePage = () => {
   if (CurrentProfile) {
     return <Profile />;
   }
-  return <div></div>;
+  return null;
 };

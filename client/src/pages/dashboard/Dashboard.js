@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Carousel } from '../../components/browser/Carousel';
+import { OwnedGames } from '../../components/browser/OwnedGames';
 import { CAROUSEL_DASHBOARD } from '../../components/browser/types/types';
 
 import { useSideBarDispatch, showFriends, showGames } from '../../components/sidebar/context';
@@ -20,6 +21,7 @@ export const Dashboard = () => {
       <div className='dashboard-Grid'>
         <Carousel type={CAROUSEL_DASHBOARD} />
       </div>
+      <OwnedGames />
     </div>
   );
 };

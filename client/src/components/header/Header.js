@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthState, useAuthDispatch, logout } from '../../pages/authentication/context';
+import { useAuthState } from '../../pages/authentication/context';
 
 //Component imports
 import { ServerList } from './ServerList';
@@ -17,7 +17,6 @@ import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './ty
 
 export const Header = () => {
   const { user, isLoggedIn } = useAuthState();
-  const authDispatch = useAuthDispatch();
 
   let navigationLinks;
 

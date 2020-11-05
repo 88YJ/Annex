@@ -1,10 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useShopState, useShopDispatch, buyGame } from './context';
+import { findOwnedGames, useProfileDispatch } from '../profile/context';
 
 export const Cart = () => {
   const { cart } = useShopState();
   const shopDispatch = useShopDispatch();
+  const profileDispatch = useProfileDispatch();
+
+  function buyButton(gameid) {
+    buyGame(shopDispatch, gameid);
+    findOwnedGames(profileDispatch);
+  }
 
   if (cart) {
     return (
@@ -29,7 +36,7 @@ export const Cart = () => {
           </li>
         </ul>
         <div>
-          <Link to='/shop' style={{ height: 'auto', width: 'auto' }} onClick={() => buyGame(shopDispatch, cart._id)} className='globalbutton'>
+          <Link to='/shop' style={{ height: 'auto', width: 'auto' }} onClick={() => buyButton(cart._id)} className='globalbutton'>
             Buy
           </Link>
           <h3 style={{ color: 'red' }}>Total: $60.00</h3>
