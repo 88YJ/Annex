@@ -2,7 +2,7 @@ import { LOAD_STORE_GAMES, ADD_TO_CART, SET_STORE_GAMEPAGE } from './types';
 
 export const initialState = {
   storeGames: undefined,
-  cart: [],
+  cart: undefined,
   gamePage: undefined,
   loading: true,
 };

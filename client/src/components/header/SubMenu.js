@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuthState, useAuthDispatch, logout } from '../../pages/authentication/context';
 
 import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types';
+import { SubMenuCart } from './SubMenuCart';
 
 export const SubMenu = (props) => {
   const authDispatch = useAuthDispatch();
@@ -46,14 +47,18 @@ export const SubMenu = (props) => {
             </h1>
             <ul>
               <li>
-                <Link to='/shop/cart'>Go To Cart</Link>
+                <Link to='/'>Featured</Link>
               </li>
               <li>
                 <Link to='/'>Wishlist</Link>
               </li>
               <li>
-                <Link to='/'>Featured</Link>
+                <Link to='/'>Stats</Link>
               </li>
+              <li>
+                <Link to='/shop/cart'>Go To Cart</Link>
+              </li>
+              <SubMenuCart />
             </ul>
           </div>
         </>
