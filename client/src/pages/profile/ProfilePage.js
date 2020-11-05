@@ -12,7 +12,7 @@ export const ProfilePage = () => {
     if (!ProfilesLoaded) {
       getProfiles(profileDispatch);
     }
-  }, []);
+  }, [ProfilesLoaded, profileDispatch]);
 
   useEffect(() => {
     if (ProfilesLoaded) {

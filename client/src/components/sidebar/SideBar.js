@@ -17,7 +17,7 @@ export const SideBar = (props) => {
     if (!FriendsLoaded) {
       getFriends(profileDispatch);
     }
-  }, []);
+  }, [FriendsLoaded, profileDispatch]);
 
   const { type } = props;
 

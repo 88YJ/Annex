@@ -12,8 +12,8 @@ export const Shop = () => {
     if (loading) {
       loadStoreGames(shopDispatch);
     }
-  }, []);
-  console.log(storeGames);
+  }, [loading, shopDispatch]);
+
   if (storeGames) {
     return (
       <>

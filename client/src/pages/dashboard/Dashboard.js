@@ -10,7 +10,7 @@ export const Dashboard = () => {
   useEffect(() => {
     showFriends(sidebarDispatch);
     showGames(sidebarDispatch);
-  }, []);
+  }, [sidebarDispatch]);
 
   return (
     <div className='dashboard'>

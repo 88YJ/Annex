@@ -21,7 +21,7 @@ export const ServerLanding = () => {
   useEffect(() => {
     showChannellist(sidebarDispatch);
     showUserlist(sidebarDispatch);
-  }, []);
+  }, [sidebarDispatch]);
 
   if (currentServer) {
     return (
