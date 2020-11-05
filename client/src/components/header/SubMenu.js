@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthDispatch, logout } from '../../pages/authentication/context';
+import { useAuthState, useAuthDispatch, logout } from '../../pages/authentication/context';
 
 import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types';
 
 export const SubMenu = (props) => {
   const authDispatch = useAuthDispatch();
+  const { user } = useAuthState();
 
   const { type } = props;
 
@@ -19,7 +20,7 @@ export const SubMenu = (props) => {
             </h1>
             <ul>
               <li>
-                <Link to='/yay'>My Profile</Link>
+                <Link to={`/profile/${user._id}`}>My Profile</Link>
               </li>
               <li>
                 <Link to='#'>Community</Link>

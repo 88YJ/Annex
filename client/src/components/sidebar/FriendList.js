@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { useProfileState } from '../profile/context';
+import { useProfileState } from '../../pages/profile/context';
 
 export const FriendList = () => {
   const { Friends } = useProfileState();
@@ -26,7 +26,7 @@ export const FriendList = () => {
                       <Link to='/redirectchat' /*onClick={() => openDM(friend)}*/>Message</Link>
                     </li>
                     <li>
-                      <Link to='/profilepage' /*onClick={() => openProfile(friend)}*/>Profile</Link>
+                      <Link to={`/profile/${friend._id}`} /*onClick={() => openProfile(friend)}*/>Profile</Link>
                     </li>
                   </ul>
                 </div>

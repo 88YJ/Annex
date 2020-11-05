@@ -1,20 +1,18 @@
 import React from 'react';
 import { useDashState } from '../../pages/dashboard/context';
 import { SHOW_SCREENSHOTS, SHOW_GAMES, SHOW_STREAMS } from './types/types';
+import { useProfileState } from '../../pages/profile/context';
 
 export const Card = (props) => {
-  const { trendgames, trendstream } = useDashState();
-
-  let data = [];
-
   const { type } = props;
+  const { trendgames, trendstream } = useDashState();
+  const { CurrentProfile } = useProfileState();
 
   switch (type) {
     case SHOW_SCREENSHOTS:
       return (
         <>
-          import {useDashState} from './context';
-          {data.map((item, index) => (
+          {CurrentProfile.screenShots.map((item, index) => (
             <div className='card' key={index}>
               <img src={item} alt=''></img>
             </div>

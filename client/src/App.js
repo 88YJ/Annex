@@ -9,7 +9,7 @@ import { ServerProvider } from './pages/server/context';
 import { ChatProvider } from './pages/chat/context';
 import { DashProvider } from './pages/dashboard/context';
 import { SideBarProvider } from './components/sidebar/context';
-import { ProfileProvider } from './components/profile/context';
+import { ProfileProvider } from './pages/profile/context';
 
 //Import Pages
 import { Register } from './pages/authentication/Register';
@@ -17,6 +17,7 @@ import { Login } from './pages/authentication/Login';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { ServerLanding } from './pages/server/ServerLanding';
 import { Stream } from './pages/stream/Stream';
+import { ProfilePage } from './pages/profile/ProfilePage';
 
 //Import Components
 import { Header } from './components/header/Header';
@@ -62,6 +63,7 @@ function App() {
                               <Route exact path='/register' component={Register} />
                               <Route exact path='/login' component={Login} />
                               <Route path='/server/:server_id' component={ServerLanding} />
+                              <Route path='/profile/:profile_id' component={ProfilePage} />
                               <Route path='/stream' component={Stream} />
                             </Switch>
                           </div>
