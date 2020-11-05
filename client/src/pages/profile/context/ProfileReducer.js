@@ -1,4 +1,4 @@
-import { CAPTURE_FRIENDS, CAPTURE_PROFILES, LOAD_CURRENT_PROFILE, CAPTURE_GAMES } from './types';
+import { CAPTURE_FRIENDS, CAPTURE_PROFILES, LOAD_CURRENT_PROFILE, CAPTURE_GAMES, SET_OWNED_CURRENT_GAME } from './types';
 
 export const initialState = {
   Friends: [],
@@ -8,6 +8,7 @@ export const initialState = {
   CurrentProfile: undefined,
   ownedGames: [],
   ownedGamesLoaded: false,
+  CurrentOwnedGame: undefined,
 };
 
 export const ProfileReducer = (initialState, action) => {
@@ -34,6 +35,11 @@ export const ProfileReducer = (initialState, action) => {
         ...initialState,
         ownedGames: action.payload,
         ownedGamesLoaded: true,
+      };
+    case SET_OWNED_CURRENT_GAME:
+      return {
+        ...initialState,
+        CurrentOwnedGame: action.payload,
       };
 
     default:

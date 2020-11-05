@@ -1,4 +1,4 @@
-import { CAPTURE_FRIENDS, CAPTURE_PROFILES, LOAD_CURRENT_PROFILE, CAPTURE_GAMES } from './types';
+import { CAPTURE_FRIENDS, CAPTURE_PROFILES, LOAD_CURRENT_PROFILE, CAPTURE_GAMES, SET_OWNED_CURRENT_GAME } from './types';
 import axios from 'axios';
 
 const requestConfig = {
@@ -41,6 +41,16 @@ export async function findOwnedGames(dispatch) {
     const res = await axios.get(`/api/games/CaptureGames`);
     dispatch({ type: CAPTURE_GAMES, payload: res.data });
     console.log('Captured Profile Games..');
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function loadOwnedCurrentGame(dispatch, Game) {
+  try {
+    const res = await axios.get(`/api/games/FindGame/${Game}`);
+    dispatch({ type: SET_OWNED_CURRENT_GAME, payload: res.data });
+    console.log('Captured Owned Current Game..');
   } catch (error) {
     console.log(error);
   }

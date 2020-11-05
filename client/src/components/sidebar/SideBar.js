@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { ChannelList } from './ChannelList';
 import { FriendList } from './FriendList';
 import { GameList } from './GameList';
+import { ServerUserList } from './ServerUserList';
 import { SHOW_RIGHT_SIDEBAR, SHOW_LEFT_SIDEBAR } from './context/types';
 import { useSideBarState } from './context';
 
@@ -51,7 +52,7 @@ export const SideBar = (props) => {
           </>
         );
       } else if (RightUserlist) {
-        return <div>Loading..</div>;
+        return <ServerUserList />;
       }
 
     default:

@@ -23,10 +23,10 @@ export const FriendList = () => {
                 <div className='Friendlist-Submenu'>
                   <ul>
                     <li>
-                      <Link to='/redirectchat' /*onClick={() => openDM(friend)}*/>Message</Link>
+                      <Link to='/redirectchat'>Message</Link>
                     </li>
                     <li>
-                      <Link to={`/profile/${friend._id}`} /*onClick={() => openProfile(friend)}*/>Profile</Link>
+                      <Link to={`/profile/${friend._id}`}>Profile</Link>
                     </li>
                   </ul>
                 </div>

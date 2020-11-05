@@ -48,3 +48,13 @@ export async function loadServerChannelList(dispatch, server) {
     console.error(error);
   }
 }
+
+export async function loadServerUserList(dispatch, server) {
+  try {
+    const response = await axios.get(`/api/servers/${server._id}/users`, requestConfig);
+    dispatch({ type: LOAD_SERVER_USERLIST, payload: response.data });
+    console.log('Server users loaded successfully.');
+  } catch (error) {
+    console.error(error);
+  }
+}

@@ -28,7 +28,7 @@ export const GameList = () => {
                     <div className='games-Submenu'>
                       <ul>
                         <li>
-                          <Link to='/game' className='globalbutton' /*onClick={() => openGame(game)}*/>
+                          <Link to={`/game/${game._id}`} className='globalbutton'>
                             Game Page
                           </Link>
                         </li>
