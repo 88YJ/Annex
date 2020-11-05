@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 
 import { ChannelList } from './ChannelList';
 import { FriendList } from './FriendList';
+import { GameList } from './GameList';
 import { SHOW_RIGHT_SIDEBAR, SHOW_LEFT_SIDEBAR } from './context/types';
 import { useSideBarState } from './context';
 
-import { useProfileDispatch, useProfileState, getFriends } from '../../pages/profile/context';
+import { useProfileDispatch, useProfileState, getFriends, findOwnedGames } from '../../pages/profile/context';
 
 export const SideBar = (props) => {
   const { LeftChannellist, LeftFriends, RightGames, RightUserlist } = useSideBarState();
 
-  const { FriendsLoaded } = useProfileState();
+  const { FriendsLoaded, ownedGamesLoaded } = useProfileState();
   const profileDispatch = useProfileDispatch();
 
   useEffect(() => {
@@ -18,6 +19,11 @@ export const SideBar = (props) => {
       getFriends(profileDispatch);
     }
   }, [FriendsLoaded, profileDispatch]);
+  useEffect(() => {
+    if (!ownedGamesLoaded) {
+      findOwnedGames(profileDispatch);
+    }
+  }, [ownedGamesLoaded, profileDispatch]);
 
   const { type } = props;
 
@@ -39,7 +45,11 @@ export const SideBar = (props) => {
 
     case SHOW_RIGHT_SIDEBAR:
       if (RightGames) {
-        return <div>Loading..</div>;
+        return (
+          <>
+            <GameList />
+          </>
+        );
       } else if (RightUserlist) {
         return <div>Loading..</div>;
       }

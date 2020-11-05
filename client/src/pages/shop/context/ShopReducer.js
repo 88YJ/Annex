@@ -24,6 +24,7 @@ export const ShopReducer = (initialState, action) => {
       return {
         ...initialState,
         gamePage: action.payload,
+        gameLoading: false,
       };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);

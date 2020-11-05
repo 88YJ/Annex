@@ -26,18 +26,19 @@ export async function setCurrentGame(dispatch, Game) {
   }
 }
 
+export async function addToCart(dispatch, Game) {
+  try {
+    const res = await axios.get(`/api/games/FindGame/${Game}`);
+    dispatch({ type: ADD_TO_CART, payload: res.data });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function buyGame(dispatch, Game) {
   try {
     const res = await axios.put(`api/games/AddGame/${Game}`, requestConfig);
   } catch (error) {
     console.error(error);
-  }
-}
-
-export function addToCart(dispatch, Game) {
-  try {
-    dispatch({ type: ADD_TO_CART, payload: Game });
-  } catch (error) {
-    console.log(error);
   }
 }

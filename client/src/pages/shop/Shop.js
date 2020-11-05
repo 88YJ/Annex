@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useShopState, useShopDispatch } from './context';
-import { loadStoreGames } from './context/ShopActions';
+import { loadStoreGames, setCurrentGame } from './context/ShopActions';
 
 export const Shop = () => {
   const { storeGames, loading } = useShopState();
@@ -47,8 +47,8 @@ export const Shop = () => {
         <div className='store-Listpage'>
           <ul>
             {storeGames.map((games, i) => (
-              <Link to='/storegamepage' key={i}>
-                <li /*onClick={() => openGamePage(games)}*/>
+              <Link to={`/shop/page/${games._id}`} key={i}>
+                <li>
                   <div
                     className='store-GamesImg'
                     style={{

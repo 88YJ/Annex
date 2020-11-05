@@ -20,6 +20,8 @@ import { ServerLanding } from './pages/server/ServerLanding';
 import { Stream } from './pages/stream/Stream';
 import { ProfilePage } from './pages/profile/ProfilePage';
 import { Shop } from './pages/shop/Shop';
+import { ShopGamePage } from './pages/shop/ShopGamePage';
+import { Cart } from './pages/shop/Cart';
 
 //Import Components
 import { Header } from './components/header/Header';
@@ -66,6 +68,8 @@ function App() {
                                 <Route exact path='/register' component={Register} />
                                 <Route exact path='/login' component={Login} />
                                 <Route exact path='/shop' component={Shop} />
+                                <Route exact path='/shop/cart' component={Cart} />
+                                <Route exact path='/shop/page/:game_id' component={ShopGamePage} />
                                 <Route path='/server/:server_id' component={ServerLanding} />
                                 <Route path='/profile/:profile_id' component={ProfilePage} />
                                 <Route path='/stream' component={Stream} />

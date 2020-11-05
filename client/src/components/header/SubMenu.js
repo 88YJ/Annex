@@ -46,7 +46,7 @@ export const SubMenu = (props) => {
             </h1>
             <ul>
               <li>
-                <Link to='/'>Go To Cart</Link>
+                <Link to='/shop/cart'>Go To Cart</Link>
               </li>
               <li>
                 <Link to='/'>Wishlist</Link>

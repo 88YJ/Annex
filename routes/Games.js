@@ -83,12 +83,10 @@ router.put('/AddGame/:id', middleware.isAuthenticated, async (req, res) => {
 //Get User Games
 router.get('/CaptureGames', middleware.isAuthenticated, async (req, res) => {
   try {
-    const currentUser = await User.findById(req.user.id);
-    const { ownedGames } = currentUser;
-
+    const { ownedGames } = await User.findById(req.user.id).select('ownedGames');
     let usergames = [];
     for (const id of ownedGames) {
-      const game = await StoreGames.findById(id);
+      const game = await Game.findById(id);
       const gameInfoObject = {
         _id: game._id,
         name: game.name,
