@@ -87,12 +87,7 @@ export const Profile = () => {
                         }}
                       >
                         <h4>{request.name}</h4>
-                        <div
-                          className='profilepicture'
-                          style={{
-                            backgroundImage: `url(${request.profilePicture})`,
-                          }}
-                        ></div>
+                        <div className='profilepicture' style={{ backgroundImage: `url(${request.profilePicture})` }} />
                         <button style={{ height: 'auto', width: 'auto' }} className='globalbutton' /*onClick={() => OnFriendRequestAccept(request._id)}*/>
                           Accept Request
                         </button>

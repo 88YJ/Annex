@@ -35,7 +35,7 @@ export const Header = () => {
           <SubMenu type={SHOW__HOME_SUBMENU} />
         </li>
         <li onClick={() => changesidebar()}>
-          <Link to='/store'>
+          <Link to='/shop'>
             <div className='NavIcons' style={{ backgroundImage: `url(${CartIcon})` }} />
           </Link>
           <SubMenu type={SHOW_SHOP_SUBMENU} />

@@ -10,6 +10,7 @@ import { ChatProvider } from './pages/chat/context';
 import { DashProvider } from './pages/dashboard/context';
 import { SideBarProvider } from './components/sidebar/context';
 import { ProfileProvider } from './pages/profile/context';
+import { ShopProvider } from './pages/shop/context';
 
 //Import Pages
 import { Register } from './pages/authentication/Register';
@@ -18,6 +19,7 @@ import { Dashboard } from './pages/dashboard/Dashboard';
 import { ServerLanding } from './pages/server/ServerLanding';
 import { Stream } from './pages/stream/Stream';
 import { ProfilePage } from './pages/profile/ProfilePage';
+import { Shop } from './pages/shop/Shop';
 
 //Import Components
 import { Header } from './components/header/Header';
@@ -50,28 +52,31 @@ function App() {
             <DashProvider>
               <SideBarProvider>
                 <ProfileProvider>
-                  <Router>
-                    <Fragment>
-                      <div className='app-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
-                        <div className='app-mainGrid'>
-                          <Header />
-                          <SideBar type={SHOW_LEFT_SIDEBAR} />
-                          <VoiceChat />
-                          <div className='app-browser'>
-                            <Switch>
-                              <Route exact path='/' component={Dashboard} />
-                              <Route exact path='/register' component={Register} />
-                              <Route exact path='/login' component={Login} />
-                              <Route path='/server/:server_id' component={ServerLanding} />
-                              <Route path='/profile/:profile_id' component={ProfilePage} />
-                              <Route path='/stream' component={Stream} />
-                            </Switch>
+                  <ShopProvider>
+                    <Router>
+                      <Fragment>
+                        <div className='app-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
+                          <div className='app-mainGrid'>
+                            <Header />
+                            <SideBar type={SHOW_LEFT_SIDEBAR} />
+                            <VoiceChat />
+                            <div className='app-browser'>
+                              <Switch>
+                                <Route exact path='/' component={Dashboard} />
+                                <Route exact path='/register' component={Register} />
+                                <Route exact path='/login' component={Login} />
+                                <Route exact path='/shop' component={Shop} />
+                                <Route path='/server/:server_id' component={ServerLanding} />
+                                <Route path='/profile/:profile_id' component={ProfilePage} />
+                                <Route path='/stream' component={Stream} />
+                              </Switch>
+                            </div>
+                            <SideBar type={SHOW_RIGHT_SIDEBAR} />
                           </div>
-                          <SideBar type={SHOW_RIGHT_SIDEBAR} />
                         </div>
-                      </div>
-                    </Fragment>
-                  </Router>
+                      </Fragment>
+                    </Router>
+                  </ShopProvider>
                 </ProfileProvider>
               </SideBarProvider>
             </DashProvider>
