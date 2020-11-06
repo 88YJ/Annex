@@ -11,17 +11,19 @@ export const SubMenuCart = () => {
         <h3 className='globalHeader' style={{ background: 'black', color: 'red' }}>
           Cart:
         </h3>
-        <Link to={`/shop/page/${cart._id}`}>
-          <div className='gamelist-Games' style={{ height: 'auto' }}>
-            <ul style={{ margin: '0', padding: '0' }}>
-              <li className='banner' style={{ backgroundImage: `url(${cart.banner})`, margin: '0', padding: '0' }}>
-                <div className='banner-Film'>
-                  <p style={{ fontSize: '20px', height: 'auto', textAlign: 'center' }}>{cart.name}</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </Link>
+        {cart.map((item, i) => (
+          <Link key={i} to={`/shop/page/${item._id}`}>
+            <div className='gamelist-Games' style={{ height: 'auto' }}>
+              <ul style={{ margin: '0', padding: '0' }}>
+                <li className='banner' style={{ backgroundImage: `url(${item.banner})`, margin: '0', padding: '0' }}>
+                  <div className='banner-Film'>
+                    <p style={{ fontSize: '20px', height: 'auto', textAlign: 'center' }}>{item.name}</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </Link>
+        ))}
       </div>
     );
   } else {

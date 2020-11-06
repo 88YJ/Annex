@@ -2,7 +2,7 @@ import { LOAD_STORE_GAMES, ADD_TO_CART, SET_STORE_GAMEPAGE } from './types';
 
 export const initialState = {
   storeGames: undefined,
-  cart: undefined,
+  cart: [],
   gamePage: undefined,
   loading: true,
 };
@@ -18,7 +18,7 @@ export const ShopReducer = (initialState, action) => {
     case ADD_TO_CART:
       return {
         ...initialState,
-        cart: action.payload,
+        cart: [...initialState.cart, action.payload],
       };
     case SET_STORE_GAMEPAGE:
       return {

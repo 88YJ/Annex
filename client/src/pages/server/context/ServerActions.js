@@ -40,6 +40,7 @@ export async function loadCurrentChannel(dispatch, channel) {
 export async function loadServerChannelList(dispatch, server) {
   try {
     let channelList = JSON.stringify(server.channelList);
+    console.log(server);
 
     const response = await axios.get(`/api/${server._id}/channels/${channelList}`, requestConfig);
     dispatch({ type: LOAD_SERVER_CHANNELLIST, payload: response.data });

@@ -17,26 +17,28 @@ export const Cart = () => {
     return (
       <div className='store-Cartpage'>
         <ul>
-          <li>
-            <h3 className='store-Gamepage-Headers' style={{ color: 'red' }}>
-              {cart.name}
-            </h3>
-            <div
-              className='store-Cartpage-Img'
-              style={{
-                backgroundImage: `url(${cart.wideimg})`,
-              }}
-            ></div>
-            <h3 className='store-Gamepage-Headers' style={{ color: 'red' }}>
-              Price: $60.00
-            </h3>
-            <button style={{ height: 'auto', width: 'auto' }} className='globalbutton'>
-              Remove From Cart
-            </button>
-          </li>
+          {cart.map((item, i) => (
+            <li key={i}>
+              <h3 className='store-Gamepage-Headers' style={{ color: 'red' }}>
+                {item.name}
+              </h3>
+              <div
+                className='store-Cartpage-Img'
+                style={{
+                  backgroundImage: `url(${item.wideimg})`,
+                }}
+              ></div>
+              <h3 className='store-Gamepage-Headers' style={{ color: 'red' }}>
+                Price: $60.00
+              </h3>
+              <button style={{ height: 'auto', width: 'auto' }} className='globalbutton'>
+                Remove From Cart
+              </button>
+            </li>
+          ))}
         </ul>
         <div>
-          <Link to='/shop' style={{ height: 'auto', width: 'auto' }} onClick={() => buyButton(cart._id)} className='globalbutton'>
+          <Link to='/shop' style={{ height: 'auto', width: 'auto' }} onClick={() => buyButton(cart)} className='globalbutton'>
             Buy
           </Link>
           <h3 style={{ color: 'red' }}>Total: $60.00</h3>

@@ -264,112 +264,6 @@
   background-size: cover;
 }
 /*Chat */
-.chat {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-rows: 6% 94%;
-  background: rgb(0, 4, 17, 0.7);
-  background-size: cover;
-}
-.chat-Box {
-  border-top: #384d48 1px solid;
-  color: grey;
-}
-.chat-Container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: rgb(0, 4, 17, 0.7);
-  height: 100%;
-  width: 100%;
-}
-.chat-Channelname {
-  text-align: center;
-  font-size: 18px;
-  background: rgb(0, 0, 0, 1);
-}
-.chat-Messages {
-  padding: 1% 0;
-  overflow: auto;
-  flex: auto;
-  height: 100%;
-}
-.chat-MessageDiv {
-  height: auto;
-}
-.chat-MessageBox {
-  background: #f3f3f3;
-  margin-top: 2%;
-  margin-left: 1%;
-  border-radius: 8px;
-  padding: 5px 20px;
-  color: white;
-  display: inline-block;
-  max-width: 80%;
-  width: auto;
-  height: auto;
-}
-.chat-MessageText {
-  height: auto;
-  letter-spacing: 0;
-  float: left;
-  font-size: 1.1em;
-  word-wrap: break-word;
-  color: black;
-}
-.chat-MessageContainer {
-  display: flex;
-  width: auto;
-  height: auto;
-  justify-content: flex-end;
-  padding: 0;
-  margin-top: 3px;
-}
-.chat-MessageContainer:hover {
-  background: rgb(0, 4, 17, 0.7);
-}
-.chat-SentText {
-  width: auto;
-  display: flex;
-  align-items: center;
-  font-family: Helvetica;
-  color: red;
-  letter-spacing: 0.3px;
-}
-.form {
-  display: flex;
-
-  height: 8%;
-}
-.chat-Input {
-  border: none;
-  outline: none;
-  border-radius: 16px;
-  padding: 0;
-  margin: 1px;
-  width: 100%;
-  font-size: 1.2em;
-}
-.sendButton {
-  color: white;
-  outline: none;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #000411;
-  padding: 10px;
-  display: inline-block;
-  border-top: 1px solid #384d48;
-  border-left: 1px solid #929c9a;
-  border-bottom: rgb(0, 0, 0, 0) 1px solid;
-  border-right: rgb(0, 0, 0, 0) 1px solid;
-  width: 20%;
-}
-.sendButton:hover {
-  border: red 1px solid;
-  color: red;
-  cursor: pointer;
-}
 
 /*Profile Page */
 
@@ -935,6 +829,8 @@
 
 /*Right Sidebar*/
 
+/* Stream Chat */
+
 /*Server Userlist */
 .R-Sidebar-ServerUserlist {
   color: red;
@@ -1160,6 +1056,15 @@
   height: 65px;
   float: center;
   margin-top: 2px;
+}
+.offlineFriends {
+  opacity: 0.5;
+}
+.offlineFriends:hover {
+  opacity: 1;
+}
+.Friendlist-Friends ul li:hover {
+  opacity: 1;
 }
 .Friendlist-Friends li a {
   height: 30px;

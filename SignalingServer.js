@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const ObjectId = require('mongodb').ObjectID;
 const socketIO = require('socket.io');
 const http = require('http');
-//const User = require('./models/User');
+const User = require('./models/User');
 
 let UserManager = [];
 
@@ -31,6 +31,12 @@ db.once('open', () => {
     updateserver(change.documentKey);
   });
 
+  const userCollection = db.collection('users');
+  const updatedUser = userCollection.watch();
+  updatedUser.on('change', (change) => {
+    updateUser(change.documentKey);
+  });
+
   const channelCollection = db.collection('channels');
   const changeChannels = channelCollection.watch();
   changeChannels.on('change', (change) => {});
@@ -43,6 +49,7 @@ io.on('connect', (socket) => {
   socket.emit('userIdRequest');
   socket.on('returnId', async (userId, friendList) => {
     socket.join(userId);
+    setOnlineStatus(true, userId);
     const userInfo = {
       socketId: socket.id,
       userData: {
@@ -51,7 +58,7 @@ io.on('connect', (socket) => {
       },
     };
     UserManager.push(userInfo);
-    friendList.forEach((element) => io.to(element).emit('FriendUpdate', userId));
+    //friendList.forEach((element) => io.to(element).emit('FriendUpdate', userId));
   });
 
   socket.on('voice-chat:join', (channel) => {
@@ -80,8 +87,8 @@ io.on('connect', (socket) => {
     let User = UserManager.filter((User) => User.socketId === socket.id);
 
     if (User[0]) {
-      //setOnlineStatus(false, User[0].userData.userId);
-      User[0].userData.friendList.forEach((element) => io.to(element).emit('FriendUpdate', User[0].userData.userId));
+      setOnlineStatus(false, User[0].userData.userId);
+      //User[0].userData.friendList.forEach((element) => io.to(element).emit('FriendUpdate', User[0].userData.userId));
     }
 
     //.forEach((element) => io.to(element).emit('FriendUpdate', userId));
@@ -105,11 +112,25 @@ function updateserver(id) {
     });
 }
 
-// function setOnlineStatus(Online, userId) {
-//   let yay = User.findByIdAndUpdate(ObjectId(userId), {
-//     name: '2B Clutch',
-//   });
-//   console.log(yay);
-// }
+function updateUser(id) {
+  const active = db
+    .collection('users')
+    .find({ _id: ObjectId(id._id) })
+    .toArray((err, result) => {
+      result[0].friendList.forEach((element) => io.to(element).emit('FriendUpdate', server));
+    });
+}
+
+async function setOnlineStatus(Online, userId) {
+  if (Online) {
+    await User.findByIdAndUpdate(userId, {
+      onlineStatus: true,
+    });
+  } else {
+    await User.findByIdAndUpdate(userId, {
+      onlineStatus: false,
+    });
+  }
+}
 
 server.listen(process.env.PORT || 5002, () => console.log(`Server has started.. PORT 5002`));

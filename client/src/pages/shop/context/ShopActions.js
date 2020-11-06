@@ -37,7 +37,7 @@ export async function addToCart(dispatch, Game) {
 
 export async function buyGame(dispatch, Game) {
   try {
-    const res = await axios.put(`api/games/AddGame/${Game}`, requestConfig);
+    const res = await axios.put(`api/games/AddGame/${Game[0]._id}`, requestConfig);
   } catch (error) {
     console.error(error);
   }

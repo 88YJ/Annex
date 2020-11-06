@@ -177,6 +177,7 @@ router.get('/friends', middleware.isAuthenticated, async (req, res) => {
         profileBanner: profile.profileBanner,
         screenShots: profile.screenShots,
         backgroundPicture: profile.backgroundPicture,
+        onlineStatus: profile.onlineStatus,
       };
       friends.push(profileInfoObject);
     }

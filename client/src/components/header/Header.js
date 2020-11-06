@@ -13,7 +13,7 @@ import StreamIcon from '../../images/StreamIcon.png';
 import CartIcon from '../../images/CartIcon.png';
 
 import { useProfileDispatch, getFriends } from '../../pages/profile/context';
-import { useServerState, useServerDispatch, loadServerChannelList } from '../../pages/server/context';
+import { useServerState, useServerDispatch, loadServerChannelList, loadCurrentServer } from '../../pages/server/context';
 import { useSideBarDispatch, showGames } from '../../components/sidebar/context';
 
 //Import Types
@@ -36,6 +36,7 @@ export const Header = () => {
       connectSocket(socketDispatch);
     }
   }, [socket, socketDispatch]);
+
   useEffect(() => {
     if (socket && user) {
       socket.on('userIdRequest', async () => {
@@ -44,12 +45,19 @@ export const Header = () => {
       socket.on('FriendUpdate', async (data) => {
         getFriends(profileDispatch);
       });
-
-      socket.on('ServerUpdate', async (data) => {
-        loadServerChannelList(serverDispatch, data);
-      });
     }
   }, [socket, user]);
+
+  useEffect(() => {
+    if (currentServer) {
+      socket.on('ServerUpdate', async (data) => {
+        if (data._id === currentServer._id) {
+          loadServerChannelList(serverDispatch, data);
+          console.log(currentServer._id + data);
+        }
+      });
+    }
+  }, [serverDispatch, currentServer]);
 
   let navigationLinks;
 
