@@ -13,7 +13,7 @@ import StreamIcon from '../../images/StreamIcon.png';
 import CartIcon from '../../images/CartIcon.png';
 
 import { useProfileDispatch, getFriends } from '../../pages/profile/context';
-import { useServerState, useServerDispatch, loadServerChannelList, loadCurrentServer } from '../../pages/server/context';
+import { useServerState, useServerDispatch, loadServerChannelList } from '../../pages/server/context';
 import { useSideBarDispatch, showGames } from '../../components/sidebar/context';
 
 //Import Types

@@ -8,9 +8,11 @@ export const Cart = () => {
   const shopDispatch = useShopDispatch();
   const profileDispatch = useProfileDispatch();
 
-  function buyButton(gameid) {
-    buyGame(shopDispatch, gameid);
-    findOwnedGames(profileDispatch);
+  async function buyButton(game) {
+    await game.forEach((element) => buyGame(shopDispatch, element._id));
+    setTimeout(function task() {
+      findOwnedGames(profileDispatch);
+    }, 1000);
   }
 
   if (cart) {

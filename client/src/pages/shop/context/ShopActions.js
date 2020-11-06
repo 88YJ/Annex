@@ -1,4 +1,4 @@
-import { LOAD_STORE_GAMES, ADD_TO_CART, SET_STORE_GAMEPAGE } from './types';
+import { LOAD_STORE_GAMES, ADD_TO_CART, CLEAR_CART, SET_STORE_GAMEPAGE } from './types';
 import axios from 'axios';
 
 const requestConfig = {
@@ -37,7 +37,8 @@ export async function addToCart(dispatch, Game) {
 
 export async function buyGame(dispatch, Game) {
   try {
-    const res = await axios.put(`api/games/AddGame/${Game[0]._id}`, requestConfig);
+    const res = await axios.put(`api/games/AddGame/${Game}`, requestConfig);
+    dispatch({ type: CLEAR_CART });
   } catch (error) {
     console.error(error);
   }
