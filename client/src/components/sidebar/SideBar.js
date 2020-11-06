@@ -4,13 +4,14 @@ import { ChannelList } from './ChannelList';
 import { FriendList } from './FriendList';
 import { GameList } from './GameList';
 import { ServerUserList } from './ServerUserList';
+import { StreamChat } from './StreamChat';
 import { SHOW_RIGHT_SIDEBAR, SHOW_LEFT_SIDEBAR } from './context/types';
 import { useSideBarState } from './context';
 
 import { useProfileDispatch, useProfileState, getFriends, findOwnedGames } from '../../pages/profile/context';
 
 export const SideBar = (props) => {
-  const { LeftChannellist, LeftFriends, RightGames, RightUserlist } = useSideBarState();
+  const { LeftChannellist, LeftFriends, RightGames, RightUserlist, RightStreamChat } = useSideBarState();
 
   const { FriendsLoaded, ownedGamesLoaded } = useProfileState();
   const profileDispatch = useProfileDispatch();
@@ -53,6 +54,8 @@ export const SideBar = (props) => {
         );
       } else if (RightUserlist) {
         return <ServerUserList />;
+      } else if (RightStreamChat) {
+        return <StreamChat />;
       }
 
     default:

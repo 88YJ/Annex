@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthState } from '../../pages/authentication/context';
 
@@ -12,16 +12,50 @@ import SearchIcon from '../../images/SearchIcon.png';
 import StreamIcon from '../../images/StreamIcon.png';
 import CartIcon from '../../images/CartIcon.png';
 
+import { useProfileDispatch, getFriends } from '../../pages/profile/context';
+import { useServerState, useServerDispatch, loadServerChannelList } from '../../pages/server/context';
+import { useSideBarDispatch, showGames } from '../../components/sidebar/context';
+
 //Import Types
 import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types';
 
+import { useSocketState, useSocketDispatch } from '../socketManager';
+import { connectSocket } from '../socketManager/socketActions';
+
 export const Header = () => {
+  const sidebarDispatch = useSideBarDispatch();
   const { user, isLoggedIn } = useAuthState();
+  const profileDispatch = useProfileDispatch();
+  const serverDispatch = useServerDispatch();
+  const { currentServer } = useServerState();
+  const socketDispatch = useSocketDispatch();
+  const { socket } = useSocketState();
+
+  useEffect(() => {
+    if (!socket && user) {
+      connectSocket(socketDispatch);
+    }
+  }, [socket, socketDispatch]);
+  useEffect(() => {
+    if (socket && user) {
+      socket.on('userIdRequest', async () => {
+        socket.emit('returnId', user._id, user.friendList);
+      });
+      socket.on('FriendUpdate', async (data) => {
+        getFriends(profileDispatch);
+      });
+
+      socket.on('ServerUpdate', async (data) => {
+        loadServerChannelList(serverDispatch, data);
+      });
+    }
+  }, [socket, user]);
 
   let navigationLinks;
 
   function changesidebar() {
     document.getElementsByTagName('div')[3].setAttribute('class', 'app-mainGrid');
+    showGames(sidebarDispatch);
   }
 
   if (isLoggedIn) {

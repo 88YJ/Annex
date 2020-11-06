@@ -11,6 +11,7 @@ import { DashProvider } from './pages/dashboard/context';
 import { SideBarProvider } from './components/sidebar/context';
 import { ProfileProvider } from './pages/profile/context';
 import { ShopProvider } from './pages/shop/context';
+import { SocketPovider, SocketProvider } from './components/socketManager';
 
 //Import Pages
 import { Register } from './pages/authentication/Register';
@@ -56,32 +57,34 @@ function App() {
               <SideBarProvider>
                 <ProfileProvider>
                   <ShopProvider>
-                    <Router>
-                      <Fragment>
-                        <div className='app-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
-                          <div className='app-mainGrid'>
-                            <Header />
-                            <SideBar type={SHOW_LEFT_SIDEBAR} />
-                            <VoiceChat />
-                            <div className='app-browser'>
-                              <Switch>
-                                <Route exact path='/' component={Dashboard} />
-                                <Route exact path='/register' component={Register} />
-                                <Route exact path='/login' component={Login} />
-                                <Route exact path='/shop' component={Shop} />
-                                <Route exact path='/shop/cart' component={Cart} />
-                                <Route exact path='/shop/page/:game_id' component={ShopGamePage} />
-                                <Route path='/server/:server_id' component={ServerLanding} />
-                                <Route path='/profile/:profile_id' component={ProfilePage} />
-                                <Route path='/game/:game_id' component={MyGame} />
-                                <Route path='/stream' component={Stream} />
-                              </Switch>
+                    <SocketProvider>
+                      <Router>
+                        <Fragment>
+                          <div className='app-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
+                            <div className='app-mainGrid'>
+                              <Header />
+                              <SideBar type={SHOW_LEFT_SIDEBAR} />
+                              <VoiceChat />
+                              <div className='app-browser'>
+                                <Switch>
+                                  <Route exact path='/' component={Dashboard} />
+                                  <Route exact path='/register' component={Register} />
+                                  <Route exact path='/login' component={Login} />
+                                  <Route exact path='/shop' component={Shop} />
+                                  <Route exact path='/shop/cart' component={Cart} />
+                                  <Route exact path='/shop/page/:game_id' component={ShopGamePage} />
+                                  <Route path='/server/:server_id' component={ServerLanding} />
+                                  <Route path='/profile/:profile_id' component={ProfilePage} />
+                                  <Route path='/game/:game_id' component={MyGame} />
+                                  <Route path='/stream' component={Stream} />
+                                </Switch>
+                              </div>
+                              <SideBar type={SHOW_RIGHT_SIDEBAR} />
                             </div>
-                            <SideBar type={SHOW_RIGHT_SIDEBAR} />
                           </div>
-                        </div>
-                      </Fragment>
-                    </Router>
+                        </Fragment>
+                      </Router>
+                    </SocketProvider>
                   </ShopProvider>
                 </ProfileProvider>
               </SideBarProvider>

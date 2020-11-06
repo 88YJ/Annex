@@ -66,6 +66,10 @@ const UserSchema = mongoose.Schema({
       ref: 'users',
     },
   ],
+  onlineStatus: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model('user', UserSchema);

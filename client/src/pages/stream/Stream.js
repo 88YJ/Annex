@@ -1,10 +1,19 @@
 import React, { useEffect } from 'react';
 import StreamSetup from './StreamSetup';
 
+import { useSideBarDispatch, showFriends, showStreamChat } from '../../components/sidebar/context';
+
 export const Stream = () => {
+  const sidebarDispatch = useSideBarDispatch();
+
   useEffect(() => {
     document.getElementsByTagName('div')[3].setAttribute('class', 'app-mainGridStream');
   }, []);
+
+  useEffect(() => {
+    showFriends(sidebarDispatch);
+    showStreamChat(sidebarDispatch);
+  }, [sidebarDispatch]);
 
   return (
     <div>

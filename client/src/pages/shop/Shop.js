@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useShopState, useShopDispatch } from './context';
-import { loadStoreGames, setCurrentGame } from './context/ShopActions';
+import { loadStoreGames } from './context/ShopActions';
 
 export const Shop = () => {
   const { storeGames, loading } = useShopState();
