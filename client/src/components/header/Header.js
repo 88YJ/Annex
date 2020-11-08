@@ -35,7 +35,7 @@ export const Header = () => {
     if (!socket && user) {
       connectSocket(socketDispatch);
     }
-  }, [socket, socketDispatch]);
+  }, [socket, socketDispatch, user]);
 
   useEffect(() => {
     if (socket && user) {
@@ -46,7 +46,7 @@ export const Header = () => {
         getFriends(profileDispatch);
       });
     }
-  }, [socket, user]);
+  }, [socket, user, profileDispatch]);
 
   useEffect(() => {
     if (currentServer) {
@@ -57,7 +57,7 @@ export const Header = () => {
         }
       });
     }
-  }, [serverDispatch, currentServer]);
+  }, [serverDispatch, currentServer, socket]);
 
   let navigationLinks;
 

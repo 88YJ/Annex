@@ -1,10 +1,18 @@
-import { LOAD_CURRENT_SERVER, LOAD_USER_JOINED_SERVERS, LOAD_SERVER_USERLIST, LOAD_SERVER_CHANNELLIST, LOAD_CURRENT_CHANNEL } from './types';
+import {
+  LOAD_CURRENT_SERVER,
+  LOAD_USER_JOINED_SERVERS,
+  LOAD_SERVER_USERLIST,
+  LOAD_SERVER_CHANNELLIST,
+  LOAD_CURRENT_CHANNEL,
+  LOAD_CURRENT_TEXT_CHANNEL,
+} from './types';
 
 export const initialState = {
   joinedServersList: [],
   currentServer: undefined,
   channelList: [],
   currentChannel: undefined,
+  currentTextChannel: undefined,
   userList: [],
   loading: true,
 };
@@ -39,6 +47,11 @@ export const ServerReducer = (initialState, action) => {
       return {
         ...initialState,
         currentChannel: action.payload,
+      };
+    case LOAD_CURRENT_TEXT_CHANNEL:
+      return {
+        ...initialState,
+        currentTextChannel: action.payload,
       };
 
     default:

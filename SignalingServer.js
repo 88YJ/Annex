@@ -58,7 +58,31 @@ io.on('connect', (socket) => {
       },
     };
     UserManager.push(userInfo);
-    //friendList.forEach((element) => io.to(element).emit('FriendUpdate', userId));
+  });
+
+  socket.on('leaveStreamChat', (channel) => {
+    socket.leave(channel);
+    socket.removeAllListeners(channel + 'sentMessage');
+  });
+  socket.on('joinStreamChat', (channel) => {
+    socket.join(channel);
+
+    socket.on(channel + 'sentMessage', (messageContent) => {
+      io.sockets.in(channel).emit('recievedMessage', messageContent);
+    });
+  });
+
+  socket.on('leaveChat', (channel) => {
+    socket.leave(channel);
+    socket.removeAllListeners(channel + 'sentMessage');
+  });
+  socket.on('joinChat', (channel) => {
+    socket.join(channel);
+
+    socket.on(channel + 'sentMessage', (messageContent) => {
+      console.log('message recieved on server');
+      io.sockets.in(channel).emit('recievedMessage', messageContent);
+    });
   });
 
   socket.on('voice-chat:join', (channel) => {
@@ -88,10 +112,7 @@ io.on('connect', (socket) => {
 
     if (User[0]) {
       setOnlineStatus(false, User[0].userData.userId);
-      //User[0].userData.friendList.forEach((element) => io.to(element).emit('FriendUpdate', User[0].userData.userId));
     }
-
-    //.forEach((element) => io.to(element).emit('FriendUpdate', userId));
 
     socket.broadcast.emit('voice-chat:remove-user', {
       socket: socket.id,
@@ -100,24 +121,22 @@ io.on('connect', (socket) => {
 });
 
 function updateserver(id) {
-  const active = db
-    .collection('servers')
+  db.collection('servers')
     .find({ _id: ObjectId(id._id) })
     .toArray((err, result) => {
-      let server = {
+      let serverInfo = {
         _id: result[0]._id,
         channelList: result[0].channelList,
       };
-      result[0].userList.forEach((element) => io.to(element).emit('ServerUpdate', server));
+      result[0].userList.forEach((element) => io.to(element).emit('ServerUpdate', serverInfo));
     });
 }
 
 function updateUser(id) {
-  const active = db
-    .collection('users')
+  db.collection('users')
     .find({ _id: ObjectId(id._id) })
     .toArray((err, result) => {
-      result[0].friendList.forEach((element) => io.to(element).emit('FriendUpdate', server));
+      result[0].friendList.forEach((element) => io.to(element).emit('FriendUpdate'));
     });
 }
 

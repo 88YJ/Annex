@@ -1,4 +1,11 @@
-import { LOAD_CURRENT_SERVER, LOAD_CURRENT_CHANNEL, LOAD_USER_JOINED_SERVERS, LOAD_SERVER_USERLIST, LOAD_SERVER_CHANNELLIST } from './types';
+import {
+  LOAD_CURRENT_SERVER,
+  LOAD_CURRENT_CHANNEL,
+  LOAD_USER_JOINED_SERVERS,
+  LOAD_SERVER_USERLIST,
+  LOAD_SERVER_CHANNELLIST,
+  LOAD_CURRENT_TEXT_CHANNEL,
+} from './types';
 import axios from 'axios';
 
 const requestConfig = {
@@ -36,11 +43,18 @@ export async function loadCurrentChannel(dispatch, channel) {
     console.error(error);
   }
 }
+export async function loadCurrentTextChannel(dispatch, channel) {
+  try {
+    dispatch({ type: LOAD_CURRENT_TEXT_CHANNEL, payload: channel });
+    console.log('Channel loaded successfully.');
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export async function loadServerChannelList(dispatch, server) {
   try {
     let channelList = JSON.stringify(server.channelList);
-    console.log(server);
 
     const response = await axios.get(`/api/${server._id}/channels/${channelList}`, requestConfig);
     dispatch({ type: LOAD_SERVER_CHANNELLIST, payload: response.data });

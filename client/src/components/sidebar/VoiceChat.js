@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useAuthState } from '../../pages/authentication/context';
 import { useChatState, useChatDispatch, setSocket, joinVoiceChat, updateUserList, updateRTCPeerConnection, setRemoteStream } from '../../pages/chat/context';
 import { useServerState } from '../../pages/server/context';

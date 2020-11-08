@@ -44,7 +44,7 @@ export const SideBar = (props) => {
           </>
         );
       }
-
+      break;
     case SHOW_RIGHT_SIDEBAR:
       if (RightGames) {
         return (
@@ -57,7 +57,7 @@ export const SideBar = (props) => {
       } else if (RightStreamChat) {
         return <StreamChat />;
       }
-
+      break;
     default:
       return null;
   }

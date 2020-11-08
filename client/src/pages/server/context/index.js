@@ -1,4 +1,4 @@
-import { loadJoinedServers, loadCurrentServer, loadCurrentChannel, loadServerChannelList, loadServerUserList } from './ServerActions';
+import { loadJoinedServers, loadCurrentServer, loadCurrentChannel, loadServerChannelList, loadServerUserList, loadCurrentTextChannel } from './ServerActions';
 import { ServerProvider, useServerState, useServerDispatch } from './ServerContext';
 
 export {
@@ -10,4 +10,5 @@ export {
   loadCurrentChannel,
   loadServerChannelList,
   loadServerUserList,
+  loadCurrentTextChannel,
 };
