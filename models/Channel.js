@@ -23,6 +23,12 @@ const ChannelsSchema = mongoose.Schema({
         required: true,
         ref: 'servers',
     },
+    userList: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "users",
+        }
+    ],
 });
 
 module.exports = mongoose.model('channel', ChannelsSchema);

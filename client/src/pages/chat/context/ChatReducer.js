@@ -29,7 +29,7 @@ export const ChatReducer = (initialState, action) => {
         case UPDATE_USER_LIST:
             return {
                 ...initialState,
-                userList: [...initialState.userList, action.payload]
+                userList: action.payload
             }
 
         default:

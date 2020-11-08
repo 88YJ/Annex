@@ -4,9 +4,12 @@ const mongoose = require('mongoose');
 const ObjectId = require('mongodb').ObjectID;
 const socketIO = require('socket.io');
 const http = require('http');
+
 const User = require('./models/User');
+const Channel = require("./models/Channel");
 
 let UserManager = [];
+let ChannelManager = [];
 
 const app = express();
 app.use(router);
@@ -39,7 +42,9 @@ db.once('open', () => {
 
   const channelCollection = db.collection('channels');
   const changeChannels = channelCollection.watch();
-  changeChannels.on('change', (change) => { });
+  changeChannels.on('change', (change) => {
+    updateChannel(change.documentKey);
+  });
 });
 
 const server = http.createServer(app);
@@ -65,50 +70,45 @@ io.on('connect', (socket) => {
     socket.join(channel);
     console.log(user + " joined to channel: " + channel);
 
-    let data = { userId: user, socketId: socket.id };
-    io.to(channel).emit('voice-chat:update-users', (data));
-  });
+    ChannelManager[socket.id] = channel;
 
-  socket.on('voice-chat:call', (data) => {
-    socket.to(data.to).emit('voice-chat:receiving-call', {
-      offer: data.offer,
-      socket: socket.id,
-    });
+    updateChannelUserList(channel, user, false);
   });
-
-  socket.on('voice-chat:update-new-user', (data) => {
-    let userData = { userId: data.userId, socketId: data.socketId };
-    io.to(data.newUser).emit('voice-chat:update-users', (userData));
-  })
 
   socket.on("voice-chat:call", (data) => {
     socket.to(data.to).emit("voice-chat:receiving-call", {
       offer: data.offer,
-      socket: socket.id,
       from: data.from
     });
   });
 
-  socket.on('disconnect', () => {
-    let User = UserManager.filter((User) => User.socketId === socket.id);
-
-    if (User[0]) {
-      setOnlineStatus(false, User[0].userData.userId);
-      //User[0].userData.friendList.forEach((element) => io.to(element).emit('FriendUpdate', User[0].userData.userId));
-    }
-
-    socket.on("voice-chat:answer-call", (data) => {
-      socket.to(data.to).emit("voice-chat:answer-recieved", {
-        from: data.from,
-        answer: data.answer
-      });
-      //.forEach((element) => io.to(element).emit('FriendUpdate', userId));
-
-      socket.broadcast.emit('voice-chat:remove-user', {
-        socket: socket.id,
-      });
+  socket.on("voice-chat:answer-call", (data) => {
+    socket.to(data.to).emit("voice-chat:answer-recieved", {
+      from: data.from,
+      answer: data.answer
     });
   });
+
+  socket.on("voice-chat:ice-candidate", (data) => {
+    socket.to(data.to).emit("voice-chat:incoming-candidate", {
+      candidate: data.candidate,
+      from: data.from
+    })
+  })
+
+  socket.on('disconnect', () => {
+    let user = UserManager.filter((user) => user.socketId === socket.id);
+
+    if (user[0]) {
+      setOnlineStatus(false, user[0].userData.userId);
+      //User[0].userData.friendList.forEach((element) => io.to(element).emit('FriendUpdate', User[0].userData.userId));
+
+      if (ChannelManager[socket.id]) {
+        updateChannelUserList(ChannelManager[socket.id], user[0].userData.userId, true)
+      }
+    }
+  });
+
 });
 
 function updateserver(id) {
@@ -133,6 +133,16 @@ function updateUser(id) {
     });
 }
 
+function updateChannel(id) {
+  db.collection('channels')
+    .find({ _id: ObjectId(id._id) })
+    .toArray((err, result) => {
+      let users = result[0].userList;
+      result[0].userList.forEach((element) => io.to(element).emit('voice-chat:update-users', users));
+      console.log(users)
+    });
+}
+
 async function setOnlineStatus(Online, userId) {
   if (Online) {
     await User.findByIdAndUpdate(userId, {
@@ -142,6 +152,18 @@ async function setOnlineStatus(Online, userId) {
     await User.findByIdAndUpdate(userId, {
       onlineStatus: false,
     });
+  }
+}
+
+async function updateChannelUserList(channel, user, remove) {
+  if (remove) {
+    await Channel.findByIdAndUpdate(channel, {
+      $pull: { userList: user }
+    })
+  } else {
+    await Channel.findByIdAndUpdate(channel, {
+      $addToSet: { userList: user }
+    })
   }
 }
 
