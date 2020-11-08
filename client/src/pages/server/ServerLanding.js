@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
+import { Channel } from './Channel';
 import { useParams } from 'react-router';
-import { useServerState, useServerDispatch, loadCurrentServer } from './context';
+import { useServerState, useServerDispatch, loadCurrentServer, loadCurrentTextChannel } from './context';
 import { useSideBarDispatch, showChannellist, showUserlist } from '../../components/sidebar/context';
 
 export const ServerLanding = () => {
-  const { server_id } = useParams();
-  const { joinedServersList, currentServer, loading } = useServerState();
+  const { server_id, channel_id } = useParams();
+  const { joinedServersList, loading, channelList } = useServerState();
 
   const serverDispatch = useServerDispatch();
 
@@ -19,35 +20,20 @@ export const ServerLanding = () => {
   }, [loading, serverDispatch, joinedServersList, server_id]);
 
   useEffect(() => {
+    if (!loading) {
+      let channel = channelList.filter((channel) => channel._id === channel_id);
+      if (channel[0]) {
+        loadCurrentTextChannel(serverDispatch, channel[0]);
+      } else {
+        loadCurrentTextChannel(serverDispatch, undefined);
+      }
+    }
+  }, [loading, serverDispatch, channelList, channel_id]);
+
+  useEffect(() => {
     showChannellist(sidebarDispatch);
     showUserlist(sidebarDispatch);
   }, [sidebarDispatch]);
 
-  if (currentServer) {
-    return (
-      <div className='server-Landingpageimg' style={{ backgroundImage: `url(${currentServer.img})` }}>
-        <div>
-          <h1 className='globalHeader' style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)', color: 'red' }}>
-            {currentServer.name}
-          </h1>
-        </div>
-        <div>
-          <div>
-            <div>
-              <h2 className='globalHeader' style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)', color: 'red' }}>
-                Welcome To the Server!!
-              </h2>{' '}
-              <br />{' '}
-              <h2 className='globalHeader' style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)', color: 'red' }}>
-                Please take a look at our rules!
-              </h2>
-            </div>
-          </div>
-        </div>
-        <div className='globalHeader'></div>
-      </div>
-    );
-  }
-
-  return <div>Loading...</div>;
+  return <Channel />;
 };

@@ -63,7 +63,35 @@ io.on('connect', (socket) => {
       },
     };
     UserManager.push(userInfo);
-    //friendList.forEach((element) => io.to(element).emit('FriendUpdate', userId));
+  });
+
+  socket.on('respondLogged', (user) => {
+    setOnlineStatus(true, user);
+  });
+
+  socket.on('leaveStreamChat', (channel) => {
+    socket.leave(channel);
+    socket.removeAllListeners(channel + 'sentMessage');
+  });
+  socket.on('joinStreamChat', (channel) => {
+    socket.join(channel);
+
+    socket.on(channel + 'sentMessage', (messageContent) => {
+      io.sockets.in(channel).emit('recievedMessage', messageContent);
+    });
+  });
+
+  socket.on('leaveChat', (channel) => {
+    socket.leave(channel);
+    socket.removeAllListeners(channel + 'sentMessage');
+  });
+  socket.on('joinChat', (channel) => {
+    socket.join(channel);
+
+    socket.on(channel + 'sentMessage', (messageContent) => {
+      console.log('message recieved on server');
+      io.sockets.in(channel).emit('recievedMessage', messageContent);
+    });
   });
 
   socket.on('voice-chat:join', ({ channel, user }) => {
@@ -101,7 +129,7 @@ io.on('connect', (socket) => {
 
     if (user[0]) {
       setOnlineStatus(false, user[0].userData.userId);
-      //User[0].userData.friendList.forEach((element) => io.to(element).emit('FriendUpdate', User[0].userData.userId));
+      io.to(user[0].userData.userId).emit('stillLogged');
 
       if (ChannelManager[socket.id]) {
         updateChannelUserList(ChannelManager[socket.id], user[0].userData.userId, true)
@@ -112,24 +140,33 @@ io.on('connect', (socket) => {
 });
 
 function updateserver(id) {
-  const active = db
-    .collection('servers')
+  db.collection('servers')
     .find({ _id: ObjectId(id._id) })
     .toArray((err, result) => {
-      let server = {
+      let serverInfo = {
         _id: result[0]._id,
         channelList: result[0].channelList,
       };
-      result[0].userList.forEach((element) => io.to(element).emit('ServerUpdate', server));
+      result[0].userList.forEach((element) => io.to(element).emit('ServerUpdate', serverInfo));
+    });
+}
+
+function updateServerUsers(id) {
+  db.collection('servers')
+    .find({ _id: ObjectId(id) })
+    .toArray((err, server) => {
+      server[0].userList.forEach((element) => io.to(element).emit('ServerUserUpdate', id));
     });
 }
 
 function updateUser(id) {
-  const active = db
-    .collection('users')
+  db.collection('users')
     .find({ _id: ObjectId(id._id) })
     .toArray((err, result) => {
-      result[0].friendList.forEach((element) => io.to(element).emit('FriendUpdate', server));
+      if (result[0]) {
+        result[0].friendList.forEach((element) => io.to(element).emit('FriendUpdate'));
+        result[0].joinedServers.forEach((element) => updateServerUsers(element));
+      }
     });
 }
 

@@ -13,7 +13,7 @@ import StreamIcon from '../../images/StreamIcon.png';
 import CartIcon from '../../images/CartIcon.png';
 
 import { useProfileDispatch, getFriends } from '../../pages/profile/context';
-import { useServerState, useServerDispatch, loadServerChannelList } from '../../pages/server/context';
+import { useServerState, useServerDispatch, loadServerChannelList, loadServerUserList } from '../../pages/server/context';
 import { useSideBarDispatch, showGames } from '../../components/sidebar/context';
 
 //Import Types
@@ -35,7 +35,7 @@ export const Header = () => {
     if (!socket && user) {
       connectSocket(socketDispatch);
     }
-  }, [socket, socketDispatch]);
+  }, [socket, socketDispatch, user]);
 
   useEffect(() => {
     if (socket && user) {
@@ -46,7 +46,7 @@ export const Header = () => {
         getFriends(profileDispatch);
       });
     }
-  }, [socket, user]);
+  }, [socket, user, profileDispatch]);
 
   useEffect(() => {
     if (currentServer) {
@@ -57,7 +57,26 @@ export const Header = () => {
         }
       });
     }
-  }, [serverDispatch, currentServer]);
+  }, [serverDispatch, currentServer, socket]);
+
+  useEffect(() => {
+    if (currentServer) {
+      socket.on('ServerUserUpdate', async (data) => {
+        if (data === currentServer._id) {
+          loadServerUserList(serverDispatch, currentServer);
+          console.log('serverupdate');
+        }
+      });
+    }
+  }, [serverDispatch, currentServer, socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('stillLogged', async () => {
+        socket.emit('respondLogged', user._id);
+      });
+    }
+  }, [socket, user]);
 
   let navigationLinks;
 
