@@ -5,7 +5,6 @@ const ObjectId = require('mongodb').ObjectID;
 const socketIO = require('socket.io');
 const http = require('http');
 const User = require('./models/User');
-const Server = require('./models/Server');
 
 let UserManager = [];
 

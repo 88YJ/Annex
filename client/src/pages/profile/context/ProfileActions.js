@@ -29,7 +29,8 @@ export async function getProfiles(dispatch) {
 
 export async function loadCurrentProfile(dispatch, profile) {
   try {
-    dispatch({ type: LOAD_CURRENT_PROFILE, payload: profile });
+    const response = await axios.get(`/api/users/profile/${profile._id}`, requestConfig);
+    dispatch({ type: LOAD_CURRENT_PROFILE, payload: response.data });
     console.log('Profile Loaded..');
   } catch (error) {
     console.log(error);
