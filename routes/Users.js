@@ -197,7 +197,7 @@ router.get('/profile', middleware.isAuthenticated, async (req, res) => {
     let profileInfoArray = [];
 
     allProfiles.forEach((user) => {
-      const { _id, name, email, profilePicture, profileBanner, backgroundPicture, screenShots } = user;
+      const { _id, name, email, profilePicture, profileBanner, backgroundPicture, screenShots, onlineStatus } = user;
       const profileInfoObject = {
         _id: _id,
         name: name,
@@ -206,6 +206,7 @@ router.get('/profile', middleware.isAuthenticated, async (req, res) => {
         profileBanner: profileBanner,
         backgroundPicture: backgroundPicture,
         screenShots: screenShots,
+        onlineStatus: onlineStatus,
       };
       profileInfoArray.push(profileInfoObject);
     });

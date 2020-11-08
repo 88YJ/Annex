@@ -21,14 +21,26 @@ export const ServerUserList = () => {
           </h3>
           <div className='R-Sidebar-ServerUsers'>
             <ul>
-              {userList.map((user, i) => (
-                <li key={i} className='banner' style={{ backgroundImage: `url(${user.profileBanner})` }}>
-                  <div className='profilepicture' style={{ backgroundImage: `url('${user.profilePicture}')` }} />
-                  <Link to={`/profile/${user._id}`}>
-                    <p style={{ background: 'rgb(0,0,0,.5)' }}>{user.name}</p>
-                  </Link>
-                </li>
-              ))}
+              {userList.map((user, i) =>
+                user.onlineStatus ? (
+                  <li key={i} className='banner' style={{ backgroundImage: `url(${user.profileBanner})` }}>
+                    <div className='profilepicture' style={{ backgroundImage: `url('${user.profilePicture}')` }} />
+                    <Link to={`/profile/${user._id}`}>
+                      <p style={{ background: 'rgb(0,0,0,.5)' }}>{user.name}</p>
+                    </Link>
+                  </li>
+                ) : null
+              )}
+              {userList.map((user, i) =>
+                !user.onlineStatus ? (
+                  <li key={i} className='banner offlineFriends' style={{ backgroundImage: `url(${user.profileBanner})` }}>
+                    <div className='profilepicture' style={{ backgroundImage: `url('${user.profilePicture}')` }} />
+                    <Link to={`/profile/${user._id}`}>
+                      <p style={{ background: 'rgb(0,0,0,.5)' }}>{user.name}</p>
+                    </Link>
+                  </li>
+                ) : null
+              )}
             </ul>
           </div>
         </div>

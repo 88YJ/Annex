@@ -5,6 +5,7 @@ const ObjectId = require('mongodb').ObjectID;
 const socketIO = require('socket.io');
 const http = require('http');
 const User = require('./models/User');
+const Server = require('./models/Server');
 
 let UserManager = [];
 
@@ -60,6 +61,10 @@ io.on('connect', (socket) => {
     UserManager.push(userInfo);
   });
 
+  socket.on('respondLogged', (user) => {
+    setOnlineStatus(true, user);
+  });
+
   socket.on('leaveStreamChat', (channel) => {
     socket.leave(channel);
     socket.removeAllListeners(channel + 'sentMessage');
@@ -112,6 +117,7 @@ io.on('connect', (socket) => {
 
     if (User[0]) {
       setOnlineStatus(false, User[0].userData.userId);
+      io.to(User[0].userData.userId).emit('stillLogged');
     }
 
     socket.broadcast.emit('voice-chat:remove-user', {
@@ -132,11 +138,22 @@ function updateserver(id) {
     });
 }
 
+function updateServerUsers(id) {
+  db.collection('servers')
+    .find({ _id: ObjectId(id) })
+    .toArray((err, server) => {
+      server[0].userList.forEach((element) => io.to(element).emit('ServerUserUpdate', id));
+    });
+}
+
 function updateUser(id) {
   db.collection('users')
     .find({ _id: ObjectId(id._id) })
     .toArray((err, result) => {
-      result[0].friendList.forEach((element) => io.to(element).emit('FriendUpdate'));
+      if (result[0]) {
+        result[0].friendList.forEach((element) => io.to(element).emit('FriendUpdate'));
+        result[0].joinedServers.forEach((element) => updateServerUsers(element));
+      }
     });
 }
 

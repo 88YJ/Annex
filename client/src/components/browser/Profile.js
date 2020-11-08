@@ -125,6 +125,15 @@ export const Profile = () => {
                 <h3 className='globalHeaderR' style={{ color: 'red' }}>
                   Years: 0
                 </h3>
+                {CurrentProfile.onlineStatus ? (
+                  <h3 className='globalHeaderR' style={{ color: 'red' }}>
+                    Online
+                  </h3>
+                ) : (
+                  <h3 className='globalHeaderR' style={{ color: 'red' }}>
+                    Offline
+                  </h3>
+                )}
               </div>
               <div>
                 <button className='globalbutton' style={{ height: 'auto', width: 'auto' }} /*onClick={() => editProfile()}*/>
