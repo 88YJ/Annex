@@ -1,11 +1,8 @@
-import { JOIN_VOICE_CHAT, SET_SOCKET, UPDATE_USERLIST, UPDATE_RTC_PEER_CONNECTION, SET_REMOTE_STREAM } from "./types";
-
-const configuration = { 'iceServers': [{ 'urls': 'stun:stun.l.google.com:19302' }] }
+import { SET_SOCKET, SET_LOCAL_STREAM, SET_REMOTE_STREAM, UPDATE_USER_LIST } from "./types";
 
 export const initialState = {
     socket: undefined,
-    userList: {},
-    rtcPeerConnection: new RTCPeerConnection(configuration),
+    userList: [],
     localStream: undefined,
     remoteStream: undefined,
     loading: true
@@ -13,31 +10,26 @@ export const initialState = {
 
 export const ChatReducer = (initialState, action) => {
     switch (action.type) {
-        case JOIN_VOICE_CHAT:
-            return {
-                ...initialState,
-                localStream: action.payload,
-                loading: false
-            };
         case SET_SOCKET:
             return {
                 ...initialState,
                 socket: action.payload
             }
-        case UPDATE_USERLIST:
+        case SET_LOCAL_STREAM:
             return {
                 ...initialState,
-                userList: { ...initialState.userList, [action.payload.socket]: action.payload.rtc }
-            }
-        case UPDATE_RTC_PEER_CONNECTION:
-            return {
-                ...initialState,
-                rtcPeerConnection: action.payload
+                localStream: action.payload,
+                loading: false
             }
         case SET_REMOTE_STREAM:
             return {
                 ...initialState,
                 remoteStream: action.payload
+            }
+        case UPDATE_USER_LIST:
+            return {
+                ...initialState,
+                userList: [...initialState.userList, action.payload]
             }
 
         default:

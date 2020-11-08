@@ -1,4 +1,4 @@
-import { JOIN_VOICE_CHAT, SET_SOCKET, UPDATE_USERLIST, UPDATE_RTC_PEER_CONNECTION, SET_REMOTE_STREAM } from "./types";
+import { SET_SOCKET, SET_LOCAL_STREAM, SET_REMOTE_STREAM, UPDATE_USER_LIST } from "./types";
 import io from "socket.io-client";
 
 const ENDPOINT = ":5002";
@@ -14,31 +14,12 @@ export function setSocket(dispatch) {
     }
 }
 
-export async function joinVoiceChat(dispatch, payload) {
+export async function setLocalStream(dispatch, payload) {
     try {
-        dispatch({ type: JOIN_VOICE_CHAT, payload: payload });
-        console.log("Voice chat joined successfully.");
+        dispatch({ type: SET_LOCAL_STREAM, payload: payload });
+        console.log("Local stream successfully set.");
     } catch (error) {
         console.error(error)
-    }
-}
-
-export async function updateUserList(dispatch, payload) {
-    try {
-        const userObject = { socket: payload, rtc: undefined }
-        dispatch({ type: UPDATE_USERLIST, payload: userObject });
-        console.log("Chat user list updated.")
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-export async function updateRTCPeerConnection(dispatch, payload) {
-    try {
-        dispatch({ type: UPDATE_RTC_PEER_CONNECTION, payload: payload });
-        console.log("RTC peer connection updated.")
-    } catch (error) {
-        console.error(error);
     }
 }
 
@@ -46,6 +27,15 @@ export async function setRemoteStream(dispatch, payload) {
     try {
         dispatch({ type: SET_REMOTE_STREAM, payload: payload });
         console.log("Remote stream successfully set.");
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export async function updateUserList(dispatch, payload) {
+    try {
+        dispatch({ type: UPDATE_USER_LIST, payload: payload });
+        console.log("User list successfully updated.");
     } catch (error) {
         console.error(error)
     }

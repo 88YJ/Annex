@@ -4,64 +4,62 @@ import {
     useChatState,
     useChatDispatch,
     setSocket,
-    joinVoiceChat,
-    updateUserList,
-    updateRTCPeerConnection,
-    setRemoteStream
+    setLocalStream,
+    updateUserList
 } from "../../pages/chat/context";
 import { useServerState } from "../../pages/server/context";
 
+let RTCConfig = {
+    iceServers: [{ urls: 'stun:stun.services.mozilla.com' }, { urls: 'stun:stun.l.google.com:19302' }]
+};
+let peerConnections = [];
+
 export const VoiceChat = () => {
-    const { isLoggedIn } = useAuthState();
-    const { socket, userList, rtcPeerConnection, localStream, remoteStream } = useChatState();
+    const { isLoggedIn, user } = useAuthState();
+    const { socket, localStream, userList } = useChatState();
     const { currentChannel } = useServerState();
 
     const chatDispatch = useChatDispatch();
 
-    const callUser = useCallback(async (socketId) => {
-        console.log("Calling user: " + socketId);
+    const callUser = useCallback(async (data) => {
+        console.log("Calling user: " + data.userId);
 
-        const peerConnection = rtcPeerConnection;
-        const offer = await peerConnection.createOffer();
-        await peerConnection.setLocalDescription(new RTCSessionDescription(offer));
+        const offer = await peerConnections[data.userId].createOffer();
+        await peerConnections[data.userId].setLocalDescription(new RTCSessionDescription(offer));
 
-        updateRTCPeerConnection(chatDispatch, peerConnection)
-        socket.emit("voice-chat:call", { offer, to: socketId });
+        socket.emit("voice-chat:call", { offer, to: data.socketId, from: user._id });
 
-    }, [socket, rtcPeerConnection, chatDispatch]);
+    }, [socket, chatDispatch]);
 
     const answerCall = useCallback(async () => {
         socket.on("voice-chat:receiving-call", async (data) => {
-            const peerConnection = rtcPeerConnection;
+            console.log("reciving call from: " + data.from)
+            console.log(peerConnections);
 
-            await peerConnection.setRemoteDescription(
+            await peerConnections[data.from].setRemoteDescription(
                 new RTCSessionDescription(data.offer)
             );
-            const answer = await peerConnection.createAnswer();
-            await peerConnection.setLocalDescription(new RTCSessionDescription(answer));
 
-            updateRTCPeerConnection(chatDispatch, peerConnection);
-
+            const answer = await peerConnections[data.from].createAnswer();
+            await peerConnections[data.from].setLocalDescription(new RTCSessionDescription(answer));
             socket.emit("voice-chat:answer-call", {
                 answer,
-                to: data.socket
+                to: data.socket,
+                from: user._id
             });
         });
-    }, [socket, rtcPeerConnection, chatDispatch])
+    }, [socket, chatDispatch])
 
     const receiveAnswer = useCallback(async () => {
         socket.on("voice-chat:answer-recieved", async (data) => {
-            const peerConnection = rtcPeerConnection;
 
             //This is running twice, hence the if to stop
-            if (!peerConnection.remoteDescription) {
-                console.log(peerConnection);
-                await peerConnection.setRemoteDescription(new RTCSessionDescription(data.answer))
-                updateRTCPeerConnection(chatDispatch, peerConnection);
+            if (!peerConnections[data.from].remoteDescription) {
+                await peerConnections[data.from].setRemoteDescription(new RTCSessionDescription(data.answer))
+                console.log("received an answer from:" + data.from)
             }
         })
-
-    }, [socket, rtcPeerConnection, chatDispatch])
+    }, [socket, chatDispatch])
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -76,55 +74,53 @@ export const VoiceChat = () => {
                 //removeUserFromChat(chatDispatch, socket);
             })
 
-            socket.on('voice-chat:update-users', (socketId) => {
-                if (socketId !== socket.id) {
-                    updateUserList(chatDispatch, socketId);
-                    callUser(socketId);
-                    console.log("User joined voice chat!");
-                }
-            })
-
             answerCall();
             receiveAnswer();
         }
     }, [socket, userList, callUser, answerCall, receiveAnswer, chatDispatch])
 
     useEffect(() => {
-        const peerConnection = rtcPeerConnection;
+        userList.forEach(userInfo => {
+            console.log(userInfo);
+            if (!peerConnections[userInfo.userId]) {
+                peerConnections[userInfo.userId] = new RTCPeerConnection(RTCConfig);
+                localStream.getTracks().forEach(track => peerConnections[userInfo.userId].addTrack(track, localStream));
+
+                peerConnections[userInfo.userId].ontrack = ({ streams: [stream] }) => {
+                    const remote = document.getElementById('remote-video');
+                    if (remote) {
+                        remote.srcObject = stream;
+                    }
+                }
+
+                callUser(userInfo);
+            }
+        });
+
+    }, [userList, callUser])
+
+    useEffect(() => {
         if (currentChannel && socket) {
             navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
-                joinVoiceChat(chatDispatch, stream);
 
-                stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
+                setLocalStream(chatDispatch, stream);
+                const local = document.getElementById('local-video');
+                if (local) {
+                    local.srcObject = stream;
+                }
+
             }).then(() => {
-                socket.emit('voice-chat:join', currentChannel._id)
-                updateRTCPeerConnection(chatDispatch, peerConnection)
-            });
+                socket.emit('voice-chat:join', { channel: currentChannel._id, user: user._id })
+            }).finally(() => {
+                socket.on('voice-chat:update-users', (data) => {
+                    socket.emit('voice-chat:update-new-user', { userId: user._id, socketId: socket.id, newUser: data.userId })
+                    if (data.userId !== user._id) {
+                        updateUserList(chatDispatch, data);
+                    }
+                })
+            })
         }
-    }, [socket, currentChannel, rtcPeerConnection, chatDispatch])
-
-    useEffect(() => {
-        rtcPeerConnection.ontrack = ({ streams: [stream] }) => {
-            setRemoteStream(chatDispatch, stream);
-        };
-    }, [rtcPeerConnection, chatDispatch])
-
-    useEffect(() => {
-        if (localStream) {
-            const local = document.getElementById('local-video');
-            if (local) {
-                local.srcObject = localStream;
-            }
-        }
-
-        if (remoteStream) {
-            const remote = document.getElementById('remote-video');
-            if (remote) {
-                remote.srcObject = remoteStream;
-                console.log(remoteStream);
-            }
-        }
-    }, [localStream, remoteStream])
+    }, [socket, currentChannel, chatDispatch])
 
     let localVideo = <video autoPlay muted id="local-video" />
     let remoteVideo = <video autoPlay id="remote-video" />
