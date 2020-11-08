@@ -7,66 +7,93 @@ import './css/App.css';
 import { AuthProvider } from './pages/authentication/context';
 import { ServerProvider } from './pages/server/context';
 import { ChatProvider } from './pages/chat/context';
+import { DashProvider } from './pages/dashboard/context';
+import { SideBarProvider } from './components/sidebar/context';
+import { ProfileProvider } from './pages/profile/context';
+import { ShopProvider } from './pages/shop/context';
+import { SocketPovider, SocketProvider } from './components/socketManager';
 
 //Import Pages
 import { Register } from './pages/authentication/Register';
 import { Login } from './pages/authentication/Login';
 import { Dashboard } from './pages/dashboard/Dashboard';
 import { ServerLanding } from './pages/server/ServerLanding';
+import { Stream } from './pages/stream/Stream';
+import { ProfilePage } from './pages/profile/ProfilePage';
+import { MyGame } from './pages/profile/MyGame';
+import { Shop } from './pages/shop/Shop';
+import { ShopGamePage } from './pages/shop/ShopGamePage';
+import { Cart } from './pages/shop/Cart';
 
 //Import Components
 import { Header } from './components/header/Header';
-import { ChannelList } from './components/sidebar/ChannelList';
+import { SideBar } from './components/sidebar/SideBar';
 import { VoiceChat } from './components/sidebar/VoiceChat';
+
+//Import Types
+import { SHOW_RIGHT_SIDEBAR, SHOW_LEFT_SIDEBAR } from './components/sidebar/context/types';
 
 import DefaultBackground from './images/DefaultBackground.png';
 
 let user = JSON.parse(localStorage.getItem('user'));
-
-let sidebarwidth = 250;
-let backgroundImage = user ? user.backgroundPicture : DefaultBackground;
+let backgroundImage = DefaultBackground;
+if (user) {
+  backgroundImage = user.backgroundPicture ? user.backgroundPicture : DefaultBackground;
+}
 
 if (localStorage.token) {
- axios.defaults.headers.common['x-auth-token'] = localStorage.token;
+  axios.defaults.headers.common['x-auth-token'] = localStorage.token;
 } else {
- delete axios.defaults.headers.common['x-auth-token'];
+  delete axios.defaults.headers.common['x-auth-token'];
 }
 
 function App() {
- return (
-  <div className='App'>
-   <AuthProvider>
-    <ServerProvider>
-     <ChatProvider>
-      <Router>
-       <Fragment>
-        <div
-         className='img'
-         style={{ backgroundImage: `url(${backgroundImage})` }}
-        >
-         <div className='app-mainGrid'>
-          <Header />
-          <ChannelList />
-          <VoiceChat />
-          <div className='browser'>
-           <div className='dash'>
-            <Switch>
-             <Route exact path='/' component={Dashboard} />
-             <Route exact path='/register' component={Register} />
-             <Route exact path='/login' component={Login} />
-             <Route path='/server/:server_id' component={ServerLanding} />
-            </Switch>
-           </div>
-          </div>
-         </div>
-        </div>
-       </Fragment>
-      </Router>
-     </ChatProvider>
-    </ServerProvider>
-   </AuthProvider>
-  </div>
- );
+  return (
+    <div className='app'>
+      <AuthProvider>
+        <ServerProvider>
+          <ChatProvider>
+            <DashProvider>
+              <SideBarProvider>
+                <ProfileProvider>
+                  <ShopProvider>
+                    <SocketProvider>
+                      <Router>
+                        <Fragment>
+                          <div className='app-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
+                            <div className='app-mainGrid'>
+                              <Header />
+                              <SideBar type={SHOW_LEFT_SIDEBAR} />
+                              <VoiceChat />
+                              <div className='app-browser'>
+                                <Switch>
+                                  <Route exact path='/' component={Dashboard} />
+                                  <Route exact path='/register' component={Register} />
+                                  <Route exact path='/login' component={Login} />
+                                  <Route exact path='/shop' component={Shop} />
+                                  <Route exact path='/shop/cart' component={Cart} />
+                                  <Route exact path='/shop/page/:game_id' component={ShopGamePage} />
+                                  <Route path='/server/:server_id' component={ServerLanding} />
+                                  <Route path='/profile/:profile_id' component={ProfilePage} />
+                                  <Route path='/game/:game_id' component={MyGame} />
+                                  <Route path='/stream' component={Stream} />
+                                </Switch>
+                              </div>
+                              <SideBar type={SHOW_RIGHT_SIDEBAR} />
+                            </div>
+                          </div>
+                        </Fragment>
+                      </Router>
+                    </SocketProvider>
+                  </ShopProvider>
+                </ProfileProvider>
+              </SideBarProvider>
+            </DashProvider>
+          </ChatProvider>
+        </ServerProvider>
+      </AuthProvider>
+    </div>
+  );
 }
 
 export default App;

@@ -1,11 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {
- useAuthState,
- useAuthDispatch,
- logout,
-} from '../../pages/authentication/context';
+import { useAuthState } from '../../pages/authentication/context';
+
+//Component imports
 import { ServerList } from './ServerList';
+import { SubMenu } from './SubMenu';
 
 //Import images
 import PlusIcon from '../../images/PlusIcon.png';
@@ -13,109 +12,113 @@ import SearchIcon from '../../images/SearchIcon.png';
 import StreamIcon from '../../images/StreamIcon.png';
 import CartIcon from '../../images/CartIcon.png';
 
+import { useProfileDispatch, getFriends } from '../../pages/profile/context';
+import { useServerState, useServerDispatch, loadServerChannelList } from '../../pages/server/context';
+import { useSideBarDispatch, showGames } from '../../components/sidebar/context';
+
+//Import Types
+import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types';
+
+import { useSocketState, useSocketDispatch } from '../socketManager';
+import { connectSocket } from '../socketManager/socketActions';
+
 export const Header = () => {
- const { user, isLoggedIn } = useAuthState();
- const authDispatch = useAuthDispatch();
+  const sidebarDispatch = useSideBarDispatch();
+  const { user, isLoggedIn } = useAuthState();
+  const profileDispatch = useProfileDispatch();
+  const serverDispatch = useServerDispatch();
+  const { currentServer } = useServerState();
+  const socketDispatch = useSocketDispatch();
+  const { socket } = useSocketState();
 
- let navigationLinks;
+  useEffect(() => {
+    if (!socket && user) {
+      connectSocket(socketDispatch);
+    }
+  }, [socket, socketDispatch]);
 
- if (isLoggedIn) {
-  navigationLinks = (
-   <Fragment>
-    <li>
-     <Link to='/'>
-      <div
-       className='NavIcons'
-       style={{ backgroundImage: `url(${user.profilePicture})` }}
-      >
-       <ul>
-        <li>
-         <Link to='/'>My Profile</Link>
+  useEffect(() => {
+    if (socket && user) {
+      socket.on('userIdRequest', async () => {
+        socket.emit('returnId', user._id, user.friendList);
+      });
+      socket.on('FriendUpdate', async (data) => {
+        getFriends(profileDispatch);
+      });
+    }
+  }, [socket, user]);
+
+  useEffect(() => {
+    if (currentServer) {
+      socket.on('ServerUpdate', async (data) => {
+        if (data._id === currentServer._id) {
+          loadServerChannelList(serverDispatch, data);
+          console.log(currentServer._id + data);
+        }
+      });
+    }
+  }, [serverDispatch, currentServer]);
+
+  let navigationLinks;
+
+  function changesidebar() {
+    document.getElementsByTagName('div')[3].setAttribute('class', 'app-mainGrid');
+    showGames(sidebarDispatch);
+  }
+
+  if (isLoggedIn) {
+    navigationLinks = (
+      <Fragment>
+        <li onClick={() => changesidebar()}>
+          <Link to='/'>
+            <div className='NavIcons' style={{ backgroundImage: `url(${user.profilePicture})` }} />
+          </Link>
+          <SubMenu type={SHOW__HOME_SUBMENU} />
+        </li>
+        <li onClick={() => changesidebar()}>
+          <Link to='/shop'>
+            <div className='NavIcons' style={{ backgroundImage: `url(${CartIcon})` }} />
+          </Link>
+          <SubMenu type={SHOW_SHOP_SUBMENU} />
         </li>
         <li>
-         <Link to='/' onClick={() => logout(authDispatch)}>
-          Logout
-         </Link>
+          <Link to='/stream'>
+            <div className='NavIcons' style={{ backgroundImage: `url(${StreamIcon})` }} />
+          </Link>
+          <SubMenu type={SHOW_STREAM_SUBMENU} />
         </li>
-       </ul>
-      </div>
-     </Link>
-    </li>
-    <li>
-     <Link to='/store'>
-      <div
-       className='NavIcons'
-       style={{
-        backgroundImage: `url(${CartIcon})`,
-       }}
-      >
-       <ul>
+        <li onClick={() => changesidebar()}>
+          <Link to='/'>
+            <div className='NavIcons' style={{ backgroundImage: `url(${SearchIcon})` }} />
+          </Link>
+        </li>
+        <li style={{ marginTop: '3px', borderBottom: 'red 1px solid', paddingBottom: '4px', cursor: 'pointer' }} key='addServer' /*onClick={displayModal}*/>
+          <div className='NavIcons' style={{ backgroundImage: `url(${PlusIcon})` }} />
+        </li>
+      </Fragment>
+    );
+  } else {
+    navigationLinks = (
+      <Fragment>
         <li>
-         <Link to='/'>Cart</Link>
+          <Link to='/'>Dashoard</Link>
         </li>
-       </ul>
-      </div>
-     </Link>
-    </li>
-    <li>
-     <Link to='/'>
-      <div
-       className='NavIcons'
-       style={{
-        backgroundImage: `url(${StreamIcon})`,
-       }}
-      ></div>
-     </Link>
-    </li>
-    <li>
-     <Link to='/'>
-      <div
-       className='NavIcons'
-       style={{
-        backgroundImage: `url(${SearchIcon})`,
-       }}
-      ></div>
-     </Link>
-    </li>
-    <li
-     style={{
-      borderBottom: 'red 1px solid',
-      paddingBottom: '4px',
-      cursor: 'pointer',
-     }}
-     key='addServer'
-     /*onClick={displayModal}*/
-    >
-     <div
-      className='NavIcons'
-      style={{
-       backgroundImage: `url(${PlusIcon})`,
-      }}
-     ></div>
-    </li>
-   </Fragment>
+        <li>
+          <Link to='/register'>Register</Link>
+        </li>
+        <li>
+          <Link to='/login'>Login</Link>
+        </li>
+      </Fragment>
+    );
+  }
+  return (
+    <div className='Nav'>
+      <ul>
+        {navigationLinks}
+        <ServerList />
+      </ul>
+      <div className='NavSubMenu'></div>
+    </div>
   );
- } else {
-  navigationLinks = (
-   <Fragment>
-    <li>
-     <Link to='/'>Dashoard</Link>
-    </li>
-    <li>
-     <Link to='/register'>Register</Link>
-    </li>
-    <li>
-     <Link to='/login'>Login</Link>
-    </li>
-   </Fragment>
-  );
- }
- return (
-  <div className='Nav'>
-   <ul>
-    {navigationLinks}
-    <ServerList />
-   </ul>
-  </div>
- );
 };

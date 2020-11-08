@@ -129,4 +129,4 @@ export const VoiceChat = () => {
         {localVideo}
         {remoteVideo}
     </div>
-}
+};

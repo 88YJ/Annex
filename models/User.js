@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema({
   name: {
@@ -21,53 +21,55 @@ const UserSchema = mongoose.Schema({
   joinedServers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "servers",
+      ref: 'servers',
     },
   ],
   profilePicture: {
     type: String,
-    default:
-      "https://www.digitalconfectioners.com/wp-content/uploads/2016/11/dc-default-profile.png",
+    default: 'https://www.digitalconfectioners.com/wp-content/uploads/2016/11/dc-default-profile.png',
   },
   profileBanner: {
     type: String,
-    default:
-      "https://easyhitch.com.co/wp-content/uploads/2016/10/background_easy-hitch4-1200x480.jpg",
+    default: 'https://easyhitch.com.co/wp-content/uploads/2016/10/background_easy-hitch4-1200x480.jpg',
   },
   backgroundPicture: {
     type: String,
-    default: "https://cdn.wallpapersafari.com/16/42/BYjicP.jpg",
+    default: undefined,
   },
   friendList: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
+      ref: 'users',
     },
   ],
   incomingFriendRequests: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
+      ref: 'users',
     },
   ],
   pendingFriendRequests: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
+      ref: 'users',
     },
   ],
   ownedGames: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "games",
+      ref: 'games',
     },
   ],
   screenShots: [
     {
       type: String,
-      ref: "users",
+      ref: 'users',
     },
   ],
+  onlineStatus: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-module.exports = mongoose.model("user", UserSchema);
+module.exports = mongoose.model('user', UserSchema);
