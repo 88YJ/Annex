@@ -1,4 +1,4 @@
-import { updateStreamMessages, clearStreamMessages, setMessage, updateChannelMessages, clearChannelMessages } from './MessageActions';
+import { updateStreamMessages, clearStreamMessages, setMessage, updateChannelMessages, clearChannelMessages, updateDirectMessages, clearDirectMessages } from './MessageActions';
 import { MessageProvider, useMessageState, useMessageDispatch } from './MessageContext';
 
 export {
@@ -10,4 +10,6 @@ export {
   setMessage,
   updateChannelMessages,
   clearChannelMessages,
+  updateDirectMessages,
+  clearDirectMessages
 };

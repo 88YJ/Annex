@@ -24,7 +24,7 @@ export const FriendList = () => {
                   <div className='Friendlist-Submenu'>
                     <ul>
                       <li>
-                        <Link to='/redirectchat'>Message</Link>
+                        <Link to={`/directchat/${friend._id}`}>Message</Link>
                       </li>
                       <li>
                         <Link to={`/profile/${friend._id}`}>Profile</Link>
@@ -44,7 +44,7 @@ export const FriendList = () => {
                   <div className='Friendlist-Submenu'>
                     <ul>
                       <li>
-                        <Link to='/redirectchat'>Message</Link>
+                        <Link to={`/directchat/${friend._id}`}>Message</Link>
                       </li>
                       <li>
                         <Link to={`/profile/${friend._id}`}>Profile</Link>

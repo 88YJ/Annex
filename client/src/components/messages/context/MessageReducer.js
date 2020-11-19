@@ -1,8 +1,9 @@
-import { UPDATE_STREAM_MESSAGES, CLEAR_STREAM_MESSAGES, SET_MESSAGE, UPDATE_CHANNEL_MESSAGES, CLEAR_CHANNEL_MESSAGES } from './types';
+import { UPDATE_STREAM_MESSAGES, CLEAR_STREAM_MESSAGES, SET_MESSAGE, UPDATE_CHANNEL_MESSAGES, CLEAR_CHANNEL_MESSAGES, UPDATE_DIRECT_MESSAGES, CLEAR_DIRECT_MESSAGES } from './types';
 
 export const initialState = {
   StreamMessages: [],
   ChannelMessages: [],
+  DirectMessages: [],
   message: '',
 };
 
@@ -32,6 +33,16 @@ export const MessageReducer = (initialState, action) => {
       return {
         ...initialState,
         ChannelMessages: [],
+      };
+      case UPDATE_DIRECT_MESSAGES:
+      return {
+        ...initialState,
+        DirectMessages: [...initialState.DirectMessages, action.payload],
+      };
+      case CLEAR_DIRECT_MESSAGES:
+      return {
+        ...initialState,
+        DirectMessages: [],
       };
 
     default:

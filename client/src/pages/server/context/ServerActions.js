@@ -43,10 +43,17 @@ export async function loadCurrentChannel(dispatch, channel) {
     console.error(error);
   }
 }
-export async function loadCurrentTextChannel(dispatch, channel) {
+export async function loadCurrentTextChannel(dispatch, channel, server) {
   try {
-    dispatch({ type: LOAD_CURRENT_TEXT_CHANNEL, payload: channel });
-    console.log('Channel loaded successfully.');
+    if (channel) {
+      const response = await axios.get(`/api/${server}/channels/messages/${channel._id}`, requestConfig);
+      console.log(response);
+      dispatch({ type: LOAD_CURRENT_TEXT_CHANNEL, payload: response.data });
+      console.log('Channel loaded successfully.');
+    } else {
+      dispatch({ type: LOAD_CURRENT_TEXT_CHANNEL, payload: channel });
+      console.log('Channel loaded successfully.');
+    }
   } catch (error) {
     console.error(error);
   }

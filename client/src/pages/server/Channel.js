@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { CHANNEL_MESSAGES } from '../../components/messages/context/types';
 import { Message } from '../../components/messages/Message';
+import { ChannelHeader } from './ChannelHeader';
 import { useMessageDispatch, useMessageState, setMessage, updateChannelMessages, clearChannelMessages } from '../../components/messages/context';
 import { useSocketState } from '../../components/socketManager';
 import { useAuthState } from '../../pages/authentication/context';
@@ -34,14 +35,22 @@ export const Channel = () => {
     }
   }, [socket, currentTextChannel, messageDispatch]);
 
+  useEffect(() => {
+    if (currentTextChannel) {
+      //updateChannelMessages(currentTextChannel.messages)
+      console.log(currentTextChannel.messages);
+      currentTextChannel.messages.forEach((element) => updateChannelMessages(messageDispatch, element));
+    }
+  }, [currentTextChannel]);
+
   const sendMessage = (event) => {
     event.preventDefault();
-
     let messageContent = {
       userId: user._id,
       name: user.name,
       profilepicture: user.profilePicture,
       text: message,
+      date: Date(),
     };
 
     setMessage(messageDispatch, '');
@@ -77,23 +86,21 @@ export const Channel = () => {
     } else
       return (
         <div className='channelPage' style={{ backgroundImage: `url(${currentTextChannel.customization.icon})` }}>
-          <div>
-            <div className='chat-Channelname'>
-              <h2 className='globalHeader' style={{ color: 'red', backgroundColor: 'black', height: '4%' }}>
-                {currentTextChannel.name}
-              </h2>
-              <div className='channelGrid' style={{ backgroundColor: 'rgb(0,0,0,.8)' }}>
-                <div style={{ height: '100%' }}>
-                  <Message type={CHANNEL_MESSAGES} />
-                </div>
+          <div className='chat'>
+            <ChannelHeader />
+
+            <div className='chat_messages'>
+              <Message type={CHANNEL_MESSAGES} />
+            </div>
+            <div className='chat_input'>
+              <form>
                 <input
                   placeholder='Talk Some Trash Talk..'
-                  style={{ height: '100%', width: '100%', margin: '0', padding: '0', backgroundColor: 'black', color: 'white' }}
                   value={message}
                   onChange={({ target: { value } }) => setMessage(messageDispatch, value)}
                   onKeyPress={(event) => (event.key === 'Enter' ? sendMessage(event) : null)}
                 />
-              </div>
+              </form>
             </div>
           </div>
         </div>

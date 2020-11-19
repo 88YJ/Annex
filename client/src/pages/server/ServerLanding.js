@@ -23,7 +23,7 @@ export const ServerLanding = () => {
     if (!loading) {
       let channel = channelList.filter((channel) => channel._id === channel_id);
       if (channel[0]) {
-        loadCurrentTextChannel(serverDispatch, channel[0]);
+        loadCurrentTextChannel(serverDispatch, channel[0], server_id);
       } else {
         loadCurrentTextChannel(serverDispatch, undefined);
       }

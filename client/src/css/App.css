@@ -276,6 +276,84 @@
   display: grid;
   grid-template-rows: auto 40px;
 }
+.chat {
+  background: rgb(0, 4, 17, 0.8);
+  display: flex;
+  flex-direction: column;
+  flex: 0.75;
+}
+.chatHeader {
+  background: rgb(0, 4, 17, 0.9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 10px;
+  height: auto;
+}
+.chatHeader_hash {
+  color: white;
+  padding: 10px;
+  font-size: 30px;
+}
+.chat_messages {
+  flex: 1;
+}
+.chat_input {
+  color: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  margin: 20px;
+  border-radius: 5px;
+  border-top: 1px solid gray;
+  background-color: rgb(0, 0, 0, 0.9);
+  height: auto;
+  width: auto;
+}
+.chat_input > form > input {
+  padding: 0px;
+  background: transparent;
+  border: none;
+  outline-width: 0;
+  color: white;
+  font-size: large;
+}
+.chat_input > form {
+  align-items: center;
+  flex: 1;
+}
+.chat_inputButton {
+  display: none;
+}
+.message {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: white;
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
+}
+.message:hover {
+  background-color: rgb(0, 0, 0, 0.5);
+}
+.message_info {
+  margin-left: 10px;
+  height: auto;
+  border-top: #384d48 1px solid;
+}
+.message_info p img {
+  height: 20px;
+  width: 20px;
+}
+.message_timestamp {
+  color: grey;
+  margin-left: 10px;
+  font-size: x-small;
+}
 
 /*Profile Page */
 

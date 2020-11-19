@@ -6,7 +6,7 @@ const socketIO = require('socket.io');
 const http = require('http');
 
 const User = require('./models/User');
-const Channel = require("./models/Channel");
+const Channel = require('./models/Channel');
 
 let UserManager = [];
 let ChannelManager = [];
@@ -69,6 +69,11 @@ io.on('connect', (socket) => {
     setOnlineStatus(true, user);
   });
 
+  socket.on('text-chat:send-direct', (message, user) => {
+    socket.to(user).emit('text-chat:incoming-message', message);
+    io.to(message.userId).emit('text-chat:incoming-message', message);
+  })
+
   socket.on('leaveStreamChat', (channel) => {
     socket.leave(channel);
     socket.removeAllListeners(channel + 'sentMessage');
@@ -89,6 +94,7 @@ io.on('connect', (socket) => {
     socket.join(channel);
 
     socket.on(channel + 'sentMessage', (messageContent) => {
+      updateChannelMessages(channel, messageContent);
       console.log('message recieved on server');
       io.sockets.in(channel).emit('recievedMessage', messageContent);
     });
@@ -96,35 +102,36 @@ io.on('connect', (socket) => {
 
   socket.on('voice-chat:join', ({ channel, user }) => {
     socket.join(channel);
-    console.log(user + " joined to channel: " + channel);
+    console.log(user + ' joined to channel: ' + channel);
 
     ChannelManager[socket.id] = channel;
 
     updateChannelUserList(channel, user, false);
   });
 
-  socket.on("voice-chat:call", (data) => {
-    socket.to(data.to).emit("voice-chat:receiving-call", {
+  socket.on('voice-chat:call', (data) => {
+    socket.to(data.to).emit('voice-chat:receiving-call', {
       offer: data.offer,
-      from: data.from
-    });
-  });
-
-  socket.on("voice-chat:answer-call", (data) => {
-    socket.to(data.to).emit("voice-chat:answer-recieved", {
       from: data.from,
-      answer: data.answer
     });
   });
 
-  socket.on("voice-chat:ice-candidate", (data) => {
-    socket.to(data.to).emit("voice-chat:incoming-candidate", {
+  socket.on('voice-chat:answer-call', (data) => {
+    socket.to(data.to).emit('voice-chat:answer-recieved', {
+      from: data.from,
+      answer: data.answer,
+    });
+  });
+
+  socket.on('voice-chat:ice-candidate', (data) => {
+    socket.to(data.to).emit('voice-chat:incoming-candidate', {
       candidate: data.candidate,
-      from: data.from
-    })
-  })
+      from: data.from,
+    });
+  });
 
   socket.on('disconnect', () => {
+    socket.removeAllListeners('text-chat:send-direct');
     let user = UserManager.filter((user) => user.socketId === socket.id);
 
     if (user[0]) {
@@ -132,11 +139,10 @@ io.on('connect', (socket) => {
       io.to(user[0].userData.userId).emit('stillLogged');
 
       if (ChannelManager[socket.id]) {
-        updateChannelUserList(ChannelManager[socket.id], user[0].userData.userId, true)
+        updateChannelUserList(ChannelManager[socket.id], user[0].userData.userId, true);
       }
     }
   });
-
 });
 
 function updateserver(id) {
@@ -174,9 +180,11 @@ function updateChannel(id) {
   db.collection('channels')
     .find({ _id: ObjectId(id._id) })
     .toArray((err, result) => {
-      let users = result[0].userList;
-      result[0].userList.forEach((element) => io.to(element).emit('voice-chat:update-users', users));
-      console.log(users)
+      if (result[0].userList) {
+        let users = result[0].userList;
+        result[0].userList.forEach((element) => io.to(element).emit('voice-chat:update-users', users));
+        console.log(users);
+      }
     });
 }
 
@@ -195,13 +203,19 @@ async function setOnlineStatus(Online, userId) {
 async function updateChannelUserList(channel, user, remove) {
   if (remove) {
     await Channel.findByIdAndUpdate(channel, {
-      $pull: { userList: user }
-    })
+      $pull: { userList: user },
+    });
   } else {
     await Channel.findByIdAndUpdate(channel, {
-      $addToSet: { userList: user }
-    })
+      $addToSet: { userList: user },
+    });
   }
+}
+
+async function updateChannelMessages(channel, messageContent) {
+  await Channel.findByIdAndUpdate(channel, {
+    $addToSet: { messages: messageContent },
+  });
 }
 
 server.listen(process.env.PORT || 5002, () => console.log(`Server has started.. PORT 5002`));

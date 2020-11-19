@@ -25,6 +25,7 @@ import { MyGame } from './pages/profile/MyGame';
 import { Shop } from './pages/shop/Shop';
 import { ShopGamePage } from './pages/shop/ShopGamePage';
 import { Cart } from './pages/shop/Cart';
+import { DirectMessage } from './pages/directmessage/DirectMessage'
 
 //Import Components
 import { Header } from './components/header/Header';
@@ -76,6 +77,7 @@ function App() {
                                     <Route exact path='/shop/cart' component={Cart} />
                                     <Route exact path='/shop/page/:game_id' component={ShopGamePage} />
                                     <Route path='/server/:server_id/:channel_id' component={ServerLanding} />
+                                    <Route path='/directchat/:profile_id' component={DirectMessage} />
                                     <Route path='/profile/:profile_id' component={ProfilePage} />
                                     <Route path='/game/:game_id' component={MyGame} />
                                     <Route path='/stream' component={Stream} />
