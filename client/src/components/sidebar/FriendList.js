@@ -1,62 +1,74 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { style } from '../../css/CustomStyling'
 
-import { useProfileState } from '../../pages/profile/context';
+import { useProfileState } from '../../pages/profile/context'
 
 export const FriendList = () => {
-  const { Friends } = useProfileState();
+    const { Friends } = useProfileState()
 
-  return (
-    <>
-      <div className='L-Sidebar-Friendlist'>
-        <h3 className='globalHeader' style={{ background: 'black' }}>
-          Friends:
-        </h3>
-        <div className='Friendlist-Friends'>
-          <ul>
-            {Friends.map((friend, i) =>
-              friend.onlineStatus ? (
-                <li key={i} className='banner' style={{ backgroundImage: `url(${friend.profileBanner})` }}>
-                  <div className='profilepicture' style={{ backgroundImage: `url('${friend.profilePicture}')`, marginLeft: '3px' }} />
-                  <Link to='#'>
-                    <p style={{ background: 'rgb(0,0,0,.5)' }}>{friend.name}</p>
-                  </Link>
-                  <div className='Friendlist-Submenu'>
+    return (
+        <>
+            <div className='L-Sidebar-Friendlist'>
+                <h3
+                    className='globalHeader'
+                    style={{ background: `${style.tertiaryBackground}`, color: `${style.primaryHeader}`, borderBottom: `${style.secondaryOutLine} 1px solid` }}
+                >
+                    Friends:
+                </h3>
+                <div className='Friendlist-Friends'>
                     <ul>
-                      <li>
-                        <Link to={`/directchat/${friend._id}`}>Message</Link>
-                      </li>
-                      <li>
-                        <Link to={`/profile/${friend._id}`}>Profile</Link>
-                      </li>
+                        {Friends.map((friend, i) =>
+                            friend.onlineStatus ? (
+                                <li key={i} className='banner' style={{ backgroundImage: `url(${friend.profileBanner})` }}>
+                                    <div className='profilepicture' style={{ backgroundImage: `url('${friend.profilePicture}')`, marginLeft: '3px' }} />
+                                    <Link to='#'>
+                                        <p style={{ background: 'rgb(0,0,0,.5)', color: `${style.tertiaryHeader}` }}>{friend.name}</p>
+                                    </Link>
+                                    <div className='Friendlist-Submenu'>
+                                        <ul>
+                                            <li>
+                                                <Link to={`/profile/${friend._id}`} style={{ height: '100%' }}>
+                                                    Profile
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={`/directchat/${friend._id}`} style={{ height: '100%' }}>
+                                                    Message
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            ) : null
+                        )}
+                        {Friends.map((friend, i) =>
+                            friend.onlineStatus === false ? (
+                                <li key={i} className='banner offlineFriends' style={{ backgroundImage: `url(${friend.profileBanner})` }}>
+                                    <div className='profilepicture' style={{ backgroundImage: `url('${friend.profilePicture}')`, marginLeft: '3px' }} />
+                                    <Link to='#'>
+                                        <p style={{ background: 'rgb(0,0,0,.5)', color: `${style.tertiaryHeader}` }}>{friend.name}</p>
+                                    </Link>
+                                    <div className='Friendlist-Submenu'>
+                                        <ul>
+                                            <li>
+                                                <Link to={`/profile/${friend._id}`} style={{ height: '100%' }}>
+                                                    Profile
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to={`/directchat/${friend._id}`} style={{ height: '100%' }}>
+                                                    Message
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            ) : null
+                        )}
                     </ul>
-                  </div>
-                </li>
-              ) : null
-            )}
-            {Friends.map((friend, i) =>
-              friend.onlineStatus === false ? (
-                <li key={i} className='banner offlineFriends' style={{ backgroundImage: `url(${friend.profileBanner})` }}>
-                  <div className='profilepicture' style={{ backgroundImage: `url('${friend.profilePicture}')`, marginLeft: '3px' }} />
-                  <Link to='#'>
-                    <p style={{ background: 'rgb(0,0,0,.5)' }}>{friend.name}</p>
-                  </Link>
-                  <div className='Friendlist-Submenu'>
-                    <ul>
-                      <li>
-                        <Link to={`/directchat/${friend._id}`}>Message</Link>
-                      </li>
-                      <li>
-                        <Link to={`/profile/${friend._id}`}>Profile</Link>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-              ) : null
-            )}
-          </ul>
-        </div>
-      </div>
-    </>
-  );
-};
+                </div>
+            </div>
+        </>
+    )
+}

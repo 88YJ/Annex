@@ -47,8 +47,6 @@ router.get('/FindGame/:id', middleware.isAuthenticated, async (req, res) => {
   try {
     const game = await Game.findById(req.params.id);
 
-    console.log(game);
-
     const { name, img, backgroundimg, wideimg, banner, _id } = game;
 
     const gameInfo = {
