@@ -55,6 +55,6 @@ export const ServerReducer = (initialState, action) => {
       };
 
     default:
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action type: ${action.type}`)
   }
-};
+}

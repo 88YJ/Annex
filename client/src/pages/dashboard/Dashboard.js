@@ -1,27 +1,26 @@
-import React, { useEffect } from 'react';
-import { Carousel } from '../../components/browser/Carousel';
-import { OwnedGames } from '../../components/browser/OwnedGames';
-import { CAROUSEL_DASHBOARD } from '../../components/browser/types/types';
-
-import { useSideBarDispatch, showFriends, showGames } from '../../components/sidebar/context';
+import React, { useEffect } from 'react'
+import { Carousel } from '../../components/browser/Carousel'
+import { OwnedGames } from '../../components/browser/OwnedGames'
+import { CAROUSEL_DASHBOARD } from '../../components/browser/types/types'
+import { useSideBarDispatch, showFriends, showGames } from '../../components/sidebar/context'
+import { style } from '../../css/CustomStyling'
 
 export const Dashboard = () => {
-  const sidebarDispatch = useSideBarDispatch();
+    const sidebarDispatch = useSideBarDispatch()
+    useEffect(() => {
+        showFriends(sidebarDispatch)
+        showGames(sidebarDispatch)
+    }, [sidebarDispatch])
 
-  useEffect(() => {
-    showFriends(sidebarDispatch);
-    showGames(sidebarDispatch);
-  }, [sidebarDispatch]);
-
-  return (
-    <div className='dashboard'>
-      <h1 className='globalHeader' style={{ color: 'white' }}>
-        Dashboard!
-      </h1>
-      <div className='dashboard-Grid'>
-        <Carousel type={CAROUSEL_DASHBOARD} />
-      </div>
-      <OwnedGames />
-    </div>
-  );
-};
+    return (
+        <div className='dashboard'>
+            <h1 className='globalHeader' style={{ color: `${style.primaryHeader}` }}>
+                Dashboard!
+            </h1>
+            <div className='dashboard-Grid'>
+                <Carousel type={CAROUSEL_DASHBOARD} />
+            </div>
+            <OwnedGames />
+        </div>
+    )
+}
