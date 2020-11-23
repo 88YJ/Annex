@@ -1,4 +1,4 @@
-import { loadJoinedServers, loadCurrentServer, loadCurrentChannel, loadServerChannelList, loadServerUserList, loadCurrentTextChannel } from './ServerActions';
+import { loadJoinedServers, loadCurrentServer, loadCurrentVoiceChannel, loadServerChannelList, loadServerUserList, loadCurrentTextChannel } from './ServerActions';
 import { ServerProvider, useServerState, useServerDispatch } from './ServerContext';
 
 export {
@@ -7,7 +7,7 @@ export {
   useServerDispatch,
   loadJoinedServers,
   loadCurrentServer,
-  loadCurrentChannel,
+  loadCurrentVoiceChannel,
   loadServerChannelList,
   loadServerUserList,
   loadCurrentTextChannel,

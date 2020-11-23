@@ -22,12 +22,9 @@ const ChannelsSchema = mongoose.Schema({
     required: true,
     ref: 'servers',
   },
-  userList: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'users',
-    },
-  ],
+  userList: {
+    type: Array
+  },
   messages: {
     type: Array,
   },

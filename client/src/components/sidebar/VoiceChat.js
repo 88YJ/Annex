@@ -17,7 +17,7 @@ let peerConnections = [];
 export const VoiceChat = () => {
     const { user } = useAuthState();
     const { localStream, userList } = useChatState();
-    const { currentChannel } = useServerState();
+    const { currentVoiceChannel } = useServerState();
     const { socket } = useSocketState();
     const chatDispatch = useChatDispatch();
 
@@ -100,7 +100,7 @@ export const VoiceChat = () => {
     }, [userList, callUser])
 
     useEffect(() => {
-        if (currentChannel && socket) {
+        if (currentVoiceChannel && socket) {
             navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
 
                 setLocalStream(chatDispatch, stream);
@@ -110,10 +110,10 @@ export const VoiceChat = () => {
                 }
 
             }).then(() => {
-                socket.emit('voice-chat:join', { channel: currentChannel._id, user: user._id })
+                socket.emit('voice-chat:join', { channel: currentVoiceChannel._id, user: user._id })
             })
         }
-    }, [socket, currentChannel, chatDispatch])
+    }, [socket, currentVoiceChannel, chatDispatch])
 
     useEffect(() => {
         if (socket) {

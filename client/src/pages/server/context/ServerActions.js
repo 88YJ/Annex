@@ -1,6 +1,6 @@
 import {
   LOAD_CURRENT_SERVER,
-  LOAD_CURRENT_CHANNEL,
+  LOAD_CURRENT_VOICE_CHANNEL,
   LOAD_USER_JOINED_SERVERS,
   LOAD_SERVER_USERLIST,
   LOAD_SERVER_CHANNELLIST,
@@ -35,9 +35,9 @@ export function loadCurrentServer(dispatch, server) {
   }
 }
 
-export async function loadCurrentChannel(dispatch, channel) {
+export async function loadCurrentVoiceChannel(dispatch, channel) {
   try {
-    dispatch({ type: LOAD_CURRENT_CHANNEL, payload: channel });
+    dispatch({ type: LOAD_CURRENT_VOICE_CHANNEL, payload: channel });
     console.log('Channel loaded successfully.');
   } catch (error) {
     console.error(error);

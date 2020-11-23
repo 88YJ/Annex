@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useServerState, useServerDispatch, loadServerChannelList, loadCurrentChannel } from '../../pages/server/context';
+import { useServerState, useServerDispatch, loadServerChannelList, loadCurrentVoiceChannel } from '../../pages/server/context';
 
 export const ChannelList = () => {
   const { currentServer, channelList } = useServerState();
@@ -12,9 +12,9 @@ export const ChannelList = () => {
     }
   }, [currentServer, serverDispatch]);
 
-  const handleChannelJoin = (channel) => {
+  const handleVoiceChannelJoin = (channel) => {
     try {
-      loadCurrentChannel(serverDispatch, channel);
+      loadCurrentVoiceChannel(serverDispatch, channel);
     } catch (error) {
       console.error(error);
     }
@@ -43,9 +43,14 @@ export const ChannelList = () => {
           {channelList.map((channel) =>
             channel.voiceChannel ? (
               <li key={channel.name}>
-                <Link onClick={() => handleChannelJoin(channel)} to='#'>
+                <Link onClick={() => handleVoiceChannelJoin(channel)} to='#'>
                   {channel.name}
                 </Link>
+                {channel.userList.map((user) =>
+                  <li key={user}>
+                    {user}
+                  </li>
+                )}
               </li>
             ) : null
           )}
