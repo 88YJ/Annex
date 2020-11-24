@@ -36,7 +36,7 @@ router.get('/messages/:channel_id', middleware.isAuthenticated, async (req, res)
 })
 
 //Post a new channel to the current server
-router.post('/', createChannelCheck, async (req, res) => {
+router.post('/:server_id', createChannelCheck, async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })

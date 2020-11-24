@@ -103,7 +103,7 @@ export const VoiceChat = () => {
                 }
             }
         })
-    }, [userList, callUser, localStream, receiveAnswer, socket, answerCall, handleIceCandidate, user])
+    }, [userList, callUser, localStream, receiveAnswer, socket, answerCall, user])
 
     useEffect(() => {
         if (currentVoiceChannel && socket) {
@@ -117,7 +117,7 @@ export const VoiceChat = () => {
                     }
                 })
                 .then(() => {
-                    socket.emit('voice-chat:join', { channel: currentVoiceChannel._id, user: user._id })
+                    socket.emit('voice-chat:join', { channel: currentVoiceChannel._id, user: user })
                 })
         }
     }, [socket, currentVoiceChannel, chatDispatch, user])

@@ -95,7 +95,6 @@ io.on('connect', (socket) => {
 
         socket.on(channel + 'sentMessage', (messageContent) => {
             updateChannelMessages(channel, messageContent)
-            console.log('message recieved on server')
             io.sockets.in(channel).emit('recievedMessage', messageContent)
         })
     })
@@ -132,6 +131,13 @@ io.on('connect', (socket) => {
 
     socket.on('disconnect', () => {
         socket.removeAllListeners('text-chat:send-direct')
+        socket.removeAllListeners('voice-chat:join')
+        socket.removeAllListeners('voice-chat:update-users')
+        socket.removeAllListeners('voice-chat:incoming-candidate')
+        socket.removeAllListeners('voice-chat:ice-candidate')
+        socket.removeAllListeners('voice-chat:answer-recieved')
+        socket.removeAllListeners('voice-chat:answer-call')
+        socket.removeAllListeners('voice-chat:receiving-call')
         let user = UserManager.filter((user) => user.socketId === socket.id)
 
         if (user[0]) {
@@ -139,7 +145,7 @@ io.on('connect', (socket) => {
             io.to(user[0].userData.userId).emit('stillLogged')
 
             if (ChannelManager[socket.id]) {
-                updateChannelUserList(ChannelManager[socket.id], user[0].userData.userId, true)
+                updateChannelUserList(ChannelManager[socket.id], user[0].userData, true)
             }
         }
     })
@@ -182,14 +188,17 @@ function updateChannel(id) {
         .find({ _id: ObjectId(id._id) })
         .toArray((err, result) => {
             if (result[0].userList) {
-                let users = result[0].userList
-                result[0].userList.forEach((element) => io.to(element).emit('voice-chat:update-users', users))
-                console.log(users)
+                let IDarray = [];
+                result[0].userList.forEach((item) => IDarray.push(item._id))
+                
+                console.log(IDarray)
+                result[0].userList.forEach((element) => io.to(element._id).emit('voice-chat:update-users', IDarray))
             }
         })
 }
 
 async function setOnlineStatus(Online, userId) {
+  
     if (Online) {
         await User.findByIdAndUpdate(userId, {
             onlineStatus: true,
@@ -203,13 +212,25 @@ async function setOnlineStatus(Online, userId) {
 
 async function updateChannelUserList(channel, user, remove) {
     if (remove) {
+        let channelholder = await Channel.findById(channel)
+
+        let result = channelholder.userList.filter(item => item._id.includes(user.userId))
+
         await Channel.findByIdAndUpdate(channel, {
-            $pull: { userList: user },
+          
+          $pull: { userList: result[0] },
         })
+
+        updateserver(channelholder.owner);
     } else {
+        let channelholder = await Channel.findById(channel)
+
         await Channel.findByIdAndUpdate(channel, {
+            
             $addToSet: { userList: user },
         })
+
+        updateserver(channelholder.owner);
     }
 }
 

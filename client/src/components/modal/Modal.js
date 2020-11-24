@@ -2,6 +2,7 @@ import React from 'react'
 import { useModalDispatch, useModalState, hideModal } from './context'
 import { ScreenshotForm } from './ScreenshotForm'
 import { CreateServerForm } from './CreateServerForm'
+import { CreateChannelForm } from './CreateChannelForm'
 
 import { style } from '../../css/CustomStyling'
 
@@ -28,6 +29,7 @@ export const Modal = () => {
         <>
             {show && screenShot ? customContent(<ScreenshotForm />) : null}
             {show && addServer ? customContent(<CreateServerForm />) : null}
+            {show && addChannel ? customContent(<CreateChannelForm />) : null}
         </>
     )
 }

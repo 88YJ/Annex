@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useServerState, useServerDispatch, loadServerChannelList, loadCurrentVoiceChannel } from '../../pages/server/context';
+import { useModalDispatch, showModalWithAddChannel } from '../modal/context'
 import { style } from '../../css/CustomStyling'
+import PlusIcon from '../../images/PlusIcon.png'
 
 export const ChannelList = () => {
     const { currentServer, channelList, currentTextChannel } = useServerState()
     const serverDispatch = useServerDispatch()
+    const modalDispatch = useModalDispatch()
 
     useEffect(() => {
         if (currentServer) {
@@ -66,16 +69,21 @@ export const ChannelList = () => {
                                     {'< '}
                                     {channel.name}
                                 </Link>
-                                <ul>
+                                <ul className='channelUserlist'>
                                   {channel.userList.map((user) =>
-                                    <li key={user}>
-                                      {user}
-                                    </li>
+                                    <Link to={`/profile/${user._id}`} key={user._id}>
+                                      <li style={{color:`${style.primaryHeader}`, marginLeft:'8px'}} >
+                                        <div className='NavIcons' style={{ backgroundImage: `url(${user.profilePicture})`, height:'25px', width:'25px' }} />{user.name}
+                                      </li>
+                                    </Link>
                                   )}
                                 </ul>
                             </li>
                         ) : null
                     )}
+                    <li style={{ marginTop: '3px', paddingBottom: '4px', cursor: 'pointer' }} key='addChannel' >
+                        <div className='NavIcons' style={{ backgroundImage: `url(${PlusIcon})` }} onClick={() => showModalWithAddChannel(modalDispatch)} />
+                    </li>
                 </ul>
             </div>
         )

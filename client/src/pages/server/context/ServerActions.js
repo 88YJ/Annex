@@ -97,3 +97,13 @@ export async function createServer(dispatch, server) {
         console.error(error)
     }
 }
+
+export async function createChannel(dispatch, channel, server) {
+  try {
+      const response = await axios.post(`/api/${server}/channels/${server}`, channel, requestConfig)
+      console.log(response.data)
+      console.log('Channel Created')
+  } catch (error) {
+      console.error(error)
+  }
+}

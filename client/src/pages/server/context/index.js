@@ -6,6 +6,7 @@ import {
   loadServerUserList,
   loadCurrentTextChannel,
   createServer,
+  createChannel
 } from './ServerActions'
 import { ServerProvider, useServerState, useServerDispatch } from './ServerContext'
 
@@ -20,4 +21,5 @@ export {
   loadServerUserList,
   loadCurrentTextChannel,
   createServer,
+  createChannel
 }

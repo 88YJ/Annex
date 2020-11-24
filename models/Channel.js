@@ -28,6 +28,10 @@ const ChannelsSchema = mongoose.Schema({
   messages: {
     type: Array,
   },
+  voiceChannel: {
+    type: Boolean,
+    default: false
+  }
 });
 
 module.exports = mongoose.model('channel', ChannelsSchema);

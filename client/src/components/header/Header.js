@@ -64,6 +64,17 @@ export const Header = () => {
 
     useEffect(() => {
         if (currentServer) {
+            socket.on('voice-chat:user-joined-chat', async (data) => {
+                if (data._id === currentServer._id) {
+                    loadServerChannelList(serverDispatch, data)
+                    console.log(currentServer._id + data)
+                }
+            })
+        }
+    }, [serverDispatch, currentServer, socket])
+
+    useEffect(() => {
+        if (currentServer) {
             socket.on('ServerUserUpdate', async (data) => {
                 if (data === currentServer._id) {
                     loadServerUserList(serverDispatch, currentServer)
