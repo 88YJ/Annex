@@ -34,6 +34,7 @@ import { Header } from './components/header/Header'
 import { SideBar } from './components/sidebar/SideBar'
 import { VoiceChat } from './components/sidebar/VoiceChat'
 import { Modal } from './components/modal/Modal'
+import { SocketMaster } from './components/socketManager/SocketMaster'
 
 //Import Types
 import { SHOW_RIGHT_SIDEBAR, SHOW_LEFT_SIDEBAR } from './components/sidebar/context/types'
@@ -72,6 +73,7 @@ function App() {
                                                                 <div className='app-mainGrid'>
                                                                     <Header />
                                                                     <SideBar type={SHOW_LEFT_SIDEBAR} />
+                                                                    <SocketMaster />
                                                                     <VoiceChat />
                                                                     <div
                                                                         className='app-browser'

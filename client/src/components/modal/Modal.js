@@ -3,11 +3,12 @@ import { useModalDispatch, useModalState, hideModal } from './context'
 import { ScreenshotForm } from './ScreenshotForm'
 import { CreateServerForm } from './CreateServerForm'
 import { CreateChannelForm } from './CreateChannelForm'
+import { EditChannelForm } from './EditChannelForm'
 
 import { style } from '../../css/CustomStyling'
 
 export const Modal = () => {
-    const { show, addServer, addChannel, editProfile, screenShot } = useModalState()
+    const { show, addServer, addChannel, editProfile, screenShot, channelEdit } = useModalState()
     const modalDispatch = useModalDispatch()
 
     const onHideModal = () => {
@@ -28,6 +29,7 @@ export const Modal = () => {
     return (
         <>
             {show && screenShot ? customContent(<ScreenshotForm />) : null}
+            {show && channelEdit ? customContent(<EditChannelForm />) : null}
             {show && addServer ? customContent(<CreateServerForm />) : null}
             {show && addChannel ? customContent(<CreateChannelForm />) : null}
         </>

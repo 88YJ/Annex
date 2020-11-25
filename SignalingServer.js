@@ -188,17 +188,27 @@ function updateChannel(id) {
         .find({ _id: ObjectId(id._id) })
         .toArray((err, result) => {
             if (result[0].userList) {
-                let IDarray = [];
+                updateChannelInfo(result[0].owner)
+                let IDarray = []
                 result[0].userList.forEach((item) => IDarray.push(item._id))
-                
+
                 console.log(IDarray)
                 result[0].userList.forEach((element) => io.to(element._id).emit('voice-chat:update-users', IDarray))
             }
         })
 }
 
+function updateChannelInfo(id) {
+    db.collection('servers')
+        .find({ _id: ObjectId(id._id) })
+        .toArray((err, result) => {
+            if (result[0]) {
+                result[0].userList.forEach((element) => io.to(element._id).emit('update:ChannelInfo', id))
+            }
+        })
+}
+
 async function setOnlineStatus(Online, userId) {
-  
     if (Online) {
         await User.findByIdAndUpdate(userId, {
             onlineStatus: true,
@@ -214,23 +224,21 @@ async function updateChannelUserList(channel, user, remove) {
     if (remove) {
         let channelholder = await Channel.findById(channel)
 
-        let result = channelholder.userList.filter(item => item._id.includes(user.userId))
+        let result = channelholder.userList.filter((item) => item._id.includes(user.userId))
 
         await Channel.findByIdAndUpdate(channel, {
-          
-          $pull: { userList: result[0] },
+            $pull: { userList: result[0] },
         })
 
-        updateserver(channelholder.owner);
+        updateserver(channelholder.owner)
     } else {
         let channelholder = await Channel.findById(channel)
 
         await Channel.findByIdAndUpdate(channel, {
-            
             $addToSet: { userList: user },
         })
 
-        updateserver(channelholder.owner);
+        updateserver(channelholder.owner)
     }
 }
 

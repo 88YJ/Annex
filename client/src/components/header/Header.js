@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuthState } from '../../pages/authentication/context'
 import { style } from '../../css/CustomStyling'
 
 //Component imports
@@ -13,84 +12,18 @@ import SearchIcon from '../../images/SearchIcon.png'
 import StreamIcon from '../../images/StreamIcon.png'
 import CartIcon from '../../images/CartIcon.png'
 
-import { useProfileDispatch, getFriends } from '../../pages/profile/context'
-import { useServerState, useServerDispatch, loadServerChannelList, loadServerUserList } from '../../pages/server/context'
+//Context
 import { useSideBarDispatch, showGames } from '../../components/sidebar/context'
 import { useModalDispatch, showModalWithAddServer } from '../modal/context'
+import { useAuthState } from '../../pages/authentication/context'
 
 //Import Types
 import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types'
 
-import { useSocketState, useSocketDispatch } from '../socketManager'
-import { connectSocket } from '../socketManager/socketActions'
-
 export const Header = () => {
     const sidebarDispatch = useSideBarDispatch()
     const { user, isLoggedIn } = useAuthState()
-    const profileDispatch = useProfileDispatch()
-    const serverDispatch = useServerDispatch()
-    const { currentServer } = useServerState()
-    const socketDispatch = useSocketDispatch()
-    const { socket } = useSocketState()
     const modalDispatch = useModalDispatch()
-
-    useEffect(() => {
-        if (!socket && user) {
-            connectSocket(socketDispatch)
-        }
-    }, [socket, socketDispatch, user])
-
-    useEffect(() => {
-        if (socket && user) {
-            socket.on('userIdRequest', async () => {
-                socket.emit('returnId', user._id, user.friendList)
-            })
-            socket.on('FriendUpdate', async (data) => {
-                getFriends(profileDispatch)
-            })
-        }
-    }, [socket, user, profileDispatch])
-
-    useEffect(() => {
-        if (currentServer) {
-            socket.on('ServerUpdate', async (data) => {
-                if (data._id === currentServer._id) {
-                    loadServerChannelList(serverDispatch, data)
-                    console.log(currentServer._id + data)
-                }
-            })
-        }
-    }, [serverDispatch, currentServer, socket])
-
-    useEffect(() => {
-        if (currentServer) {
-            socket.on('voice-chat:user-joined-chat', async (data) => {
-                if (data._id === currentServer._id) {
-                    loadServerChannelList(serverDispatch, data)
-                    console.log(currentServer._id + data)
-                }
-            })
-        }
-    }, [serverDispatch, currentServer, socket])
-
-    useEffect(() => {
-        if (currentServer) {
-            socket.on('ServerUserUpdate', async (data) => {
-                if (data === currentServer._id) {
-                    loadServerUserList(serverDispatch, currentServer)
-                    console.log('serverupdate')
-                }
-            })
-        }
-    }, [serverDispatch, currentServer, socket])
-
-    useEffect(() => {
-        if (socket) {
-            socket.on('stillLogged', async () => {
-                socket.emit('respondLogged', user._id)
-            })
-        }
-    }, [socket, user])
 
     let navigationLinks
 

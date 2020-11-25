@@ -1,12 +1,12 @@
 import {
-  LOAD_CURRENT_SERVER,
-  LOAD_CURRENT_VOICE_CHANNEL,
-  LOAD_USER_JOINED_SERVERS,
-  LOAD_SERVER_USERLIST,
-  LOAD_SERVER_CHANNELLIST,
-  LOAD_CURRENT_TEXT_CHANNEL,
-} from './types';
-import axios from 'axios';
+    LOAD_CURRENT_SERVER,
+    LOAD_CURRENT_VOICE_CHANNEL,
+    LOAD_USER_JOINED_SERVERS,
+    LOAD_SERVER_USERLIST,
+    LOAD_SERVER_CHANNELLIST,
+    LOAD_CURRENT_TEXT_CHANNEL,
+} from './types'
+import axios from 'axios'
 
 const requestConfig = {
     headers: {
@@ -36,19 +36,18 @@ export function loadCurrentServer(dispatch, server) {
 }
 
 export async function loadCurrentVoiceChannel(dispatch, channel) {
-  try {
-    dispatch({ type: LOAD_CURRENT_VOICE_CHANNEL, payload: channel });
-    console.log('Channel loaded successfully.');
-  } catch (error) {
-    console.error(error);
-  }
+    try {
+        dispatch({ type: LOAD_CURRENT_VOICE_CHANNEL, payload: channel })
+        console.log('Channel loaded successfully.')
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 export async function loadCurrentTextChannel(dispatch, channel, server) {
     try {
         if (channel) {
             const response = await axios.get(`/api/${server}/channels/messages/${channel._id}`, requestConfig)
-            console.log(response)
             dispatch({ type: LOAD_CURRENT_TEXT_CHANNEL, payload: response.data })
             console.log('Channel loaded successfully.')
         } else {
@@ -99,11 +98,21 @@ export async function createServer(dispatch, server) {
 }
 
 export async function createChannel(dispatch, channel, server) {
-  try {
-      const response = await axios.post(`/api/${server}/channels/${server}`, channel, requestConfig)
-      console.log(response.data)
-      console.log('Channel Created')
-  } catch (error) {
-      console.error(error)
-  }
+    try {
+        const response = await axios.post(`/api/${server}/channels/${server}`, channel, requestConfig)
+        console.log(response.data)
+        console.log('Channel Created')
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export async function editChannel(dispatch, channel, server, id) {
+    try {
+        const response = await axios.put(`/api/${server}/channels/editchannel/${id}`, channel, requestConfig)
+        console.log(response.data)
+        console.log('Channel Edited')
+    } catch (error) {
+        console.error(error)
+    }
 }

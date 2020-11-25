@@ -39,7 +39,6 @@ export const Channel = () => {
     useEffect(() => {
         if (currentTextChannel) {
             //updateChannelMessages(currentTextChannel.messages)
-            console.log(currentTextChannel.messages)
             currentTextChannel.messages.forEach((element) => updateChannelMessages(messageDispatch, element))
         }
     }, [currentTextChannel, messageDispatch])
@@ -54,9 +53,11 @@ export const Channel = () => {
             date: Date(),
         }
 
-        setMessage(messageDispatch, '')
+        if (message !== '') {
+            setMessage(messageDispatch, '')
 
-        socket.emit(currentTextChannel._id + 'sentMessage', messageContent)
+            socket.emit(currentTextChannel._id + 'sentMessage', messageContent)
+        }
     }
 
     if (currentServer) {

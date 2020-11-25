@@ -25,6 +25,36 @@ router.get('/:channel_ids', middleware.isAuthenticated, async (req, res) => {
     }
 })
 
+//edit channel
+router.put('/editchannel/:id', middleware.isAuthenticated, async (req, res) => {
+    console.log('edit in pros')
+    try {
+        const { name, img } = req.body
+
+        if (/\S/.test(name)) {
+            console.log('Channel Name Updated')
+            await Channel.findByIdAndUpdate(req.params.id, {
+                name: name,
+            })
+        }
+        if (/\S/.test(img)) {
+            console.log('Channel Background Updated')
+            await Channel.findByIdAndUpdate(req.params.id, {
+                customization: {
+                    icon: img,
+                },
+            })
+        }
+        const updatedchannel = await Channel.findById(req.params.id)
+        console.log(updatedchannel.customization.icon)
+
+        res.json(updatedchannel)
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server Err')
+    }
+})
+
 router.get('/messages/:channel_id', middleware.isAuthenticated, async (req, res) => {
     try {
         const channel = await Channel.findById(req.params.channel_id)

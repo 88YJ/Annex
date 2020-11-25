@@ -1,4 +1,11 @@
-import { SHOW_MODAL_WITH_ADD_SERVER, SHOW_MODAL_WITH_ADD_CHANNEL, SHOW_MODAL_WITH_EDIT_PROFILE, SHOW_MODAL_WITH_SCREENSHOT, HIDE_MODAL } from './types'
+import {
+    SHOW_MODAL_WITH_ADD_SERVER,
+    SHOW_MODAL_WITH_ADD_CHANNEL,
+    SHOW_MODAL_WITH_EDIT_PROFILE,
+    SHOW_MODAL_WITH_SCREENSHOT,
+    HIDE_MODAL,
+    SHOW_MODAL_WITH_CHANNEL_EDIT,
+} from './types'
 
 export const initialState = {
     show: false,
@@ -6,6 +13,7 @@ export const initialState = {
     addChannel: false,
     editProfile: false,
     screenShot: false,
+    channelEdit: false,
     screenShotLink: null,
 }
 
@@ -36,6 +44,12 @@ export const ModalReducer = (initialState, action) => {
                 screenShot: true,
                 screenShotLink: action.payload,
             }
+        case SHOW_MODAL_WITH_CHANNEL_EDIT:
+            return {
+                ...initialState,
+                show: true,
+                channelEdit: true,
+            }
         case HIDE_MODAL:
             return {
                 ...initialState,
@@ -45,6 +59,7 @@ export const ModalReducer = (initialState, action) => {
                 startStream: false,
                 editProfile: false,
                 screenShot: false,
+                channelEdit: false,
             }
         default:
             throw new Error(`Unhandled action type: ${action.type}`)
