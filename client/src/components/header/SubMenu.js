@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuthState, useAuthDispatch, logout } from '../../pages/authentication/context'
+import { useMessageDispatch, useMessageState, loadInbox } from '../messages/context'
 import { style } from '../../css/CustomStyling'
 
 import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types'
@@ -9,6 +10,11 @@ import { SubMenuCart } from './SubMenuCart'
 export const SubMenu = (props) => {
     const authDispatch = useAuthDispatch()
     const { user } = useAuthState()
+    const messageDispatch = useMessageDispatch()
+    const { inbox } = useMessageState()
+    useEffect(() => {
+        loadInbox(messageDispatch, user._id)
+    }, [user, messageDispatch])
 
     const { type } = props
 
@@ -41,6 +47,27 @@ export const SubMenu = (props) => {
                                     Logout
                                 </Link>
                             </li>
+                            {inbox.messages !== undefined
+                                ? inbox.messages.map((item, i) =>
+                                      item.read ? (
+                                          <li key={i} className='FriendMessages' style={{ backgroundColor: `${style.primaryBackground}` }}>
+                                              <Link to={`/profile/${item.user._id}`} style={{ width: '60px' }}>
+                                                  <div className='NavIcons' style={{ backgroundImage: `url(${item.user.profilePicture})` }} />
+                                              </Link>
+
+                                              <Link to={`/directchat/${item.user._id}`}>{item.user.name}</Link>
+                                          </li>
+                                      ) : (
+                                          <li key={i} className='FriendMessages' style={{ backgroundColor: `${style.secondaryBackground}` }}>
+                                              <Link to={`/profile/${item.user._id}`} style={{ width: '60px' }}>
+                                                  <div className='NavIcons' style={{ backgroundImage: `url(${item.user.profilePicture})` }} />
+                                              </Link>
+
+                                              <Link to={`/directchat/${item.user._id}`}>{item.user.name}</Link>
+                                          </li>
+                                      )
+                                  )
+                                : null}
                         </ul>
                     </div>
                 </>

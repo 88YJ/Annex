@@ -1,6 +1,13 @@
 import React, { useEffect } from 'react'
 import { useProfileState } from '../profile/context'
-import { useMessageDispatch, useMessageState, setMessage, updateDirectMessages, clearDirectMessages } from '../../components/messages/context'
+import {
+    useMessageDispatch,
+    useMessageState,
+    setMessage,
+    updateDirectMessages,
+    clearDirectMessages,
+    loadDirectMessages,
+} from '../../components/messages/context'
 import { useSocketState } from '../../components/socketManager'
 import { useAuthState } from '../../pages/authentication/context'
 import { Message } from '../../components/messages/Message'
@@ -17,13 +24,14 @@ export const Messenger = () => {
         if (socket && CurrentProfile) {
             socket.removeAllListeners('text-chat:incoming-message')
             clearDirectMessages(messageDispatch)
+            loadDirectMessages(messageDispatch, CurrentProfile._id)
             socket.on('text-chat:incoming-message', (messageContent) => {
                 if (messageContent.userId === CurrentProfile._id || messageContent.userId === user._id) {
                     updateDirectMessages(messageDispatch, messageContent)
                 }
             })
         }
-    }, [socket, CurrentProfile, messageDispatch, user._id])
+    }, [socket, CurrentProfile, messageDispatch, user])
 
     const sendMessage = (event) => {
         event.preventDefault()

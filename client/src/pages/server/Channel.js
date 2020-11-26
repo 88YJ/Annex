@@ -2,11 +2,19 @@ import React, { useEffect } from 'react'
 import { CHANNEL_MESSAGES } from '../../components/messages/context/types'
 import { Message } from '../../components/messages/Message'
 import { ChannelHeader } from './ChannelHeader'
-import { useMessageDispatch, useMessageState, setMessage, updateChannelMessages, clearChannelMessages } from '../../components/messages/context'
+import {
+    useMessageDispatch,
+    useMessageState,
+    setMessage,
+    updateChannelMessages,
+    loadChannelMessages,
+    clearChannelMessages,
+} from '../../components/messages/context'
 import { useSocketState } from '../../components/socketManager'
 import { useAuthState } from '../../pages/authentication/context'
 import { useServerState } from './context'
 import { style } from '../../css/CustomStyling'
+import DefaultBackground from '../../images/DefaultBackgroundV2.png'
 
 export const Channel = () => {
     const messageDispatch = useMessageDispatch()
@@ -14,6 +22,7 @@ export const Channel = () => {
     const { currentServer, currentTextChannel } = useServerState()
     const { socket } = useSocketState()
     const { user } = useAuthState()
+    let background = currentTextChannel && currentTextChannel.customization !== undefined ? currentTextChannel.customization.icon : DefaultBackground
 
     useEffect(() => {
         if (socket && currentTextChannel) {
@@ -38,8 +47,7 @@ export const Channel = () => {
 
     useEffect(() => {
         if (currentTextChannel) {
-            //updateChannelMessages(currentTextChannel.messages)
-            currentTextChannel.messages.forEach((element) => updateChannelMessages(messageDispatch, element))
+            loadChannelMessages(messageDispatch, currentTextChannel.messages)
         }
     }, [currentTextChannel, messageDispatch])
 
@@ -87,7 +95,7 @@ export const Channel = () => {
             )
         } else
             return (
-                <div className='channelPage' style={{ backgroundImage: `url(${currentTextChannel.customization.icon})` }}>
+                <div className='channelPage' style={{ backgroundImage: `url(${background})` }}>
                     <div className='chat'>
                         <ChannelHeader />
 

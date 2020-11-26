@@ -7,6 +7,8 @@ const http = require('http')
 
 const User = require('./models/User')
 const Channel = require('./models/Channel')
+const DirectMessages = require('./models/DirectMessage')
+const MessageContainer = require('./models/MessageContainer')
 
 let UserManager = []
 let ChannelManager = []
@@ -45,6 +47,12 @@ db.once('open', () => {
     changeChannels.on('change', (change) => {
         updateChannel(change.documentKey)
     })
+
+    const directCollection = db.collection('directmessages')
+    const changeDirect = directCollection.watch()
+    changeDirect.on('change', (change) => {
+        updateDirect(change.documentKey)
+    })
 })
 
 const server = http.createServer(app)
@@ -68,8 +76,12 @@ io.on('connect', (socket) => {
     socket.on('respondLogged', (user) => {
         setOnlineStatus(true, user)
     })
+    socket.on('return-update:read', (data, user) => {
+        updateReadMessage(data, user)
+    })
 
     socket.on('text-chat:send-direct', (message, user) => {
+        updateDirectMessages(message, user)
         socket.to(user).emit('text-chat:incoming-message', message)
         io.to(message.userId).emit('text-chat:incoming-message', message)
     })
@@ -177,8 +189,13 @@ function updateUser(id) {
         .toArray((err, result) => {
             if (result[0]) {
                 //io.to(result[0]._id).emit('UpdateRequest')
-                result[0].friendList.forEach((element) => io.to(element).emit('FriendUpdate'))
-                result[0].joinedServers.forEach((element) => updateServerUsers(element))
+                if (result[0].friendList !== undefined) {
+                    result[0].friendList.forEach((element) => io.to(element).emit('FriendUpdate'))
+                }
+
+                if (result[0].joinedServers !== undefined) {
+                    result[0].joinedServers.forEach((element) => updateServerUsers(element))
+                }
             }
         })
 }
@@ -187,8 +204,8 @@ function updateChannel(id) {
     db.collection('channels')
         .find({ _id: ObjectId(id._id) })
         .toArray((err, result) => {
+            updateChannelInfo(result[0].owner)
             if (result[0].userList) {
-                updateChannelInfo(result[0].owner)
                 let IDarray = []
                 result[0].userList.forEach((item) => IDarray.push(item._id))
 
@@ -246,6 +263,39 @@ async function updateChannelMessages(channel, messageContent) {
     await Channel.findByIdAndUpdate(channel, {
         $addToSet: { messages: messageContent },
     })
+}
+
+async function updateDirectMessages(message, user) {
+    const userInfo = await User.findById(user)
+    const userDirect = await DirectMessages.findById(userInfo.directMessages)
+    const result = userDirect.messages.filter((item) => item.otherUserID == message.userId)
+    await MessageContainer.findByIdAndUpdate(result[0].message, {
+        $addToSet: { messages: message },
+    })
+    await DirectMessages.findOneAndUpdate(
+        { _id: userInfo.directMessages },
+        {
+            $set: { 'messages.$[elem].read': false },
+        },
+        { arrayFilters: [{ 'elem.message': result[0].message }] }
+    )
+    io.to(user).emit('update:inbox', message.userId, result[0].message)
+}
+
+async function updateReadMessage(data, user) {
+    const userInfo = await User.findById(user)
+    await DirectMessages.findOneAndUpdate(
+        { _id: userInfo.directMessages },
+        {
+            $set: { 'messages.$[elem].read': false },
+        },
+        { arrayFilters: [{ 'elem.message': data }] }
+    )
+}
+
+async function updateDirect(id) {
+    const container = await DirectMessages.findById(id._id)
+    io.to(container.owner).emit('update:inbox-change-in-database')
 }
 
 server.listen(process.env.PORT || 5002, () => console.log(`Server has started.. PORT 5002`))

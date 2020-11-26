@@ -70,15 +70,11 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    directMessages: [
-        {
-            messageRef: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'dms',
-            },
-            read: false,
-        },
-    ],
+    directMessages: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'directmessages',
+    },
+
     colorScheme: {
         primaryHeader: {
             type: String,

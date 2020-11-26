@@ -226,6 +226,21 @@
     text-align: center;
     font-size: 24px;
 }
+.FriendMessages {
+    margin: 0;
+    display: flex;
+    opacity: 0.5;
+}
+.FriendMessages:hover {
+    opacity: 1;
+}
+.FriendMessages img {
+    height: 25px;
+    width: 25px;
+}
+.FriendMessages a {
+    text-align: left;
+}
 
 /*register & login Css */
 
@@ -1161,7 +1176,7 @@
     background-size: cover;
     cursor: pointer;
 }
-.channelUserlist li{
+.channelUserlist li {
     display: flex;
     cursor: pointer;
 }

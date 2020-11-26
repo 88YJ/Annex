@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react'
 import { useAuthState } from '../../pages/authentication/context'
-import { useProfileDispatch, getFriends } from '../../pages/profile/context'
+import { useProfileDispatch, useProfileState, getFriends } from '../../pages/profile/context'
 import { useServerState, useServerDispatch, loadServerChannelList, loadServerUserList } from '../../pages/server/context'
+import { useMessageDispatch, loadInbox } from '../messages/context'
 import { useSocketState, useSocketDispatch } from '../socketManager'
 import { connectSocket } from '../socketManager/socketActions'
 
 export const SocketMaster = () => {
     const { user } = useAuthState()
     const profileDispatch = useProfileDispatch()
+    const { CurrentProfile } = useProfileState()
     const serverDispatch = useServerDispatch()
     const { currentServer } = useServerState()
     const socketDispatch = useSocketDispatch()
     const { socket } = useSocketState()
+    const messageDispatch = useMessageDispatch()
 
     useEffect(() => {
         if (!socket && user) {
@@ -81,6 +84,22 @@ export const SocketMaster = () => {
             })
         }
     }, [socket, user])
+
+    useEffect(() => {
+        if (CurrentProfile) {
+            socket.on('update:inbox', async (userID, data) => {
+                if (userID === CurrentProfile._id) {
+                    socket.emit('return-update:read', data, user._id)
+                } else {
+                    loadInbox(messageDispatch, user._id)
+                    console.log('inbox update')
+                }
+            })
+            socket.on('update:inbox-change-in-database', async () => {
+                loadInbox(messageDispatch, user._id)
+            })
+        }
+    }, [socket, user, CurrentProfile])
 
     return null
 }
