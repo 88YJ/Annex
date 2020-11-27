@@ -61,7 +61,7 @@ export const VoiceChat = () => {
         })
     }, [socket])
 
-    const handleRemoteStream = (stream, id) => {
+    const handleRemoteStream = useCallback(async (stream, id) => {
         const remoteVideo = document.createElement('video')
 
         remoteVideo.id = id
@@ -70,13 +70,13 @@ export const VoiceChat = () => {
 
         let videoContainer = document.getElementById('video-container')
         videoContainer.appendChild(remoteVideo)
-    }
+    }, [])
 
-    const handleIceCandidate = (event, userId) => {
+    const handleIceCandidate = useCallback(async (event, userId) => {
         if (event.candidate) {
             socket.emit('voice-chat:ice-candidate', { candidate: event.candidate, to: userId, from: user._id })
         }
-    }
+    }, [socket, user])
 
     useEffect(() => {
         userList.forEach((userId) => {
@@ -108,7 +108,7 @@ export const VoiceChat = () => {
                 }
             }
         })
-    }, [userList, callUser, receiveAnswer, socket, answerCall, user])
+    }, [userList, callUser, receiveAnswer, handleIceCandidate, handleRemoteStream, socket, answerCall, user])
 
     useEffect(() => {
         if (currentVoiceChannel && socket) {
