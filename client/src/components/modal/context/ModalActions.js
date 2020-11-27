@@ -5,6 +5,7 @@ import {
     SHOW_MODAL_WITH_EDIT_PROFILE,
     SHOW_MODAL_WITH_SCREENSHOT,
     SHOW_MODAL_WITH_CHANNEL_EDIT,
+    SHOW_MODAL_WITH_FRIEND_REQUESTS,
 } from './types'
 
 export function showModalWithAddServer(dispatch) {
@@ -40,10 +41,17 @@ export function showModalwithScreenshot(dispatch, link) {
     }
 }
 
-export function showModalWithChannelEdit(dispatch, link) {
+export function showModalWithChannelEdit(dispatch) {
     try {
-        console.log(link)
-        dispatch({ type: SHOW_MODAL_WITH_CHANNEL_EDIT, payload: link })
+        dispatch({ type: SHOW_MODAL_WITH_CHANNEL_EDIT })
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export function showModalWithFriendRequests(dispatch) {
+    try {
+        dispatch({ type: SHOW_MODAL_WITH_FRIEND_REQUESTS })
     } catch (error) {
         console.error(error)
     }

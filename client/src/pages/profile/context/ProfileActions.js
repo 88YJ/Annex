@@ -1,4 +1,4 @@
-import { CAPTURE_FRIENDS, CAPTURE_PROFILES, LOAD_CURRENT_PROFILE, CAPTURE_GAMES, SET_OWNED_CURRENT_GAME } from './types'
+import { CAPTURE_FRIENDS, CAPTURE_PROFILES, LOAD_CURRENT_PROFILE, CAPTURE_GAMES, SET_OWNED_CURRENT_GAME, GET_INCOMING_FRIEND_REQUESTS } from './types'
 import axios from 'axios'
 
 const requestConfig = {
@@ -52,6 +52,49 @@ export async function loadOwnedCurrentGame(dispatch, Game) {
         const res = await axios.get(`/api/games/FindGame/${Game}`)
         dispatch({ type: SET_OWNED_CURRENT_GAME, payload: res.data })
         console.log('Captured Owned Current Game..')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function editProfile(dispatch, info) {
+    try {
+        await axios.put(`/api/users/editprofile`, info, requestConfig)
+
+        console.log('profile edited')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function getIncomingFriendRequests(dispatch) {
+    try {
+        const res = await axios.get('/api/users/friendrequests', requestConfig)
+        dispatch({ type: GET_INCOMING_FRIEND_REQUESTS, payload: res.data })
+        console.log(res.data)
+        console.log('got incoming requests')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function sendFriendRequest(dispatch, profile) {
+    try {
+        await axios.put(`/api/users/sendfriendrequest/${profile}`, requestConfig)
+
+        console.log('sent friend requests')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function acceptFriendRequest(dispatch, request) {
+    try {
+        await axios.put(`/api/users/acceptfriendrequest/${request}`, requestConfig)
+        const res = await axios.get('/api/users/friendrequests', requestConfig)
+        dispatch({ type: GET_INCOMING_FRIEND_REQUESTS, payload: res.data })
+
+        console.log('accepted friend requests')
     } catch (error) {
         console.log(error)
     }

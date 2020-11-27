@@ -41,7 +41,6 @@ router.post('/', registerCheck, async (req, res) => {
                 id: user.id,
             },
         }
-
         res.json(payload)
     } catch (error) {
         console.error(error.message)
@@ -53,8 +52,13 @@ router.post('/', registerCheck, async (req, res) => {
 router.put('/editprofile', middleware.isAuthenticated, async (req, res) => {
     try {
         let updatedUser
-        const { profilePicture, background, banner } = req.body
-
+        const { name, profilePicture, background, banner } = req.body
+        if (/\S/.test(name)) {
+            console.log('Profile Name Updated')
+            updatedUser = await User.findByIdAndUpdate(req.user.id, {
+                name: name,
+            })
+        }
         if (/\S/.test(profilePicture)) {
             console.log('Profile Picture Updated')
             updatedUser = await User.findByIdAndUpdate(req.user.id, {
@@ -135,6 +139,7 @@ router.put('/acceptfriendrequest/:id', middleware.isAuthenticated, async (req, r
 //GET ALL FRIEND REQUESTS
 router.get('/friendrequests', middleware.isAuthenticated, async (req, res) => {
     try {
+        console.log('getting')
         const { incomingFriendRequests } = await User.findById(req.user.id, 'incomingFriendRequests')
 
         let incomingRequests = []

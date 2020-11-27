@@ -37,6 +37,22 @@ export async function loginUser(dispatch, loginPayload) {
     }
 }
 
+export async function reloadUser(dispatch) {
+    try {
+        const response = await axios.get('/api/auth', requestConfig)
+        if (response.data) {
+            console.log(response.data)
+            localStorage.setItem('user', JSON.stringify(response.data))
+
+            console.log('User successfully reloaded')
+
+            window.location.reload()
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export function logout(dispatch) {
     localStorage.removeItem('user')
     localStorage.removeItem('token')

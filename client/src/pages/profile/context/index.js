@@ -1,4 +1,27 @@
-import { getFriends, getProfiles, loadCurrentProfile, findOwnedGames, loadOwnedCurrentGame } from './ProfileActions';
-import { ProfileProvider, useProfileState, useProfileDispatch } from './ProfileContext';
+import {
+    getFriends,
+    getProfiles,
+    loadCurrentProfile,
+    findOwnedGames,
+    loadOwnedCurrentGame,
+    editProfile,
+    getIncomingFriendRequests,
+    sendFriendRequest,
+    acceptFriendRequest,
+} from './ProfileActions'
+import { ProfileProvider, useProfileState, useProfileDispatch } from './ProfileContext'
 
-export { getFriends, getProfiles, loadCurrentProfile, findOwnedGames, loadOwnedCurrentGame, ProfileProvider, useProfileState, useProfileDispatch };
+export {
+    getFriends,
+    getProfiles,
+    loadCurrentProfile,
+    findOwnedGames,
+    loadOwnedCurrentGame,
+    editProfile,
+    getIncomingFriendRequests,
+    sendFriendRequest,
+    acceptFriendRequest,
+    ProfileProvider,
+    useProfileState,
+    useProfileDispatch,
+}

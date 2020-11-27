@@ -1,7 +1,8 @@
 import React from 'react'
 import { Carousel } from './Carousel'
 import { CAROUSEL_SCREENSHOT } from './types/types'
-import { useProfileState } from '../../pages/profile/context'
+import { useProfileState, useProfileDispatch, sendFriendRequest } from '../../pages/profile/context'
+import { useModalDispatch, showModalWithEditProfile, showModalWithFriendRequests } from '../modal/context'
 import { useAuthState } from '../../pages/authentication/context'
 import DefaultBackground from '../../images/DefaultBackgroundV2.png'
 import { style } from '../../css/CustomStyling'
@@ -9,7 +10,9 @@ import { style } from '../../css/CustomStyling'
 export const Profile = () => {
     let backgroundImage = DefaultBackground
     const { CurrentProfile } = useProfileState()
+    const profileDispatch = useProfileDispatch()
     const { user } = useAuthState()
+    const modalDipatch = useModalDispatch()
 
     if (CurrentProfile && CurrentProfile.backgroundPicture) {
         backgroundImage = CurrentProfile.backgroundPicture
@@ -44,10 +47,18 @@ export const Profile = () => {
                                     </h3>
                                 </div>
                                 <div>
-                                    <button className='globalbutton' style={{ height: 'auto', width: '107px' }} /*onClick={() => editProfile()}*/>
+                                    <button
+                                        className='globalbutton'
+                                        style={{ height: 'auto', width: '107px' }}
+                                        onClick={() => showModalWithEditProfile(modalDipatch)}
+                                    >
                                         Edit
                                     </button>
-                                    <button className='globalbutton' style={{ height: 'auto', width: 'auto' }}>
+                                    <button
+                                        className='globalbutton'
+                                        style={{ height: 'auto', width: 'auto' }}
+                                        onClick={() => showModalWithFriendRequests(modalDipatch)}
+                                    >
                                         Requests
                                     </button>
                                 </div>
@@ -152,7 +163,11 @@ export const Profile = () => {
                                 )}
                             </div>
                             <div>
-                                <button className='globalbutton' style={{ height: 'auto', width: 'auto' }} /*onClick={() => editProfile()}*/>
+                                <button
+                                    className='globalbutton'
+                                    style={{ height: 'auto', width: 'auto' }}
+                                    onClick={() => sendFriendRequest(profileDispatch, CurrentProfile._id)}
+                                >
                                     Add
                                 </button>
                                 <button className='globalbutton' style={{ height: 'auto', width: 'auto' }}>

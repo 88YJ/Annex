@@ -4,6 +4,7 @@ import {
     showModalWithEditProfile,
     showModalwithScreenshot,
     showModalWithChannelEdit,
+    showModalWithFriendRequests,
     hideModal,
 } from './ModalActions'
 import { ModalProvider, useModalState, useModalDispatch } from './ModalContext'
@@ -17,5 +18,6 @@ export {
     showModalWithEditProfile,
     showModalwithScreenshot,
     showModalWithChannelEdit,
+    showModalWithFriendRequests,
     hideModal,
 }

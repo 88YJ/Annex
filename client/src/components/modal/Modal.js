@@ -4,11 +4,13 @@ import { ScreenshotForm } from './ScreenshotForm'
 import { CreateServerForm } from './CreateServerForm'
 import { CreateChannelForm } from './CreateChannelForm'
 import { EditChannelForm } from './EditChannelForm'
+import { EditProfileForm } from './EditProfileForm'
+import { FriendRequestsForm } from './FriendRequestsForm'
 
 import { style } from '../../css/CustomStyling'
 
 export const Modal = () => {
-    const { show, addServer, addChannel, editProfile, screenShot, channelEdit } = useModalState()
+    const { show, addServer, addChannel, editProfile, screenShot, channelEdit, friendRequests } = useModalState()
     const modalDispatch = useModalDispatch()
 
     const onHideModal = () => {
@@ -29,6 +31,8 @@ export const Modal = () => {
     return (
         <>
             {show && screenShot ? customContent(<ScreenshotForm />) : null}
+            {show && editProfile ? customContent(<EditProfileForm />) : null}
+            {show && friendRequests ? customContent(<FriendRequestsForm />) : null}
             {show && channelEdit ? customContent(<EditChannelForm />) : null}
             {show && addServer ? customContent(<CreateServerForm />) : null}
             {show && addChannel ? customContent(<CreateChannelForm />) : null}
