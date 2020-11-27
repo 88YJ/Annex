@@ -1,4 +1,1 @@
-export const SET_SOCKET = "SET_SOCKET";
-export const SET_LOCAL_STREAM = "SET_LOCAL_STREAM";
-export const SET_REMOTE_STREAM = "SET_REMOTE_STREAM";
 export const UPDATE_USER_LIST = "UPDATE_USER_LIST";

@@ -120,6 +120,15 @@ io.on('connect', (socket) => {
         updateChannelUserList(channel, user, false)
     })
 
+    socket.on('voice-chat:leave', ({ channel, user }) => {
+        socket.leave(channel);
+
+        let userInfo = {userId: user._id}
+
+        updateChannelUserList(channel, userInfo, true)
+        ChannelManager[socket.id] = undefined;
+    })
+
     socket.on('voice-chat:call', (data) => {
         socket.to(data.to).emit('voice-chat:receiving-call', {
             offer: data.offer,

@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react'
 import { useAuthState } from '../../pages/authentication/context'
-import { useChatState, useChatDispatch, setLocalStream, updateUserList } from '../../pages/chat/context'
+import { useChatState, useChatDispatch, updateUserList } from '../../pages/chat/context'
 import { useServerState } from '../../pages/server/context'
 import { useSocketState } from '../../components/socketManager'
 
@@ -8,10 +8,12 @@ let RTCConfig = {
     iceServers: [{ urls: 'stun:stun.services.mozilla.com' }, { urls: 'stun:stun.l.google.com:19302' }],
 }
 let peerConnections = []
+let previousChannel;
+let localStream;
 
 export const VoiceChat = () => {
     const { user } = useAuthState();
-    const { localStream, userList } = useChatState();
+    const { userList } = useChatState();
     const { currentVoiceChannel } = useServerState();
     const { socket } = useSocketState();
     const chatDispatch = useChatDispatch();
@@ -59,8 +61,10 @@ export const VoiceChat = () => {
         })
     }, [socket])
 
-    const handleRemoteStream = (stream) => {
+    const handleRemoteStream = (stream, id) => {
         const remoteVideo = document.createElement('video')
+
+        remoteVideo.id = id
         remoteVideo.autoplay = true
         remoteVideo.srcObject = stream
 
@@ -76,13 +80,14 @@ export const VoiceChat = () => {
 
     useEffect(() => {
         userList.forEach((userId) => {
+            console.log(userId);
             if (userId !== user._id) {
                 if (!peerConnections[userId]) {
                     peerConnections[userId] = new RTCPeerConnection(RTCConfig)
                     localStream.getTracks().forEach((track) => peerConnections[userId].addTrack(track, localStream))
 
                     peerConnections[userId].ontrack = (event) => {
-                        handleRemoteStream(event.streams[0])
+                        handleRemoteStream(event.streams[0], userId)
                     }
 
                     peerConnections[userId].onicecandidate = (event) => {
@@ -103,17 +108,36 @@ export const VoiceChat = () => {
                 }
             }
         })
-    }, [userList, callUser, localStream, receiveAnswer, socket, answerCall, user])
+    }, [userList, callUser, receiveAnswer, socket, answerCall, user])
 
     useEffect(() => {
         if (currentVoiceChannel && socket) {
+
+            if(previousChannel) {
+                peerConnections.forEach((peer) => peer.close());
+                peerConnections = [];
+
+                localStream.getTracks().forEach((track) => track.stop());
+                localStream = undefined;
+
+                let videoContainer = document.getElementById('video-container');
+                while (videoContainer.firstChild) {
+                    videoContainer.removeChild(videoContainer.firstChild);
+                }
+
+                updateUserList(chatDispatch, [])
+
+                socket.emit('voice-chat:leave', ({ channel: previousChannel._id, user: user }) )
+            } 
+            
+            previousChannel = currentVoiceChannel;
             navigator.mediaDevices
                 .getUserMedia({ video: true, audio: true })
                 .then((stream) => {
-                    setLocalStream(chatDispatch, stream)
                     const local = document.getElementById('local-video')
                     if (local) {
                         local.srcObject = stream
+                        localStream = stream;
                     }
                 })
                 .then(() => {
@@ -125,11 +149,36 @@ export const VoiceChat = () => {
     useEffect(() => {
         if (socket) {
             socket.on('voice-chat:update-users', (data) => {
-                console.log(data)
+                //We want to check if a user has left the voice chat.
+                let dictionary = [];
+
+                //Map each user.
+                data.forEach(user => {
+                    if(!dictionary[user]) {
+                        dictionary[user] = 1;
+                    }
+                })
+
+                //If there is an user that is not in the dictionary then they have left the chat.
+                userList.forEach(user => {
+                    if(!dictionary[user]) {
+
+                        if(peerConnections[user]) {
+                            peerConnections[user].close();
+                            delete peerConnections[user];
+                        }
+                        
+                        let remoteStream = document.getElementById(user);
+                        if(remoteStream) {
+                            remoteStream.remove();
+                        }  
+                    }
+                })
+
                 updateUserList(chatDispatch, data)
             })
         }
-    }, [socket, chatDispatch])
+    }, [socket, chatDispatch, userList])
 
     let localVideo = <video autoPlay muted id='local-video' />
     let remoteVideoContainer = <div id='video-container'></div>
