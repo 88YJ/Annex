@@ -54,7 +54,7 @@ export const Header = () => {
                     <SubMenu type={SHOW_STREAM_SUBMENU} />
                 </li>
                 <li onClick={() => changesidebar()}>
-                    <Link to='/'>
+                    <Link to='/search'>
                         <div className='NavIcons' style={{ backgroundImage: `url(${SearchIcon})` }} />
                     </Link>
                 </li>

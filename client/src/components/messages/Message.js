@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useMessageState } from './context'
+import { useProfileState } from '../../pages/profile/context'
+import { useAuthState } from '../../pages/authentication/context'
 import ScrollToBottom from 'react-scroll-to-bottom'
 import ReactEmoji from 'react-emoji'
 import { useSideBarDispatch, showGames } from '../../components/sidebar/context'
@@ -9,6 +11,8 @@ import { STREAM_MESSAGES, CHANNEL_MESSAGES, DIRECT_MESSAGES } from './context/ty
 export const Message = (props) => {
     const { type } = props
 
+    const { CurrentProfile } = useProfileState()
+    const { user } = useAuthState()
     const { StreamMessages, ChannelMessages, DirectMessages } = useMessageState()
     const sidebarDispatch = useSideBarDispatch()
 
@@ -80,12 +84,18 @@ export const Message = (props) => {
                                     <Link to={`/profile/${message.userId}`} style={{ height: '45px', width: '55px' }}>
                                         <div
                                             className='NavIcons'
-                                            style={{ backgroundImage: `url(${message.profilepicture})`, height: '45px', width: '45px' }}
+                                            style={{
+                                                backgroundImage: `url(${
+                                                    message.userId === CurrentProfile._id ? CurrentProfile.profilePicture : user.profilePicture
+                                                })`,
+                                                height: '45px',
+                                                width: '45px',
+                                            }}
                                         />
                                     </Link>
                                     <div className='message_info'>
                                         <h4>
-                                            {message.name}
+                                            {message.userId === CurrentProfile._id ? CurrentProfile.name : user.name}
                                             <span className='message_timestamp'>{message.date}</span>
                                         </h4>
                                         <p>{ReactEmoji.emojify(message.text)}</p>

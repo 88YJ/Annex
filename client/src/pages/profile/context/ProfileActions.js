@@ -71,7 +71,6 @@ export async function getIncomingFriendRequests(dispatch) {
     try {
         const res = await axios.get('/api/users/friendrequests', requestConfig)
         dispatch({ type: GET_INCOMING_FRIEND_REQUESTS, payload: res.data })
-        console.log(res.data)
         console.log('got incoming requests')
     } catch (error) {
         console.log(error)
@@ -95,6 +94,22 @@ export async function acceptFriendRequest(dispatch, request) {
         dispatch({ type: GET_INCOMING_FRIEND_REQUESTS, payload: res.data })
 
         console.log('accepted friend requests')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function joinServer(dispatch, server) {
+    try {
+        const response = await axios.put(`/api/users/joinserver/${server}`, requestConfig)
+
+        if (response.data) {
+            console.log(response.data)
+            localStorage.setItem('user', JSON.stringify(response.data))
+
+            console.log('User successfully reloaded')
+        }
+        console.log('joined server')
     } catch (error) {
         console.log(error)
     }

@@ -5,6 +5,7 @@ import {
     LOAD_SERVER_USERLIST,
     LOAD_SERVER_CHANNELLIST,
     LOAD_CURRENT_TEXT_CHANNEL,
+    LOAD_ALL_SERVERS,
 } from './types'
 import axios from 'axios'
 
@@ -12,6 +13,19 @@ const requestConfig = {
     headers: {
         'Content-Type': 'application/json',
     },
+}
+
+export async function loadAllServers(dispatch) {
+    try {
+        const response = await axios.get('/api/servers', requestConfig)
+
+        if (response.data) {
+            dispatch({ type: LOAD_ALL_SERVERS, payload: response.data })
+            console.log('Servers Loaded.')
+        }
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 export async function loadJoinedServers(dispatch) {

@@ -28,6 +28,7 @@ import { Shop } from './pages/shop/Shop'
 import { ShopGamePage } from './pages/shop/ShopGamePage'
 import { Cart } from './pages/shop/Cart'
 import { DirectMessage } from './pages/directmessage/DirectMessage'
+import { Search } from './pages/search/Search'
 
 //Import Components
 import { Header } from './components/header/Header'
@@ -86,6 +87,7 @@ function App() {
                                                                             <Route exact path='/' component={Dashboard} />
                                                                             <Route exact path='/register' component={Register} />
                                                                             <Route exact path='/login' component={Login} />
+                                                                            <Route exact path='/search' component={Search} />
                                                                             <Route exact path='/shop' component={Shop} />
                                                                             <Route exact path='/shop/cart' component={Cart} />
                                                                             <Route exact path='/shop/page/:game_id' component={ShopGamePage} />

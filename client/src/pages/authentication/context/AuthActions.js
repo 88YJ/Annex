@@ -9,10 +9,16 @@ const requestConfig = {
 
 export async function registerUser(dispatch, registerPayload) {
     try {
-        const response = await axios.post('/api/users', registerPayload, requestConfig)
+        const response = await axios.post('/api/auth/register', registerPayload, requestConfig)
         if (response.data) {
-            dispatch({ type: REGISTER_SUCCESS })
+            localStorage.setItem('user', JSON.stringify(response.data.user))
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('isLoggedIn', true)
+
+            dispatch({ type: REGISTER_SUCCESS, payload: response.data })
             console.log('New user successfully registered.')
+
+            window.location.reload()
         }
     } catch (error) {
         dispatch({ type: REGISTER_ERROR, payload: error.response.data.msg })

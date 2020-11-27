@@ -47,7 +47,7 @@ export const SubMenu = (props) => {
                                     Logout
                                 </Link>
                             </li>
-                            {inbox.messages !== undefined
+                            {inbox && inbox.length !== 0
                                 ? inbox.messages.map((item, i) =>
                                       item.read ? (
                                           <li key={i} className='FriendMessages' style={{ backgroundColor: `${style.primaryBackground}` }}>

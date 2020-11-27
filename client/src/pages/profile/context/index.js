@@ -8,6 +8,7 @@ import {
     getIncomingFriendRequests,
     sendFriendRequest,
     acceptFriendRequest,
+    joinServer,
 } from './ProfileActions'
 import { ProfileProvider, useProfileState, useProfileDispatch } from './ProfileContext'
 
@@ -24,4 +25,5 @@ export {
     ProfileProvider,
     useProfileState,
     useProfileDispatch,
+    joinServer,
 }

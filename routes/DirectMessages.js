@@ -32,34 +32,34 @@ router.get('/:profile_id', middleware.isAuthenticated, async (req, res) => {
         const SecondUserToUpdate = await User.findById(req.params.profile_id)
         let profileInfo
         let secondProfileInfo
-        // if (!userToUpdate.directMessages) {
-        //     const DirectMessageToAdd = new DirectMessages({
-        //         owner: req.user.id,
-        //     })
+        if (!userToUpdate.directMessages) {
+            const DirectMessageToAdd = new DirectMessages({
+                owner: req.user.id,
+            })
 
-        //     const savedDirectMessage = await DirectMessageToAdd.save()
+            const savedDirectMessage = await DirectMessageToAdd.save()
 
-        //     await User.findByIdAndUpdate(req.user.id, {
-        //         $push: { directMessages: savedDirectMessage._id },
-        //     })
-        // } else if (!SecondUserToUpdate.directMessages) {
-        //     const DirectMessageToAdd = new DirectMessages({
-        //         owner: req.params.profile_id,
-        //     })
+            await User.findByIdAndUpdate(req.user.id, {
+                $push: { directMessages: savedDirectMessage._id },
+            })
+        } else if (!SecondUserToUpdate.directMessages) {
+            const DirectMessageToAdd = new DirectMessages({
+                owner: req.params.profile_id,
+            })
 
-        //     const savedDirectMessage = await DirectMessageToAdd.save()
+            const savedDirectMessage = await DirectMessageToAdd.save()
 
-        //     await User.findByIdAndUpdate(req.params.profile_id, {
-        //         $push: { directMessages: savedDirectMessage._id },
-        //     })
-        // }
+            await User.findByIdAndUpdate(req.params.profile_id, {
+                $push: { directMessages: savedDirectMessage._id },
+            })
+        }
 
         const userToUpdateDirect = await DirectMessages.findById(userToUpdate.directMessages)
         const result = userToUpdateDirect.messages.filter((item) => item.otherUserID == req.params.profile_id)
         const secondUserToUpdateDirect = await DirectMessages.findById(SecondUserToUpdate.directMessages)
         const secondresult = secondUserToUpdateDirect.messages.filter((item) => item.otherUserID == req.user.id)
 
-        if (!result[0] || !secondresult[0]) {
+        if ((!result[0] || !secondresult[0]) && req.user.id !== req.params.profile_id) {
             console.log('added to users')
             const MessageContainerToAdd = new MessageContainer({ owners: [req.user.id, req.params.profile_id] })
 
