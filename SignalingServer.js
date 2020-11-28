@@ -121,12 +121,12 @@ io.on('connect', (socket) => {
     })
 
     socket.on('voice-chat:leave', ({ channel, user }) => {
-        socket.leave(channel);
+        socket.leave(channel)
 
-        let userInfo = {userId: user._id}
+        let userInfo = { userId: user._id }
 
         updateChannelUserList(channel, userInfo, true)
-        ChannelManager[socket.id] = undefined;
+        ChannelManager[socket.id] = undefined
     })
 
     socket.on('voice-chat:call', (data) => {
@@ -176,11 +176,7 @@ function updateserver(id) {
     db.collection('servers')
         .find({ _id: ObjectId(id._id) })
         .toArray((err, result) => {
-            let serverInfo = {
-                _id: result[0]._id,
-                channelList: result[0].channelList,
-            }
-            result[0].userList.forEach((element) => io.to(element).emit('ServerUpdate', serverInfo))
+            result[0].userList.forEach((element) => io.to(element).emit('ServerUpdate', result[0]._id))
         })
 }
 
@@ -218,7 +214,6 @@ function updateChannel(id) {
                 let IDarray = []
                 result[0].userList.forEach((item) => IDarray.push(item._id))
 
-                console.log(IDarray)
                 result[0].userList.forEach((element) => io.to(element._id).emit('voice-chat:update-users', IDarray))
             }
         })

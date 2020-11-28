@@ -2,7 +2,6 @@ import React from 'react'
 import { useDashState } from '../../pages/dashboard/context'
 import { SHOW_SCREENSHOTS, SHOW_GAMES, SHOW_STREAMS } from './types/types'
 import { useProfileState } from '../../pages/profile/context'
-import { style } from '../../css/CustomStyling'
 import { useModalDispatch, showModalwithScreenshot } from '../modal/context'
 
 export const Card = (props) => {
@@ -17,7 +16,7 @@ export const Card = (props) => {
                 <>
                     {CurrentProfile.screenShots.map((item, index) => (
                         <div className='card' key={index} onClick={() => showModalwithScreenshot(modalDispatch, item)}>
-                            <img src={item} alt=''></img>
+                            <img src={item}></img>
                         </div>
                     ))}
                 </>
@@ -27,17 +26,8 @@ export const Card = (props) => {
                 <>
                     {trendstream.map((item, index) => (
                         <div className='card' key={index}>
-                            <img src={item.img} alt='' style={{ border: `${style.outLine} 2px solid` }}></img>
-                            <h2
-                                className='globalheader'
-                                style={{
-                                    color: `${style.secondaryHeader}`,
-                                    borderTop: `${style.activeOutline} 1px solid`,
-                                    backgroundColor: `${style.primaryBackground}`,
-                                }}
-                            >
-                                {item.name}
-                            </h2>
+                            <img src={item.img} />
+                            <h2 className='globalheader Border-Top-1PX Secondary-Header'>{item.name}</h2>
                         </div>
                     ))}
                 </>
@@ -47,17 +37,8 @@ export const Card = (props) => {
                 <>
                     {trendgames.map((item, index) => (
                         <div className='card' key={index}>
-                            <img src={item.img} alt='' style={{ border: `${style.outLine} 2px solid` }}></img>
-                            <h2
-                                className='globalheader'
-                                style={{
-                                    color: `${style.secondaryHeader}`,
-                                    borderTop: `${style.activeOutline} 1px solid`,
-                                    backgroundColor: `${style.primaryBackground}`,
-                                }}
-                            >
-                                {item.name}
-                            </h2>
+                            <img src={item.img} />
+                            <h2 className='globalheader Border-Top-1PX Secondary-Header'>{item.name}</h2>
                         </div>
                     ))}
                 </>

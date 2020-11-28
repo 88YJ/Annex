@@ -1,16 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useServerState, useServerDispatch, loadServerChannelList, loadCurrentVoiceChannel } from '../../pages/server/context'
-import { useModalDispatch, showModalWithAddChannel } from '../modal/context'
+import { useModalDispatch, useModalState, showModalWithAddChannel, showModalWithEditServer } from '../modal/context'
 import { useAuthState } from '../../pages/authentication/context'
-import { style } from '../../css/CustomStyling'
 import PlusIcon from '../../images/PlusIcon.png'
+import MenuArrow from '../../images/MenuArrow.png'
 
 export const ChannelList = () => {
     const { currentServer, channelList, currentTextChannel } = useServerState()
     const { user } = useAuthState()
     const serverDispatch = useServerDispatch()
     const modalDispatch = useModalDispatch()
+    const { show } = useModalState()
+    const [menu, setMenu] = useState(false)
+
+    useEffect(() => {
+        if (show) {
+            setMenu(false)
+        }
+    }, [show])
 
     useEffect(() => {
         if (currentServer) {
@@ -29,15 +37,64 @@ export const ChannelList = () => {
     if (currentServer) {
         return (
             <div className='L-Sidebar-Serverchannels'>
-                <h3
-                    className='globalHeader'
-                    style={{ background: `${style.tertiaryBackground}`, color: `${style.primaryHeader}`, borderBottom: `${style.secondaryOutLine} 1px solid` }}
-                >
+                <h3 className='globalHeader Tertiary-Background Primary-Header Border-Bottom-1PX'>
                     {currentServer.name}
+                    <div
+                        className='profile-Options Primary-Header'
+                        style={{
+                            backgroundImage: `url(${MenuArrow})`,
+                            position: 'absolute',
+                            top: '-4px',
+                            left: '285px',
+                            height: '25px',
+                            width: '25px',
+                            transform: `${menu ? 'scale(1, 1)' : 'scale(1, -1)'}`,
+                        }}
+                        onClick={() => (menu ? setMenu(false) : setMenu(true))}
+                    />
+
+                    {menu ? (
+                        <ul className='server-Options-Submenu'>
+                            {currentServer.owner === user._id ? (
+                                <li>
+                                    <button
+                                        className='globalbutton'
+                                        style={{ height: 'auto', width: '96%' }}
+                                        onClick={() => showModalWithEditServer(modalDispatch)}
+                                    >
+                                        Edit
+                                    </button>
+                                </li>
+                            ) : null}
+                            <li>
+                                <button className='globalbutton' style={{ height: 'auto', width: '96%' }}>
+                                    Invite Friends
+                                </button>
+                            </li>
+                            <li>
+                                <button className='globalbutton' style={{ height: 'auto', width: '96%' }}>
+                                    Notification Settings
+                                </button>
+                            </li>
+                            {currentServer.owner === user._id ? (
+                                <li>
+                                    <button className='globalbutton' style={{ height: 'auto', width: '96%', color: 'red' }}>
+                                        Delete Server
+                                    </button>
+                                </li>
+                            ) : (
+                                <li>
+                                    <button className='globalbutton' style={{ height: 'auto', width: '96%', color: 'red' }}>
+                                        Leave Server
+                                    </button>
+                                </li>
+                            )}
+                        </ul>
+                    ) : null}
                 </h3>
                 <ul>
                     <li style={{ marginLeft: '0px' }}>
-                        <Link to={`/server/${currentServer._id}/landing`} style={{ color: `${style.primaryHeader}` }}>
+                        <Link to={`/server/${currentServer._id}/landing`} className='Primary-Header'>
                             Landing Page
                         </Link>
                     </li>
@@ -45,16 +102,13 @@ export const ChannelList = () => {
                         !channel.voiceChannel ? (
                             currentTextChannel && channel._id === currentTextChannel._id ? (
                                 <li key={channel.name}>
-                                    <Link
-                                        to={`/server/${currentServer._id}/${channel._id}`}
-                                        style={{ color: `${style.primaryHeader}`, backgroundColor: `${style.secondaryBackground}` }}
-                                    >
+                                    <Link to={`/server/${currentServer._id}/${channel._id}`} className='Primary-Header Secondary-Background'>
                                         # {channel.name}
                                     </Link>
                                 </li>
                             ) : (
                                 <li key={channel.name}>
-                                    <Link to={`/server/${currentServer._id}/${channel._id}`} style={{ color: `${style.secondaryHeader}` }}>
+                                    <Link to={`/server/${currentServer._id}/${channel._id}`} className='Secondary-Header'>
                                         # {channel.name}
                                     </Link>
                                 </li>
@@ -62,19 +116,19 @@ export const ChannelList = () => {
                         ) : null
                     )}
                     <li style={{ marginLeft: '0px' }}>
-                        <p style={{ color: `${style.primaryHeader}` }}>________________________</p>
+                        <p className='Primary-Header'>________________________</p>
                     </li>
                     {channelList.map((channel) =>
                         channel.voiceChannel ? (
                             <li key={channel.name}>
-                                <Link onClick={() => handleVoiceChannelJoin(channel)} to='#' style={{ color: `${style.secondaryHeader}` }}>
+                                <Link onClick={() => handleVoiceChannelJoin(channel)} to='#' className='Secondary-Header'>
                                     {'< '}
                                     {channel.name}
                                 </Link>
                                 <ul className='channelUserlist'>
                                     {channel.userList.map((user) => (
                                         <Link to={`/profile/${user._id}`} key={user._id}>
-                                            <li style={{ color: `${style.primaryHeader}`, marginLeft: '8px' }}>
+                                            <li className='Primary-Header' style={{ marginLeft: '8px' }}>
                                                 <div
                                                     className='NavIcons'
                                                     style={{ backgroundImage: `url(${user.profilePicture})`, height: '25px', width: '25px' }}

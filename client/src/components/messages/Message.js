@@ -35,9 +35,7 @@ export const Message = (props) => {
                                                 style={{ backgroundImage: `url(${message.profilepicture})`, height: '25px', width: '25px' }}
                                             />
                                         </Link>
-                                        <h4 className='streamChatUsername' style={{ color: 'red' }}>
-                                            {message.name}
-                                        </h4>
+                                        <h4 className='streamChatUsername Secondary-Header'>{message.name}</h4>
                                     </div>
                                     <div className='messageBox'>
                                         <p className='messageText'>{ReactEmoji.emojify(message.text)}</p>
@@ -55,7 +53,7 @@ export const Message = (props) => {
                         <ScrollToBottom>
                             {ChannelMessages.map((message, i) => (
                                 <div className='message' key={i}>
-                                    <Link to={`/profile/${message.userId}`} style={{ height: '45px', width: '55px' }}>
+                                    <Link to={`/profile/${message.userId}`} style={{ height: '47px', width: '55px' }}>
                                         <div
                                             className='NavIcons'
                                             style={{ backgroundImage: `url(${message.profilepicture})`, height: '45px', width: '45px' }}
@@ -94,7 +92,7 @@ export const Message = (props) => {
                                         />
                                     </Link>
                                     <div className='message_info'>
-                                        <h4>
+                                        <h4 className='Secondary-Header'>
                                             {message.userId === CurrentProfile._id ? CurrentProfile.name : user.name}
                                             <span className='message_timestamp'>{message.date}</span>
                                         </h4>

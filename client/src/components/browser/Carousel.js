@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card } from './Card'
-import { style } from '../../css/CustomStyling'
 import Arrow from '../../images/Arrow.png'
 import { SHOW_GAMES, SHOW_STREAMS, SHOW_SCREENSHOTS, CAROUSEL_SCREENSHOT, CAROUSEL_DASHBOARD } from './types/types'
 
@@ -48,10 +47,8 @@ export const Carousel = (props) => {
         case CAROUSEL_DASHBOARD:
             return (
                 <>
-                    <div className='dashboard-Trending' style={{ borderBottom: `${style.outLine} 2px solid` }}>
-                        <h2 className='sticky globalHeader' style={{ color: `${style.secondaryHeader}` }}>
-                            Trending Streams For You!
-                        </h2>
+                    <div className='dashboard-Trending'>
+                        <h2 className='sticky globalHeader Secondary-Header'>Trending Streams For You!</h2>
                         <div className='wrapper'>
                             <div className='trendy' ref={streamRef}>
                                 <Card type={SHOW_STREAMS} />
@@ -66,10 +63,8 @@ export const Carousel = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className='dashboard-Trending' style={{ borderBottom: `${style.outLine} 2px solid` }}>
-                        <h2 className='sticky globalHeader' style={{ color: `${style.secondaryHeader}` }}>
-                            Trending Games For You!
-                        </h2>
+                    <div className='dashboard-Trending'>
+                        <h2 className='sticky globalHeader Secondary-Header'>Trending Games For You!</h2>
                         <div className='wrapper'>
                             <div className='trendy' ref={gamesRef}>
                                 <Card type={SHOW_GAMES} />
@@ -89,7 +84,7 @@ export const Carousel = (props) => {
         case CAROUSEL_SCREENSHOT:
             return (
                 <div className='profile-Screenshots-Container'>
-                    <h2 className='globalHeader sticky' style={{ background: 'rgb(0,0,0,.8)', color: `${style.primaryHeader}` }}>
+                    <h2 className='globalHeader sticky Primary-Header' style={{ background: 'rgb(0,0,0,.8)' }}>
                         Showcase
                     </h2>
                     <div className='wrapper'>

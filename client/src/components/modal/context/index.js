@@ -5,6 +5,8 @@ import {
     showModalwithScreenshot,
     showModalWithChannelEdit,
     showModalWithFriendRequests,
+    showModalWithColorScheme,
+    showModalWithEditServer,
     hideModal,
 } from './ModalActions'
 import { ModalProvider, useModalState, useModalDispatch } from './ModalContext'
@@ -19,5 +21,7 @@ export {
     showModalwithScreenshot,
     showModalWithChannelEdit,
     showModalWithFriendRequests,
+    showModalWithColorScheme,
+    showModalWithEditServer,
     hideModal,
 }

@@ -36,6 +36,18 @@ const UserSchema = mongoose.Schema({
         type: String,
         default: undefined,
     },
+    location: {
+        type: String,
+        default: 'The Void..',
+    },
+    bio: {
+        type: String,
+        default: 'This user has not setup a bio yet..',
+    },
+    profileLevel: {
+        type: Number,
+        default: 0,
+    },
     friendList: [
         {
             type: mongoose.Schema.Types.ObjectId,

@@ -40,12 +40,23 @@ export async function loadJoinedServers(dispatch) {
     }
 }
 
-export function loadCurrentServer(dispatch, server) {
+// export function loadCurrentServer(dispatch, server) {
+//     try {
+//         console.log(server)
+//         dispatch({ type: LOAD_CURRENT_SERVER, payload: server })
+//         console.log('Server loaded successfully.')
+//     } catch (error) {
+//         console.error(error)
+//     }
+// }
+
+export async function loadCurrentServer(dispatch, server) {
     try {
-        dispatch({ type: LOAD_CURRENT_SERVER, payload: server })
-        console.log('Server loaded successfully.')
+        const response = await axios.get(`/api/servers/server/${server}`, requestConfig)
+        dispatch({ type: LOAD_CURRENT_SERVER, payload: response.data })
+        console.log('Server Loaded..')
     } catch (error) {
-        console.error(error)
+        console.log(error)
     }
 }
 
@@ -76,8 +87,7 @@ export async function loadCurrentTextChannel(dispatch, channel, server) {
 export async function loadServerChannelList(dispatch, server) {
     try {
         let channelList = JSON.stringify(server.channelList)
-
-        const response = await axios.get(`/api/${server._id}/channels/${channelList}`, requestConfig)
+        const response = await axios.get(`/api/${server}/channels/${channelList}`, requestConfig)
         dispatch({ type: LOAD_SERVER_CHANNELLIST, payload: response.data })
         console.log('Server channels loaded successfully.')
     } catch (error) {
@@ -124,6 +134,16 @@ export async function createChannel(dispatch, channel, server) {
 export async function editChannel(dispatch, channel, server, id) {
     try {
         const response = await axios.put(`/api/${server}/channels/editchannel/${id}`, channel, requestConfig)
+        console.log(response.data)
+        console.log('Channel Edited')
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export async function editServer(dispatch, server, id) {
+    try {
+        const response = await axios.put(`/api/servers/editserver/${id}`, server, requestConfig)
         console.log(response.data)
         console.log('Channel Edited')
     } catch (error) {

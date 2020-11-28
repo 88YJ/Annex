@@ -2,12 +2,13 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuthState, useAuthDispatch, logout } from '../../pages/authentication/context'
 import { useMessageDispatch, useMessageState, loadInbox } from '../messages/context'
-import { style } from '../../css/CustomStyling'
-
+import EditIcon from '../../images/EditIcon.png'
+import { useModalDispatch, showModalWithColorScheme } from '../modal/context'
 import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types'
 import { SubMenuCart } from './SubMenuCart'
 
 export const SubMenu = (props) => {
+    const modalDispatch = useModalDispatch()
     const authDispatch = useAuthDispatch()
     const { user } = useAuthState()
     const messageDispatch = useMessageDispatch()
@@ -23,34 +24,42 @@ export const SubMenu = (props) => {
             return (
                 <>
                     <div className='NavSubMenu'>
-                        <h1 className='globalHeader' style={{ color: `${style.primaryHeader}` }}>
+                        <h1 className='globalHeader Primary-Header'>
+                            <img
+                                className='Bright-Background'
+                                src={EditIcon}
+                                style={{
+                                    height: '20px',
+                                    width: '20px',
+                                    borderRadius: '0px',
+                                    cursor: 'pointer',
+                                    position: 'absolute',
+                                    left: '10px',
+                                    top: '10px',
+                                }}
+                                onClick={() => showModalWithColorScheme(modalDispatch)}
+                            />
                             Home
                         </h1>
                         <ul>
                             <li>
-                                <Link to={`/profile/${user._id}`} style={{ color: `${style.secondaryHeader}` }}>
-                                    My Profile
-                                </Link>
+                                <Link to={`/profile/${user._id}`}>My Profile</Link>
                             </li>
                             <li>
-                                <Link to='#' style={{ color: `${style.secondaryHeader}` }}>
-                                    Friends Feed
-                                </Link>
+                                <Link to='#'>Friends Feed</Link>
                             </li>
                             <li>
-                                <Link to='#' style={{ color: `${style.secondaryHeader}` }}>
-                                    Community
-                                </Link>
+                                <Link to='#'>Community</Link>
                             </li>
                             <li>
-                                <Link to='/' onClick={() => logout(authDispatch)} style={{ color: `${style.secondaryHeader}` }}>
+                                <Link to='/' onClick={() => logout(authDispatch)}>
                                     Logout
                                 </Link>
                             </li>
                             {inbox && inbox.length !== 0
                                 ? inbox.messages.map((item, i) =>
                                       item.read ? (
-                                          <li key={i} className='FriendMessages' style={{ backgroundColor: `${style.primaryBackground}` }}>
+                                          <li key={i} className='FriendMessages Primary-Background'>
                                               <Link to={`/profile/${item.user._id}`} style={{ width: '60px' }}>
                                                   <div className='NavIcons' style={{ backgroundImage: `url(${item.user.profilePicture})` }} />
                                               </Link>
@@ -58,7 +67,7 @@ export const SubMenu = (props) => {
                                               <Link to={`/directchat/${item.user._id}`}>{item.user.name}</Link>
                                           </li>
                                       ) : (
-                                          <li key={i} className='FriendMessages' style={{ backgroundColor: `${style.secondaryBackground}` }}>
+                                          <li key={i} className='FriendMessages Secondary-Background'>
                                               <Link to={`/profile/${item.user._id}`} style={{ width: '60px' }}>
                                                   <div className='NavIcons' style={{ backgroundImage: `url(${item.user.profilePicture})` }} />
                                               </Link>
@@ -76,27 +85,25 @@ export const SubMenu = (props) => {
             return (
                 <>
                     <div className='NavSubMenu'>
-                        <h1 className='globalHeader' style={{ color: `${style.primaryHeader}` }}>
-                            Shop
-                        </h1>
+                        <h1 className='globalHeader Primary-Header'>Shop</h1>
                         <ul>
                             <li>
-                                <Link to='/' style={{ color: `${style.secondaryHeader}` }}>
+                                <Link to='/' className='Secondary-Header'>
                                     Featured
                                 </Link>
                             </li>
                             <li>
-                                <Link to='/' style={{ color: `${style.secondaryHeader}` }}>
+                                <Link to='/' className='Secondary-Header'>
                                     Wishlist
                                 </Link>
                             </li>
                             <li>
-                                <Link to='#' style={{ color: `${style.secondaryHeader}` }}>
+                                <Link to='#' className='Secondary-Header'>
                                     Market
                                 </Link>
                             </li>
                             <li>
-                                <Link to='/' style={{ color: `${style.secondaryHeader}` }}>
+                                <Link to='/' className='Secondary-Header'>
                                     Stats
                                 </Link>
                             </li>
@@ -110,9 +117,7 @@ export const SubMenu = (props) => {
             return (
                 <>
                     <div className='NavSubMenu'>
-                        <h1 className='globalHeader' style={{ color: `${style.primaryHeader}` }}>
-                            Stream
-                        </h1>
+                        <h1 className='globalHeader Primary-Header'>Stream</h1>
                     </div>
                 </>
             )

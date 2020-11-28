@@ -67,6 +67,16 @@ export async function editProfile(dispatch, info) {
     }
 }
 
+export async function editScheme(dispatch, info) {
+    try {
+        await axios.put(`/api/users/editscheme`, info, requestConfig)
+
+        console.log('scheme edited')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export async function getIncomingFriendRequests(dispatch) {
     try {
         const res = await axios.get('/api/users/friendrequests', requestConfig)

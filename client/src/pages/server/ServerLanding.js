@@ -6,18 +6,15 @@ import { useSideBarDispatch, showChannellist, showUserlist } from '../../compone
 
 export const ServerLanding = () => {
     const { server_id, channel_id } = useParams()
-    const { joinedServersList, loading, channelList } = useServerState()
+    const { loading, channelList } = useServerState()
 
     const serverDispatch = useServerDispatch()
 
     const sidebarDispatch = useSideBarDispatch()
 
     useEffect(() => {
-        if (!loading) {
-            let server = joinedServersList.filter((server) => server._id === server_id)
-            loadCurrentServer(serverDispatch, server[0])
-        }
-    }, [loading, serverDispatch, joinedServersList, server_id])
+        loadCurrentServer(serverDispatch, server_id)
+    }, [serverDispatch, server_id])
 
     useEffect(() => {
         if (!loading) {

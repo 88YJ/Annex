@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { style } from '../../css/CustomStyling'
 import { useProfileState, useProfileDispatch, getIncomingFriendRequests, acceptFriendRequest } from '../../pages/profile/context'
 
 export const FriendRequestsForm = () => {
@@ -13,7 +12,7 @@ export const FriendRequestsForm = () => {
     return (
         <>
             <div className='profile-Friendrequests'>
-                <h2 style={{ color: `${style.primaryHeader}` }}>Friend Requests</h2>
+                <h2 className='Primary-Header'>Friend Requests</h2>
                 <ul>
                     {incomingRequests.map((request, i) => (
                         <li

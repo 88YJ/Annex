@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { style } from '../../css/CustomStyling'
 
 //Component imports
 import { ServerList } from './ServerList'
@@ -59,7 +58,8 @@ export const Header = () => {
                     </Link>
                 </li>
                 <li
-                    style={{ marginTop: '3px', borderBottom: `${style.primaryHeader} 1px solid`, paddingBottom: '4px', cursor: 'pointer' }}
+                    className='Border-Bottom-1PX'
+                    style={{ marginTop: '3px', paddingBottom: '4px', cursor: 'pointer' }}
                     key='addServer'
                     onClick={() => showModalWithAddServer(modalDispatch)}
                 >
@@ -83,7 +83,7 @@ export const Header = () => {
         )
     }
     return (
-        <div className='Nav' style={{ borderRight: `${style.outLine} 2px solid` }}>
+        <div className='Nav'>
             <ul>
                 {navigationLinks}
                 <ServerList />

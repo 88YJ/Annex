@@ -8,6 +8,7 @@ import {
     createServer,
     createChannel,
     editChannel,
+    editServer,
     loadAllServers,
 } from './ServerActions'
 import { ServerProvider, useServerState, useServerDispatch } from './ServerContext'
@@ -25,5 +26,6 @@ export {
     createServer,
     createChannel,
     editChannel,
+    editServer,
     loadAllServers,
 }

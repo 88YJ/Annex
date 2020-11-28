@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Carousel } from './Carousel'
 import { CAROUSEL_SCREENSHOT } from './types/types'
 import { useProfileState, useProfileDispatch, sendFriendRequest } from '../../pages/profile/context'
-import { useModalDispatch, showModalWithEditProfile, showModalWithFriendRequests } from '../modal/context'
+import { useModalDispatch, useModalState, showModalWithEditProfile, showModalWithFriendRequests } from '../modal/context'
 import { useAuthState } from '../../pages/authentication/context'
 import DefaultBackground from '../../images/DefaultBackgroundV2.png'
-import { style } from '../../css/CustomStyling'
+import MenuArrow from '../../images/MenuArrow.png'
 
 export const Profile = () => {
     let backgroundImage = DefaultBackground
@@ -13,6 +13,15 @@ export const Profile = () => {
     const profileDispatch = useProfileDispatch()
     const { user } = useAuthState()
     const modalDipatch = useModalDispatch()
+    const { show } = useModalState()
+
+    const [menu, setMenu] = useState(false)
+
+    useEffect(() => {
+        if (show) {
+            setMenu(false)
+        }
+    }, [show])
 
     if (CurrentProfile && CurrentProfile.backgroundPicture) {
         backgroundImage = CurrentProfile.backgroundPicture
@@ -25,42 +34,49 @@ export const Profile = () => {
                     <div className='profile-Film'>
                         <div className='profile-Master'>
                             <div className='profile-Header'>
-                                <div className='profile-DisplayPicture' style={{ backgroundImage: `url(${CurrentProfile.profilePicture})` }}></div>
+                                <div className='profile-DisplayPicture' style={{ backgroundImage: `url(${CurrentProfile.profilePicture})` }} />
                                 <div style={{ color: 'white' }}>
-                                    <h1 className='globalHeaderL' style={{ color: `${style.primaryHeader}` }}>
+                                    <h1 className='globalHeaderL Primary-Header' style={{ display: 'flex' }}>
+                                        <div
+                                            className='profile-Options'
+                                            style={{
+                                                backgroundImage: `url(${MenuArrow})`,
+                                                transform: `${menu ? 'scale(1, 1)' : 'scale(1, -1)'}`,
+                                            }}
+                                            onClick={() => (menu ? setMenu(false) : setMenu(true))}
+                                        />
                                         {CurrentProfile.name}
+
+                                        {menu ? (
+                                            <ul className='profile-Options-Submenu'>
+                                                <li>
+                                                    <button
+                                                        className='globalbutton'
+                                                        style={{ height: 'auto', width: '96%' }}
+                                                        onClick={() => showModalWithEditProfile(modalDipatch)}
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                </li>
+                                                <li>
+                                                    <button
+                                                        className='globalbutton'
+                                                        style={{ height: 'auto', width: '96%' }}
+                                                        onClick={() => showModalWithFriendRequests(modalDipatch)}
+                                                    >
+                                                        Requests
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        ) : null}
                                     </h1>
-                                    <h4 className='globalHeaderL' style={{ color: `${style.secondaryHeader}` }}>
-                                        Location: United States{' '}
-                                    </h4>
-                                    <p className='globalHeaderL' style={{ color: `${style.secondaryHeader}` }}>
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex voluptatem voluptates
-                                    </p>
+                                    <h4 className='globalHeaderL Secondary-Header'>Location: {CurrentProfile.location}</h4>
+                                    <p className='globalHeaderL Secondary-Header'>Desc: {CurrentProfile.bio}</p>
                                 </div>
                                 <div />
                                 <div>
-                                    <h3 className='globalHeaderR' style={{ color: `${style.primaryHeader}` }}>
-                                        Level: 150
-                                    </h3>
-                                    <h3 className='globalHeaderR' style={{ color: `${style.primaryHeader}` }}>
-                                        Years: 0
-                                    </h3>
-                                </div>
-                                <div>
-                                    <button
-                                        className='globalbutton'
-                                        style={{ height: 'auto', width: '107px' }}
-                                        onClick={() => showModalWithEditProfile(modalDipatch)}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className='globalbutton'
-                                        style={{ height: 'auto', width: 'auto' }}
-                                        onClick={() => showModalWithFriendRequests(modalDipatch)}
-                                    >
-                                        Requests
-                                    </button>
+                                    <h3 className='globalHeaderR Primary-Header'>Level: {CurrentProfile.profileLevel}</h3>
+                                    <h3 className='globalHeaderR Primary-Header'>Years: 0</h3>
                                 </div>
                             </div>
                             <div className='profile-SubMaster'>
@@ -97,28 +113,7 @@ export const Profile = () => {
                                             </li>
                                         </ul>
                                     </div>
-                                    <div className='profile-Body-Center'>
-                                        <ul>
-                                            {user.incomingFriendRequests.map((request, i) => (
-                                                <li
-                                                    key={i}
-                                                    className='banner'
-                                                    style={{
-                                                        backgroundImage: `url(${request.profileBanner})`,
-                                                    }}
-                                                >
-                                                    <h4>{request.name}</h4>
-                                                    <div className='profilepicture' style={{ backgroundImage: `url(${request.profilePicture})` }} />
-                                                    <button
-                                                        style={{ height: 'auto', width: 'auto' }}
-                                                        className='globalbutton' /*onClick={() => OnFriendRequestAccept(request._id)}*/
-                                                    >
-                                                        Accept Request
-                                                    </button>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                                    <div className='profile-Body-Center'></div>
                                 </div>
                             </div>
                         </div>
@@ -134,45 +129,48 @@ export const Profile = () => {
                         <div className='profile-Header'>
                             <div className='profile-DisplayPicture' style={{ backgroundImage: `url(${CurrentProfile.profilePicture})` }}></div>
                             <div style={{ color: 'white' }}>
-                                <h1 className='globalHeaderL' style={{ color: `${style.primaryHeader}` }}>
+                                <h1 className='globalHeaderL Primary-Header' style={{ display: 'flex' }}>
+                                    <div
+                                        className='profile-Options'
+                                        style={{
+                                            backgroundImage: `url(${MenuArrow})`,
+                                            transform: `${menu ? 'scale(1, 1)' : 'scale(1, -1)'}`,
+                                        }}
+                                        onClick={() => (menu ? setMenu(false) : setMenu(true))}
+                                    />
                                     {CurrentProfile.name}
+
+                                    {menu ? (
+                                        <ul className='profile-Options-Submenu'>
+                                            <li>
+                                                <button
+                                                    className='globalbutton'
+                                                    style={{ height: 'auto', width: '95%' }}
+                                                    onClick={() => sendFriendRequest(profileDispatch, CurrentProfile._id)}
+                                                >
+                                                    Add Friend
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button className='globalbutton' style={{ height: 'auto', width: '95%' }}>
+                                                    Chat
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    ) : null}
                                 </h1>
-                                <h4 className='globalHeaderL' style={{ color: `${style.secondaryHeader}` }}>
-                                    Location: United States{' '}
-                                </h4>
-                                <p className='globalHeaderL' style={{ color: `${style.secondaryHeader}` }}>
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex voluptatem voluptates
-                                </p>
+                                <h4 className='globalHeaderL Secondary-Header'>Location: {CurrentProfile.location}</h4>
+                                <p className='globalHeaderL Secondary-Header'>Desc: {CurrentProfile.bio}</p>
                             </div>
                             <div />
                             <div>
-                                <h3 className='globalHeaderR' style={{ color: `${style.primaryHeader}` }}>
-                                    Level: 150
-                                </h3>
-                                <h3 className='globalHeaderR' style={{ color: `${style.primaryHeader}` }}>
-                                    Years: 0
-                                </h3>
+                                <h3 className='globalHeaderR Primary-Header'>Level: {CurrentProfile.profileLevel}</h3>
+                                <h3 className='globalHeaderR Primary-Header'>Years: 0</h3>
                                 {CurrentProfile.onlineStatus ? (
-                                    <h3 className='globalHeaderR' style={{ color: `${style.primaryHeader}` }}>
-                                        Online
-                                    </h3>
+                                    <h3 className='globalHeaderR Primary-Header'>Online</h3>
                                 ) : (
-                                    <h3 className='globalHeaderR' style={{ color: `${style.secondaryHeader}` }}>
-                                        Offline
-                                    </h3>
+                                    <h3 className='globalHeaderR Seconday-Header'>Offline</h3>
                                 )}
-                            </div>
-                            <div>
-                                <button
-                                    className='globalbutton'
-                                    style={{ height: 'auto', width: 'auto' }}
-                                    onClick={() => sendFriendRequest(profileDispatch, CurrentProfile._id)}
-                                >
-                                    Add
-                                </button>
-                                <button className='globalbutton' style={{ height: 'auto', width: 'auto' }}>
-                                    Chat
-                                </button>
                             </div>
                         </div>
                         <div className='profile-SubMaster'>

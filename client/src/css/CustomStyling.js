@@ -5,7 +5,7 @@ export const style = {
     secondaryHeader: `${user && user.colorScheme.secondaryHeader ? user.colorScheme.secondaryHeader : '#C5C6C7'}`,
     tertiaryHeader: `${user && user.colorScheme.tertiaryHeader ? user.colorScheme.tertiaryHeader : '#FFFFFF'}`,
     outLine: `${user && user.colorScheme.outLine ? user.colorScheme.outLine : '#384d48'}`,
-    secondaryOutLine: `${user && user.colorScheme.secondaryOutLine ? user.colorScheme.secondaryOutLine : '#45A29E'}`,
+    secondaryOutLine: `${user && user.colorScheme.secondaryOutline ? user.colorScheme.secondaryOutline : '#45A29E'}`,
     activeOutline: `${user && user.colorScheme.activeOutline ? user.colorScheme.activeOutline : '#66FCF1'}`,
     tint: `${user && user.colorScheme.tint ? user.colorScheme.tint : 'black'}`,
     defaultBackground: `${user && user.defaultBackground ? user.defaultBackground : '#0B0C10'}`,

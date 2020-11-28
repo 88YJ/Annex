@@ -12,7 +12,7 @@ const Server = require('../models/Server')
 router.put('/editprofile', middleware.isAuthenticated, async (req, res) => {
     try {
         let updatedUser
-        const { name, profilePicture, background, banner } = req.body
+        const { name, profilePicture, background, banner, bio, location, screenShot } = req.body
         if (/\S/.test(name)) {
             console.log('Profile Name Updated')
             updatedUser = await User.findByIdAndUpdate(req.user.id, {
@@ -36,6 +36,136 @@ router.put('/editprofile', middleware.isAuthenticated, async (req, res) => {
             updatedUser = await User.findByIdAndUpdate(req.user.id, {
                 profileBanner: banner,
             })
+        }
+        if (/\S/.test(bio)) {
+            console.log('Bio Updated')
+            updatedUser = await User.findByIdAndUpdate(req.user.id, {
+                bio: bio,
+            })
+        }
+        if (/\S/.test(location)) {
+            console.log('Location Updated')
+            updatedUser = await User.findByIdAndUpdate(req.user.id, {
+                location: location,
+            })
+        }
+        if (/\S/.test(screenShot)) {
+            console.log('ScreenShot Uploaded')
+            updatedUser = await User.findByIdAndUpdate(req.user.id, {
+                $addToSet: { screenShots: screenShot },
+            })
+        }
+
+        res.json(updatedUser)
+    } catch (error) {
+        console.error(error.message)
+        res.status(500).send('Server Error')
+    }
+})
+
+//Edit Color Scheme
+router.put('/editscheme', middleware.isAuthenticated, async (req, res) => {
+    try {
+        let updatedUser
+        const {
+            background,
+            primaryHeader,
+            secondaryHeader,
+            tertiaryHeader,
+            outLine,
+            secondaryOutline,
+            activeOutline,
+            primaryBackground,
+            secondaryBackground,
+            tertiaryBackground,
+        } = req.body
+
+        if (/\S/.test(background)) {
+            console.log('Background Updated')
+            updatedUser = await User.findByIdAndUpdate(req.user.id, {
+                backgroundPicture: background,
+            })
+        }
+        if (/\S/.test(primaryHeader)) {
+            console.log('Primary Header Updated')
+            updatedUser = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $set: { 'colorScheme.primaryHeader': primaryHeader },
+                }
+            )
+        }
+        if (/\S/.test(secondaryHeader)) {
+            console.log('Secondary Header Updated')
+            updatedUser = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $set: { 'colorScheme.secondaryHeader': secondaryHeader },
+                }
+            )
+        }
+        if (/\S/.test(tertiaryHeader)) {
+            console.log('Tertiary Header Updated')
+            updatedUser = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $set: { 'colorScheme.tertiaryHeader': tertiaryHeader },
+                }
+            )
+        }
+        if (/\S/.test(outLine)) {
+            console.log('Outline Updated')
+            updatedUser = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $set: { 'colorScheme.outLine': outLine },
+                }
+            )
+        }
+        if (/\S/.test(secondaryOutline)) {
+            console.log('Secondary Outline Updated')
+            updatedUser = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $set: { 'colorScheme.secondaryOutline': secondaryOutline },
+                }
+            )
+        }
+        if (/\S/.test(activeOutline)) {
+            console.log('Active Outline Updated')
+            updatedUser = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $set: { 'colorScheme.activeOutline': activeOutline },
+                }
+            )
+        }
+        if (/\S/.test(primaryBackground)) {
+            console.log('Primary Background Uploaded')
+            updatedUser = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $set: { 'colorScheme.primaryBackground': primaryBackground },
+                }
+            )
+        }
+        if (/\S/.test(secondaryBackground)) {
+            console.log('secondaryBackground Uploaded')
+            updatedUser = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $set: { 'colorScheme.secondaryBackground': secondaryBackground },
+                }
+            )
+        }
+        if (/\S/.test(tertiaryBackground)) {
+            console.log('Tertiary Background Uploaded')
+            updatedUser = await User.findOneAndUpdate(
+                { _id: req.user.id },
+                {
+                    $set: { 'colorScheme.tertiaryBackground': tertiaryBackground },
+                }
+            )
         }
 
         res.json(updatedUser)
@@ -189,7 +319,7 @@ router.get('/profile/:id', middleware.isAuthenticated, async (req, res) => {
     try {
         const profile = await User.findById(req.params.id)
 
-        const { name, backgroundPicture, profilePicture, profileBanner, screenShots, _id, onlineStatus } = profile
+        const { name, backgroundPicture, profilePicture, profileBanner, screenShots, _id, onlineStatus, location, bio, profileLevel } = profile
 
         const profileInfo = {
             _id: _id,
@@ -199,6 +329,9 @@ router.get('/profile/:id', middleware.isAuthenticated, async (req, res) => {
             profileBanner: profileBanner,
             screenShots: screenShots,
             onlineStatus: onlineStatus,
+            location: location,
+            bio: bio,
+            profileLevel: profileLevel,
         }
 
         res.json(profileInfo)

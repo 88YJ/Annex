@@ -6,6 +6,8 @@ import {
     HIDE_MODAL,
     SHOW_MODAL_WITH_CHANNEL_EDIT,
     SHOW_MODAL_WITH_FRIEND_REQUESTS,
+    SHOW_MODAL_WITH_COLOR_SCHEME,
+    SHOW_MODAL_WITH_EDIT_SERVER,
 } from './types'
 
 export const initialState = {
@@ -16,6 +18,8 @@ export const initialState = {
     screenShot: false,
     channelEdit: false,
     friendRequests: false,
+    editServer: false,
+    colorScheme: false,
     screenShotLink: null,
 }
 
@@ -58,6 +62,18 @@ export const ModalReducer = (initialState, action) => {
                 show: true,
                 friendRequests: true,
             }
+        case SHOW_MODAL_WITH_COLOR_SCHEME:
+            return {
+                ...initialState,
+                show: true,
+                colorScheme: true,
+            }
+        case SHOW_MODAL_WITH_EDIT_SERVER:
+            return {
+                ...initialState,
+                show: true,
+                editServer: true,
+            }
         case HIDE_MODAL:
             return {
                 ...initialState,
@@ -69,6 +85,8 @@ export const ModalReducer = (initialState, action) => {
                 screenShot: false,
                 channelEdit: false,
                 friendRequests: false,
+                colorScheme: false,
+                editServer: false,
             }
         default:
             throw new Error(`Unhandled action type: ${action.type}`)
