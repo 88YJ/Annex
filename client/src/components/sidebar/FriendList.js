@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import DefaultProfilePicture from '../../images/DefaultProfile.png'
 import { useProfileState } from '../../pages/profile/context'
 
 export const FriendList = () => {
@@ -15,7 +15,13 @@ export const FriendList = () => {
                         {Friends.map((friend, i) =>
                             friend.onlineStatus ? (
                                 <li key={i} className='banner' style={{ backgroundImage: `url(${friend.profileBanner})` }}>
-                                    <div className='profilepicture' style={{ backgroundImage: `url('${friend.profilePicture}')`, marginLeft: '3px' }} />
+                                    <div
+                                        className='profilepicture'
+                                        style={{
+                                            backgroundImage: `url('${friend.profilePicture ? friend.profilePicture : DefaultProfilePicture}')`,
+                                            marginLeft: '3px',
+                                        }}
+                                    />
                                     <Link to='#'>
                                         <p className='Tertiary-Header' style={{ background: 'rgb(0,0,0,.5)' }}>
                                             {friend.name}
@@ -41,7 +47,13 @@ export const FriendList = () => {
                         {Friends.map((friend, i) =>
                             friend.onlineStatus === false ? (
                                 <li key={i} className='banner offlineFriends' style={{ backgroundImage: `url(${friend.profileBanner})` }}>
-                                    <div className='profilepicture' style={{ backgroundImage: `url('${friend.profilePicture}')`, marginLeft: '3px' }} />
+                                    <div
+                                        className='profilepicture'
+                                        style={{
+                                            backgroundImage: `url('${friend.profilePicture ? friend.profilePicture : DefaultProfilePicture}')`,
+                                            marginLeft: '3px',
+                                        }}
+                                    />
                                     <Link to='#'>
                                         <p className='Tertiary-Header' style={{ background: 'rgb(0,0,0,.5)' }}>
                                             {friend.name}

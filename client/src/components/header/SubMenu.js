@@ -6,6 +6,7 @@ import EditIcon from '../../images/EditIcon.png'
 import { useModalDispatch, showModalWithColorScheme } from '../modal/context'
 import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types'
 import { SubMenuCart } from './SubMenuCart'
+import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
 export const SubMenu = (props) => {
     const modalDispatch = useModalDispatch()
@@ -37,6 +38,7 @@ export const SubMenu = (props) => {
                                     left: '10px',
                                     top: '10px',
                                 }}
+                                alt=''
                                 onClick={() => showModalWithColorScheme(modalDispatch)}
                             />
                             Home
@@ -59,9 +61,16 @@ export const SubMenu = (props) => {
                             {inbox && inbox.length !== 0
                                 ? inbox.messages.map((item, i) =>
                                       item.read ? (
-                                          <li key={i} className='FriendMessages Primary-Background'>
+                                          <li key={i} className='FriendMessages'>
                                               <Link to={`/profile/${item.user._id}`} style={{ width: '60px' }}>
-                                                  <div className='NavIcons' style={{ backgroundImage: `url(${item.user.profilePicture})` }} />
+                                                  <div
+                                                      className='NavIcons'
+                                                      style={{
+                                                          backgroundImage: `url(${
+                                                              item.user.profilePicture ? item.user.profilePicture : DefaultProfilePicture
+                                                          })`,
+                                                      }}
+                                                  />
                                               </Link>
 
                                               <Link to={`/directchat/${item.user._id}`}>{item.user.name}</Link>
@@ -69,7 +78,14 @@ export const SubMenu = (props) => {
                                       ) : (
                                           <li key={i} className='FriendMessages Secondary-Background'>
                                               <Link to={`/profile/${item.user._id}`} style={{ width: '60px' }}>
-                                                  <div className='NavIcons' style={{ backgroundImage: `url(${item.user.profilePicture})` }} />
+                                                  <div
+                                                      className='NavIcons'
+                                                      style={{
+                                                          backgroundImage: `url(${
+                                                              item.user.profilePicture ? item.user.profilePicture : DefaultProfilePicture
+                                                          })`,
+                                                      }}
+                                                  />
                                               </Link>
 
                                               <Link to={`/directchat/${item.user._id}`}>{item.user.name}</Link>

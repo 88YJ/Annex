@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Carousel } from './Carousel'
 import { CAROUSEL_SCREENSHOT } from './types/types'
 import { useProfileState, useProfileDispatch, sendFriendRequest } from '../../pages/profile/context'
 import { useModalDispatch, useModalState, showModalWithEditProfile, showModalWithFriendRequests } from '../modal/context'
 import { useAuthState } from '../../pages/authentication/context'
+import { ProfileBody } from './ProfileBody'
 import DefaultBackground from '../../images/DefaultBackgroundV2.png'
+import DefaultProfilePicture from '../../images/DefaultProfile.png'
 import MenuArrow from '../../images/MenuArrow.png'
 
 export const Profile = () => {
@@ -34,7 +37,14 @@ export const Profile = () => {
                     <div className='profile-Film'>
                         <div className='profile-Master'>
                             <div className='profile-Header'>
-                                <div className='profile-DisplayPicture' style={{ backgroundImage: `url(${CurrentProfile.profilePicture})` }} />
+                                <div
+                                    className='profile-DisplayPicture'
+                                    style={
+                                        CurrentProfile.profilePicture
+                                            ? { backgroundImage: `url(${CurrentProfile.profilePicture})` }
+                                            : { backgroundImage: `url(${DefaultProfilePicture})` }
+                                    }
+                                />
                                 <div style={{ color: 'white' }}>
                                     <h1 className='globalHeaderL Primary-Header' style={{ display: 'flex' }}>
                                         <div
@@ -85,9 +95,6 @@ export const Profile = () => {
                                     <div className='profile-Tabs'>
                                         <ul>
                                             <li>
-                                                <h2 className='globalHeader'>Online</h2>
-                                            </li>
-                                            <li>
                                                 <h4 className='globalHeader'>Friends</h4>
                                             </li>
                                             <li>
@@ -113,7 +120,7 @@ export const Profile = () => {
                                             </li>
                                         </ul>
                                     </div>
-                                    <div className='profile-Body-Center'></div>
+                                    <ProfileBody />
                                 </div>
                             </div>
                         </div>
@@ -127,7 +134,14 @@ export const Profile = () => {
                 <div className='profile-Film'>
                     <div className='profile-Master'>
                         <div className='profile-Header'>
-                            <div className='profile-DisplayPicture' style={{ backgroundImage: `url(${CurrentProfile.profilePicture})` }}></div>
+                            <div
+                                className='profile-DisplayPicture'
+                                style={
+                                    CurrentProfile.profilePicture
+                                        ? { backgroundImage: `url(${CurrentProfile.profilePicture})` }
+                                        : { backgroundImage: `url(${DefaultProfilePicture})` }
+                                }
+                            ></div>
                             <div style={{ color: 'white' }}>
                                 <h1 className='globalHeaderL Primary-Header' style={{ display: 'flex' }}>
                                     <div
@@ -152,9 +166,11 @@ export const Profile = () => {
                                                 </button>
                                             </li>
                                             <li>
-                                                <button className='globalbutton' style={{ height: 'auto', width: '95%' }}>
-                                                    Chat
-                                                </button>
+                                                <Link to={`/directchat/${CurrentProfile._id}`}>
+                                                    <button className='globalbutton' style={{ height: 'auto', width: '95%' }}>
+                                                        Chat
+                                                    </button>
+                                                </Link>
                                             </li>
                                         </ul>
                                     ) : null}
@@ -178,9 +194,6 @@ export const Profile = () => {
                             <div className='profile-Body'>
                                 <div className='profile-Tabs'>
                                     <ul>
-                                        <li>
-                                            <h2 className='globalHeader'>Online</h2>
-                                        </li>
                                         <li>
                                             <h4 className='globalHeader'>Friends</h4>
                                         </li>
@@ -207,7 +220,7 @@ export const Profile = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className='profile-Body-Center'></div>
+                                <ProfileBody />
                             </div>
                         </div>
                     </div>

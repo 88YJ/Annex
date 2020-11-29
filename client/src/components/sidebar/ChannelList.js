@@ -5,6 +5,7 @@ import { useModalDispatch, useModalState, showModalWithAddChannel, showModalWith
 import { useAuthState } from '../../pages/authentication/context'
 import PlusIcon from '../../images/PlusIcon.png'
 import MenuArrow from '../../images/MenuArrow.png'
+import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
 export const ChannelList = () => {
     const { currentServer, channelList, currentTextChannel } = useServerState()
@@ -40,7 +41,7 @@ export const ChannelList = () => {
                 <h3 className='globalHeader Tertiary-Background Primary-Header Border-Bottom-1PX'>
                     {currentServer.name}
                     <div
-                        className='profile-Options Primary-Header'
+                        className='profile-Options'
                         style={{
                             backgroundImage: `url(${MenuArrow})`,
                             position: 'absolute',
@@ -131,7 +132,11 @@ export const ChannelList = () => {
                                             <li className='Primary-Header' style={{ marginLeft: '8px' }}>
                                                 <div
                                                     className='NavIcons'
-                                                    style={{ backgroundImage: `url(${user.profilePicture})`, height: '25px', width: '25px' }}
+                                                    style={{
+                                                        backgroundImage: `url(${user.profilePicture ? user.profilePicture : DefaultProfilePicture})`,
+                                                        height: '25px',
+                                                        width: '25px',
+                                                    }}
                                                 />
                                                 {user.name}
                                             </li>

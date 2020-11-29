@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Redirect, Route } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Redirect, Route, Link } from 'react-router-dom'
 import { loginUser, useAuthState, useAuthDispatch } from './context'
 
 export const Login = (props) => {
@@ -8,6 +8,10 @@ export const Login = (props) => {
 
     const dispatch = useAuthDispatch()
     const { loading, isLoggedIn } = useAuthState()
+
+    useEffect(() => {
+        document.getElementsByTagName('div')[3].setAttribute('class', 'app-mainGrid-Login-Register')
+    }, [])
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -33,7 +37,7 @@ export const Login = (props) => {
     return (
         <div className='register-login'>
             {redirectRoute}
-            <h1 className='globalHeader' style={{ background: 'black' }}>
+            <h1 className='globalHeader' style={{ background: 'black', color: '#66fcf1' }}>
                 Account Login
             </h1>
             <div className='register-login-Grid'>
@@ -66,7 +70,10 @@ export const Login = (props) => {
                                 style={{ height: 'auto', width: ' auto' }}
                             />
                         </div>
-                        <input style={{ height: 'auto', width: 'auto' }} type='submit' value='Login' className='globalbutton' />
+                        <input style={{ height: 'auto', width: '97%', marginTop: '6px' }} type='submit' value='Submit' className='globalbutton' />
+                        <Link to='/register' style={{ height: 'auto', width: '90%' }} className='globalbutton'>
+                            Register
+                        </Link>
                     </form>
                 </div>
             </div>

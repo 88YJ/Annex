@@ -35,6 +35,21 @@ export const EditColorSchemeForm = () => {
 
     const onChange = (e) => setScheme({ ...scheme, [e.target.name]: e.target.value })
 
+    function resetColors() {
+        setScheme({
+            background: '',
+            primaryHeader: '#66FCF1',
+            secondaryHeader: '#C5C6C7',
+            tertiaryHeader: '#FFFFFF',
+            outLine: '#384d48',
+            secondaryOutline: '#45A29E',
+            activeOutline: '#66FCF1',
+            primaryBackground: '#000411',
+            secondaryBackground: '#384d48',
+            tertiaryBackground: '#000000',
+        })
+    }
+
     const onSubmit = (e) => {
         e.preventDefault()
         editScheme(profileDispatch, scheme)
@@ -91,6 +106,7 @@ export const EditColorSchemeForm = () => {
 
             <div>
                 <input className='GeneralHeaders globalbutton' type='submit' value='Save Changes' style={{ width: '99%' }} />
+                <input className='GeneralHeaders globalbutton' onClick={() => resetColors()} type='submit' value='Reset Colors' style={{ width: '99%' }} />
             </div>
         </form>
     )

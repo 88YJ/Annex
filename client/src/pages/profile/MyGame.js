@@ -74,7 +74,7 @@ export const MyGame = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div>
+                        <div className='Gamepage-News-Container'>
                             <div className='Gamepage-News'>
                                 <h2 className='globalHeaderL'>Game News:</h2>
                                 <ul>
@@ -83,27 +83,21 @@ export const MyGame = () => {
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente magnam neque sed facere laboriosam iusto
                                             repudiandae et eius eos soluta recusandae reiciendis numquam, quo dolores veritatis. Ad laborum incidunt officia.
                                         </p>
-                                        <h4 className='globalHeaderL' className='Primary-Header'>
-                                            04/25/3001
-                                        </h4>
+                                        <h4 className='globalHeaderL Primary-Header'>04/25/3001</h4>
                                     </li>
                                     <li>
                                         <p>
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente magnam neque sed facere laboriosam iusto
                                             repudiandae et eius eos soluta recusandae reiciendis numquam, quo dolores veritatis. Ad laborum incidunt officia.
                                         </p>
-                                        <h4 className='globalHeaderL' className='Primary-Header'>
-                                            07/05/3001
-                                        </h4>
+                                        <h4 className='globalHeaderL Primary-Header'>07/05/3001</h4>
                                     </li>
                                     <li>
                                         <p>
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente magnam neque sed facere laboriosam iusto
                                             repudiandae et eius eos soluta recusandae reiciendis numquam, quo dolores veritatis. Ad laborum incidunt officia.
                                         </p>
-                                        <h4 className='globalHeaderL' className='Primary-Header'>
-                                            12/31/3001
-                                        </h4>
+                                        <h4 className='globalHeaderL Primary-Header'>12/31/3001</h4>
                                     </li>
                                 </ul>
                             </div>

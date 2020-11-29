@@ -98,7 +98,7 @@ export const SocketMaster = () => {
                 loadInbox(messageDispatch, user._id)
             })
         }
-    }, [socket, user, CurrentProfile])
+    }, [socket, user, CurrentProfile, messageDispatch])
 
     return null
 }

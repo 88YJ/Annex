@@ -10,6 +10,7 @@ import PlusIcon from '../../images/PlusIcon.png'
 import SearchIcon from '../../images/SearchIcon.png'
 import StreamIcon from '../../images/StreamIcon.png'
 import CartIcon from '../../images/CartIcon.png'
+import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
 //Context
 import { useSideBarDispatch, showGames } from '../../components/sidebar/context'
@@ -36,7 +37,12 @@ export const Header = () => {
             <Fragment>
                 <li onClick={() => changesidebar()}>
                     <Link to='/'>
-                        <div className='NavIcons' style={{ backgroundImage: `url(${user.profilePicture})` }} />
+                        <div
+                            className='NavIcons'
+                            style={
+                                user.profilePicture ? { backgroundImage: `url(${user.profilePicture})` } : { backgroundImage: `url(${DefaultProfilePicture})` }
+                            }
+                        />
                     </Link>
                     <SubMenu type={SHOW__HOME_SUBMENU} />
                 </li>

@@ -7,6 +7,7 @@ import ScrollToBottom from 'react-scroll-to-bottom'
 import ReactEmoji from 'react-emoji'
 import { useSideBarDispatch, showGames } from '../../components/sidebar/context'
 import { STREAM_MESSAGES, CHANNEL_MESSAGES, DIRECT_MESSAGES } from './context/types'
+import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
 export const Message = (props) => {
     const { type } = props
@@ -32,7 +33,11 @@ export const Message = (props) => {
                                         <Link onClick={() => changesidebar()} to={`/profile/${message.userId}`} style={{ height: '25px', width: '25px' }}>
                                             <div
                                                 className='profilepicture'
-                                                style={{ backgroundImage: `url(${message.profilepicture})`, height: '25px', width: '25px' }}
+                                                style={
+                                                    message.profilepicture
+                                                        ? { backgroundImage: `url(${message.profilepicture})`, height: '25px', width: '25px' }
+                                                        : { backgroundImage: `url(${DefaultProfilePicture})`, height: '25px', width: '25px' }
+                                                }
                                             />
                                         </Link>
                                         <h4 className='streamChatUsername Secondary-Header'>{message.name}</h4>
@@ -56,7 +61,11 @@ export const Message = (props) => {
                                     <Link to={`/profile/${message.userId}`} style={{ height: '47px', width: '55px' }}>
                                         <div
                                             className='NavIcons'
-                                            style={{ backgroundImage: `url(${message.profilepicture})`, height: '45px', width: '45px' }}
+                                            style={
+                                                message.profilepicture
+                                                    ? { backgroundImage: `url(${message.profilepicture})`, height: '45px', width: '45px' }
+                                                    : { backgroundImage: `url(${DefaultProfilePicture})`, height: '45px', width: '45px' }
+                                            }
                                         />
                                     </Link>
                                     <div className='message_info'>
@@ -79,16 +88,24 @@ export const Message = (props) => {
                         <ScrollToBottom>
                             {DirectMessages.map((message, i) => (
                                 <div className='message' key={i}>
-                                    <Link to={`/profile/${message.userId}`} style={{ height: '45px', width: '55px' }}>
+                                    <Link to={`/profile/${message.userId}`} style={{ height: '47px', width: '55px' }}>
                                         <div
                                             className='NavIcons'
-                                            style={{
-                                                backgroundImage: `url(${
-                                                    message.userId === CurrentProfile._id ? CurrentProfile.profilePicture : user.profilePicture
-                                                })`,
-                                                height: '45px',
-                                                width: '45px',
-                                            }}
+                                            style={
+                                                message.userId === CurrentProfile._id
+                                                    ? {
+                                                          backgroundImage: `url(${
+                                                              CurrentProfile.profilePicture ? CurrentProfile.profilePicture : DefaultProfilePicture
+                                                          })`,
+                                                          height: '45px',
+                                                          width: '45px',
+                                                      }
+                                                    : {
+                                                          backgroundImage: `url(${user.profilePicture ? user.profilePicture : DefaultProfilePicture})`,
+                                                          height: '45px',
+                                                          width: '45px',
+                                                      }
+                                            }
                                         />
                                     </Link>
                                     <div className='message_info'>

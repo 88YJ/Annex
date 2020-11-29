@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useProfileDispatch, useProfileState, getProfiles, joinServer } from '../../pages/profile/context'
 import { useServerDispatch, useServerState, loadAllServers, loadJoinedServers } from '../../pages/server/context'
+import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
 export const SearchComponent = (props) => {
     const { type } = props
@@ -42,10 +43,14 @@ export const SearchComponent = (props) => {
                             >
                                 <div
                                     className='profilepicture'
-                                    style={{
-                                        backgroundImage: `url(${item.profilePicture})`,
-                                        border: 'black 3px solid',
-                                    }}
+                                    style={
+                                        item.profilePicture
+                                            ? {
+                                                  backgroundImage: `url(${item.profilePicture})`,
+                                                  border: 'black 3px solid',
+                                              }
+                                            : { backgroundImage: `url(${DefaultProfilePicture})`, border: 'black 3px solid' }
+                                    }
                                 ></div>
                                 <h2 style={{ backgroundColor: 'rgb(0,0,0,.8)' }}>{item.name}</h2>
                             </li>

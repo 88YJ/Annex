@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
-import { Redirect, Route } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Redirect, Route, Link } from 'react-router-dom'
 import { useAuthDispatch, useAuthState, registerUser } from './context'
 
 export const Register = (props) => {
     const authDispatch = useAuthDispatch()
     const { loading, isLoggedIn } = useAuthState()
+
+    useEffect(() => {
+        document.getElementsByTagName('div')[3].setAttribute('class', 'app-mainGrid-Login-Register')
+    }, [])
 
     const [user, setUser] = useState({
         name: '',
@@ -41,7 +45,7 @@ export const Register = (props) => {
     return (
         <div className='register-login'>
             {redirectRoute}
-            <h1 className='globalHeader' style={{ background: 'black' }}>
+            <h1 className='globalHeader' style={{ background: 'black', color: '#66fcf1' }}>
                 Account Register
             </h1>
             <div className='register-login-Grid'>
@@ -49,7 +53,7 @@ export const Register = (props) => {
                 <div>
                     <form onSubmit={onSubmit}>
                         <div className='register-login-Form'>
-                            <h2 className='globalHeader'>Name:</h2>
+                            <h2 className='globalHeader'>Username:</h2>
                             <input
                                 style={{ height: 'auto', width: 'auto' }}
                                 className='register-login-Values'
@@ -102,7 +106,10 @@ export const Register = (props) => {
                                 disabled={loading}
                             />
                         </div>
-                        <input style={{ height: 'auto', width: 'auto', marginTop: '6px' }} type='submit' value='Register' className='globalbutton' />
+                        <input style={{ height: 'auto', width: '97%', marginTop: '6px' }} type='submit' value='Submit' className='globalbutton' />
+                        <Link to='/login' style={{ height: 'auto', width: '90%' }} className='globalbutton'>
+                            Login
+                        </Link>
                     </form>
                 </div>
                 <div></div>

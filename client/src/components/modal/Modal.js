@@ -9,8 +9,6 @@ import { FriendRequestsForm } from './FriendRequestsForm'
 import { EditColorSchemeForm } from './EditColorSchemeForm'
 import { EditServerForm } from './EditServerForm'
 
-import { style } from '../../css/CustomStyling'
-
 export const Modal = () => {
     const { show, addServer, addChannel, editProfile, screenShot, channelEdit, friendRequests, colorScheme, editServer } = useModalState()
     const modalDispatch = useModalDispatch()
@@ -22,7 +20,7 @@ export const Modal = () => {
     const customContent = (content) => (
         <div className='modal'>
             <div style={{ height: 'auto' }} className='modal-content'>
-                <span className='close' style={{ color: `${style.primaryHeader}` }} onClick={onHideModal}>
+                <span className='close' onClick={onHideModal}>
                     &times;
                 </span>
                 {content}

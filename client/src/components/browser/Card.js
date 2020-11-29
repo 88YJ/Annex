@@ -16,7 +16,7 @@ export const Card = (props) => {
                 <>
                     {CurrentProfile.screenShots.map((item, index) => (
                         <div className='card' key={index} onClick={() => showModalwithScreenshot(modalDispatch, item)}>
-                            <img src={item}></img>
+                            <img src={item} alt='' />
                         </div>
                     ))}
                 </>
@@ -26,7 +26,7 @@ export const Card = (props) => {
                 <>
                     {trendstream.map((item, index) => (
                         <div className='card' key={index}>
-                            <img src={item.img} />
+                            <img src={item.img} alt='' />
                             <h2 className='globalheader Border-Top-1PX Secondary-Header'>{item.name}</h2>
                         </div>
                     ))}
@@ -37,7 +37,7 @@ export const Card = (props) => {
                 <>
                     {trendgames.map((item, index) => (
                         <div className='card' key={index}>
-                            <img src={item.img} />
+                            <img src={item.img} alt='' />
                             <h2 className='globalheader Border-Top-1PX Secondary-Header'>{item.name}</h2>
                         </div>
                     ))}

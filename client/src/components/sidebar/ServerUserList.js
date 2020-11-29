@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useServerState, useServerDispatch, loadServerUserList } from '../../pages/server/context'
+import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
 export const ServerUserList = () => {
     const { currentServer, userList } = useServerState()
@@ -22,7 +23,10 @@ export const ServerUserList = () => {
                             {userList.map((user, i) =>
                                 user.onlineStatus ? (
                                     <li key={i} className='banner' style={{ backgroundImage: `url(${user.profileBanner})` }}>
-                                        <div className='profilepicture' style={{ backgroundImage: `url('${user.profilePicture}')` }} />
+                                        <div
+                                            className='profilepicture'
+                                            style={{ backgroundImage: `url('${user.profilePicture ? user.profilePicture : DefaultProfilePicture}')` }}
+                                        />
                                         <Link to={`/profile/${user._id}`}>
                                             <p className='Tertiary-Header' style={{ background: 'rgb(0,0,0,.5)' }}>
                                                 {user.name}
@@ -34,7 +38,10 @@ export const ServerUserList = () => {
                             {userList.map((user, i) =>
                                 !user.onlineStatus ? (
                                     <li key={i} className='banner offlineFriends' style={{ backgroundImage: `url(${user.profileBanner})` }}>
-                                        <div className='profilepicture' style={{ backgroundImage: `url('${user.profilePicture}')` }} />
+                                        <div
+                                            className='profilepicture'
+                                            style={{ backgroundImage: `url('${user.profilePicture ? user.profilePicture : DefaultProfilePicture}')` }}
+                                        />
                                         <Link to={`/profile/${user._id}`}>
                                             <p className='Tertiary-Header' style={{ background: 'rgb(0,0,0,.5)' }}>
                                                 {user.name}
