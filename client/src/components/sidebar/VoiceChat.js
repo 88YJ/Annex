@@ -78,6 +78,27 @@ export const VoiceChat = () => {
         }
     }, [socket, user])
 
+    const handleLeaveChannel = useCallback(async () => {
+        if(previousChannel) {
+            peerConnections.forEach((peer) => peer.close());
+            peerConnections = [];
+
+            localStream.getTracks().forEach((track) => track.stop());
+            localStream = undefined;
+
+            let videoContainer = document.getElementById('video-container');
+            while (videoContainer.firstChild) {
+                videoContainer.removeChild(videoContainer.firstChild);
+            }
+
+            updateUserList(chatDispatch, [])
+
+            socket.emit('voice-chat:leave', ({ channel: previousChannel._id, user: user }) )
+            previousChannel = undefined;
+        } 
+
+    }, [chatDispatch, socket, user])
+
     useEffect(() => {
         userList.forEach((userId) => {
             console.log(userId);
@@ -112,27 +133,12 @@ export const VoiceChat = () => {
 
     useEffect(() => {
         if (currentVoiceChannel && socket) {
-
-            if(previousChannel) {
-                peerConnections.forEach((peer) => peer.close());
-                peerConnections = [];
-
-                localStream.getTracks().forEach((track) => track.stop());
-                localStream = undefined;
-
-                let videoContainer = document.getElementById('video-container');
-                while (videoContainer.firstChild) {
-                    videoContainer.removeChild(videoContainer.firstChild);
-                }
-
-                updateUserList(chatDispatch, [])
-
-                socket.emit('voice-chat:leave', ({ channel: previousChannel._id, user: user }) )
-            } 
+            //Check if we are joining from another channel
+            handleLeaveChannel();
             
             previousChannel = currentVoiceChannel;
             navigator.mediaDevices
-                .getUserMedia({ video: true, audio: true })
+                .getUserMedia({ video: false, audio: true })
                 .then((stream) => {
                     const local = document.getElementById('local-video')
                     if (local) {
@@ -144,7 +150,7 @@ export const VoiceChat = () => {
                     socket.emit('voice-chat:join', { channel: currentVoiceChannel._id, user: user })
                 })
         }
-    }, [socket, currentVoiceChannel, chatDispatch, user])
+    }, [socket, currentVoiceChannel, handleLeaveChannel, chatDispatch, user])
 
     useEffect(() => {
         if (socket) {
@@ -180,13 +186,14 @@ export const VoiceChat = () => {
         }
     }, [socket, chatDispatch, userList])
 
-    let localVideo = <video autoPlay muted id='local-video' />
-    let remoteVideoContainer = <div id='video-container'></div>
+    let localVideo = <video hidden autoPlay muted id='local-video' />
+    let remoteVideoContainer = <div hidden id='video-container'></div>
 
     return (
         <div>
             {localVideo}
             {remoteVideoContainer}
+            {previousChannel ? (<button onClick={handleLeaveChannel}>Leave Chat</button>) : null}
         </div>
     )
 }

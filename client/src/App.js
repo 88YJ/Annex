@@ -33,7 +33,6 @@ import { Search } from './pages/search/Search'
 //Import Components
 import { Header } from './components/header/Header'
 import { SideBar } from './components/sidebar/SideBar'
-import { VoiceChat } from './components/sidebar/VoiceChat'
 import { Modal } from './components/modal/Modal'
 import { SocketMaster } from './components/socketManager/SocketMaster'
 
@@ -75,7 +74,7 @@ function App() {
                                                                     <Header />
                                                                     <SideBar type={SHOW_LEFT_SIDEBAR} />
                                                                     <SocketMaster />
-                                                                    <VoiceChat />
+                                                                    <div></div>
                                                                     <div
                                                                         className='app-browser'
                                                                         style={{
