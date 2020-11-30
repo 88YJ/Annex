@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import axios from 'axios'
 import './css/App.css'
-import { style } from './css/CustomStyling'
 
 //Import providers
 import { AuthProvider } from './pages/authentication/context'
@@ -75,13 +74,7 @@ function App() {
                                                                     <SideBar type={SHOW_LEFT_SIDEBAR} />
                                                                     <SocketMaster />
                                                                     <div></div>
-                                                                    <div
-                                                                        className='app-browser'
-                                                                        style={{
-                                                                            borderRight: `${style.outLine} 2px solid`,
-                                                                            borderLeft: `${style.outLine} 2px solid`,
-                                                                        }}
-                                                                    >
+                                                                    <div className='app-browser'>
                                                                         <Switch>
                                                                             <Route exact path='/' component={Dashboard} />
                                                                             <Route exact path='/register' component={Register} />

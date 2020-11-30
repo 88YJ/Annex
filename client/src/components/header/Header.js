@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { style } from '../../css/CustomStyling'
 
 //Component imports
 import { ServerList } from './ServerList'
@@ -11,6 +10,7 @@ import PlusIcon from '../../images/PlusIcon.png'
 import SearchIcon from '../../images/SearchIcon.png'
 import StreamIcon from '../../images/StreamIcon.png'
 import CartIcon from '../../images/CartIcon.png'
+import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
 //Context
 import { useSideBarDispatch, showGames } from '../../components/sidebar/context'
@@ -37,7 +37,12 @@ export const Header = () => {
             <Fragment>
                 <li onClick={() => changesidebar()}>
                     <Link to='/'>
-                        <div className='NavIcons' style={{ backgroundImage: `url(${user.profilePicture})` }} />
+                        <div
+                            className='NavIcons'
+                            style={
+                                user.profilePicture ? { backgroundImage: `url(${user.profilePicture})` } : { backgroundImage: `url(${DefaultProfilePicture})` }
+                            }
+                        />
                     </Link>
                     <SubMenu type={SHOW__HOME_SUBMENU} />
                 </li>
@@ -59,7 +64,8 @@ export const Header = () => {
                     </Link>
                 </li>
                 <li
-                    style={{ marginTop: '3px', borderBottom: `${style.primaryHeader} 1px solid`, paddingBottom: '4px', cursor: 'pointer' }}
+                    className='Border-Bottom-1PX'
+                    style={{ marginTop: '3px', paddingBottom: '4px', cursor: 'pointer' }}
                     key='addServer'
                     onClick={() => showModalWithAddServer(modalDispatch)}
                 >
@@ -83,7 +89,7 @@ export const Header = () => {
         )
     }
     return (
-        <div className='Nav' style={{ borderRight: `${style.outLine} 2px solid` }}>
+        <div className='Nav'>
             <ul>
                 {navigationLinks}
                 <ServerList />

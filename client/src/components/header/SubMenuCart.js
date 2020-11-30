@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useShopState } from '../../pages/shop/context'
-import { style } from '../../css/CustomStyling'
 
 export const SubMenuCart = () => {
     const { cart } = useShopState()
@@ -10,9 +9,7 @@ export const SubMenuCart = () => {
         return (
             <>
                 <div className='R-Sidebar-Gamelist' style={{ height: 'auto' }}>
-                    <h3 className='globalHeader' style={{ background: 'black', color: `${style.primaryHeader}` }}>
-                        Cart:
-                    </h3>
+                    <h3 className='globalHeader Primary-Header Tertiary-Background'>Cart:</h3>
                     {cart.map((item, i) => (
                         <Link key={i} to={`/shop/page/${item._id}`}>
                             <div className='gamelist-Games' style={{ height: 'auto' }}>
@@ -28,7 +25,7 @@ export const SubMenuCart = () => {
                     ))}
                 </div>
                 <li>
-                    <Link to='/shop/cart' style={{ color: `${style.secondaryHeader}` }}>
+                    <Link to='/shop/cart' className='Secondary-Header'>
                         Go To Cart
                     </Link>
                 </li>

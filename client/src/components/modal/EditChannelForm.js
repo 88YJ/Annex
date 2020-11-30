@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { style } from '../../css/CustomStyling'
 import { useServerDispatch, useServerState, editChannel } from '../../pages/server/context'
 
 export const EditChannelForm = () => {
@@ -26,14 +25,12 @@ export const EditChannelForm = () => {
 
     return (
         <form style={{ height: 'auto' }} onSubmit={onSubmit}>
-            <h2 className='GeneralHeaders' style={{ color: `${style.primaryHeader}` }}>
-                Edit Channel
-            </h2>
+            <h2 className='GeneralHeaders Primary-Header'>Edit Channel</h2>
             <input className='GeneralHeaders' type='text' placeholder='Channel Name' name='name' value={name} onChange={onChange} />
-            <input className='GeneralHeaders' type='text' placeholder='Channel Image' name='img' value={img} onChange={onChange} />
+            <input className='GeneralHeaders' type='url' placeholder='Channel Image' name='img' value={img} onChange={onChange} />
 
             <div style={{ height: 'auto' }}>
-                <input className='GeneralHeaders globalbutton' type='submit' value='Save Changes' />
+                <input className='GeneralHeaders globalbutton' type='submit' value='Save Changes' style={{ width: '99%' }} />
             </div>
         </form>
     )

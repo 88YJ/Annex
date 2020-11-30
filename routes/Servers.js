@@ -100,4 +100,43 @@ router.put('/:id/adduser', middleware.isAuthenticated, async (req, res) => {
     }
 })
 
+//Edit Server
+
+router.put('/editserver/:id', middleware.isAuthenticated, async (req, res) => {
+    console.log('edit in pros')
+    try {
+        const { name, img } = req.body
+        if (/\S/.test(name)) {
+            console.log('Server Name Updated')
+            await Server.findByIdAndUpdate(req.params.id, {
+                name: name,
+            })
+        }
+        if (/\S/.test(img)) {
+            console.log('Server Background Updated')
+            await Server.findByIdAndUpdate(req.params.id, {
+                img: img,
+            })
+        }
+        const updatedserver = await Server.findById(req.params.id)
+
+        res.json(updatedserver)
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send('Server Err')
+    }
+})
+
+//Get A Server
+router.get('/server/:id', middleware.isAuthenticated, async (req, res) => {
+    try {
+        const server = await Server.findById(req.params.id)
+
+        res.json(server)
+    } catch (error) {
+        console.error(error.message)
+        res.status(500).send('Server Error')
+    }
+})
+
 module.exports = router

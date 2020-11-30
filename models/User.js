@@ -26,7 +26,7 @@ const UserSchema = mongoose.Schema({
     ],
     profilePicture: {
         type: String,
-        default: 'https://www.digitalconfectioners.com/wp-content/uploads/2016/11/dc-default-profile.png',
+        default: undefined,
     },
     profileBanner: {
         type: String,
@@ -35,6 +35,18 @@ const UserSchema = mongoose.Schema({
     backgroundPicture: {
         type: String,
         default: undefined,
+    },
+    location: {
+        type: String,
+        default: 'The Void..',
+    },
+    bio: {
+        type: String,
+        default: 'This user has not setup a bio yet..',
+    },
+    profileLevel: {
+        type: Number,
+        default: 0,
     },
     friendList: [
         {
@@ -94,7 +106,7 @@ const UserSchema = mongoose.Schema({
         },
         secondaryOutline: {
             type: String,
-            default: '#45A29',
+            default: '#45A29E',
         },
         activeOutline: {
             type: String,

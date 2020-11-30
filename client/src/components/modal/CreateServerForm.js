@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useServerDispatch, createServer } from '../../pages/server/context'
-import { style } from '../../css/CustomStyling'
 
 export const CreateServerForm = () => {
     const serverDispatch = useServerDispatch()
@@ -25,13 +24,11 @@ export const CreateServerForm = () => {
 
     return (
         <form onSubmit={onSubmit}>
-            <h2 className='GeneralHeaders' style={{ color: `${style.primaryHeader}` }}>
-                Create a Server
-            </h2>
+            <h2 className='GeneralHeaders Primary-Header'>Create a Server</h2>
             <input className='GeneralHeaders' type='text' placeholder='Sever Name' name='name' value={name} onChange={onChange} />
             <input className='GeneralHeaders' type='url' placeholder='Image URL' name='img' value={img} onChange={onChange} />
             <div>
-                <input className='GeneralHeaders globalbutton' type='submit' value='Create Server' />
+                <input className='GeneralHeaders globalbutton' type='submit' value='Create Server' style={{ width: '99%' }} />
             </div>
         </form>
     )

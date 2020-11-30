@@ -8,17 +8,8 @@ export const ProfilePage = () => {
     const profileDispatch = useProfileDispatch()
     const { profile_id } = useParams()
 
-    // useEffect(() => {
-    //   if (!ProfilesLoaded) {
-    //     getProfiles(profileDispatch);
-    //   }
-    // }, [ProfilesLoaded, profileDispatch]);
-
     useEffect(() => {
-        // if (ProfilesLoaded) {
-        //   let profile = Profiles.filter((profile) => profile._id === profile_id);
         loadCurrentProfile(profileDispatch, profile_id)
-        //}
     }, [ProfilesLoaded, profileDispatch, Profiles, profile_id])
 
     if (CurrentProfile) {

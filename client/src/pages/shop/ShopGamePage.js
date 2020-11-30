@@ -58,9 +58,7 @@ export const ShopGamePage = () => {
                             >
                                 Back
                             </Link>
-                            <h1 className='globalHeader' style={{ color: `${style.primaryHeader}` }}>
-                                {gamePage.name}
-                            </h1>
+                            <h1 className='globalHeader Primary-Header'>{gamePage.name}</h1>
                         </div>
 
                         <div className='store-Gamepage-Grid'>
@@ -72,9 +70,7 @@ export const ShopGamePage = () => {
                                     }}
                                 ></div>
                                 <div>
-                                    <h2 className='globalHeaderL' style={{ color: `${style.secondaryHeader}` }}>
-                                        Game Desc:
-                                    </h2>{' '}
+                                    <h2 className='globalHeaderL Secondary-Header'>Game Desc:</h2>{' '}
                                     <p style={{ color: `${style.tertiaryHeader}` }}>
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, esse. Eius et dolorem aspernatur vitae laudantium magnam
                                         vero natus ab deleniti, voluptate architecto debitis veniam asperiores suscipit, sunt fugit ullam! Lorem ipsum dolor
@@ -87,13 +83,13 @@ export const ShopGamePage = () => {
                                 <div className='store-Gamepage-Subcomponents'>
                                     <div>
                                         <h2 className='globalHeaderL'>
-                                            Ratings: <span style={{ color: `${style.primaryHeader}` }}>4.5</span>
+                                            Ratings: <span className='Primary-Header'>4.5</span>
                                         </h2>
                                         <h3 className='globalHeaderL'>
-                                            Recent Ratings: <span style={{ color: `${style.primaryHeader}` }}>4.1</span>
+                                            Recent Ratings: <span className='Primary-Header'>4.1</span>
                                         </h3>
                                         <h4 className='globalHeaderL'>
-                                            Our Ratings: <span style={{ color: `${style.primaryHeader}` }}>5</span>
+                                            Our Ratings: <span className='Primary-Header'>5</span>
                                         </h4>
                                     </div>
                                     <div>
@@ -113,55 +109,53 @@ export const ShopGamePage = () => {
                                     </div>
                                 </div>
                                 <div className='store-Gamepage-Reviews'>
-                                    <h2 className='globalHeaderL' style={{ color: `${style.secondaryHeader}` }}>
-                                        Review Comments:
-                                    </h2>
+                                    <h2 className='globalHeaderL Secondary-Header'>Review Comments:</h2>
                                     <ul>
                                         <li>
-                                            <h5 className='globaHeaderL' style={{ color: `${style.tertiaryHeader}` }}>
-                                                User: <span style={{ color: `${style.primaryHeader}` }}>BabyJesus</span>
+                                            <h5 className='globaHeaderL Tertiary-Header'>
+                                                User: <span className='Primary-Header'>BabyJesus</span>
                                             </h5>
-                                            <p style={{ color: `${style.secondaryHeader}` }}>
+                                            <p className='Secondary-Header'>
                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur quidem quasi fuga laudantium ipsam ut earum
                                                 laborum laboriosam, consectetur reiciendis odit voluptates? Velit voluptates, non sunt dicta animi repudiandae
                                                 voluptatibus?
                                             </p>
                                         </li>
                                         <li>
-                                            <h5 className='globalHeaderL' style={{ color: `${style.tertiaryHeader}` }}>
-                                                User: <span style={{ color: `${style.primaryHeader}` }}>Rejis</span>
+                                            <h5 className='globalHeaderL Tertiary-Header'>
+                                                User: <span className='Primary-Header'>Rejis</span>
                                             </h5>
-                                            <p style={{ color: `${style.secondaryHeader}` }}>
+                                            <p className='Secondary-Header'>
                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur quidem quasi fuga laudantium ipsam ut earum
                                                 laborum laboriosam, consectetur reiciendis odit voluptates? Velit voluptates, non sunt dicta animi repudiandae
                                                 voluptatibus?
                                             </p>
                                         </li>
                                         <li>
-                                            <h5 className='globalHeaderL' style={{ color: `${style.tertiaryHeader}` }}>
-                                                User: <span style={{ color: `${style.primaryHeader}` }}>Parathax</span>
+                                            <h5 className='globalHeaderL Tertiary-Header'>
+                                                User: <span className='Primary-Header'>Parathax</span>
                                             </h5>
-                                            <p style={{ color: `${style.secondaryHeader}` }}>
+                                            <p className='Secondary-Header'>
                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur quidem quasi fuga laudantium ipsam ut earum
                                                 laborum laboriosam, consectetur reiciendis odit voluptates? Velit voluptates, non sunt dicta animi repudiandae
                                                 voluptatibus?
                                             </p>
                                         </li>
                                         <li>
-                                            <h5 className='globalHeaderL' style={{ color: `${style.tertiaryHeader}` }}>
-                                                User: <span style={{ color: `${style.primaryHeader}` }}>Flipster</span>
+                                            <h5 className='globalHeaderL Tertiary-Header'>
+                                                User: <span className='Primary-Header'>Flipster</span>
                                             </h5>
-                                            <p style={{ color: `${style.secondaryHeader}` }}>
+                                            <p className='Secondary-Header'>
                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur quidem quasi fuga laudantium ipsam ut earum
                                                 laborum laboriosam, consectetur reiciendis odit voluptates? Velit voluptates, non sunt dicta animi repudiandae
                                                 voluptatibus?
                                             </p>
                                         </li>
                                         <li>
-                                            <h5 className='globalHeaderL' style={{ color: `${style.tertiaryHeader}` }}>
-                                                User: <span style={{ color: `${style.primaryHeader}` }}>Commissar</span>
+                                            <h5 className='globalHeaderL Tertiary-Header'>
+                                                User: <span className='Primary-Header'>Commissar</span>
                                             </h5>
-                                            <p style={{ color: `${style.secondaryHeader}` }}>
+                                            <p className='Secondary-Header'>
                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur quidem quasi fuga laudantium ipsam ut earum
                                                 laborum laboriosam, consectetur reiciendis odit voluptates? Velit voluptates, non sunt dicta animi repudiandae
                                                 voluptatibus?

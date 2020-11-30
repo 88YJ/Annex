@@ -3,7 +3,6 @@ import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useProfileState, useProfileDispatch, loadOwnedCurrentGame, findOwnedGames } from './context'
 import { FriendList } from '../../components/sidebar/FriendList'
-import { style } from '../../css/CustomStyling'
 
 export const MyGame = () => {
     const { CurrentOwnedGame, ownedGamesLoaded, ownedGames } = useProfileState()
@@ -33,9 +32,7 @@ export const MyGame = () => {
                         <div />
                     </div>
                     <div className='Gamepage-Nav'>
-                        <h1 className='globalHeader' style={{ background: 'black', color: `${style.primaryHeader}` }}>
-                            {CurrentOwnedGame.name}
-                        </h1>
+                        <h1 className='globalHeader Tertiary-Background Primary-Header'>{CurrentOwnedGame.name}</h1>
                         <button style={{ height: 'auto', width: 'auto' }} className='globalbutton'>
                             Play
                         </button>
@@ -54,10 +51,10 @@ export const MyGame = () => {
                     </div>
                     <div className='Gamepage-Body'>
                         <div className='Gamepage-Lists'>
-                            <ul style={{ borderRight: `${style.outLine} 2px solid` }}>
+                            <ul className='Border-Right-2PX'>
                                 <FriendList />
                             </ul>
-                            <ul style={{ borderRight: `${style.outLine} 2px solid` }}>
+                            <ul className='Border-Right-2PX'>
                                 <li>
                                     <h3>Friend Achievements:</h3>
                                 </li>
@@ -77,7 +74,7 @@ export const MyGame = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div>
+                        <div className='Gamepage-News-Container'>
                             <div className='Gamepage-News'>
                                 <h2 className='globalHeaderL'>Game News:</h2>
                                 <ul>
@@ -86,27 +83,21 @@ export const MyGame = () => {
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente magnam neque sed facere laboriosam iusto
                                             repudiandae et eius eos soluta recusandae reiciendis numquam, quo dolores veritatis. Ad laborum incidunt officia.
                                         </p>
-                                        <h4 className='globalHeaderL' style={{ color: `${style.primaryHeader}` }}>
-                                            04/25/3001
-                                        </h4>
+                                        <h4 className='globalHeaderL Primary-Header'>04/25/3001</h4>
                                     </li>
                                     <li>
                                         <p>
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente magnam neque sed facere laboriosam iusto
                                             repudiandae et eius eos soluta recusandae reiciendis numquam, quo dolores veritatis. Ad laborum incidunt officia.
                                         </p>
-                                        <h4 className='globalHeaderL' style={{ color: `${style.primaryHeader}` }}>
-                                            07/05/3001
-                                        </h4>
+                                        <h4 className='globalHeaderL Primary-Header'>07/05/3001</h4>
                                     </li>
                                     <li>
                                         <p>
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente magnam neque sed facere laboriosam iusto
                                             repudiandae et eius eos soluta recusandae reiciendis numquam, quo dolores veritatis. Ad laborum incidunt officia.
                                         </p>
-                                        <h4 className='globalHeaderL' style={{ color: `${style.primaryHeader}` }}>
-                                            12/31/3001
-                                        </h4>
+                                        <h4 className='globalHeaderL Primary-Header'>12/31/3001</h4>
                                     </li>
                                 </ul>
                             </div>
@@ -114,14 +105,18 @@ export const MyGame = () => {
                                 <h2 style={{ height: 'auto' }}>Patch Notes:</h2>
                                 <ul>
                                     <li style={{ height: 'auto', width: 'auto' }}>
-                                        <h4 style={{ color: `${style.primaryHeader}`, height: 'auto' }}>7.05</h4>
+                                        <h4 className='Primary-Header' style={{ height: 'auto' }}>
+                                            7.05
+                                        </h4>
                                         <p style={{ height: 'auto' }}>
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis repellat modi perferendis impedit soluta aliquid
                                             unde ea nihil ex doloribus distinctio eaque dolore, suscipit, quisquam adipisci fugiat sed fuga. Libero!
                                         </p>
                                     </li>
                                     <li style={{ height: 'auto' }}>
-                                        <h4 style={{ color: `${style.primaryHeader}`, height: 'auto' }}>7.06</h4>
+                                        <h4 className='Primary-Header' style={{ height: 'auto' }}>
+                                            7.06
+                                        </h4>
                                         <p style={{ height: 'auto' }}>
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis repellat modi perferendis impedit soluta aliquid
                                             unde ea nihil ex doloribus distinctio eaque dolore, suscipit, quisquam adipisci fugiat sed fuga. Libero!

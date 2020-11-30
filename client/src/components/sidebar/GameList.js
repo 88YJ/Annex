@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { style } from '../../css/CustomStyling'
 
 import { useProfileState } from '../../pages/profile/context'
 
@@ -11,16 +10,7 @@ export const GameList = () => {
         return (
             <>
                 <div className='R-Sidebar-Gamelist'>
-                    <h3
-                        className='globalHeader'
-                        style={{
-                            background: `${style.tertiaryBackground}`,
-                            color: `${style.primaryHeader}`,
-                            borderBottom: `${style.secondaryOutLine} 1px solid`,
-                        }}
-                    >
-                        Games:
-                    </h3>
+                    <h3 className='globalHeader Tertiary-Background Primary-Header Border-Bottom-1PX'>Games:</h3>
                     <div className='gamelist-Games'>
                         <ul>
                             {ownedGames.map((game, i) => (

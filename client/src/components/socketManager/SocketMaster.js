@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useAuthState } from '../../pages/authentication/context'
 import { useProfileDispatch, useProfileState, getFriends } from '../../pages/profile/context'
-import { useServerState, useServerDispatch, loadServerChannelList, loadServerUserList } from '../../pages/server/context'
+import { useServerState, useServerDispatch, loadServerChannelList, loadServerUserList, loadCurrentServer } from '../../pages/server/context'
 import { useMessageDispatch, loadInbox } from '../messages/context'
 import { useSocketState, useSocketDispatch } from '../socketManager'
 import { connectSocket } from '../socketManager/socketActions'
@@ -36,9 +36,8 @@ export const SocketMaster = () => {
     useEffect(() => {
         if (currentServer) {
             socket.on('ServerUpdate', async (data) => {
-                if (data._id === currentServer._id) {
-                    loadServerChannelList(serverDispatch, data)
-                    console.log(currentServer._id + data)
+                if (data === currentServer._id) {
+                    loadCurrentServer(serverDispatch, currentServer._id)
                 }
             })
         }
@@ -99,7 +98,7 @@ export const SocketMaster = () => {
                 loadInbox(messageDispatch, user._id)
             })
         }
-    }, [socket, user, CurrentProfile])
+    }, [socket, user, CurrentProfile, messageDispatch])
 
     return null
 }

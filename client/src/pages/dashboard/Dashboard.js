@@ -3,7 +3,6 @@ import { Carousel } from '../../components/browser/Carousel'
 import { OwnedGames } from '../../components/browser/OwnedGames'
 import { CAROUSEL_DASHBOARD } from '../../components/browser/types/types'
 import { useSideBarDispatch, showFriends, showGames } from '../../components/sidebar/context'
-import { style } from '../../css/CustomStyling'
 
 export const Dashboard = () => {
     const sidebarDispatch = useSideBarDispatch()
@@ -14,9 +13,7 @@ export const Dashboard = () => {
 
     return (
         <div className='dashboard'>
-            <h1 className='globalHeader' style={{ color: `${style.primaryHeader}` }}>
-                Dashboard!
-            </h1>
+            <h1 className='globalHeader Primary-Header'>Dashboard!</h1>
             <div className='dashboard-Grid'>
                 <Carousel type={CAROUSEL_DASHBOARD} />
             </div>

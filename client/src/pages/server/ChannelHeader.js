@@ -1,7 +1,6 @@
 import React from 'react'
 import { useServerState } from './context'
 import { useAuthState } from '../authentication/context'
-import { style } from '../../css/CustomStyling'
 import EditIcon from '../../images/EditIcon.png'
 import { useModalDispatch, showModalWithChannelEdit } from '../../components/modal/context'
 
@@ -15,23 +14,20 @@ export const ChannelHeader = () => {
             <div className='chatHeader'>
                 <div className='chatHeader_left'>
                     {currentServer.owner === user._id ? (
-                        <h3 style={{ height: 'auto', color: `${style.primaryHeader}` }}>
+                        <h3 className='Primary-Header' style={{ height: 'auto' }}>
                             <img
+                                className='Bright-Background'
                                 src={EditIcon}
-                                style={{ height: '20px', width: '20px', borderRadius: '0px', backgroundColor: `${style.primaryHeader}`, cursor: 'pointer' }}
+                                style={{ height: '20px', width: '20px', borderRadius: '0px', cursor: 'pointer' }}
                                 alt=''
                                 onClick={() => showModalWithChannelEdit(modalDispatch)}
                             />
-                            <span className='chatHeader_hash' style={{ color: `${style.secondaryHeader}` }}>
-                                #
-                            </span>
+                            <span className='chatHeader_hash Secondary-Header'>#</span>
                             {currentTextChannel.name}
                         </h3>
                     ) : (
-                        <h3 style={{ height: 'auto', color: `${style.primaryHeader}` }}>
-                            <span className='chatHeader_hash' style={{ color: `${style.secondaryHeader}` }}>
-                                #
-                            </span>
+                        <h3 className='Primary-Header' style={{ height: 'auto' }}>
+                            <span className='chatHeader_hash Secondary-Header'>#</span>
                             {currentTextChannel.name}
                         </h3>
                     )}

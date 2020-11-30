@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { style } from '../../css/CustomStyling'
-
+import DefaultProfilePicture from '../../images/DefaultProfile.png'
 import { useProfileState } from '../../pages/profile/context'
 
 export const FriendList = () => {
@@ -10,20 +9,23 @@ export const FriendList = () => {
     return (
         <>
             <div className='L-Sidebar-Friendlist'>
-                <h3
-                    className='globalHeader'
-                    style={{ background: `${style.tertiaryBackground}`, color: `${style.primaryHeader}`, borderBottom: `${style.secondaryOutLine} 1px solid` }}
-                >
-                    Friends:
-                </h3>
+                <h3 className='globalHeader Tertiary-Background Primary-Header Border-Bottom-1PX'>Friends:</h3>
                 <div className='Friendlist-Friends'>
                     <ul>
                         {Friends.map((friend, i) =>
                             friend.onlineStatus ? (
                                 <li key={i} className='banner' style={{ backgroundImage: `url(${friend.profileBanner})` }}>
-                                    <div className='profilepicture' style={{ backgroundImage: `url('${friend.profilePicture}')`, marginLeft: '3px' }} />
+                                    <div
+                                        className='profilepicture'
+                                        style={{
+                                            backgroundImage: `url('${friend.profilePicture ? friend.profilePicture : DefaultProfilePicture}')`,
+                                            marginLeft: '3px',
+                                        }}
+                                    />
                                     <Link to='#'>
-                                        <p style={{ background: 'rgb(0,0,0,.5)', color: `${style.tertiaryHeader}` }}>{friend.name}</p>
+                                        <p className='Tertiary-Header' style={{ background: 'rgb(0,0,0,.5)' }}>
+                                            {friend.name}
+                                        </p>
                                     </Link>
                                     <div className='Friendlist-Submenu'>
                                         <ul>
@@ -45,9 +47,17 @@ export const FriendList = () => {
                         {Friends.map((friend, i) =>
                             friend.onlineStatus === false ? (
                                 <li key={i} className='banner offlineFriends' style={{ backgroundImage: `url(${friend.profileBanner})` }}>
-                                    <div className='profilepicture' style={{ backgroundImage: `url('${friend.profilePicture}')`, marginLeft: '3px' }} />
+                                    <div
+                                        className='profilepicture'
+                                        style={{
+                                            backgroundImage: `url('${friend.profilePicture ? friend.profilePicture : DefaultProfilePicture}')`,
+                                            marginLeft: '3px',
+                                        }}
+                                    />
                                     <Link to='#'>
-                                        <p style={{ background: 'rgb(0,0,0,.5)', color: `${style.tertiaryHeader}` }}>{friend.name}</p>
+                                        <p className='Tertiary-Header' style={{ background: 'rgb(0,0,0,.5)' }}>
+                                            {friend.name}
+                                        </p>
                                     </Link>
                                     <div className='Friendlist-Submenu'>
                                         <ul>

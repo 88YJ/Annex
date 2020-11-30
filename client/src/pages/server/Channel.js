@@ -13,7 +13,6 @@ import {
 import { useSocketState } from '../../components/socketManager'
 import { useAuthState } from '../../pages/authentication/context'
 import { useServerState } from './context'
-import { style } from '../../css/CustomStyling'
 import DefaultBackground from '../../images/DefaultBackgroundV2.png'
 
 export const Channel = () => {
@@ -73,18 +72,18 @@ export const Channel = () => {
             return (
                 <div className='server-Landingpageimg' style={{ backgroundImage: `url(${currentServer.img})` }}>
                     <div>
-                        <h1 className='globalHeader' style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)', color: `${style.primaryHeader}` }}>
+                        <h1 className='globalHeader Primary-Header' style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)' }}>
                             {currentServer.name}
                         </h1>
                     </div>
                     <div>
                         <div>
                             <div>
-                                <h2 className='globalHeader' style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)', color: `${style.secondaryHeader}` }}>
+                                <h2 className='globalHeader Secondary-Header' style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)' }}>
                                     Welcome To the Server!!
                                 </h2>
                                 <br />
-                                <h2 className='globalHeader' style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)', color: `${style.secondaryHeader}` }}>
+                                <h2 className='globalHeader Secondary-Header' style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)' }}>
                                     Please take a look at our rules!
                                 </h2>
                             </div>
