@@ -4,14 +4,14 @@ import { useServerState, useServerDispatch, loadServerUserList } from '../../pag
 import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
 export const ServerUserList = () => {
-    const { currentServer, userList } = useServerState()
+    const { currentServerID, currentServer, userList } = useServerState()
     const serverDispatch = useServerDispatch()
 
     useEffect(() => {
-        if (currentServer) {
-            loadServerUserList(serverDispatch, currentServer)
+        if (currentServerID) {
+            loadServerUserList(serverDispatch, currentServerID)
         }
-    }, [currentServer, serverDispatch])
+    }, [currentServerID, serverDispatch])
 
     if (currentServer) {
         return (

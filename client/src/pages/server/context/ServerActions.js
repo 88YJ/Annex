@@ -87,7 +87,7 @@ export async function loadCurrentTextChannel(dispatch, channel, server) {
 export async function loadServerChannelList(dispatch, server) {
     try {
         let channelList = JSON.stringify(server.channelList)
-        const response = await axios.get(`/api/${server}/channels/${channelList}`, requestConfig)
+        const response = await axios.get(`/api/${server._id}/channels/${channelList}`, requestConfig)
         dispatch({ type: LOAD_SERVER_CHANNELLIST, payload: response.data })
         console.log('Server channels loaded successfully.')
     } catch (error) {
@@ -97,7 +97,7 @@ export async function loadServerChannelList(dispatch, server) {
 
 export async function loadServerUserList(dispatch, server) {
     try {
-        const response = await axios.get(`/api/servers/${server._id}/users`, requestConfig)
+        const response = await axios.get(`/api/servers/${server}/users`, requestConfig)
         dispatch({ type: LOAD_SERVER_USERLIST, payload: response.data })
         console.log('Server users loaded successfully.')
     } catch (error) {
@@ -133,8 +133,7 @@ export async function createChannel(dispatch, channel, server) {
 
 export async function editChannel(dispatch, channel, server, id) {
     try {
-        const response = await axios.put(`/api/${server}/channels/editchannel/${id}`, channel, requestConfig)
-        console.log(response.data)
+        await axios.put(`/api/${server}/channels/editchannel/${id}`, channel, requestConfig)
         console.log('Channel Edited')
     } catch (error) {
         console.error(error)

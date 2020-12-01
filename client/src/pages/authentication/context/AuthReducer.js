@@ -69,7 +69,6 @@ if (user && user.colorScheme.tertiaryHeader) {
     document.documentElement.style.setProperty('--Tertiary-Header-Color', user.colorScheme.tertiaryHeader)
 }
 if (user && user.colorScheme.outLine) {
-    console.log('set outline' + user.colorScheme.outLine)
     document.documentElement.style.setProperty('--outLine', user.colorScheme.outLine)
 }
 if (user && user.colorScheme.secondaryOutline) {

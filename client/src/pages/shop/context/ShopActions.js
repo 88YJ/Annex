@@ -1,4 +1,4 @@
-import { LOAD_STORE_GAMES, ADD_TO_CART, CLEAR_CART, SET_STORE_GAMEPAGE, ADDED_TO_CART } from './types'
+import { LOAD_STORE_GAMES, ADD_TO_CART, CLEAR_CART, SET_STORE_GAMEPAGE, ADDED_TO_CART, FILTER_STORE_GAMES } from './types'
 import axios from 'axios'
 
 const requestConfig = {
@@ -47,6 +47,14 @@ export async function buyGame(dispatch, Game) {
 export async function setAddedToCart(dispatch, added) {
     try {
         dispatch({ type: ADDED_TO_CART, payload: added })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function filterShop(dispatch, filter) {
+    try {
+        dispatch({ type: FILTER_STORE_GAMES, payload: filter })
     } catch (error) {
         console.log(error)
     }

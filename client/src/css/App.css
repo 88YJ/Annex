@@ -191,6 +191,38 @@
     text-decoration: none;
     cursor: pointer;
 }
+.color-PickerGrid {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.color-PickerGrid ul {
+    margin: 0;
+    padding: 0;
+}
+.color-PickerGrid ul li:hover {
+    border: var(--Active-Outline-Color) 2px solid;
+}
+.color-Options {
+    height: auto;
+    width: 95%;
+    cursor: pointer;
+    border: var(--outLine) 2px solid;
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+}
+.color-Options2 {
+    height: auto;
+    width: 95%;
+    cursor: pointer;
+    border: var(--Active-Outline-Color) 2px solid;
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+}
+.sketch-picker {
+    height: auto;
+}
 
 /* Nav Bar Css */
 .Nav {
@@ -1357,6 +1389,7 @@
 .Friendlist-Submenu ul {
     width: 100%;
     margin: 0;
+    overflow-y: hidden;
     z-index: 1;
 }
 .Friendlist-Submenu li {

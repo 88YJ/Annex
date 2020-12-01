@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { useProfileDispatch, editScheme } from '../../pages/profile/context'
 import { useAuthDispatch, useAuthState, reloadUser } from '../../pages/authentication/context'
-
+import { SketchPicker } from 'react-color'
 export const EditColorSchemeForm = () => {
     const profileDispatch = useProfileDispatch()
     const authDispatch = useAuthDispatch()
     const { user } = useAuthState()
+
+    const [hex, setHex] = useState()
+    const [type, setType] = useState()
 
     const [scheme, setScheme] = useState({
         background: '',
@@ -22,15 +25,15 @@ export const EditColorSchemeForm = () => {
 
     const {
         background,
-        primaryHeader,
-        secondaryHeader,
-        tertiaryHeader,
-        outLine,
-        secondaryOutline,
-        activeOutline,
-        primaryBackground,
-        secondaryBackground,
-        tertiaryBackground,
+        // primaryHeader,
+        // secondaryHeader,
+        // tertiaryHeader,
+        // outLine,
+        // secondaryOutline,
+        // activeOutline,
+        // primaryBackground,
+        // secondaryBackground,
+        // tertiaryBackground,
     } = scheme
 
     const onChange = (e) => setScheme({ ...scheme, [e.target.name]: e.target.value })
@@ -72,38 +75,87 @@ export const EditColorSchemeForm = () => {
         //window.location.reload(false)
     }
 
-    return (
-        <form onSubmit={onSubmit}>
-            <h2 className='Primary-Header'>Edit Theme</h2>
-            <input type='url' placeholder='Set Background Picture' name='background' value={background} onChange={onChange} />
-            <input type='text' placeholder='Set Primary Header Color (Use Hex Code)' name='primaryHeader' value={primaryHeader} onChange={onChange} />
-            <input type='text' placeholder='Set Secondary Header Color (Use Hex Code)' name='secondaryHeader' value={secondaryHeader} onChange={onChange} />
-            <input type='text' placeholder='Set Tertiary Header Color (Use Hex Code)' name='tertiaryHeader' value={tertiaryHeader} onChange={onChange} />
-            <input type='text' placeholder='Set Outline Color (Use Hex Code)' name='outLine' value={outLine} onChange={onChange} />
-            <input type='text' placeholder='Set Secondary Outline (Use Hex Code)' name='secondaryOutline' value={secondaryOutline} onChange={onChange} />
-            <input type='text' placeholder='Set Active Outline (Use Hex Code)' name='activeOutline' value={activeOutline} onChange={onChange} />
-            <input
-                type='text'
-                placeholder='Set Primary Background Color (Use Hex Code)'
-                name='primaryBackground'
-                value={primaryBackground}
-                onChange={onChange}
-            />
-            <input
-                type='text'
-                placeholder='Set Secondary Background Color (Use Hex Code)'
-                name='secondaryBackground'
-                value={secondaryBackground}
-                onChange={onChange}
-            />
-            <input
-                type='text'
-                placeholder='Set Tertiary Background Color (Use Hex Code)'
-                name='tertiaryBackground'
-                value={tertiaryBackground}
-                onChange={onChange}
-            />
+    const handleChange = (e) => {
+        setHex(e)
 
+        if (type === 'primaryHeader') {
+            setScheme({ ...scheme, primaryHeader: `rgb(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})` })
+        } else if (type === 'secondaryHeader') {
+            setScheme({ ...scheme, secondaryHeader: `rgb(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})` })
+        } else if (type === 'tertiaryHeader') {
+            setScheme({ ...scheme, tertiaryHeader: `rgb(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})` })
+        } else if (type === 'outLine') {
+            setScheme({ ...scheme, outLine: `rgb(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})` })
+        } else if (type === 'secondaryOutline') {
+            setScheme({ ...scheme, secondaryOutline: `rgb(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})` })
+        } else if (type === 'activeOutline') {
+            setScheme({ ...scheme, activeOutline: `rgb(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})` })
+        } else if (type === 'primaryBackground') {
+            setScheme({ ...scheme, primaryBackground: `rgb(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})` })
+        } else if (type === 'secondaryBackground') {
+            setScheme({ ...scheme, secondaryBackground: `rgb(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})` })
+        } else if (type === 'tertiaryBackground') {
+            setScheme({ ...scheme, tertiaryBackground: `rgb(${e.rgb.r}, ${e.rgb.g}, ${e.rgb.b}, ${e.rgb.a})` })
+        }
+    }
+
+    return (
+        <form style={{ overflow: 'hidden' }} onSubmit={onSubmit}>
+            <h2 className='Primary-Header'>Edit Theme</h2>
+            <div className='color-PickerGrid'>
+                <div>
+                    <SketchPicker color={hex} onChange={handleChange} disableAlpha={false} style={{ height: 'auto' }} />
+                </div>
+
+                <ul>
+                    <li onClick={() => setType('primaryHeader')} className={type === 'primaryHeader' ? 'color-Options2' : 'color-Options'}>
+                        <h4 className='Primary-Header Tertiary-Background' style={{ height: 'auto' }}>
+                            <span className='Tertiary-Background'>Primary Header</span>
+                        </h4>
+                    </li>
+                    <li onClick={() => setType('secondaryHeader')} className={type === 'secondaryHeader' ? 'color-Options2' : 'color-Options'}>
+                        <h4 className='Primary-Header Tertiary-Background' style={{ height: 'auto' }}>
+                            <span className='Tertiary-Background'> Secondary Header</span>
+                        </h4>
+                    </li>
+                    <li onClick={() => setType('tertiaryHeader')} className={type === 'tertiaryHeader' ? 'color-Options2' : 'color-Options'}>
+                        <h4 className='Primary-Header Tertiary-Background' style={{ height: 'auto' }}>
+                            <span className='Tertiary-Background'>Tertiary Header</span>
+                        </h4>
+                    </li>
+                    <li onClick={() => setType('outLine')} className={type === 'outLine' ? 'color-Options2' : 'color-Options'}>
+                        <h4 className='Primary-Header Tertiary-Background' style={{ height: 'auto' }}>
+                            <span className='Tertiary-Background'>Outline</span>
+                        </h4>
+                    </li>
+                    <li onClick={() => setType('secondaryOutline')} className={type === 'secondaryOutline' ? 'color-Options2' : 'color-Options'}>
+                        <h4 className='Primary-Header Tertiary-Background' style={{ height: 'auto' }}>
+                            <span className='Tertiary-Background'> Secondary Outline</span>
+                        </h4>
+                    </li>
+                    <li onClick={() => setType('activeOutline')} className={type === 'activeOutline' ? 'color-Options2' : 'color-Options'}>
+                        <h4 className='Primary-Header Tertiary-Background' style={{ height: 'auto' }}>
+                            <span className='Tertiary-Background'> Active Outline</span>
+                        </h4>
+                    </li>
+                    <li onClick={() => setType('primaryBackground')} className={type === 'primaryBackground' ? 'color-Options2' : 'color-Options'}>
+                        <h4 className='Primary-Header Tertiary-Background' style={{ height: 'auto' }}>
+                            <span className='Tertiary-Background'> Primary Background</span>
+                        </h4>
+                    </li>
+                    <li onClick={() => setType('secondaryBackground')} className={type === 'secondaryBackground' ? 'color-Options2' : 'color-Options'}>
+                        <h4 className='Primary-Header Tertiary-Background' style={{ height: 'auto' }}>
+                            <span className='Tertiary-Background'>Secondary Background</span>
+                        </h4>
+                    </li>
+                    <li onClick={() => setType('tertiaryBackground')} className={type === 'tertiaryBackground' ? 'color-Options2' : 'color-Options'}>
+                        <h4 className='Primary-Header Tertiary-Background' style={{ height: 'auto' }}>
+                            <span className='Tertiary-Background'> Tertiary Background</span>
+                        </h4>
+                    </li>
+                </ul>
+            </div>
+            <input type='url' placeholder='Set Background Picture' name='background' value={background} onChange={onChange} />
             <div>
                 <input className='GeneralHeaders globalbutton' type='submit' value='Save Changes' style={{ width: '99%' }} />
                 <input className='GeneralHeaders globalbutton' onClick={() => resetColors()} type='submit' value='Reset Colors' style={{ width: '99%' }} />

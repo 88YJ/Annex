@@ -3,7 +3,6 @@ import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { useShopState, useShopDispatch } from './context'
 import { addToCart, loadStoreGames, setCurrentGame, setAddedToCart } from './context/ShopActions'
-import { style } from '../../css/CustomStyling'
 
 export const ShopGamePage = () => {
     const { game_id } = useParams()
@@ -71,7 +70,7 @@ export const ShopGamePage = () => {
                                 ></div>
                                 <div>
                                     <h2 className='globalHeaderL Secondary-Header'>Game Desc:</h2>{' '}
-                                    <p style={{ color: `${style.tertiaryHeader}` }}>
+                                    <p className='Tertiary-Header'>
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, esse. Eius et dolorem aspernatur vitae laudantium magnam
                                         vero natus ab deleniti, voluptate architecto debitis veniam asperiores suscipit, sunt fugit ullam! Lorem ipsum dolor
                                         sit, amet consectetur adipisicing elit. Corrupti, at libero dolor rem vitae, accusantium facilis praesentium illo

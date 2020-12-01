@@ -9,6 +9,7 @@
     "avatar": "^0.1.0",
     "axios": "^0.20.0",
     "react": "^16.13.1",
+    "react-color": "^2.19.3",
     "react-dom": "^16.13.1",
     "react-emoji": "^0.5.0",
     "react-router-dom": "^5.2.0",

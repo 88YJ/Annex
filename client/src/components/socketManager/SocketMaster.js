@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useAuthState } from '../../pages/authentication/context'
 import { useProfileDispatch, useProfileState, getFriends } from '../../pages/profile/context'
 import { useServerState, useServerDispatch, loadServerChannelList, loadServerUserList, loadCurrentServer } from '../../pages/server/context'
@@ -11,7 +11,7 @@ export const SocketMaster = () => {
     const profileDispatch = useProfileDispatch()
     const { CurrentProfile } = useProfileState()
     const serverDispatch = useServerDispatch()
-    const { currentServer } = useServerState()
+    const { currentServer, currentServerID } = useServerState()
     const socketDispatch = useSocketDispatch()
     const { socket } = useSocketState()
     const messageDispatch = useMessageDispatch()
@@ -34,47 +34,48 @@ export const SocketMaster = () => {
     }, [socket, user, profileDispatch])
 
     useEffect(() => {
-        if (currentServer) {
+        if (currentServerID) {
             socket.on('ServerUpdate', async (data) => {
-                if (data === currentServer._id) {
-                    loadCurrentServer(serverDispatch, currentServer._id)
+                if (data === currentServerID) {
+                    loadCurrentServer(serverDispatch, currentServerID)
+                    console.log('ServerUpdate')
                 }
             })
         }
-    }, [serverDispatch, currentServer, socket])
+    }, [serverDispatch, currentServerID, socket])
 
     useEffect(() => {
-        if (currentServer) {
+        if (currentServerID) {
             socket.on('voice-chat:user-joined-chat', async (data) => {
-                if (data._id === currentServer._id) {
+                if (data._id === currentServerID) {
                     loadServerChannelList(serverDispatch, data)
-                    console.log(currentServer._id + data)
+                    console.log(currentServerID + data)
                 }
             })
         }
-    }, [serverDispatch, currentServer, socket])
+    }, [serverDispatch, currentServerID, socket])
 
     useEffect(() => {
-        if (currentServer) {
+        if (currentServerID) {
             socket.on('ServerUserUpdate', async (data) => {
-                if (data === currentServer._id) {
-                    loadServerUserList(serverDispatch, currentServer)
-                    console.log('serverupdate')
+                if (data === currentServerID) {
+                    loadServerUserList(serverDispatch, currentServerID)
+                    console.log('ServerUserUpdate')
                 }
             })
         }
-    }, [serverDispatch, currentServer, socket])
+    }, [serverDispatch, currentServerID, socket])
 
     useEffect(() => {
-        if (currentServer) {
+        if (currentServerID) {
             socket.on('update:ChannelInfo', async (data) => {
-                if (data === currentServer._id) {
+                if (data === currentServerID) {
                     loadServerChannelList(serverDispatch, currentServer)
-                    console.log('serverupdate')
+                    console.log('update:ChannelInfo')
                 }
             })
         }
-    }, [serverDispatch, currentServer, socket])
+    }, [serverDispatch, currentServerID, socket])
 
     useEffect(() => {
         if (socket) {

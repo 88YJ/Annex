@@ -184,7 +184,6 @@ function updateServerUsers(id) {
     db.collection('servers')
         .find({ _id: ObjectId(id) })
         .toArray((err, server) => {
-            console.log("Updating...")
             server[0].userList.forEach((element) => io.to(element).emit('ServerUserUpdate', id))
         })
 }

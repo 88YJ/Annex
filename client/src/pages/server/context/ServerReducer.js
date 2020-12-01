@@ -13,6 +13,7 @@ export const initialState = {
     allServers: [],
     allServersLoaded: false,
     currentServer: undefined,
+    currentServerID: undefined,
     channelList: [],
     currentVoiceChannel: undefined,
     currentTextChannel: undefined,
@@ -32,6 +33,7 @@ export const ServerReducer = (initialState, action) => {
             return {
                 ...initialState,
                 currentServer: action.payload,
+                currentServerID: action.payload._id,
                 loading: false,
             }
         case LOAD_SERVER_USERLIST:

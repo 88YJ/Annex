@@ -1,7 +1,8 @@
-import { LOAD_STORE_GAMES, ADD_TO_CART, SET_STORE_GAMEPAGE, CLEAR_CART, ADDED_TO_CART } from './types'
+import { LOAD_STORE_GAMES, ADD_TO_CART, SET_STORE_GAMEPAGE, CLEAR_CART, ADDED_TO_CART, FILTER_STORE_GAMES } from './types'
 
 export const initialState = {
     storeGames: undefined,
+    filtered: null,
     cart: [],
     addedToCart: false,
     gamePage: undefined,
@@ -31,6 +32,14 @@ export const ShopReducer = (initialState, action) => {
             return {
                 ...initialState,
                 addedToCart: action.payload,
+            }
+        case FILTER_STORE_GAMES:
+            return {
+                ...initialState,
+                filtered: initialState.storeGames.filter((game) => {
+                    const regex = new RegExp(`${action.payload}`, 'gi')
+                    return game.name.match(regex)
+                }),
             }
         case CLEAR_CART:
             return {
