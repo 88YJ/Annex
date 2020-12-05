@@ -75,6 +75,7 @@ export const SocketMaster = () => {
                 }
             })
         }
+        // eslint-disable-next-line
     }, [serverDispatch, currentServerID, socket])
 
     useEffect(() => {

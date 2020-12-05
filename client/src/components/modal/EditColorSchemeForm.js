@@ -155,7 +155,7 @@ export const EditColorSchemeForm = () => {
                     </li>
                 </ul>
             </div>
-            <input type='url' placeholder='Set Background Picture' name='background' value={background} onChange={onChange} />
+            <input type='url' placeholder='Set Background Picture' name='background' value={background} onChange={onChange} style={{ width: '99%' }} />
             <div>
                 <input className='GeneralHeaders globalbutton' type='submit' value='Save Changes' style={{ width: '99%' }} />
                 <input className='GeneralHeaders globalbutton' onClick={() => resetColors()} type='submit' value='Reset Colors' style={{ width: '99%' }} />

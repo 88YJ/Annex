@@ -1,9 +1,12 @@
 import React from 'react'
+import { useProfileState } from '../../pages/profile/context'
 
-export const ProfileBody = () => {
+export const ProfileActivity = () => {
+    const { CurrentProfile } = useProfileState()
+
     return (
         <>
-            <div className='profile-Body-Center'>
+            <div className='profile-Activity'>
                 <h1
                     className='globalHeader Border-Bottom-1PX Primary-Header'
                     style={{
@@ -136,42 +139,56 @@ export const ProfileBody = () => {
                         </h2>
                     </li>
                 </ul>
-                <div className='profile-Comments'>
-                    <h1
-                        className='globalHeader Border-Top-1PX Primary-Header'
-                        style={{
-                            background: 'rgb(0,0,0,.8)',
-                        }}
-                    >
-                        Profile Comments
-                    </h1>
-                    <ul>
-                        <li>
-                            <p className='globalHeaderL Tertiary-Header'>C:/{'>'} Load NPC Comment.exe</p>
-                            <h5 className='globalHeaderL Primary-Header'>
-                                User: <span className='Secondary-Header'>BabyJesus</span>
-                            </h5>
-                        </li>
-                        <li>
-                            <p className='globalHeaderL Tertiary-Header'>The Lord Of Dota</p>
-                            <h5 className='globalHeaderL Primary-Header'>
-                                User: <span className='Secondary-Header'>Rejis</span>
-                            </h5>
-                        </li>
-                        <li>
-                            <p className='globalHeaderL Tertiary-Header'>Have a nice afternoon friend</p>
-                            <h5 className='globalHeaderL Primary-Header'>
-                                User: <span className='Secondary-Header'>Parathax</span>
-                            </h5>
-                        </li>
-                        <li>
-                            <p className='globalHeaderL Tertiary-Header'>+rep prooooo skilllsssssss</p>
-                            <h5 className='globalHeaderL Primary-Header'>
-                                User: <span className='Secondary-Header'>Flipster</span>
-                            </h5>
-                        </li>
-                    </ul>
-                </div>
+                <ul className='profile-Activity-Log'>
+                    <li>
+                        <h3 className='Primary-Header' style={{ height: 'auto', width: 'auto' }}>
+                            Halo:
+                        </h3>
+                        <p className='Secondary-Header' style={{ marginLeft: '5px', marginTop: '2px' }}>
+                            {CurrentProfile.name}: Completed Halo on legendary!
+                        </p>
+                    </li>
+                    <li>
+                        <h3 className='Primary-Header' style={{ height: 'auto', width: 'auto' }}>
+                            Halo:
+                        </h3>
+                        <p className='Secondary-Header' style={{ marginLeft: '5px', marginTop: '2px' }}>
+                            {CurrentProfile.name}: Landed 100 headshots!
+                        </p>
+                    </li>
+                    <li>
+                        <h3 className='Primary-Header' style={{ height: 'auto', width: 'auto' }}>
+                            Ark Survival Evolved:
+                        </h3>
+                        <p className='Secondary-Header' style={{ marginLeft: '5px', marginTop: '2px' }}>
+                            {CurrentProfile.name}: Tamed their first rex!
+                        </p>
+                    </li>
+                    <li>
+                        <h3 className='Primary-Header' style={{ height: 'auto', width: 'auto' }}>
+                            Portal:
+                        </h3>
+                        <p className='Secondary-Header' style={{ marginLeft: '5px', marginTop: '2px' }}>
+                            {CurrentProfile.name}: Jumped through 50 portals!
+                        </p>
+                    </li>
+                    <li>
+                        <h3 className='Primary-Header' style={{ height: 'auto', width: 'auto' }}>
+                            Monster Hunter: World:
+                        </h3>
+                        <p className='Secondary-Header' style={{ marginLeft: '5px', marginTop: '2px' }}>
+                            {CurrentProfile.name}: Executed their 50th monster!
+                        </p>
+                    </li>
+                    <li>
+                        <h3 className='Primary-Header' style={{ height: 'auto', width: 'auto' }}>
+                            The Witcher: Wild Hunt:
+                        </h3>
+                        <p className='Secondary-Header' style={{ marginLeft: '5px', marginTop: '2px' }}>
+                            {CurrentProfile.name}: Brewed their 15th potion!
+                        </p>
+                    </li>
+                </ul>
             </div>
         </>
     )

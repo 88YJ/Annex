@@ -109,6 +109,16 @@ export async function acceptFriendRequest(dispatch, request) {
     }
 }
 
+export async function sendComment(dispatch, profile, comment) {
+    try {
+        await axios.put(`/api/users/sendcomment/${profile}`, comment, requestConfig)
+
+        console.log('sent comment')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export async function joinServer(dispatch, server) {
     try {
         const response = await axios.put(`/api/users/joinserver/${server}`, requestConfig)

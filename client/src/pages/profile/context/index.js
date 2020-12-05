@@ -10,6 +10,7 @@ import {
     sendFriendRequest,
     acceptFriendRequest,
     joinServer,
+    sendComment,
 } from './ProfileActions'
 import { ProfileProvider, useProfileState, useProfileDispatch } from './ProfileContext'
 
@@ -28,4 +29,5 @@ export {
     useProfileState,
     useProfileDispatch,
     joinServer,
+    sendComment,
 }
