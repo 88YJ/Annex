@@ -314,12 +314,24 @@ router.get('/profile', middleware.isAuthenticated, async (req, res) => {
     }
 })
 
+router.put('/sendcomment/:id', middleware.isAuthenticated, async (req, res) => {
+    try {
+        let updatedComments = await User.findByIdAndUpdate(req.params.id, {
+            $addToSet: { profileComments: req.body },
+        })
+        res.json('updated')
+    } catch (error) {
+        console.error(error.message)
+        res.status(500).send('Server Error')
+    }
+})
+
 //GET A PROFILE
 router.get('/profile/:id', middleware.isAuthenticated, async (req, res) => {
     try {
         const profile = await User.findById(req.params.id)
 
-        const { name, backgroundPicture, profilePicture, profileBanner, screenShots, _id, onlineStatus, location, bio, profileLevel } = profile
+        const { name, backgroundPicture, profilePicture, profileBanner, screenShots, _id, onlineStatus, location, bio, profileLevel, profileComments } = profile
 
         const profileInfo = {
             _id: _id,
@@ -332,6 +344,7 @@ router.get('/profile/:id', middleware.isAuthenticated, async (req, res) => {
             location: location,
             bio: bio,
             profileLevel: profileLevel,
+            profileComments: profileComments,
         }
 
         res.json(profileInfo)

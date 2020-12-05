@@ -48,6 +48,7 @@ const UserSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
+    profileComments: [],
     friendList: [
         {
             type: mongoose.Schema.Types.ObjectId,

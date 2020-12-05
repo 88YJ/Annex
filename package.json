@@ -1,31 +1,31 @@
 {
-  "name": "annex",
-  "version": "1.0.0",
-  "description": "Annex",
-  "main": "API.js",
-  "scripts": {
-    "start": "node API.js",
-    "server": "nodemon API.js",
-    "signaling": "nodemon SignalingServer.js",
-    "client": "npm start --prefix client",
-    "clientinstall": "npm install --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run signaling\""
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "config": "^3.3.1",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "express-validator": "^6.5.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.18",
-    "socket.io": "^2.3.0"
-  },
-  "devDependencies": {
-    "concurrently": "^5.2.0",
-    "nodemon": "^2.0.4"
-  }
+    "name": "annex",
+    "version": "1.0.0",
+    "description": "Annex",
+    "main": "API.js",
+    "scripts": {
+        "start": "node API.js && node SignalingServer.js && npm run client",
+        "server": "nodemon API.js",
+        "signaling": "nodemon SignalingServer.js",
+        "client": "npm start --prefix client",
+        "clientinstall": "npm install --prefix client",
+        "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run signaling\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "config": "^3.3.1",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "express-validator": "^6.5.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.9.18",
+        "socket.io": "^2.3.0"
+    },
+    "devDependencies": {
+        "concurrently": "^5.2.0",
+        "nodemon": "^2.0.4"
+    }
 }
