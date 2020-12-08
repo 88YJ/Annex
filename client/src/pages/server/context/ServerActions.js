@@ -71,13 +71,13 @@ export async function loadCurrentVoiceChannel(dispatch, channel) {
 
 export async function loadCurrentTextChannel(dispatch, channel, server) {
     try {
-        if (channel) {
+        if (channel && server) {
             const response = await axios.get(`/api/${server}/channels/messages/${channel._id}`, requestConfig)
             dispatch({ type: LOAD_CURRENT_TEXT_CHANNEL, payload: response.data })
             console.log('Channel loaded successfully.')
         } else {
-            dispatch({ type: LOAD_CURRENT_TEXT_CHANNEL, payload: channel })
-            console.log('Channel loaded successfully.')
+            dispatch({ type: LOAD_CURRENT_TEXT_CHANNEL, payload: null })
+            console.log('Landing loaded successfully.')
         }
     } catch (error) {
         console.error(error)
