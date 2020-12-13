@@ -13,6 +13,8 @@ import {
 
 import axios from 'axios'
 
+const deployedURL = "https://api-dot-ultimate-karma-297923.wl.r.appspot.com"
+
 const requestConfig = {
     headers: {
         'Content-Type': 'application/json',
@@ -83,7 +85,7 @@ export function updateDirectMessages(dispatch, message) {
 
 export async function loadDirectMessages(dispatch, profile) {
     try {
-        const response = await axios.get(`/api/directmessage/${profile}`, requestConfig)
+        const response = await axios.get(`${deployedURL}/api/directmessage/${profile}`, requestConfig)
 
         if (response.data === 'error') {
             console.log('an err occured in load direct messages, likely it was creating a message container, can disregard')
@@ -99,7 +101,7 @@ export async function loadDirectMessages(dispatch, profile) {
 
 export async function loadInbox(dispatch, profile) {
     try {
-        const response = await axios.get(`/api/directmessage/inbox/${profile}`, requestConfig)
+        const response = await axios.get(`${deployedURL}/api/directmessage/inbox/${profile}`, requestConfig)
         dispatch({ type: LOAD_INBOX, payload: response.data })
 
         console.log('inbox Loaded')

@@ -1,6 +1,8 @@
 import { REGISTER_SUCCESS, REGISTER_ERROR, LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from './types'
 import axios from 'axios'
 
+const deployedURL = "https://api-dot-ultimate-karma-297923.wl.r.appspot.com"
+
 const requestConfig = {
     headers: {
         'Content-Type': 'application/json',
@@ -9,7 +11,7 @@ const requestConfig = {
 
 export async function registerUser(dispatch, registerPayload) {
     try {
-        const response = await axios.post('/api/auth/register', registerPayload, requestConfig)
+        const response = await axios.post(`${deployedURL}/api/auth/register`, registerPayload, requestConfig)
         if (response.data) {
             localStorage.setItem('user', JSON.stringify(response.data.user))
             localStorage.setItem('token', response.data.token)
@@ -27,7 +29,7 @@ export async function registerUser(dispatch, registerPayload) {
 
 export async function loginUser(dispatch, loginPayload) {
     try {
-        const response = await axios.post('/api/auth', loginPayload, requestConfig)
+        const response = await axios.post(`${deployedURL}/api/auth`, loginPayload, requestConfig)
         if (response.data) {
             localStorage.setItem('user', JSON.stringify(response.data.user))
             localStorage.setItem('token', response.data.token)
@@ -45,7 +47,7 @@ export async function loginUser(dispatch, loginPayload) {
 
 export async function reloadUser(dispatch) {
     try {
-        const response = await axios.get('/api/auth', requestConfig)
+        const response = await axios.get(`${deployedURL}/api/auth`, requestConfig)
         if (response.data) {
             console.log(response.data)
             localStorage.setItem('user', JSON.stringify(response.data))
