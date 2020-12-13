@@ -1,0 +1,5 @@
+runtime: nodejs12
+
+service: signaling
+
+env: flex

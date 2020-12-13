@@ -1,11 +1,8 @@
 runtime: nodejs12
 
-manual_scaling:
-  instances: 1
-
 handlers:
-  - url: /
+  - url: /.*
     static_files: build/index.html
     upload: build/index.html
-  - url: /
+  - url: /.*
     static_dir: build

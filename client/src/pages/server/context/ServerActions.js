@@ -110,7 +110,7 @@ export async function loadServerUserList(dispatch, server) {
 export async function createServer(dispatch, server) {
     try {
         const response = await axios.post(`${deployedURL}/api/servers`, server, requestConfig)
-        await axios.put(`${deployedURL}api/users/joinserver/${response.data._id}`, server, requestConfig)
+        await axios.put(`${deployedURL}/api/users/joinserver/${response.data._id}`, server, requestConfig)
         const request = await axios.get(`${deployedURL}/api/servers/joinedservers`, requestConfig)
         if (request.data) {
             dispatch({ type: LOAD_USER_JOINED_SERVERS, payload: request.data })
