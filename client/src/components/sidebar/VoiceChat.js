@@ -1,22 +1,22 @@
-import React, { useEffect, useCallback } from 'react'
-import { useAuthState } from '../../pages/authentication/context'
-import { useChatState, useChatDispatch, updateUserList } from '../../pages/chat/context'
-import { useServerState } from '../../pages/server/context'
-import { useSocketState } from '../../components/socketManager'
+import React, { useCallback, useEffect } from 'react';
+import { useSocketState } from '../../components/socketManager';
+import { useAuthState } from '../../pages/authentication/context';
+import { updateUserList, useChatDispatch, useChatState } from '../../pages/chat/context';
+import { useServerState } from '../../pages/server/context';
 
 let RTCConfig = {
     iceServers: [{ urls: 'stun:stun.services.mozilla.com' }, { urls: 'stun:stun.l.google.com:19302' }],
 }
 let peerConnections = []
-let previousChannel;
-let localStream;
+let previousChannel
+let localStream
 
 export const VoiceChat = () => {
-    const { user } = useAuthState();
-    const { userList } = useChatState();
-    const { currentVoiceChannel } = useServerState();
-    const { socket } = useSocketState();
-    const chatDispatch = useChatDispatch();
+    const { user } = useAuthState()
+    const { userList } = useChatState()
+    const { currentVoiceChannel } = useServerState()
+    const { socket } = useSocketState()
+    const chatDispatch = useChatDispatch()
 
     const callUser = useCallback(
         async (userId) => {
@@ -72,36 +72,38 @@ export const VoiceChat = () => {
         videoContainer.appendChild(remoteVideo)
     }, [])
 
-    const handleIceCandidate = useCallback(async (event, userId) => {
-        if (event.candidate) {
-            socket.emit('voice-chat:ice-candidate', { candidate: event.candidate, to: userId, from: user._id })
-        }
-    }, [socket, user])
+    const handleIceCandidate = useCallback(
+        async (event, userId) => {
+            if (event.candidate) {
+                socket.emit('voice-chat:ice-candidate', { candidate: event.candidate, to: userId, from: user._id })
+            }
+        },
+        [socket, user]
+    )
 
     const handleLeaveChannel = useCallback(async () => {
-        if(previousChannel) {
-            peerConnections.forEach((peer) => peer.close());
-            peerConnections = [];
+        if (previousChannel) {
+            peerConnections.forEach((peer) => peer.close())
+            peerConnections = []
 
-            localStream.getTracks().forEach((track) => track.stop());
-            localStream = undefined;
+            localStream.getTracks().forEach((track) => track.stop())
+            localStream = undefined
 
-            let videoContainer = document.getElementById('video-container');
+            let videoContainer = document.getElementById('video-container')
             while (videoContainer.firstChild) {
-                videoContainer.removeChild(videoContainer.firstChild);
+                videoContainer.removeChild(videoContainer.firstChild)
             }
 
             updateUserList(chatDispatch, [])
 
-            socket.emit('voice-chat:leave', ({ channel: previousChannel._id, user: user }) )
-            previousChannel = undefined;
-        } 
-
+            socket.emit('voice-chat:leave', { channel: previousChannel._id, user: user })
+            previousChannel = undefined
+        }
     }, [chatDispatch, socket, user])
 
     useEffect(() => {
         userList.forEach((userId) => {
-            console.log(userId);
+            console.log(userId)
             if (userId !== user._id) {
                 if (!peerConnections[userId]) {
                     peerConnections[userId] = new RTCPeerConnection(RTCConfig)
@@ -134,16 +136,16 @@ export const VoiceChat = () => {
     useEffect(() => {
         if (currentVoiceChannel && socket) {
             //Check if we are joining from another channel
-            handleLeaveChannel();
-            
-            previousChannel = currentVoiceChannel;
+            handleLeaveChannel()
+
+            previousChannel = currentVoiceChannel
             navigator.mediaDevices
                 .getUserMedia({ video: false, audio: true })
                 .then((stream) => {
                     const local = document.getElementById('local-video')
                     if (local) {
                         local.srcObject = stream
-                        localStream = stream;
+                        localStream = stream
                     }
                 })
                 .then(() => {
@@ -156,28 +158,27 @@ export const VoiceChat = () => {
         if (socket) {
             socket.on('voice-chat:update-users', (data) => {
                 //We want to check if a user has left the voice chat.
-                let dictionary = [];
+                let dictionary = []
 
                 //Map each user.
-                data.forEach(user => {
-                    if(!dictionary[user]) {
-                        dictionary[user] = 1;
+                data.forEach((user) => {
+                    if (!dictionary[user]) {
+                        dictionary[user] = 1
                     }
                 })
 
                 //If there is an user that is not in the dictionary then they have left the chat.
-                userList.forEach(user => {
-                    if(!dictionary[user]) {
-
-                        if(peerConnections[user]) {
-                            peerConnections[user].close();
-                            delete peerConnections[user];
+                userList.forEach((user) => {
+                    if (!dictionary[user]) {
+                        if (peerConnections[user]) {
+                            peerConnections[user].close()
+                            delete peerConnections[user]
                         }
-                        
-                        let remoteStream = document.getElementById(user);
-                        if(remoteStream) {
-                            remoteStream.remove();
-                        }  
+
+                        let remoteStream = document.getElementById(user)
+                        if (remoteStream) {
+                            remoteStream.remove()
+                        }
                     }
                 })
 
@@ -193,7 +194,11 @@ export const VoiceChat = () => {
         <div>
             {localVideo}
             {remoteVideoContainer}
-            {previousChannel ? (<button onClick={handleLeaveChannel}>Leave Chat</button>) : null}
+            {previousChannel ? (
+                <button style={{ position: 'absolute', width: '251px', height: '30px', bottom: '0', left: '65px' }} onClick={handleLeaveChannel}>
+                    Leave Chat
+                </button>
+            ) : null}
         </div>
     )
 }

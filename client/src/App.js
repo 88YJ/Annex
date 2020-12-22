@@ -34,6 +34,7 @@ import { Header } from './components/header/Header'
 import { SideBar } from './components/sidebar/SideBar'
 import { Modal } from './components/modal/Modal'
 import { SocketMaster } from './components/socketManager/SocketMaster'
+import { VoiceChat } from './components/sidebar/VoiceChat'
 
 //Import Types
 import { SHOW_RIGHT_SIDEBAR, SHOW_LEFT_SIDEBAR } from './components/sidebar/context/types'
@@ -73,7 +74,7 @@ function App() {
                                                                     <Header />
                                                                     <SideBar type={SHOW_LEFT_SIDEBAR} />
                                                                     <SocketMaster />
-                                                                    <div></div>
+                                                                    <VoiceChat />
                                                                     <div className='app-browser'>
                                                                         <Switch>
                                                                             <Route exact path='/' component={Dashboard} />

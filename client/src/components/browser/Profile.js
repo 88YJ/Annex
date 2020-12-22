@@ -25,8 +25,6 @@ export const Profile = () => {
         }
     }, [show])
 
-    console.log(CurrentProfile)
-
     if (user._id === CurrentProfile._id) {
         return (
             <>
@@ -38,16 +36,9 @@ export const Profile = () => {
                 >
                     <div className='profile-Film'>
                         <div className='profile-Master'>
-                            <div className='profile-Banner'>
+                            <div classame='profile-Banner'>
                                 <div className='profile-Header'>
-                                    <div
-                                        className='profile-DisplayPicture'
-                                        style={
-                                            CurrentProfile.profilePicture
-                                                ? { backgroundImage: `url(${CurrentProfile.profilePicture})` }
-                                                : { backgroundImage: `url(${DefaultProfilePicture})` }
-                                        }
-                                    />
+                                    <div clNassName='profile-DisplayPicture' style={CurrentProfile.profilePicture ? { backgroundImage: `url(${CurrentProfile.profilePicture})` } : { backgroundImage: `url(${DefaultProfilePicture})` }} />
                                     <div>
                                         <h1 className='globalHeaderL Primary-Header' style={{ display: 'flex' }}>
                                             <div
@@ -63,20 +54,12 @@ export const Profile = () => {
                                             {menu ? (
                                                 <ul className='profile-Options-Submenu'>
                                                     <li>
-                                                        <button
-                                                            className='globalbutton'
-                                                            style={{ height: 'auto', width: '96%' }}
-                                                            onClick={() => showModalWithEditProfile(modalDipatch)}
-                                                        >
+                                                        <button className='globalbutton' style={{ height: 'auto', width: '96%' }} onClick={() => showModalWithEditProfile(modalDipatch)}>
                                                             Edit Profile
                                                         </button>
                                                     </li>
                                                     <li>
-                                                        <button
-                                                            className='globalbutton'
-                                                            style={{ height: 'auto', width: '96%' }}
-                                                            onClick={() => showModalWithFriendRequests(modalDipatch)}
-                                                        >
+                                                        <button className='globalbutton' style={{ height: 'auto', width: '96%' }} onClick={() => showModalWithFriendRequests(modalDipatch)}>
                                                             Requests
                                                         </button>
                                                     </li>
@@ -106,21 +89,11 @@ export const Profile = () => {
         )
     } else {
         return (
-            <div
-                className='profile-Background'
-                style={{ backgroundImage: `url(${CurrentProfile && CurrentProfile.backgroundPicture ? CurrentProfile.backgroundPicture : DefaultBackground})` }}
-            >
+            <div className='profile-Background' style={{ backgroundImage: `url(${CurrentProfile && CurrentProfile.backgroundPicture ? CurrentProfile.backgroundPicture : DefaultBackground})` }}>
                 <div className='profile-Film'>
                     <div className='profile-Master'>
                         <div className='profile-Header'>
-                            <div
-                                className='profile-DisplayPicture'
-                                style={
-                                    CurrentProfile.profilePicture
-                                        ? { backgroundImage: `url(${CurrentProfile.profilePicture})` }
-                                        : { backgroundImage: `url(${DefaultProfilePicture})` }
-                                }
-                            ></div>
+                            <div className='profile-DisplayPicture' style={CurrentProfile.profilePicture ? { backgroundImage: `url(${CurrentProfile.profilePicture})` } : { backgroundImage: `url(${DefaultProfilePicture})` }}></div>
                             <div style={{ color: 'white' }}>
                                 <h1 className='globalHeaderL Primary-Header' style={{ display: 'flex' }}>
                                     <div
@@ -136,11 +109,7 @@ export const Profile = () => {
                                     {menu ? (
                                         <ul className='profile-Options-Submenu'>
                                             <li>
-                                                <button
-                                                    className='globalbutton'
-                                                    style={{ height: 'auto', width: '95%' }}
-                                                    onClick={() => sendFriendRequest(profileDispatch, CurrentProfile._id)}
-                                                >
+                                                <button className='globalbutton' style={{ height: 'auto', width: '95%' }} onClick={() => sendFriendRequest(profileDispatch, CurrentProfile._id)}>
                                                     Add Friend
                                                 </button>
                                             </li>
@@ -161,11 +130,7 @@ export const Profile = () => {
                             <div>
                                 <h3 className='globalHeaderR Primary-Header'>Level: {CurrentProfile.profileLevel}</h3>
                                 <h3 className='globalHeaderR Primary-Header'>Years: 0</h3>
-                                {CurrentProfile.onlineStatus ? (
-                                    <h3 className='globalHeaderR Primary-Header'>Online</h3>
-                                ) : (
-                                    <h3 className='globalHeaderR Seconday-Header'>Offline</h3>
-                                )}
+                                {CurrentProfile.onlineStatus ? <h3 className='globalHeaderR Primary-Header'>Online</h3> : <h3 className='globalHeaderR Seconday-Header'>Offline</h3>}
                             </div>
                         </div>
                         <div className='profile-SubMaster'>

@@ -4,7 +4,6 @@ import { useServerState, useServerDispatch, loadServerChannelList, loadCurrentVo
 import { useModalDispatch, useModalState, showModalWithAddChannel, showModalWithEditServer } from '../modal/context'
 import { useAuthState } from '../../pages/authentication/context'
 import PlusIcon from '../../images/PlusIcon.png'
-import { VoiceChat } from './VoiceChat'
 import MenuArrow from '../../images/MenuArrow.png'
 import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
@@ -152,9 +151,6 @@ export const ChannelList = () => {
                             <div className='NavIcons' style={{ backgroundImage: `url(${PlusIcon})` }} onClick={() => showModalWithAddChannel(modalDispatch)} />
                         </li>
                     ) : null}
-                    <li>
-                        <VoiceChat />
-                    </li>
                 </ul>
             </div>
             
