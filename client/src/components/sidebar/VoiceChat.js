@@ -31,7 +31,7 @@ export const VoiceChat = () => {
     )
 
     const answerCall = useCallback(async () => {
-        socket.on('voice-chat:receiving-call', async (data) => {
+        await socket.on('voice-chat:receiving-call', async (data) => {
             console.log('reciving call from: ' + data.from)
 
             if (!peerConnections[data.from].remoteDescription) {
