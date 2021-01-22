@@ -20,7 +20,7 @@ export const ServerList = () => {
     }, [isLoggedIn, serverDispatch])
 
     return joinedServersList.map((server) => (
-        <Link to={`/server/${server._id}/landing`} key={server.name} onClick={() => changesidebar()}>
+        <Link to={`/server/${server._id}/landing`} key={server._id} onClick={() => changesidebar()}>
             <li>
                 <div className='NavIcons' style={{ backgroundImage: `url(${server.img})` }}></div>
             </li>

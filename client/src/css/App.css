@@ -1496,3 +1496,7 @@
     color: var(--Tertiary-Header-Color);
 }
 /*////////////////*/
+
+.animatedDivs {
+    height: auto;
+}

@@ -6,6 +6,8 @@ import {
     LOAD_CURRENT_VOICE_CHANNEL,
     LOAD_CURRENT_TEXT_CHANNEL,
     LOAD_ALL_SERVERS,
+    CLEAR_SERVER_USERLIST,
+    CLEAR_SERVER_CHANNELLIST,
 } from './types'
 
 export const initialState = {
@@ -42,10 +44,22 @@ export const ServerReducer = (initialState, action) => {
                 userList: action.payload,
                 loading: false,
             }
+        case CLEAR_SERVER_USERLIST:
+            return {
+                ...initialState,
+                userList: [],
+                loading: false,
+            }
         case LOAD_SERVER_CHANNELLIST:
             return {
                 ...initialState,
                 channelList: action.payload,
+                loading: false,
+            }
+        case CLEAR_SERVER_CHANNELLIST:
+            return {
+                ...initialState,
+                channelList: [],
                 loading: false,
             }
         case LOAD_CURRENT_VOICE_CHANNEL:

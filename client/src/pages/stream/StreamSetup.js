@@ -18,7 +18,7 @@ function StreamSetup(options) {
                 // eslint-disable-next-line no-undef
                 const player = IVSPlayer.create()
                 player.attachHTMLVideoElement(document.getElementById('video-player'))
-                //player.load('https://606fb87513f1.us-west-2.playback.live-video.net/api/video/v1/us-west-2.304074195227.channel.MWthyDciPjUY.m3u8');
+                player.load('https://606fb87513f1.us-west-2.playback.live-video.net/api/video/v1/us-west-2.304074195227.channel.ugstQ6MiM7yd.m3u8')
                 player.play()
             }
         }

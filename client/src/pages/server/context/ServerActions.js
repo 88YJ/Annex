@@ -6,6 +6,8 @@ import {
     LOAD_SERVER_CHANNELLIST,
     LOAD_CURRENT_TEXT_CHANNEL,
     LOAD_ALL_SERVERS,
+    CLEAR_SERVER_USERLIST,
+    CLEAR_SERVER_CHANNELLIST,
 } from './types'
 import axios from 'axios'
 
@@ -84,10 +86,14 @@ export async function loadCurrentTextChannel(dispatch, channel, server) {
     }
 }
 
-export async function loadServerChannelList(dispatch, server) {
+export async function loadServerChannelList(dispatch, server, origin) {
     try {
+        if (origin) {
+            dispatch({ type: CLEAR_SERVER_CHANNELLIST })
+        }
+
         let channelList = JSON.stringify(server.channelList)
-        const response = await axios.get(`/api/${server._id}/channels/${channelList}`, requestConfig)
+        const response = await axios.get(`/api/${server}/channels/${channelList}`, requestConfig)
         dispatch({ type: LOAD_SERVER_CHANNELLIST, payload: response.data })
         console.log('Server channels loaded successfully.')
     } catch (error) {
@@ -95,8 +101,13 @@ export async function loadServerChannelList(dispatch, server) {
     }
 }
 
-export async function loadServerUserList(dispatch, server) {
+export async function loadServerUserList(dispatch, server, origin) {
     try {
+        if (origin) {
+            console.log('ran')
+            dispatch({ type: CLEAR_SERVER_USERLIST })
+        }
+
         const response = await axios.get(`/api/servers/${server}/users`, requestConfig)
         dispatch({ type: LOAD_SERVER_USERLIST, payload: response.data })
         console.log('Server users loaded successfully.')

@@ -60,7 +60,7 @@ export const SocketMaster = () => {
             socket.on('ServerUserUpdate', async (data) => {
                 if (data === currentServerID) {
                     loadServerUserList(serverDispatch, currentServerID)
-                    console.log('ServerUserUpdate')
+                    console.log('ServerUserUpdate' + currentServerID)
                 }
             })
         }
