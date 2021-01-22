@@ -8,6 +8,7 @@
         "@testing-library/user-event": "^7.2.1",
         "avatar": "^0.1.0",
         "axios": "^0.20.0",
+        "electron": "^11.2.0",
         "react": "^16.13.1",
         "react-color": "^2.19.3",
         "react-dom": "^16.13.1",
