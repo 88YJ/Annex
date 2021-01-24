@@ -33,7 +33,7 @@ export const ChannelList = () => {
         if (currentServerID) {
             loadServerChannelList(serverDispatch, currentServer, true)
         }
-    }, [currentServerID, currentServer, serverDispatch])
+    }, [currentServerID, serverDispatch])
 
     const handleVoiceChannelJoin = (channel) => {
         try {
