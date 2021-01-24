@@ -1,4 +1,6 @@
-import { CAPTURE_FRIENDS, CAPTURE_PROFILES, LOAD_CURRENT_PROFILE, CAPTURE_GAMES, SET_OWNED_CURRENT_GAME, GET_INCOMING_FRIEND_REQUESTS } from './types'
+import { CAPTURE_FRIENDS, CAPTURE_PROFILES, LOAD_CURRENT_PROFILE, CAPTURE_GAMES, SET_OWNED_CURRENT_GAME, GET_INCOMING_FRIEND_REQUESTS, LOAD_LOCAL_GAMES } from './types'
+
+let localGames = localStorage.getItem('localGames') ? JSON.parse(localStorage.getItem('localGames')) : []
 
 export const initialState = {
     Friends: [],
@@ -7,6 +9,7 @@ export const initialState = {
     ProfilesLoaded: false,
     CurrentProfile: undefined,
     ownedGames: [],
+    localGames: localGames,
     ownedGamesLoaded: false,
     CurrentOwnedGame: undefined,
     incomingRequests: [],
@@ -46,6 +49,11 @@ export const ProfileReducer = (initialState, action) => {
             return {
                 ...initialState,
                 incomingRequests: action.payload,
+            }
+        case LOAD_LOCAL_GAMES: 
+            return {
+                ...initialState,
+                localGames: JSON.parse(localStorage.getItem('localGames'))
             }
 
         default:

@@ -1,22 +1,39 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useProfileState, useProfileDispatch, loadLocalGames } from '../../pages/profile/context'
 
-import { useProfileState } from '../../pages/profile/context'
-
-const gameLocation = 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Dust An Elysian Tail\\DustAET.exe'
+let gameLocation = 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Dust An Elysian Tail\\DustAET.exe'
 
 export const GameList = () => {
-    const { ownedGames } = useProfileState()
+    const { ownedGames, localGames } = useProfileState()
+    const profileDispatch = useProfileDispatch()
 
-    const playGame = () => {
-         if(process.version.hasOwnProperty('electron')) {
-
+    const playGame = (gameLocation) => {
+        if (window.process !== undefined && window.process.type === 'renderer') {
             const { ipcRenderer } = window.require('electron')
             setTimeout(() => {
                 ipcRenderer.send('game-play', gameLocation)
-            }, 1000);
-            
+            }, 1000)
+            console.log('game is running')
             ipcRenderer.send("game-stream")
+        }
+    }
+
+    const addLocalGame = async () => {
+        if (window.process !== undefined && window.process.type === 'renderer') {
+            const { ipcRenderer } = window.require('electron')
+            let response = await ipcRenderer.invoke('game-local-add')
+
+            if (response === undefined) {
+                return
+            }
+
+            let { icon, path } = response
+
+            localGames.push({ path: path, icon: icon })
+            localStorage.setItem('localGames', JSON.stringify(localGames))
+
+            loadLocalGames(profileDispatch)
         }
     }
 
@@ -27,9 +44,9 @@ export const GameList = () => {
                     <h3 className='globalHeader Tertiary-Background Primary-Header Border-Bottom-1PX'>Games:</h3>
                     <div className='gamelist-Games'>
                         <ul>
-                            {ownedGames.map((game, i) => (
+                            {ownedGames.map((game) => (
                                 <li
-                                    key={i}
+                                    key={game._id}
                                     className='banner'
                                     style={{
                                         backgroundImage: `url(${game.banner})`,
@@ -45,7 +62,7 @@ export const GameList = () => {
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <button className='globalbutton' style={{ height: '37px', width: 'auto' }} onClick={playGame}>
+                                                    <button className='globalbutton' style={{ height: '37px', width: 'auto' }} onClick={() => playGame(gameLocation)}>
                                                         Play
                                                     </button>
                                                 </li>
@@ -54,6 +71,33 @@ export const GameList = () => {
                                     </div>
                                 </li>
                             ))}
+                            {localGames.map((game, i) => (
+                                <li
+                                    key={i}
+                                    className='banner'
+                                    style={{
+                                        backgroundImage: `url(${game.icon})`,
+                                    }}
+                                >
+                                    <div className='banner-Film'>
+                                        <p style={{ fontSize: '16px', height: 20 }}>{game.Path}</p>
+                                        <div className='games-Submenu'>
+                                            <ul>
+                                                <li>
+                                                    <button className='globalbutton' style={{ height: '37px', width: 'auto' }} onClick={() => playGame(game.path)}>
+                                                        Play
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            ))}
+                            <li>
+                                <button className='globalbutton' style={{ height: '37px', width: 'auto' }} onClick={addLocalGame}>
+                                    Add Game
+                                </button>
+                            </li>
                         </ul>
                     </div>
                 </div>

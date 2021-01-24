@@ -1,4 +1,4 @@
-import { CAPTURE_FRIENDS, CAPTURE_PROFILES, LOAD_CURRENT_PROFILE, CAPTURE_GAMES, SET_OWNED_CURRENT_GAME, GET_INCOMING_FRIEND_REQUESTS } from './types'
+import { CAPTURE_FRIENDS, CAPTURE_PROFILES, LOAD_CURRENT_PROFILE, CAPTURE_GAMES, SET_OWNED_CURRENT_GAME, GET_INCOMING_FRIEND_REQUESTS, LOAD_LOCAL_GAMES } from './types'
 import axios from 'axios'
 
 const requestConfig = {
@@ -130,6 +130,15 @@ export async function joinServer(dispatch, server) {
             console.log('User successfully reloaded')
         }
         console.log('joined server')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export function loadLocalGames(dispatch) {
+    try {
+        dispatch({ type: LOAD_LOCAL_GAMES })
+        console.log('local games loaded successfully')
     } catch (error) {
         console.log(error)
     }
