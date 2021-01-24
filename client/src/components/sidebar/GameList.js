@@ -3,20 +3,31 @@ import { Link } from 'react-router-dom'
 
 import { useProfileState } from '../../pages/profile/context'
 
-const gameLocation = 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Dust An Elysian Tail\\DustAET.exe'
+const gameLocation = 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Call of Duty Black Ops\\BlackOps.exe'
 
 export const GameList = () => {
     const { ownedGames } = useProfileState()
 
-    const playGame = () => {
-         if(process.version.hasOwnProperty('electron')) {
-
+    const streamGame = () => {
+        if (window.process !== undefined && window.process.type === 'renderer') {
+            console.log('started game')
             const { ipcRenderer } = window.require('electron')
             setTimeout(() => {
                 ipcRenderer.send('game-play', gameLocation)
-            }, 1000);
-            
-            ipcRenderer.send("game-stream")
+            }, 1000)
+
+            ipcRenderer.send('game-stream')
+        }
+    }
+
+    const playGame = () => {
+        console.log(window.process)
+        if (window.process !== undefined && window.process.type === 'renderer') {
+            console.log('started game')
+            const { ipcRenderer } = window.require('electron')
+            setTimeout(() => {
+                ipcRenderer.send('game-play', gameLocation)
+            }, 1000)
         }
     }
 
@@ -40,8 +51,8 @@ export const GameList = () => {
                                         <div className='games-Submenu'>
                                             <ul>
                                                 <li>
-                                                    <Link to={`/game/${game._id}`} className='globalbutton'>
-                                                        Game Page
+                                                    <Link className='globalbutton' to='#' onClick={streamGame}>
+                                                        Stream
                                                     </Link>
                                                 </li>
                                                 <li>
