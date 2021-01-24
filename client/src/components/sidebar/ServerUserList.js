@@ -9,7 +9,7 @@ export const ServerUserList = () => {
 
     useEffect(() => {
         if (currentServerID) {
-            loadServerUserList(serverDispatch, currentServerID)
+            loadServerUserList(serverDispatch, currentServerID, true)
         }
     }, [currentServerID, serverDispatch])
 

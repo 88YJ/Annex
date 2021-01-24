@@ -7,14 +7,21 @@ import PlusIcon from '../../images/PlusIcon.png'
 import { VoiceChat } from './VoiceChat'
 import MenuArrow from '../../images/MenuArrow.png'
 import DefaultProfilePicture from '../../images/DefaultProfile.png'
+import { useTransition, animated } from 'react-spring'
 
 export const ChannelList = () => {
-    const { currentServer, channelList, currentTextChannel } = useServerState()
+    const { currentServerID, channelList, currentTextChannel, currentServer } = useServerState()
     const { user } = useAuthState()
     const serverDispatch = useServerDispatch()
     const modalDispatch = useModalDispatch()
     const { show } = useModalState()
     const [menu, setMenu] = useState(false)
+
+    const transition = useTransition(channelList, (Channels) => Channels._id, {
+        from: { opacity: 0, marginLeft: -100 },
+        enter: { opacity: 1, marginLeft: 0 },
+        leave: { opacity: 0, height: 0 },
+    })
 
     useEffect(() => {
         if (show) {
@@ -23,10 +30,10 @@ export const ChannelList = () => {
     }, [show])
 
     useEffect(() => {
-        if (currentServer) {
-            loadServerChannelList(serverDispatch, currentServer)
+        if (currentServerID) {
+            loadServerChannelList(serverDispatch, currentServer, true)
         }
-    }, [currentServer, serverDispatch])
+    }, [currentServerID, serverDispatch])
 
     const handleVoiceChannelJoin = (channel) => {
         try {
@@ -100,53 +107,57 @@ export const ChannelList = () => {
                             Landing Page
                         </Link>
                     </li>
-                    {channelList.map((channel) =>
-                        !channel.voiceChannel ? (
-                            currentTextChannel && channel._id === currentTextChannel._id ? (
-                                <li key={channel.name}>
-                                    <Link to={`/server/${currentServer._id}/${channel._id}`} className='Primary-Header Secondary-Background'>
-                                        # {channel.name}
-                                    </Link>
-                                </li>
-                            ) : (
-                                <li key={channel.name}>
-                                    <Link to={`/server/${currentServer._id}/${channel._id}`} className='Secondary-Header'>
-                                        # {channel.name}
-                                    </Link>
-                                </li>
-                            )
-                        ) : null
-                    )}
+                    {transition.map(({ item, key, props }) => (
+                        <animated.div key={key} style={props} className='animatedDivs'>
+                            {!item.voiceChannel ? (
+                                currentTextChannel && item._id === currentTextChannel._id ? (
+                                    <li key={item.name}>
+                                        <Link to={`/server/${currentServer._id}/${item._id}`} className='Primary-Header Secondary-Background'>
+                                            # {item.name}
+                                        </Link>
+                                    </li>
+                                ) : (
+                                    <li key={item.name}>
+                                        <Link to={`/server/${currentServer._id}/${item._id}`} className='Secondary-Header'>
+                                            # {item.name}
+                                        </Link>
+                                    </li>
+                                )
+                            ) : null}
+                        </animated.div>
+                    ))}
                     <li style={{ marginLeft: '0px' }}>
                         <p className='Primary-Header'>________________________</p>
                     </li>
-                    {channelList.map((channel) =>
-                        channel.voiceChannel ? (
-                            <li key={channel.name}>
-                                <Link onClick={() => handleVoiceChannelJoin(channel)} to='#' className='Secondary-Header'>
-                                    {'< '}
-                                    {channel.name}
-                                </Link>
-                                <ul className='channelUserlist'>
-                                    {channel.userList.map((user) => (
-                                        <Link to={`/profile/${user._id}`} key={user._id}>
-                                            <li className='Primary-Header' style={{ marginLeft: '8px' }}>
-                                                <div
-                                                    className='NavIcons'
-                                                    style={{
-                                                        backgroundImage: `url(${user.profilePicture ? user.profilePicture : DefaultProfilePicture})`,
-                                                        height: '25px',
-                                                        width: '25px',
-                                                    }}
-                                                />
-                                                {user.name}
-                                            </li>
-                                        </Link>
-                                    ))}
-                                </ul>
-                            </li>
-                        ) : null
-                    )}
+                    {transition.map(({ item, key, props }) => (
+                        <animated.div key={key} style={props} className='animatedDivs'>
+                            {item.voiceChannel ? (
+                                <li key={item.name}>
+                                    <Link onClick={() => handleVoiceChannelJoin(item)} to='#' className='Secondary-Header'>
+                                        {'< '}
+                                        {item.name}
+                                    </Link>
+                                    <ul className='channelUserlist'>
+                                        {item.userList.map((user) => (
+                                            <Link to={`/profile/${user._id}`} key={user._id}>
+                                                <li className='Primary-Header' style={{ marginLeft: '8px' }}>
+                                                    <div
+                                                        className='NavIcons'
+                                                        style={{
+                                                            backgroundImage: `url(${user.profilePicture ? user.profilePicture : DefaultProfilePicture})`,
+                                                            height: '25px',
+                                                            width: '25px',
+                                                        }}
+                                                    />
+                                                    {user.name}
+                                                </li>
+                                            </Link>
+                                        ))}
+                                    </ul>
+                                </li>
+                            ) : null}
+                        </animated.div>
+                    ))}
                     {currentServer.owner === user._id ? (
                         <li style={{ marginTop: '3px', paddingBottom: '4px', cursor: 'pointer' }} key='addChannel'>
                             <div className='NavIcons' style={{ backgroundImage: `url(${PlusIcon})` }} onClick={() => showModalWithAddChannel(modalDispatch)} />
@@ -157,7 +168,6 @@ export const ChannelList = () => {
                     </li>
                 </ul>
             </div>
-            
         )
     }
 

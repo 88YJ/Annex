@@ -21,6 +21,8 @@ export const ServerLanding = () => {
             let channel = channelList.filter((channel) => channel._id === channel_id)
             if (channel[0]) {
                 loadCurrentTextChannel(serverDispatch, channel[0], server_id)
+            } else {
+                loadCurrentTextChannel(serverDispatch)
             }
         }
     }, [loading, serverDispatch, channelList, channel_id, server_id])

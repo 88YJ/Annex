@@ -25,8 +25,6 @@ export const Profile = () => {
         }
     }, [show])
 
-    console.log(CurrentProfile)
-
     if (user._id === CurrentProfile._id) {
         return (
             <>
