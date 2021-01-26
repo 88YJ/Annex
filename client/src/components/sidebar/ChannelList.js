@@ -33,6 +33,7 @@ export const ChannelList = () => {
         if (currentServerID) {
             loadServerChannelList(serverDispatch, currentServer, true)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentServerID, serverDispatch])
 
     const handleVoiceChannelJoin = (channel) => {
