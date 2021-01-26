@@ -11,14 +11,33 @@ export const GameList = () => {
     const profileDispatch = useProfileDispatch()
     const { electron } = useAuthState()
 
-    const playGame = (gameLocation) => {
+    const playGame = async (gameLocation) => {
         if (electron) {
             const { ipcRenderer } = window.require('electron')
-            setTimeout(() => {
-                ipcRenderer.send('game-play', gameLocation)
-            }, 1000)
-            console.log('game is running')
-            //ipcRenderer.send('game-stream')
+            let response = await ipcRenderer.invoke('game-play', gameLocation)
+
+            console.log(`${response} is running`)
+
+            for(let i = 0; i < localGames.length; i++) {
+                if(localGames[i].path === gameLocation) {
+
+                    let {path, icon} = localGames[i]
+                    let gameData = {
+                        path: path,
+                        icon: icon,
+                        name: response
+                    }
+
+                    localGames[i] = gameData
+                    console.log(localGames[i])
+                    break
+                }
+            }
+
+            console.log(localGames)
+
+            localStorage.setItem('localGames', JSON.stringify(localGames))
+            loadLocalGames(profileDispatch)
         }
     }
 
@@ -28,6 +47,7 @@ export const GameList = () => {
             setTimeout(() => {
                 ipcRenderer.send('game-play', gameLocation)
             }, 1000)
+
             console.log('game is running')
             ipcRenderer.send('game-stream')
         }
@@ -115,7 +135,7 @@ export const GameList = () => {
                                                         }}
                                                     ></li>
                                                     <li style={{ height: 'auto', float: 'left' }}>
-                                                        <p style={{ fontSize: '16px', height: 20, opacity: '1' }}>{game.path}</p>
+                                                        <p style={{ fontSize: '16px', height: 20, opacity: '1' }}>{game.name ? game.name : game.path}</p>
                                                     </li>
                                                 </ul>
 

@@ -144,7 +144,7 @@ export async function editServer(dispatch, server, id) {
     try {
         const response = await axios.put(`/api/servers/editserver/${id}`, server, requestConfig)
         console.log(response.data)
-        console.log('Channel Edited')
+        console.log('Server Edited')
     } catch (error) {
         console.error(error)
     }
