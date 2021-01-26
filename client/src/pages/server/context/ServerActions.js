@@ -42,16 +42,6 @@ export async function loadJoinedServers(dispatch) {
     }
 }
 
-// export function loadCurrentServer(dispatch, server) {
-//     try {
-//         console.log(server)
-//         dispatch({ type: LOAD_CURRENT_SERVER, payload: server })
-//         console.log('Server loaded successfully.')
-//     } catch (error) {
-//         console.error(error)
-//     }
-// }
-
 export async function loadCurrentServer(dispatch, server) {
     try {
         const response = await axios.get(`/api/servers/server/${server}`, requestConfig)
@@ -104,7 +94,6 @@ export async function loadServerChannelList(dispatch, server, origin) {
 export async function loadServerUserList(dispatch, server, origin) {
     try {
         if (origin) {
-            console.log('ran')
             dispatch({ type: CLEAR_SERVER_USERLIST })
         }
 

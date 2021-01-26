@@ -18,7 +18,8 @@ import { useModalDispatch, showModalWithAddServer } from '../modal/context'
 import { useAuthState } from '../../pages/authentication/context'
 
 //Import Types
-import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types'
+//import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types'
+import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU } from './types/types'
 
 export const Header = () => {
     const sidebarDispatch = useSideBarDispatch()
@@ -56,7 +57,7 @@ export const Header = () => {
                     <Link to='/stream'>
                         <div className='NavIcons' style={{ backgroundImage: `url(${StreamIcon})` }} />
                     </Link>
-                    <SubMenu type={SHOW_STREAM_SUBMENU} />
+                    {/* <SubMenu type={SHOW_STREAM_SUBMENU} /> */}
                 </li>
                 <li onClick={() => changesidebar()}>
                     <Link to='/search'>

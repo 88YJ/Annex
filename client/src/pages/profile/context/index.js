@@ -11,6 +11,7 @@ import {
     acceptFriendRequest,
     joinServer,
     sendComment,
+    loadLocalGames
 } from './ProfileActions'
 import { ProfileProvider, useProfileState, useProfileDispatch } from './ProfileContext'
 
@@ -30,4 +31,5 @@ export {
     useProfileDispatch,
     joinServer,
     sendComment,
+    loadLocalGames
 }

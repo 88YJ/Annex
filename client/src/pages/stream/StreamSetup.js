@@ -1,25 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 
 function StreamSetup(options) {
-    let player
     const divEl = useRef(null)
     const videoEl = useRef(null)
 
-    function reload() {
-        if (!player.core.isLoaded) {
-            player.load('https://606fb87513f1.us-west-2.playback.live-video.net/api/video/v1/us-west-2.304074195227.channel.3iTUm3s8X0vz.m3u8')
-            console.log('reload player' + player.core.isLoaded)
-            setTimeout(() => {
-                reload()
-            }, 5000)
-        } else {
-            console.log('start player' + player.core.isLoaded)
-            player.play()
-            return
-        }
-    }
-
     useEffect(() => {
+        let player
         const script = document.createElement('script')
 
         script.src = 'https://player.live-video.net/1.0.0/amazon-ivs-player.min.js'
@@ -34,19 +20,31 @@ function StreamSetup(options) {
                 player = IVSPlayer.create()
                 player.attachHTMLVideoElement(document.getElementById('video-player'))
                 player.load('https://606fb87513f1.us-west-2.playback.live-video.net/api/video/v1/us-west-2.304074195227.channel.3iTUm3s8X0vz.m3u8')
-                //console.log(player)
+
                 if (player.core.isLoaded) {
                     player.play()
                 } else {
-                    //reload()
+                    reload()
                 }
+            }
+        }
+
+        function reload() {
+            if (!player.core.isLoaded && window.location.href.indexOf('/stream') !== -1) {
+                player.load('https://606fb87513f1.us-west-2.playback.live-video.net/api/video/v1/us-west-2.304074195227.channel.3iTUm3s8X0vz.m3u8')
+                setTimeout(() => {
+                    reload()
+                }, 5000)
+            } else {
+                player.play()
+                return
             }
         }
 
         return () => {
             document.body.removeChild(script)
         }
-    }, [player])
+    }, [])
 
     return (
         <div ref={divEl} style={{ height: 'auto', width: 'auto', paddingBottom: '0', margin: '0' }}>

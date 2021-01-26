@@ -693,6 +693,8 @@
     width: 100%;
     display: grid;
     grid-template-rows: 200px 80px auto;
+    background-position: center;
+    background-size: cover;
 }
 .Gamepage-Banner {
     display: grid;
@@ -1104,6 +1106,14 @@
 .banner-Film:hover p {
     opacity: 1;
 }
+.banner-Film a {
+    color: var(--Tertiary-Header-Color);
+    opacity: 0;
+    font-size: 18px;
+}
+.banner-Film:hover a {
+    opacity: 1;
+}
 
 /*Right Sidebar*/
 
@@ -1303,7 +1313,7 @@
 .games-Submenu li {
     text-decoration: none;
     float: left;
-    margin-left: 0px;
+    margin-left: 3px;
     padding: 0px;
     padding-left: 0px;
     height: 40px;

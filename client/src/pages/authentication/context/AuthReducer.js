@@ -3,12 +3,14 @@ import { REGISTER_SUCCESS, REGISTER_ERROR, REQUEST_LOGIN, LOGIN_SUCCESS, LOGIN_E
 let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : undefined
 let token = localStorage.getItem('token') ? localStorage.getItem('token') : undefined
 let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true' ? true : false
+let electron = window.process !== undefined && window.process.type === 'renderer' ? true : false
 
 export const initialState = {
     user: user,
     token: token,
     isLoggedIn: isLoggedIn,
     loading: false,
+    electron: electron,
 }
 
 export const AuthReducer = (initialState, action) => {

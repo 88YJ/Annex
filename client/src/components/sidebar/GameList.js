@@ -1,62 +1,88 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useProfileState, useProfileDispatch, loadLocalGames } from '../../pages/profile/context'
+import { useAuthState } from '../../pages/authentication/context'
+import PlusIcon from '../../images/PlusIcon.png'
 
-import { useProfileState } from '../../pages/profile/context'
-
-const gameLocation = 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Call of Duty Black Ops\\BlackOps.exe'
+let gameLocation = 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Dust An Elysian Tail\\DustAET.exe'
 
 export const GameList = () => {
-    const { ownedGames } = useProfileState()
+    const { ownedGames, localGames, ownedGamesLoaded } = useProfileState()
+    const profileDispatch = useProfileDispatch()
+    const { electron } = useAuthState()
 
-    const streamGame = () => {
-        if (window.process !== undefined && window.process.type === 'renderer') {
-            console.log('started game')
+    const playGame = (gameLocation) => {
+        if (electron) {
             const { ipcRenderer } = window.require('electron')
             setTimeout(() => {
                 ipcRenderer.send('game-play', gameLocation)
             }, 1000)
+            console.log('game is running')
+            //ipcRenderer.send('game-stream')
+        }
+    }
 
+    const streamGame = (gameLocation) => {
+        if (electron) {
+            const { ipcRenderer } = window.require('electron')
+            setTimeout(() => {
+                ipcRenderer.send('game-play', gameLocation)
+            }, 1000)
+            console.log('game is running')
             ipcRenderer.send('game-stream')
         }
     }
 
-    const playGame = () => {
-        console.log(window.process)
-        if (window.process !== undefined && window.process.type === 'renderer') {
-            console.log('started game')
+    const addLocalGame = async () => {
+        if (electron) {
             const { ipcRenderer } = window.require('electron')
-            setTimeout(() => {
-                ipcRenderer.send('game-play', gameLocation)
-            }, 1000)
+            let response = await ipcRenderer.invoke('game-local-add')
+
+            if (response === undefined) {
+                return
+            }
+
+            let { icon, path } = response
+
+            localGames.push({ path: path, icon: icon })
+            localStorage.setItem('localGames', JSON.stringify(localGames))
+
+            loadLocalGames(profileDispatch)
         }
     }
 
-    if (ownedGames) {
+    if (ownedGames && ownedGamesLoaded) {
         return (
             <>
                 <div className='R-Sidebar-Gamelist'>
                     <h3 className='globalHeader Tertiary-Background Primary-Header Border-Bottom-1PX'>Games:</h3>
                     <div className='gamelist-Games'>
                         <ul>
-                            {ownedGames.map((game, i) => (
+                            {ownedGames.map((game) => (
                                 <li
-                                    key={i}
+                                    key={game._id}
                                     className='banner'
                                     style={{
                                         backgroundImage: `url(${game.banner})`,
                                     }}
                                 >
                                     <div className='banner-Film'>
-                                        <p style={{ fontSize: '16px', height: 20 }}>{game.name}</p>
+                                        <Link to={`/game/${game._id}`} style={{ fontSize: '16px', height: 20, width: 'auto' }}>
+                                            {game.name}
+                                        </Link>
                                         <div className='games-Submenu'>
                                             <ul>
                                                 <li>
-                                                    <Link className='globalbutton' to='#' onClick={streamGame}>
+                                                    <Link className='globalbutton' to='#' onClick={() => streamGame(gameLocation)}>
                                                         Stream
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <button className='globalbutton' style={{ height: '37px', width: 'auto' }} onClick={playGame}>
+                                                    <button
+                                                        className='globalbutton'
+                                                        style={{ height: '37px', width: 'auto' }}
+                                                        onClick={() => playGame(gameLocation)}
+                                                    >
                                                         Play
                                                     </button>
                                                 </li>
@@ -65,6 +91,60 @@ export const GameList = () => {
                                     </div>
                                 </li>
                             ))}
+                            {electron && (
+                                <>
+                                    {localGames.map((game, i) => (
+                                        <li
+                                            key={i}
+                                            className='banner'
+                                            style={{
+                                                backgroundImage: `url('https://simtrucker.1001watt.no/wp-content/themes/blackfyre/img/defaults/default-banner.jpg')`,
+                                            }}
+                                        >
+                                            <div className='banner-Film'>
+                                                <ul style={{ height: '30px', display: 'inline-flex', margin: '0', padding: '0' }}>
+                                                    <li
+                                                        style={{
+                                                            backgroundImage: `url(${game.icon})`,
+                                                            backgroundPosition: 'center',
+                                                            backgroundSize: 'cover',
+                                                            height: '25px',
+                                                            width: '25px',
+                                                            float: 'left',
+                                                            listStyle: 'inherit',
+                                                        }}
+                                                    ></li>
+                                                    <li style={{ height: 'auto', float: 'left' }}>
+                                                        <p style={{ fontSize: '16px', height: 20, opacity: '1' }}>{game.path}</p>
+                                                    </li>
+                                                </ul>
+
+                                                <div className='games-Submenu' style={{ marginTop: '0' }}>
+                                                    <ul style={{ marginTop: '0' }}>
+                                                        <li style={{ marginTop: '0' }}>
+                                                            <Link className='globalbutton' to='#' onClick={() => streamGame(game.path)}>
+                                                                Stream
+                                                            </Link>
+                                                        </li>
+                                                        <li style={{ marginTop: '0' }}>
+                                                            <button
+                                                                className='globalbutton'
+                                                                style={{ height: '37px', width: 'auto' }}
+                                                                onClick={() => playGame(game.path)}
+                                                            >
+                                                                Play
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    ))}
+                                    <li style={{ cursor: 'pointer' }}>
+                                        <div className='NavIcons' style={{ backgroundImage: `url(${PlusIcon})` }} onClick={addLocalGame} />
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </div>
                 </div>
