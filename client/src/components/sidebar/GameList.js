@@ -16,7 +16,7 @@ export const GameList = () => {
             const { ipcRenderer } = window.require('electron')
             let response = await ipcRenderer.invoke('game-play', gameLocation)
 
-            console.log(`${response} is running`)
+            console.log(`${response.windowTitle} is running`)
 
             for(let i = 0; i < localGames.length; i++) {
                 if(localGames[i].path === gameLocation) {
@@ -25,7 +25,7 @@ export const GameList = () => {
                     let gameData = {
                         path: path,
                         icon: icon,
-                        name: response
+                        name: response.windowTitle
                     }
 
                     localGames[i] = gameData
@@ -38,18 +38,20 @@ export const GameList = () => {
 
             localStorage.setItem('localGames', JSON.stringify(localGames))
             loadLocalGames(profileDispatch)
+
+            return response
         }
     }
 
-    const streamGame = (gameLocation) => {
+    const streamGame = async (gameLocation) => {
         if (electron) {
             const { ipcRenderer } = window.require('electron')
-            setTimeout(() => {
-                ipcRenderer.send('game-play', gameLocation)
-            }, 1000)
 
-            console.log('game is running')
-            ipcRenderer.send('game-stream')
+            let game = await playGame(gameLocation)
+            let response = await ipcRenderer.invoke('game-stream', game)
+            
+            console.log(`${response} is running`)
+            console.log(`${game} is streaming`)
         }
     }
 
