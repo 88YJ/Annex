@@ -19,7 +19,7 @@ function StreamSetup(options) {
                 // eslint-disable-next-line no-undef
                 player = IVSPlayer.create()
                 player.attachHTMLVideoElement(document.getElementById('video-player'))
-                player.load('https://606fb87513f1.us-west-2.playback.live-video.net/api/video/v1/us-west-2.304074195227.channel.yrsGEQltFtmx.m3u8')
+                player.load('https://606fb87513f1.us-west-2.playback.live-video.net/api/video/v1/us-west-2.304074195227.channel.R9BgZfds9kz2.m3u8')
 
                 if (player.core.isLoaded) {
                     player.play()
@@ -31,7 +31,7 @@ function StreamSetup(options) {
 
         function reload() {
             if (!player.core.isLoaded && window.location.href.indexOf('/stream') !== -1) {
-                player.load('https://606fb87513f1.us-west-2.playback.live-video.net/api/video/v1/us-west-2.304074195227.channel.yrsGEQltFtmx.m3u8')
+                player.load('https://606fb87513f1.us-west-2.playback.live-video.net/api/video/v1/us-west-2.304074195227.channel.R9BgZfds9kz2.m3u8')
                 setTimeout(() => {
                     reload()
                 }, 5000)

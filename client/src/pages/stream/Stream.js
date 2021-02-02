@@ -27,12 +27,8 @@ export const Stream = () => {
                     width: 'auto',
                 }}
             >
-                <h1 className='globalHeaderL' style={{ color: 'red' }}>
-                    Stream Name
-                </h1>
-                <h4 className='globalHeaderL' style={{ color: 'red' }}>
-                    Stream
-                </h4>
+                <h1 className='globalHeaderL stream_name'>Rejis is live!</h1>
+                <h4 className='globalHeaderL stream_game'></h4>
             </div>
         </div>
     )

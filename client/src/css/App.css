@@ -1307,6 +1307,13 @@
 /*Right Sidebar*/
 
 /* Stream Chat */
+.stream_game {
+    color: var(--Primary-Header-Color);
+}
+.stream_name {
+    color: var(--Primary-Header-Color);
+}
+
 .messages {
     overflow: auto;
     flex: auto;
