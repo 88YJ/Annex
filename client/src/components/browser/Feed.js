@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useAuthState } from '../../pages/authentication/context'
 import DefaultProfilePicture from '../../images/DefaultProfile.png'
 import { Posts } from './Posts'
+import { FeedSidebars } from './FeedSidebars'
 import { useDashDispatch, sendPosts } from '../../pages/dashboard/context'
 
 import VideocamIcon from '@material-ui/icons/VideocamOutlined'
@@ -46,7 +47,7 @@ export const Feed = () => {
     return (
         <>
             <div className='feed-Container'>
-                <div></div>
+                <FeedSidebars />
                 <div className='feed'>
                     {user !== undefined ? (
                         <div className='post-To-Feed'>
@@ -101,7 +102,47 @@ export const Feed = () => {
                     ) : null}
                     <Posts />
                 </div>
-                <div></div>
+                <div>
+                    <div style={{ marginLeft: '30%', width: '70%', height: 'auto' }}>
+                        <p style={{ padding: '15px', backgroundColor: 'rgba(0, 0, 0, 0.5)', marginBottom: '15px' }}>Plays Of the Week</p>
+                        <iframe
+                            title='1'
+                            width='560'
+                            height='315'
+                            src='https://www.youtube.com/embed/ohK-sKlDN1s'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen
+                        ></iframe>
+                        <iframe
+                            title='2'
+                            width='560'
+                            height='315'
+                            src='https://www.youtube.com/embed/Wd8stn7UWeA'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen
+                        ></iframe>
+                        <iframe
+                            title='3'
+                            width='560'
+                            height='315'
+                            src='https://www.youtube.com/embed/nbLp1TmGb7w'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen
+                        ></iframe>
+                        <iframe
+                            title='4'
+                            width='560'
+                            height='315'
+                            src='https://www.youtube.com/embed/fOptpokjOZI'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+                </div>
             </div>
         </>
     )

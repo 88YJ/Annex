@@ -1102,16 +1102,18 @@
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    width: auto;
-    background-color: var(--Secondary-Background-Color);
+    width: 50%;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .dashboard-Nav-Buttons-Options-Active {
     display: flex;
     cursor: pointer;
     align-items: center;
     justify-content: center;
-    width: auto;
-    background-color: var(--Tertiary-Background-Color);
+    width: 50%;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 1);
     color: var(--Primary-Header-Color);
 }
 .feed-Container {
@@ -1244,6 +1246,33 @@
 .post_option:hover {
     background-color: black;
     border-radius: 10px;
+}
+
+.feed_leftSidebar {
+    width: 60%;
+    height: auto;
+    margin-left: 5px;
+}
+.feed_leftSidebar > div > a {
+    list-style: none;
+    text-decoration: none;
+}
+.feed_banner {
+    border-bottom: white 1px solid;
+}
+.feed_leftSidebar_Options {
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    height: 31px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom: white 1px solid;
+}
+.feed_leftSidebar_Options:hover {
+    background-color: rgba(0, 0, 0, 1);
+    border-bottom: var(--Active-Outline-Color) 1px solid;
+    color: var(--Active-Outline-Color);
 }
 
 /*Sidebars*/
