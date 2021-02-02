@@ -570,7 +570,7 @@
 .profile-Body {
     border-top: var(--outLine) 1px solid;
     display: grid;
-    grid-template-columns: auto minmax(auto, 1450px);
+    grid-template-columns: 150px minmax(auto, 2050px);
     height: 100%;
     margin-top: 4px;
 }
