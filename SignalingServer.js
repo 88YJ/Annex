@@ -6,6 +6,7 @@ const socketIO = require('socket.io')
 const http = require('http')
 
 const User = require('./models/User')
+const Posts = require('./models/Posts')
 const Channel = require('./models/Channel')
 const DirectMessages = require('./models/DirectMessage')
 const MessageContainer = require('./models/MessageContainer')
@@ -52,6 +53,12 @@ db.once('open', () => {
     const changeDirect = directCollection.watch()
     changeDirect.on('change', (change) => {
         updateDirect(change.documentKey)
+    })
+
+    const feedCollection = db.collection('posts')
+    const changeFeed = feedCollection.watch()
+    changeFeed.on('change', (change) => {
+        updateFeed(change.documentKey)
     })
 })
 
@@ -300,6 +307,10 @@ async function updateReadMessage(data, user) {
 async function updateDirect(id) {
     const container = await DirectMessages.findById(id._id)
     io.to(container.owner).emit('update:inbox-change-in-database')
+}
+
+async function updateFeed(id) {
+    io.emit('update:feed')
 }
 
 server.listen(process.env.PORT || 5002, () => console.log(`Server has started.. PORT 5002`))

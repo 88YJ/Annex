@@ -4,6 +4,7 @@ import { useProfileDispatch, useProfileState, getFriends } from '../../pages/pro
 import { useServerState, useServerDispatch, loadServerChannelList, loadServerUserList, loadCurrentServer } from '../../pages/server/context'
 import { useMessageDispatch, loadInbox } from '../messages/context'
 import { useSocketState, useSocketDispatch } from '../socketManager'
+import { useDashDispatch, getPosts } from '../../pages/dashboard/context'
 import { connectSocket } from '../socketManager/socketActions'
 
 export const SocketMaster = () => {
@@ -15,12 +16,22 @@ export const SocketMaster = () => {
     const socketDispatch = useSocketDispatch()
     const { socket } = useSocketState()
     const messageDispatch = useMessageDispatch()
+    const dashDispatch = useDashDispatch()
 
     useEffect(() => {
         if (!socket && user) {
             connectSocket(socketDispatch)
         }
     }, [socket, socketDispatch, user])
+
+    useEffect(() => {
+        if (socket && user) {
+            socket.on('update:feed', async () => {
+                getPosts(dashDispatch)
+                console.log('feed update')
+            })
+        }
+    }, [dashDispatch, socket, user])
 
     useEffect(() => {
         if (socket && user) {

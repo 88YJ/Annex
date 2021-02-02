@@ -1,0 +1,3 @@
+export const GET_POSTS = 'GET_POSTS'
+export const SET_FEED_DISPLAY = 'SET_FEED_DISPLAY'
+export const SET_GAMES_DISPLAY = 'SET_GAMES_DISPLAY'

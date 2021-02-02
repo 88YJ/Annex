@@ -24,6 +24,7 @@ app.use('/api/servers', require('./routes/Servers'))
 app.use('/api/:server_id/channels', require('./routes/Channels'))
 app.use('/api/games', require('./routes/Games'))
 app.use('/api/auth', require('./routes/Auth'))
+app.use('/api/feed', require('./routes/Feed'))
 
 const PORT = process.env.PORT || 5000
 
