@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 //Component imports
 import { ServerList } from './ServerList'
@@ -75,19 +75,7 @@ export const Header = () => {
             </Fragment>
         )
     } else {
-        navigationLinks = (
-            <Fragment>
-                <li>
-                    <Link to='/'>Dashoard</Link>
-                </li>
-                <li>
-                    <Link to='/register'>Register</Link>
-                </li>
-                <li>
-                    <Link to='/login'>Login</Link>
-                </li>
-            </Fragment>
-        )
+        navigationLinks = <Redirect to='/login' />
     }
     return (
         <div className='Nav'>

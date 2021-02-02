@@ -103,7 +103,7 @@ export const Feed = () => {
                     <Posts />
                 </div>
                 <div>
-                    <div style={{ marginLeft: '30%', width: '70%', height: 'auto' }}>
+                    <div style={{ marginLeft: '29%', width: '70%', height: 'auto' }}>
                         <p style={{ padding: '15px', backgroundColor: 'rgba(0, 0, 0, 0.5)', marginBottom: '15px' }}>Plays Of the Week</p>
                         <iframe
                             title='1'
