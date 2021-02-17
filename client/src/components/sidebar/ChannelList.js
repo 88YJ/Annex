@@ -8,6 +8,9 @@ import { VoiceChat } from './VoiceChat'
 import MenuArrow from '../../images/MenuArrow.png'
 import DefaultProfilePicture from '../../images/DefaultProfile.png'
 import { useTransition, animated } from 'react-spring'
+import VoiceIcon from '@material-ui/icons/VolumeUpOutlined'
+
+import './ChannelList.css'
 
 export const ChannelList = () => {
     const { currentServerID, channelList, currentTextChannel, currentServer } = useServerState()
@@ -47,9 +50,9 @@ export const ChannelList = () => {
     if (currentServer) {
         return (
             <div className='L-Sidebar-Serverchannels'>
-                <h3 className='globalHeader Tertiary-Background Primary-Header Border-Bottom-1PX'>
-                    {currentServer.name}
-                    <div
+                <h3 className='globalHeader Primary-Header Border-Bottom-1PX Server_Headers'>
+                    Channels:
+                    {/* <div
                         className='profile-Options'
                         style={{
                             backgroundImage: `url(${MenuArrow})`,
@@ -61,8 +64,7 @@ export const ChannelList = () => {
                             transform: `${menu ? 'scale(1, 1)' : 'scale(1, -1)'}`,
                         }}
                         onClick={() => (menu ? setMenu(false) : setMenu(true))}
-                    />
-
+                    /> */}
                     {menu ? (
                         <ul className='server-Options-Submenu'>
                             {currentServer.owner === user._id ? (
@@ -135,7 +137,7 @@ export const ChannelList = () => {
                             {item.voiceChannel ? (
                                 <li key={item.name}>
                                     <Link onClick={() => handleVoiceChannelJoin(item)} to='#' className='Secondary-Header'>
-                                        {'< '}
+                                        <VoiceIcon />
                                         {item.name}
                                     </Link>
                                     <ul className='channelUserlist'>

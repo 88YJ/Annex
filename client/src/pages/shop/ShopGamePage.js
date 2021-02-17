@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { useShopState, useShopDispatch } from './context'
 import { addToCart, loadStoreGames, setCurrentGame, setAddedToCart } from './context/ShopActions'
 
+import './StoreGamePage.css'
+
 export const ShopGamePage = () => {
     const { game_id } = useParams()
     const { gamePage, storeGames, loading, cart, addedToCart } = useShopState()

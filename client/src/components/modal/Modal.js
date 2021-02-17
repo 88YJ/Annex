@@ -1,4 +1,5 @@
 import React from 'react'
+import './Modal.css'
 import { useModalDispatch, useModalState, hideModal } from './context'
 import { ScreenshotForm } from './ScreenshotForm'
 import { CreateServerForm } from './CreateServerForm'

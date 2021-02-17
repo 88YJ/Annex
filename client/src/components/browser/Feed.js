@@ -46,8 +46,9 @@ export const Feed = () => {
 
     return (
         <>
-            <div className='feed-Container'>
-                <FeedSidebars />
+            <div className='feed_Container'>
+                {/* <FeedSidebars /> */}
+                <div style={{ width: '100%' }}></div>
                 <div className='feed'>
                     {user !== undefined ? (
                         <div className='post-To-Feed'>
@@ -102,10 +103,10 @@ export const Feed = () => {
                     ) : null}
                     <Posts />
                 </div>
-                <div>
+                <div style={{ width: '100%' }}>
                     <div style={{ marginLeft: '29%', width: '70%', height: 'auto' }}>
-                        <p style={{ padding: '15px', backgroundColor: 'rgba(0, 0, 0, 0.5)', marginBottom: '15px' }}>Plays Of the Week</p>
-                        <iframe
+                        {/* <p style={{ padding: '15px', backgroundColor: 'rgba(0, 0, 0, 0.5)', marginBottom: '15px' }}>Plays Of the Week</p> */}
+                        {/* <iframe
                             title='1'
                             width='560'
                             height='315'
@@ -140,7 +141,7 @@ export const Feed = () => {
                             frameBorder='0'
                             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                             allowFullScreen
-                        ></iframe>
+                        ></iframe> */}
                     </div>
                 </div>
             </div>

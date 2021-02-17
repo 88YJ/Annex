@@ -1,0 +1,60 @@
+/* Store GamePages */
+.store-Gamepage {
+    color: var(--Secondary-Header-Color);
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.store-Gamepage-Film {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(0, 4, 17, 0.9);
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 6% 94%;
+}
+.store-Gamepage-Header {
+    height: auto;
+    background-color: var(--Tertiary-Background-Color);
+}
+.store-Gamepage-Grid {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 50% 50%;
+}
+.store-Gamepage-Components {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.store-Gamepage-Img {
+    width: 99%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.store-Gamepage-Subcomponents {
+    display: grid;
+    grid-template-rows: 85% 15%;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.store-Gamepage-Reviews {
+    height: 100%;
+}
+.store-Gamepage-Reviews ul {
+    height: 92%;
+    width: auto;
+    overflow-y: scroll;
+}
+
+.store-Gamepage-Reviews li {
+    height: auto;
+    width: auto;
+}

@@ -1,24 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import DefaultProfilePicture from '../../images/DefaultProfile.png'
-import { useProfileState } from '../../pages/profile/context'
+import DefaultProfilePicture from '../../../images/DefaultProfile.png'
+import { useProfileState } from '../../../pages/profile/context'
 import { useTransition, animated } from 'react-spring'
 
-import './FriendList.css'
+import './NavFriendList.css'
 
-export const FriendList = () => {
+export const NavFriendList = () => {
     const { Friends } = useProfileState()
 
     const transition = useTransition(Friends, (Friends) => Friends._id, {
-        from: { opacity: 0, marginLeft: -75, height: 0 },
-        enter: { opacity: 1, marginLeft: 0, height: 'auto' },
+        from: { opacity: 0, marginLeft: -75 },
+        enter: { opacity: 1, marginLeft: 0 },
         leave: { opacity: 0, height: 0 },
     })
 
     return (
         <>
             <div className='L-Sidebar-Friendlist'>
-                <h3 className='globalHeader Tertiary-Background Primary-Header Border-Bottom-1PX'>Friends:</h3>
                 <div className='Friendlist-Friends'>
                     <ul>
                         {transition.map(({ item, key, props }) => (

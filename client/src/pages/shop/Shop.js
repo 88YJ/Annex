@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { useShopState, useShopDispatch, filterShop } from './context'
 import { loadStoreGames } from './context/ShopActions'
 
+import './Store.css'
+
 export const Shop = () => {
     const { storeGames, filtered, loading } = useShopState()
 

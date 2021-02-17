@@ -1,0 +1,126 @@
+/*Server Pages */
+.server-Landingpageimg {
+    display: grid;
+    grid-row: 10% 30% 50% 10%;
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+.channelPage {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.channelGrid {
+    height: 96%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto 40px;
+}
+.chat {
+    background: rgb(0, 4, 17, 0.8);
+    display: flex;
+    flex-direction: column;
+    flex: 0.75;
+    height: 100%;
+}
+.chatHeader {
+    /* background: rgb(0, 0, 0, 0.75); */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--Tertiary-Header-Color);
+    border-bottom: var(--Active-Outline-Color) 1px solid;
+    padding: 10px;
+    height: 30px;
+}
+.chatHeader_hash {
+    color: var(--Tertiary-Header-Color);
+    padding: 10px;
+    font-size: 30px;
+}
+.chat_messages {
+    flex: 1;
+}
+.chat_input {
+    color: var(--Secondary-Header-Color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 5px;
+    border-top: var(--outLine) 1px solid;
+    background-color: rgb(0, 0, 0, 0.9);
+    height: auto;
+    width: auto;
+}
+.chat_input > form > input {
+    padding: 0px;
+    background: transparent;
+    border: none;
+    outline-width: 0;
+    color: var(--Tertiary-Header-Color);
+    font-size: large;
+}
+.chat_input > form {
+    align-items: center;
+    flex: 1;
+}
+.chat_inputButton {
+    display: none;
+}
+.message {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    color: var(--Tertiary-Header-Color);
+    height: auto;
+    width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+}
+.message:hover {
+    background-color: rgb(0, 0, 0, 0.5);
+}
+.message_info {
+    margin-left: 10px;
+    height: auto;
+    border-top: var(--outLine) 1px solid;
+}
+.message_info p img {
+    height: 20px;
+    width: 20px;
+}
+.message_timestamp {
+    color: var(--Secondary-Header-Color);
+    margin-left: 10px;
+    font-size: x-small;
+}
+.scrolltobottom {
+    height: 100%;
+}
+
+.Server_Container {
+    height: 96%;
+    width: 98%;
+    display: flex;
+    color: white;
+    border-radius: 16px;
+    margin: 16px;
+    box-shadow: 0px 5px 15px -3px var(--Active-Outline-Color);
+    background-position: center;
+    background-size: cover;
+}
+.Server_Channel {
+    height: 100%;
+    width: 300%;
+    overflow-y: scroll;
+}
+.Server_Headers {
+    height: 30px;
+    padding: 10px;
+}

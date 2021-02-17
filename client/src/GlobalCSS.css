@@ -1,0 +1,186 @@
+/*Global App Css */
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+:root {
+    --Primary-Header-Color: #66fcf1;
+    --Secondary-Header-Color: #c5c6c7;
+    --Tertiary-Header-Color: #ffffff;
+    --outLine: #384d48;
+    --Seconary-Outline-Color: #45a29e;
+    --Active-Outline-Color: #66fcf1;
+    --Tint: #000000;
+    --Primary-Background-Color: #000411;
+    --Secondary-Background-Color: #384d48;
+    --Tertiary-Background-Color: #000000;
+    --Bright-Background-Color: #ffffff;
+}
+
+* {
+    margin: 0;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    font-family: 'Goldman', cursive;
+}
+.app {
+    height: 100vh;
+    width: 100vw;
+}
+.app-background {
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    background-size: cover;
+}
+.app-mainGrid {
+    display: grid;
+    grid-template-columns: 65px 250px 0px auto 250px;
+    grid-template-columns: 13vw 0px 0px auto 13vw;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    overflow-x: hidden;
+    background-color: rgb(0, 4, 17, 0.3);
+}
+.app-mainGridStream {
+    display: grid;
+    grid-template-columns: 65px -0px 0px auto 325px;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+.app-mainGrid-Login-Register {
+    display: grid;
+    grid-template-columns: 0px -0px 0px 100% 0px;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+.app-browser {
+    height: 100%;
+    width: auto;
+    border-left: var(--outLine) 2px solid;
+    border-left: none;
+    border-right: var(--outLine) 2px solid;
+    border-right: none;
+    overflow-x: hidden;
+}
+
+.Primary-Header {
+    color: var(--Primary-Header-Color);
+}
+.Secondary-Header {
+    color: var(--Secondary-Header-Color);
+}
+.Tertiary-Header {
+    color: var(--Tertiary-Header-Color);
+}
+.Bright-Background {
+    background-color: var(--Bright-Background-Color);
+}
+.Primary-Background {
+    background-color: var(--Primary-Background-Color);
+}
+.Secondary-Background {
+    background-color: var(--Secondary-Background-Color);
+}
+.Tertiary-Background {
+    background-color: var(--Tertiary-Background-Color);
+}
+.Border-Top-1PX {
+    border-top: var(--outLine) 1px solid;
+}
+.Border-Bottom-1PX {
+    border-bottom: var(--Active-Outline-Color) 1px solid;
+}
+.Border-Right-2PX {
+    border-right: var(--outLine) 2px solid;
+}
+
+/*Global Css */
+.sticky {
+    text-align: center;
+    position: sticky;
+    left: 0;
+}
+.globalbutton {
+    outline: none;
+    position: relative;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    background: var(--Primary-Background-Color);
+    color: var(--Tertiary-Header-Color);
+    padding: 10px;
+    display: inline-block;
+    border: grey 1px solid;
+    min-width: 100px;
+    margin: 3px;
+}
+.globalbutton:hover {
+    border: var(--Active-Outline-Color) 1px solid;
+    background: var(--Tertiary-Background-Color);
+    color: var(--Active-Outline-Color);
+    cursor: pointer;
+}
+.globalHeader {
+    text-align: center;
+    height: auto;
+}
+.globalHeaderL {
+    text-align: left;
+    height: auto;
+}
+.globalHeaderR {
+    text-align: right;
+    height: auto;
+}
+.profilepicture {
+    background-color: var(--Bright-Background-Color);
+    height: 43px;
+    width: 43px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+}
+.profilepicture:hover {
+    border-radius: 16px;
+}
+
+.banner {
+    background-position: center;
+    background-size: cover;
+}
+.banner-Film {
+    height: 100%;
+    width: 100%;
+}
+.banner-Film:hover {
+    background-color: rgb(0, 4, 17, 0.8);
+}
+.banner-Film p {
+    color: var(--Tertiary-Header-Color);
+    opacity: 0;
+    font-size: 18px;
+}
+.banner-Film:hover p {
+    opacity: 1;
+}
+.banner-Film a {
+    color: var(--Tertiary-Header-Color);
+    opacity: 0;
+    font-size: 18px;
+}
+.banner-Film:hover a {
+    opacity: 1;
+}
+
+.animatedDivs {
+    height: auto;
+    width: 100%;
+}

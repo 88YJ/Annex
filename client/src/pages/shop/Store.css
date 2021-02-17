@@ -1,0 +1,71 @@
+/*Store */
+.store-Nav {
+    overflow-x: hidden;
+    background-color: #000411;
+    margin-top: 0;
+    height: auto;
+    z-index: 1;
+    width: 100%;
+}
+.store-Nav ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin: 0px;
+    overflow-x: hidden;
+}
+.store-Nav li {
+    width: auto;
+    height: auto;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+.store-Nav li:first-child {
+    margin-left: 2px;
+    margin-top: 0px;
+}
+.store-Searchbar {
+    width: auto;
+    height: auto;
+    margin: 0;
+    margin-bottom: 8px;
+    padding: 0;
+    padding-bottom: 0;
+}
+.store-Listpage {
+    overflow-y: scroll;
+    height: 96%;
+}
+.store-Listpage ul {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flexbox;
+    overflow-y: scroll;
+}
+.store-Listpage li {
+    width: auto;
+    height: auto;
+    float: left;
+    margin-left: 10px;
+    padding-bottom: 12px;
+}
+.store-Listpage a {
+    text-decoration: none;
+    height: auto;
+    width: auto;
+}
+.store-GamesImg {
+    height: 240px;
+    width: 140px;
+    background-size: cover;
+    background-position: center;
+    padding: 5px;
+    margin: 10px;
+    border: var(--outLine) 2px solid;
+}
+.store-GamesImg:hover {
+    border: var(--Active-Outline-Color) 2px solid;
+}

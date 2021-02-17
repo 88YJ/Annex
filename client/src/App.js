@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import axios from 'axios'
-import './css/App.css'
+import './GlobalCSS.css'
 
 //Import providers
 import { AuthProvider } from './pages/authentication/context'
@@ -31,6 +31,8 @@ import { Search } from './pages/search/Search'
 
 //Import Components
 import { Header } from './components/header/Header'
+import { Nav } from './components/header/Nav'
+import { PinnedGames } from './components/games/PinnedGames'
 import { SideBar } from './components/sidebar/SideBar'
 import { Modal } from './components/modal/Modal'
 import { SocketMaster } from './components/socketManager/SocketMaster'
@@ -70,7 +72,8 @@ function App() {
                                                             <Modal />
                                                             <div className='app-background' style={{ backgroundImage: `url(${backgroundImage})` }}>
                                                                 <div className='app-mainGrid'>
-                                                                    <Header />
+                                                                    {/* <Header /> */}
+                                                                    <Nav />
                                                                     <SideBar type={SHOW_LEFT_SIDEBAR} />
                                                                     <SocketMaster />
                                                                     <div></div>
@@ -90,7 +93,7 @@ function App() {
                                                                             <Route path='/stream' component={Stream} />
                                                                         </Switch>
                                                                     </div>
-                                                                    <SideBar type={SHOW_RIGHT_SIDEBAR} />
+                                                                    <PinnedGames />
                                                                 </div>
                                                             </div>
                                                         </Fragment>

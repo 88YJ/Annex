@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { useServerState, useServerDispatch, loadServerUserList } from '../../pages/server/context'
 import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
+import './ServerUserList.css'
+
 export const ServerUserList = () => {
     const { currentServerID, currentServer, userList } = useServerState()
     const serverDispatch = useServerDispatch()
@@ -17,7 +19,7 @@ export const ServerUserList = () => {
         return (
             <>
                 <div className='R-Sidebar-ServerUserlist'>
-                    <h3 className='globalHeader Tertiary-Background Primary-Header Border-Bottom-1PX'>Users:</h3>
+                    <h3 className='globalHeader Primary-Header Border-Bottom-1PX Server_Headers'>Users:</h3>
                     <div className='R-Sidebar-ServerUsers'>
                         <ul>
                             {userList.map((user, i) =>

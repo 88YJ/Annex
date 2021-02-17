@@ -70,7 +70,7 @@ export const Channel = () => {
     if (currentServer) {
         if (!currentTextChannel) {
             return (
-                <div className='server-Landingpageimg' style={{ backgroundImage: `url(${currentServer.img})` }}>
+                <div className='server-Landingpageimg'>
                     <div>
                         <h1 className='globalHeader Primary-Header' style={{ backgroundColor: 'rgb(0, 4, 17, 0.7)' }}>
                             {currentServer.name}

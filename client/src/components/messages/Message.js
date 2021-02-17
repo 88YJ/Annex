@@ -55,7 +55,7 @@ export const Message = (props) => {
             if (ChannelMessages) {
                 return (
                     <>
-                        <ScrollToBottom>
+                        <ScrollToBottom className='scrolltobottom'>
                             {ChannelMessages.map((message, i) => (
                                 <div className='message' key={i}>
                                     <Link to={`/profile/${message.userId}`} style={{ height: '47px', width: '55px' }}>

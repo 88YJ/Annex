@@ -1,0 +1,89 @@
+/*Games List*/
+.R-Sidebar-Gamelist {
+    background-color: rgb(0, 0, 0, 0.8);
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    height: 100%;
+    width: auto;
+}
+.gamelist-Games {
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: left;
+    height: 100%;
+    overflow-x: hidden;
+}
+.gamelist-Games ul {
+    height: 96%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 2px;
+    margin-top: 3px;
+    overflow-y: scroll;
+}
+.gamelist-Games li {
+    margin-top: 2px;
+    float: center;
+    height: 80px;
+}
+.gamelist-Games li a {
+    display: block;
+    color: var(--Tertiary-Header-Color);
+    text-decoration: none;
+    font-size: 12px;
+    height: 15px;
+    width: 20px;
+}
+.banner-Film:hover .games-Submenu {
+    display: block;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 0px;
+    padding-bottom: 0;
+}
+.games-Submenu {
+    display: none;
+    width: auto;
+    height: auto;
+    min-width: 70px;
+}
+.games-Submenu ul {
+    height: auto;
+    width: auto;
+}
+.games-Submenu li {
+    text-decoration: none;
+    float: left;
+    margin-left: 3px;
+    padding: 0px;
+    padding-left: 0px;
+    height: 40px;
+    width: auto;
+}
+.games-Submenu a {
+    height: auto;
+    width: auto;
+}
+
+.Pinned_GameList {
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.Pinned_Games_Title {
+    display: flex;
+    color: white;
+    cursor: pointer;
+    height: 31px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom: white 1px solid;
+}
+/* .Pinned_Games_Title:hover {
+    background-color: rgba(0, 0, 0, 1);
+    border-bottom: var(--Active-Outline-Color) 1px solid;
+    color: var(--Active-Outline-Color);
+    box-shadow: 0px 5px 15px -3px var(--Active-Outline-Color);
+} */

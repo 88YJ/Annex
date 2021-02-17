@@ -17,6 +17,8 @@ import { useSideBarDispatch, showGames } from '../../components/sidebar/context'
 import { useModalDispatch, showModalWithAddServer } from '../modal/context'
 import { useAuthState } from '../../pages/authentication/context'
 
+import './Nav.css'
+
 //Import Types
 //import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU, SHOW_STREAM_SUBMENU } from './types/types'
 import { SHOW_SHOP_SUBMENU, SHOW__HOME_SUBMENU } from './types/types'

@@ -1,0 +1,19 @@
+/*Cart Page */
+.store-Cartpage {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    background: rgb(0, 4, 17, 0.8);
+}
+.store-Cartpage ul {
+    height: 50%;
+    width: 90%;
+}
+.store-Cartpage li {
+    height: 100%;
+}
+.store-Cartpage-Img {
+    height: 75%;
+    background-position: center;
+    background-size: cover;
+}

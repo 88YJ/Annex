@@ -1,0 +1,67 @@
+/*Games List*/
+.Pinned_GameList {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    height: 100%;
+    width: auto;
+}
+.Pinned_GameList_Games {
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: left;
+    height: 100%;
+    overflow-x: hidden;
+}
+.Pinned_GameList_Games ul {
+    height: 96%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 0px;
+    margin-top: 0px;
+    overflow-y: scroll;
+}
+.Pinned_GameList_Games li {
+    margin-top: 2px;
+    float: center;
+    height: 80px;
+}
+.Pinned_GameList_Games li a {
+    display: block;
+    color: var(--Tertiary-Header-Color);
+    text-decoration: none;
+    font-size: 12px;
+    height: 15px;
+    width: 20px;
+}
+.banner-Film:hover .games-Submenu {
+    display: block;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 0px;
+    padding-bottom: 0;
+}
+.games-Submenu {
+    display: none;
+    width: auto;
+    height: auto;
+    min-width: 70px;
+}
+.games-Submenu ul {
+    height: auto;
+    width: auto;
+}
+.games-Submenu li {
+    text-decoration: none;
+    float: left;
+    margin-left: 3px;
+    padding: 0px;
+    padding-left: 0px;
+    height: 40px;
+    width: auto;
+}
+.games-Submenu a {
+    height: auto;
+    width: auto;
+}

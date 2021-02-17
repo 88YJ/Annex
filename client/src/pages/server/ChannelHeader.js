@@ -22,13 +22,11 @@ export const ChannelHeader = () => {
                                 alt=''
                                 onClick={() => showModalWithChannelEdit(modalDispatch)}
                             />
-                            <span className='chatHeader_hash Secondary-Header'>#</span>
-                            {currentTextChannel.name}
+                            {currentServer.name}
                         </h3>
                     ) : (
                         <h3 className='Primary-Header' style={{ height: 'auto' }}>
-                            <span className='chatHeader_hash Secondary-Header'>#</span>
-                            {currentTextChannel.name}
+                            {currentServer.name}
                         </h3>
                     )}
                 </div>

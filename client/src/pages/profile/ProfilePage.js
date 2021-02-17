@@ -3,6 +3,8 @@ import { useParams } from 'react-router'
 import { Profile } from '../../components/browser/Profile'
 import { useProfileState, useProfileDispatch, loadCurrentProfile } from '../../pages/profile/context'
 
+import './Profile.css'
+
 export const ProfilePage = () => {
     const { ProfilesLoaded, Profiles, CurrentProfile } = useProfileState()
     const profileDispatch = useProfileDispatch()

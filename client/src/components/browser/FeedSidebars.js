@@ -13,7 +13,7 @@ export const FeedSidebars = () => {
     const { user } = useAuthState()
     return (
         <>
-            <div>
+            <div className='feed_sidebar_container'>
                 {user !== undefined ? (
                     <div className='feed_leftSidebar'>
                         <div className='banner feed_banner' style={{ backgroundImage: `url(${user.profileBanner})` }}>

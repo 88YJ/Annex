@@ -7,6 +7,8 @@ import { CAROUSEL_DASHBOARD } from '../../components/browser/types/types'
 import { useSideBarDispatch, showFriends, showGames } from '../../components/sidebar/context'
 import { useDashState } from '../../pages/dashboard/context'
 
+import './Dashboard.css'
+
 export const Dashboard = () => {
     const { showFeed } = useDashState()
     const sidebarDispatch = useSideBarDispatch()
@@ -22,10 +24,10 @@ export const Dashboard = () => {
                 <Feed />
             ) : (
                 <>
-                    <h1 className='globalHeader Primary-Header'>Dashboard!</h1>
+                    {/* <h1 className='globalHeader Primary-Header'>Dashboard!</h1>
                     <div className='dashboard-Grid'>
                         <Carousel type={CAROUSEL_DASHBOARD} />
-                    </div>
+                    </div> */}
                     <OwnedGames />
                 </>
             )}

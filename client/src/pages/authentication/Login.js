@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Redirect, Route, Link } from 'react-router-dom'
 import { loginUser, useAuthState, useAuthDispatch } from './context'
 
+import './Auth.css'
+
 export const Login = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

@@ -1,0 +1,24 @@
+/*register & login Css */
+
+.register-login {
+    height: 100%;
+    background: rgb(0, 4, 17, 0.8);
+}
+.register-login-Form {
+    height: auto;
+}
+.register-login-Grid {
+    display: grid;
+    grid-template-columns: auto 300px auto;
+    color: grey;
+
+    height: 100%;
+}
+.register-login-Values {
+    min-width: 290px;
+    background: black;
+    color: white;
+    outline: none;
+    border: white 1px solid;
+    height: auto;
+}

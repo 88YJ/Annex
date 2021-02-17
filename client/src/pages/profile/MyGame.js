@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { useProfileState, useProfileDispatch, loadOwnedCurrentGame, findOwnedGames } from './context'
 import { FriendList } from '../../components/sidebar/FriendList'
 
+import './GamePage.css'
+
 export const MyGame = () => {
     const { CurrentOwnedGame, ownedGamesLoaded, ownedGames } = useProfileState()
     const profileDispatch = useProfileDispatch()

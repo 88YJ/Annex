@@ -4,11 +4,13 @@ import { useProfileState, useProfileDispatch, loadLocalGames } from '../../pages
 import { useAuthState } from '../../pages/authentication/context'
 import PlusIcon from '../../images/PlusIcon.png'
 
-import './GameList.css'
+import Pinned from '@material-ui/icons/PlaylistAddCheckOutlined'
+
+import './PinnedGames.css'
 
 let gameLocation = 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Dust An Elysian Tail\\DustAET.exe'
 
-export const GameList = () => {
+export const PinnedGames = () => {
     const { ownedGames, localGames, ownedGamesLoaded } = useProfileState()
     const profileDispatch = useProfileDispatch()
     const { electron } = useAuthState()
@@ -77,9 +79,12 @@ export const GameList = () => {
     if (ownedGames && ownedGamesLoaded) {
         return (
             <>
-                <div className='R-Sidebar-Gamelist'>
-                    <h3 className='globalHeader Tertiary-Background Primary-Header Border-Bottom-1PX'>Games:</h3>
-                    <div className='gamelist-Games'>
+                <div className='Pinned_GameList'>
+                    <div className='Pinned_Games_Title'>
+                        <Pinned />
+                        <p>Pinned</p>
+                    </div>
+                    <div className='Pinned_GameList_Games'>
                         <ul>
                             {ownedGames.map((game) => (
                                 <li

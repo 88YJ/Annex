@@ -1,0 +1,87 @@
+/*Friends List */
+.L-Sidebar-Friendlist {
+    background-color: rgb(0, 0, 0, 0.8);
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    height: 100%;
+}
+.Friendlist-Friends {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: left;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+.Friendlist-Friends ul {
+    height: 96%;
+    width: auto;
+    overflow-y: scroll;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 2px;
+    margin-top: 5px;
+}
+.Friendlist-Friends li {
+    height: 65px;
+    margin-top: 2px;
+}
+.offlineFriends {
+    opacity: 0.5;
+}
+.offlineFriends:hover {
+    opacity: 1;
+}
+.Friendlist-Friends ul li:hover {
+    opacity: 1;
+}
+.Friendlist-Friends li a {
+    height: 30px;
+    display: block;
+    color: var(--Tertiary-Header-Color);
+    text-decoration: none;
+    font-size: 20px;
+}
+.L-Sidebar-Friendlist ul li:hover .Friendlist-Submenu {
+    display: block;
+    margin-top: -80px;
+    padding-bottom: 0;
+    overflow-x: hidden;
+}
+.Friendlist-Submenu {
+    height: 51px;
+    width: auto;
+    position: relative;
+    display: none;
+    margin-top: -80px;
+    min-width: 70px;
+    background: rgb(0, 0, 0, 0.7);
+}
+.Friendlist-Submenu ul {
+    width: 100%;
+    margin: 0;
+    overflow-y: hidden;
+    z-index: 1;
+}
+.Friendlist-Submenu li {
+    height: 100%;
+    width: 49%;
+    float: left;
+    margin-left: 0px;
+    padding: 0px;
+    padding-left: 0px;
+    border: rgb(0, 0, 0, 0) 1px solid;
+}
+.Friendlist-Submenu li:hover {
+    border: var(--Active-Outline-Color) 1px solid;
+    background-color: black;
+}
+.Friendlist-Submenu a {
+    padding-top: 13px;
+    text-align: center;
+}
+.Friendlist-Submenu a:hover {
+    color: var(--Primary-Header-Color);
+}

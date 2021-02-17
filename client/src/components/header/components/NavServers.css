@@ -1,0 +1,14 @@
+.Servers_List_Joined {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 2px;
+    overflow-y: scroll;
+}
+.Servers_List_Joined > div > a {
+    list-style: none;
+    text-decoration: none;
+}
+.Servers_List_Joined > a > li {
+    margin: 2px;
+}
