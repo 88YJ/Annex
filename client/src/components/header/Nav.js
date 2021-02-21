@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, useHistory, Redirect } from 'react-router-dom'
 
 import { useAuthState } from '../../pages/authentication/context'
 import { useModalDispatch, showModalWithAddServer, showModalWithColorScheme } from '../modal/context'
@@ -8,6 +8,8 @@ import DefaultProfilePicture from '../../images/DefaultProfile.png'
 
 import { NavFriendList } from './components/NavFriendList'
 import { NavServers } from './components/NavServers'
+import { NavChannelList } from './components/NavChannelList'
+import { NavServerOptions } from './components/NavServerOptions'
 
 import ServerFeed from '@material-ui/icons/DnsOutlined'
 import Streaming from '@material-ui/icons/SubscriptionsOutlined'
@@ -23,9 +25,21 @@ import Search from '@material-ui/icons/SearchOutlined'
 export const Nav = () => {
     const { user } = useAuthState()
     const modalDispatch = useModalDispatch()
+    const history = useHistory()
 
     const [showFriends, setShowFriends] = useState(false)
     const [showServers, setShowServers] = useState(false)
+    const [showChannels, setShowChannels] = useState(true)
+
+    useEffect(() => {
+        return history.listen((location) => {
+            if (location.pathname.indexOf('/server') === -1) {
+                setShowChannels(true)
+            } else {
+                setShowChannels(false)
+            }
+        })
+    }, [history])
 
     function clickServers() {
         setShowFriends(false)
@@ -126,8 +140,12 @@ export const Nav = () => {
                             <Settings />
                             <p>Settings</p>
                         </div>
+                        {showChannels && <NavChannelList />}
+                        {!showChannels && <NavServerOptions />}
                     </div>
-                ) : null}
+                ) : (
+                    <Redirect to='/login' />
+                )}
             </div>
         </>
     )

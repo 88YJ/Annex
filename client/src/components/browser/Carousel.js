@@ -2,6 +2,8 @@ import React from 'react'
 import { Card } from './Card'
 import Arrow from '../../images/Arrow.png'
 import { SHOW_GAMES, SHOW_STREAMS, SHOW_SCREENSHOTS, CAROUSEL_SCREENSHOT, CAROUSEL_DASHBOARD } from './types/types'
+import LeftArrow from '@material-ui/icons/KeyboardArrowLeftOutlined'
+import RightArrow from '@material-ui/icons/KeyboardArrowRightOutlined'
 
 export const Carousel = (props) => {
     const { type } = props
@@ -84,19 +86,17 @@ export const Carousel = (props) => {
         case CAROUSEL_SCREENSHOT:
             return (
                 <div className='profile-Screenshots-Container'>
-                    <h2 className='globalHeader sticky Primary-Header' style={{ background: 'rgb(0,0,0,.8)' }}>
-                        Showcase
-                    </h2>
+                    <h2 className='globalHeader sticky Primary-Header'>Showcase</h2>
                     <div className='wrapper'>
                         <div className='trendy' ref={screenshotRef}>
                             <Card type={SHOW_SCREENSHOTS} />
                         </div>
                         <div className='row'>
                             <div className='prev' onClick={() => prevClick('screenshot')}>
-                                <img src={Arrow} alt='' />
+                                <LeftArrow className='CarouselArrows' />
                             </div>
                             <div className='next' onClick={() => nextClick('screenshot')}>
-                                <img src={Arrow} alt='' />
+                                <RightArrow className='CarouselArrows' />
                             </div>
                         </div>
                     </div>

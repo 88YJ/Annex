@@ -88,26 +88,37 @@
 }
 .prev,
 .next {
-    opacity: 0.5;
-    border-radius: 24px;
+    opacity: 1;
     position: absolute;
-    top: 35%;
+    top: 43%;
     cursor: pointer;
     width: 40px;
     height: 40px;
+    border-radius: 24px;
+    color: rgb(255, 255, 255, 0.75);
+    background-color: rgb(0, 0, 0, 0.75);
 }
 .prev {
-    left: 7px;
-    transform: rotateY(180deg);
+    left: 9px;
 }
 .next {
     right: 7px;
 }
 .prev:hover {
     opacity: 1;
+    color: var(--Active-Outline-Color);
+    background-color: black;
+    box-shadow: 0px 5px 15px -3px var(--Active-Outline-Color);
 }
 .next:hover {
     opacity: 1;
+    color: var(--Active-Outline-Color);
+    background-color: black;
+    box-shadow: 0px 5px 15px -3px var(--Active-Outline-Color);
+}
+.CarouselArrows {
+    width: 40px !important;
+    height: 40px !important;
 }
 @media (max-width: 1100px) {
     .card {

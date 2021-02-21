@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useProfileDispatch, editScheme } from '../../pages/profile/context'
-import { useAuthDispatch, useAuthState, reloadUser } from '../../pages/authentication/context'
+import { useAuthDispatch, useAuthState, reloadUser, logout } from '../../pages/authentication/context'
 import { SketchPicker } from 'react-color'
 export const EditColorSchemeForm = () => {
-    const profileDispatch = useProfileDispatch()
     const authDispatch = useAuthDispatch()
+    const profileDispatch = useProfileDispatch()
     const { user } = useAuthState()
 
     const [hex, setHex] = useState()
@@ -159,6 +159,13 @@ export const EditColorSchemeForm = () => {
             <div>
                 <input className='GeneralHeaders globalbutton' type='submit' value='Save Changes' style={{ width: '99%' }} />
                 <input className='GeneralHeaders globalbutton' onClick={() => resetColors()} type='submit' value='Reset Colors' style={{ width: '99%' }} />
+                <input
+                    className='GeneralHeaders globalbutton'
+                    onClick={() => logout(authDispatch)}
+                    type='submit'
+                    value='Logout'
+                    style={{ width: '99%', color: 'red' }}
+                />
             </div>
         </form>
     )

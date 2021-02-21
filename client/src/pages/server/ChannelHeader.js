@@ -1,12 +1,10 @@
 import React from 'react'
 import { useServerState } from './context'
 import { useAuthState } from '../authentication/context'
-import EditIcon from '../../images/EditIcon.png'
-import { useModalDispatch, showModalWithChannelEdit } from '../../components/modal/context'
 
 export const ChannelHeader = () => {
-    const { currentTextChannel, currentServer } = useServerState()
-    const modalDispatch = useModalDispatch()
+    const { currentServer } = useServerState()
+
     const { user } = useAuthState()
 
     return (
@@ -15,13 +13,6 @@ export const ChannelHeader = () => {
                 <div className='chatHeader_left'>
                     {currentServer.owner === user._id ? (
                         <h3 className='Primary-Header' style={{ height: 'auto' }}>
-                            <img
-                                className='Bright-Background'
-                                src={EditIcon}
-                                style={{ height: '20px', width: '20px', borderRadius: '0px', cursor: 'pointer' }}
-                                alt=''
-                                onClick={() => showModalWithChannelEdit(modalDispatch)}
-                            />
                             {currentServer.name}
                         </h3>
                     ) : (

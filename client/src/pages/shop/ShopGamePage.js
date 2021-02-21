@@ -48,12 +48,9 @@ export const ShopGamePage = () => {
                         <div className='globalHeaderL'>
                             <Link
                                 to='/shop'
-                                className='globalbutton'
+                                className='store-Gamepage-Buttons'
                                 style={{
                                     position: 'absolute',
-                                    width: 'auto',
-                                    height: 'auto',
-                                    color: 'white',
                                     textAlign: 'center',
                                 }}
                             >
@@ -95,15 +92,9 @@ export const ShopGamePage = () => {
                                     </div>
                                     <div>
                                         {addedToCart ? (
-                                            <button style={{ height: 'auto', width: 'auto' }} className='globalbutton'>
-                                                Added
-                                            </button>
+                                            <button className='store-Gamepage-Buttons'>Added To Cart</button>
                                         ) : (
-                                            <button
-                                                onClick={() => addToCart(shopDispatch, gamePage._id)}
-                                                style={{ height: 'auto', width: 'auto' }}
-                                                className='globalbutton'
-                                            >
+                                            <button onClick={() => addToCart(shopDispatch, gamePage._id)} className='store-Gamepage-Buttons'>
                                                 Add to cart
                                             </button>
                                         )}

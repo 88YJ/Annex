@@ -10,9 +10,8 @@ export const ProfileActivity = () => {
                 <h1
                     className='globalHeader Border-Bottom-1PX Primary-Header'
                     style={{
-                        background: 'rgb(0,0,0,.8)',
                         textAlign: 'center',
-                        height: '50',
+                        height: 'auto',
                     }}
                 >
                     Recent Activity

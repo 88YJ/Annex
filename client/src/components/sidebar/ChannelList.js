@@ -115,7 +115,7 @@ export const ChannelList = () => {
                             {!item.voiceChannel ? (
                                 currentTextChannel && item._id === currentTextChannel._id ? (
                                     <li key={item.name}>
-                                        <Link to={`/server/${currentServer._id}/${item._id}`} className='Primary-Header Secondary-Background'>
+                                        <Link to={`/server/${currentServer._id}/${item._id}`} className='Active-Outline-Class'>
                                             # {item.name}
                                         </Link>
                                     </li>

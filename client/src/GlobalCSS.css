@@ -101,7 +101,10 @@
 .Border-Right-2PX {
     border-right: var(--outLine) 2px solid;
 }
-
+.Active-Outline-Class {
+    color: var(--Active-Outline-Color);
+    background-color: black;
+}
 /*Global Css */
 .sticky {
     text-align: center;

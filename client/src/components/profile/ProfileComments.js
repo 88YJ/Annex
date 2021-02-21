@@ -26,19 +26,12 @@ export const ProfileComments = () => {
     return (
         <>
             <div className='profile-Comments'>
-                <h1
-                    className='globalHeader Border-Top-1PX Primary-Header'
-                    style={{
-                        background: 'rgb(0,0,0,.8)',
-                    }}
-                >
-                    Comments
-                </h1>
+                <h1 className='globalHeader Border-Top-1PX Primary-Header'>Comments</h1>
                 <form onSubmit={onSubmit} style={{ height: 'auto' }}>
                     <input
+                        className='profile_Comments_Input'
                         type='text'
                         placeholder='Leave a comment'
-                        style={{ height: 'auto', width: '99.3%' }}
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                     />

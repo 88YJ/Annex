@@ -4,65 +4,72 @@ import { ProfileComments } from './ProfileComments'
 import { ProfileStats } from './ProfileStats'
 import { ProfileScreenShots } from './ProfileScreenShots'
 
+import Activity from '@material-ui/icons/LocalActivityOutlined'
+import Stats from '@material-ui/icons/BarChartOutlined'
+import Games from '@material-ui/icons/GamesOutlined'
+import Inventory from '@material-ui/icons/BusinessCenterOutlined'
+import Achievements from '@material-ui/icons/EmojiEventsOutlined'
+import ScreenShots from '@material-ui/icons/DynamicFeedOutlined'
+import Reviews from '@material-ui/icons/ReceiptOutlined'
+import Artwork from '@material-ui/icons/ArtTrackOutlined'
+import Groups from '@material-ui/icons/GroupWorkOutlined'
+import Friends from '@material-ui/icons/GroupOutlined'
+
 export const ProfileBody = () => {
     const [type, setType] = useState('activity')
 
     return (
         <>
             <div className='profile-Tabs'>
-                <ul>
-                    <li>
-                        <h4 onClick={() => setType('activity')} className='globalHeader'>
-                            Recent Activity
-                        </h4>
-                    </li>
-                    <li>
-                        <h4 onClick={() => setType('stats')} className='globalHeader'>
-                            Stats
-                        </h4>
-                    </li>
+                <div onClick={() => setType('activity')} className='Profile_Tabs'>
+                    <Activity />
+                    Activity
+                </div>
 
-                    <li>
-                        <h4 onClick={() => setType('games')} className='globalHeader'>
-                            Games
-                        </h4>
-                    </li>
-                    <li>
-                        <h4 onClick={() => setType('inventory')} className='globalHeader'>
-                            Inventory
-                        </h4>
-                    </li>
-                    <li>
-                        <h4 onClick={() => setType('achievements')} className='globalHeader'>
-                            Achievements
-                        </h4>
-                    </li>
-                    <li>
-                        <h4 onClick={() => setType('screenshots')} className='globalHeader'>
-                            Screenshots
-                        </h4>
-                    </li>
-                    <li>
-                        <h4 onClick={() => setType('reviews')} className='globalHeader'>
-                            Reviews
-                        </h4>
-                    </li>
-                    <li>
-                        <h4 onClick={() => setType('artwork')} className='globalHeader'>
-                            Artwork
-                        </h4>
-                    </li>
-                    <li>
-                        <h4 onClick={() => setType('groups')} className='globalHeader'>
-                            Groups
-                        </h4>
-                    </li>
-                    <li>
-                        <h4 onClick={() => setType('friends')} className='globalHeader'>
-                            Friends
-                        </h4>
-                    </li>
-                </ul>
+                <div onClick={() => setType('stats')} className='Profile_Tabs'>
+                    <Stats />
+                    Stats
+                </div>
+
+                <div onClick={() => setType('games')} className='Profile_Tabs'>
+                    <Games />
+                    Games
+                </div>
+
+                <div onClick={() => setType('inventory')} className='Profile_Tabs'>
+                    <Inventory />
+                    Inventory
+                </div>
+
+                <div onClick={() => setType('achievements')} className='Profile_Tabs'>
+                    <Achievements />
+                    Achievements
+                </div>
+
+                <div onClick={() => setType('screenshots')} className='Profile_Tabs'>
+                    <ScreenShots />
+                    Screenshots
+                </div>
+
+                <div onClick={() => setType('reviews')} className='Profile_Tabs'>
+                    <Reviews />
+                    Reviews
+                </div>
+
+                <div onClick={() => setType('artwork')} className='Profile_Tabs'>
+                    <Artwork />
+                    Artwork
+                </div>
+
+                <div onClick={() => setType('groups')} className='Profile_Tabs'>
+                    <Groups />
+                    Groups
+                </div>
+
+                <div onClick={() => setType('friends')} className='Profile_Tabs'>
+                    <Friends />
+                    Friends
+                </div>
             </div>
             <div className='profile-Body-Center'>
                 <div>

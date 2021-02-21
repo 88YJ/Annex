@@ -47,8 +47,8 @@ function StreamSetup(options) {
     }, [])
 
     return (
-        <div ref={divEl} style={{ height: 'auto', width: 'auto', paddingBottom: '0', margin: '0' }}>
-            <video id='video-player' ref={videoEl} playsInline autoPlay style={{ width: '100%', height: 'auto' }} controls />
+        <div ref={divEl} className='video_Div'>
+            <video id='video-player' ref={videoEl} playsInline autoPlay controls />
         </div>
     )
 }

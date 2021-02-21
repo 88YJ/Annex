@@ -23,26 +23,20 @@ export const Cart = () => {
                 <ul>
                     {cart.map((item, i) => (
                         <li key={i}>
-                            <h3 className='store-Gamepage-Headers' style={{ color: 'red' }}>
-                                {item.name}
-                            </h3>
                             <div
                                 className='store-Cartpage-Img'
                                 style={{
                                     backgroundImage: `url(${item.wideimg})`,
                                 }}
                             ></div>
-                            <h3 className='store-Gamepage-Headers' style={{ color: 'red' }}>
-                                Price: $60.00
-                            </h3>
-                            <button style={{ height: 'auto', width: 'auto' }} className='globalbutton'>
-                                Remove From Cart
-                            </button>
+                            <h3 className='store-Gamepage-Headers'>{item.name}</h3>
+                            <h3 className='store-Gamepage-Headers'>Price: $60.00</h3>
+                            <button className='store-Gamepage-Buttons'>Remove From Cart</button>
                         </li>
                     ))}
                 </ul>
                 <div>
-                    <Link to='/shop' style={{ height: 'auto', width: 'auto' }} onClick={() => buyButton(cart)} className='globalbutton'>
+                    <Link to='/shop' onClick={() => buyButton(cart)} className='store-Gamepage-Buttons'>
                         Buy
                     </Link>
                     <h3 style={{ color: 'red' }}>Total: $60.00</h3>

@@ -52,13 +52,13 @@ export const StreamChat = () => {
 
     return (
         <>
-            <div style={{ backgroundColor: 'rgb(0,0,0,.9)' }}>
-                <div style={{ height: '94%' }}>
+            <div className='stream_ChatContainer'>
+                <div style={{ height: '95%' }}>
                     <Message type={STREAM_MESSAGES} />
                 </div>
                 <input
                     placeholder='Talk Some Trash Talk..'
-                    style={{ height: '5%', width: '315px', position: 'absolute', bottom: '1px', backgroundColor: 'black', color: 'white' }}
+                    className='streamChat_Input'
                     value={message}
                     onChange={({ target: { value } }) => setMessage(messageDispatch, value)}
                     onKeyPress={(event) => (event.key === 'Enter' ? sendMessage(event) : null)}

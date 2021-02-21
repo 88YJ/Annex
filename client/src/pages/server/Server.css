@@ -65,6 +65,7 @@
     outline-width: 0;
     color: var(--Tertiary-Header-Color);
     font-size: large;
+    width: 100%;
 }
 .chat_input > form {
     align-items: center;
@@ -89,6 +90,7 @@
 .message_info {
     margin-left: 10px;
     height: auto;
+    width: 100%;
     border-top: var(--outLine) 1px solid;
 }
 .message_info p img {

@@ -39,12 +39,12 @@ export const NavFriendList = () => {
                                         <div className='Friendlist-Submenu'>
                                             <ul>
                                                 <li>
-                                                    <Link to={`/profile/${item._id}`} style={{ height: '100%' }}>
+                                                    <Link to={`/profile/${item._id}`} className='Nav_Friends_Buttons'>
                                                         Profile
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to={`/directchat/${item._id}`} style={{ height: '100%' }}>
+                                                    <Link to={`/directchat/${item._id}`} className='Nav_Friends_Buttons'>
                                                         Message
                                                     </Link>
                                                 </li>
@@ -73,12 +73,12 @@ export const NavFriendList = () => {
                                         <div className='Friendlist-Submenu'>
                                             <ul>
                                                 <li>
-                                                    <Link to={`/profile/${item._id}`} style={{ height: '100%' }}>
+                                                    <Link to={`/profile/${item._id}`} className='Nav_Friends_Buttons'>
                                                         Profile
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <Link to={`/directchat/${item._id}`} style={{ height: '100%' }}>
+                                                    <Link to={`/directchat/${item._id}`} className='Nav_Friends_Buttons'>
                                                         Message
                                                     </Link>
                                                 </li>

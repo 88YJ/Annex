@@ -1,4 +1,10 @@
 /* Stream Chat */
+.stream_ChatContainer {
+    background-color: rgb(0, 0, 0, 0.75);
+    margin: 15px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
 .stream_game {
     color: var(--Primary-Header-Color);
 }
@@ -56,4 +62,13 @@
     font-family: Helvetica;
 
     letter-spacing: 0.3px;
+}
+.streamChat_Input {
+    height: 5%;
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    background-color: black;
+    color: white;
+    outline-width: 0;
 }

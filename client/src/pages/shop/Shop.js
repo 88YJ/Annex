@@ -6,7 +6,7 @@ import { loadStoreGames } from './context/ShopActions'
 import './Store.css'
 
 export const Shop = () => {
-    const { storeGames, filtered, loading } = useShopState()
+    const { storeGames, filtered, loading, cart } = useShopState()
 
     const shopDispatch = useShopDispatch()
 
@@ -34,31 +34,23 @@ export const Shop = () => {
         return (
             <>
                 <div className='store-Nav'>
-                    <ul>
-                        <li>
-                            <input value={search} onChange={onChange} className='store-Searchbar' placeholder='Search Games' />
-                        </li>
-                        <li>
-                            <Link to='#' onClick={() => resetSearch()} style={{ height: 'auto', width: 'auto' }} className='globalbutton'>
-                                Clear Filter
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to='#' style={{ height: 'auto', width: 'auto' }} className='globalbutton'>
-                                Selected For You
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to='#' style={{ height: 'auto', width: 'auto' }} className='globalbutton'>
-                                Popular Games
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to='#' style={{ height: 'auto', width: 'auto' }} className='globalbutton'>
-                                Community
-                            </Link>
-                        </li>
-                    </ul>
+                    <input value={search} onChange={onChange} className='store-Searchbar' placeholder='Search Games' />
+
+                    <Link to='#' onClick={() => resetSearch()} className='store-Buttons'>
+                        Clear Filter
+                    </Link>
+
+                    <Link to='/shop/cart' className='store-Buttons'>
+                        Cart {cart.length > 0 ? `(${cart.length})` : null}
+                    </Link>
+
+                    <Link to='#' className='store-Buttons'>
+                        Popular Games
+                    </Link>
+
+                    <Link to='#' className='store-Buttons'>
+                        Community
+                    </Link>
                 </div>
                 <div className='store-Listpage'>
                     <ul>

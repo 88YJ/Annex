@@ -9,6 +9,8 @@ import { ProfileBody } from '../profile/ProfileBody'
 import DefaultBackground from '../../images/DefaultBackgroundV2.png'
 import DefaultProfilePicture from '../../images/DefaultProfile.png'
 import MenuArrow from '../../images/MenuArrow.png'
+import LeftArrow from '@material-ui/icons/KeyboardArrowLeftOutlined'
+import RightArrow from '@material-ui/icons/KeyboardArrowRightOutlined'
 
 export const Profile = () => {
     const { CurrentProfile } = useProfileState()
@@ -47,47 +49,35 @@ export const Profile = () => {
                                         }
                                     />
                                     <div>
-                                        <h1 className='globalHeaderL Primary-Header' style={{ display: 'flex' }}>
-                                            <div
-                                                className='profile-Options'
-                                                style={{
-                                                    backgroundImage: `url(${MenuArrow})`,
-                                                    transform: `${menu ? 'scale(1, 1)' : 'scale(1, -1)'}`,
-                                                }}
-                                                onClick={() => (menu ? setMenu(false) : setMenu(true))}
-                                            />
-                                            {CurrentProfile.name}
-
-                                            {menu ? (
-                                                <ul className='profile-Options-Submenu'>
-                                                    <li>
-                                                        <button
-                                                            className='globalbutton'
-                                                            style={{ height: 'auto', width: '96%' }}
-                                                            onClick={() => showModalWithEditProfile(modalDipatch)}
-                                                        >
-                                                            Edit Profile
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button
-                                                            className='globalbutton'
-                                                            style={{ height: 'auto', width: '96%' }}
-                                                            onClick={() => showModalWithFriendRequests(modalDipatch)}
-                                                        >
-                                                            Requests
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            ) : null}
-                                        </h1>
+                                        <h1 className='Profile_Title'>{CurrentProfile.name}</h1>
                                         <h4 className='globalHeaderL Secondary-Header'>Location: {CurrentProfile.location}</h4>
                                         <p className='globalHeaderL Secondary-Header'>Desc: {CurrentProfile.bio}</p>
                                     </div>
-                                    <div />
-                                    <div>
+                                    <div className='Profile_Header_R'>
                                         <h3 className='globalHeaderR Primary-Header'>Level: {CurrentProfile.profileLevel}</h3>
                                         <h3 className='globalHeaderR Primary-Header'>Years: 0</h3>
+                                        <div className='Profile_Header_Options'>
+                                            {menu ? (
+                                                <>
+                                                    <button className='profileButton' onClick={() => showModalWithEditProfile(modalDipatch)}>
+                                                        Edit Profile
+                                                    </button>
+                                                    <button className='profileButton' onClick={() => showModalWithFriendRequests(modalDipatch)}>
+                                                        Requests
+                                                    </button>
+                                                </>
+                                            ) : null}
+                                            {menu ? (
+                                                <>
+                                                    <RightArrow className='Profile_Arrows' onClick={() => (menu ? setMenu(false) : setMenu(true))} />
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <LeftArrow className='Profile_Arrows' onClick={() => (menu ? setMenu(false) : setMenu(true))} />
+                                                    Profile Options
+                                                </>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -119,44 +109,13 @@ export const Profile = () => {
                                         : { backgroundImage: `url(${DefaultProfilePicture})` }
                                 }
                             ></div>
-                            <div style={{ color: 'white' }}>
-                                <h1 className='globalHeaderL Primary-Header' style={{ display: 'flex' }}>
-                                    <div
-                                        className='profile-Options'
-                                        style={{
-                                            backgroundImage: `url(${MenuArrow})`,
-                                            transform: `${menu ? 'scale(1, 1)' : 'scale(1, -1)'}`,
-                                        }}
-                                        onClick={() => (menu ? setMenu(false) : setMenu(true))}
-                                    />
-                                    {CurrentProfile.name}
-
-                                    {menu ? (
-                                        <ul className='profile-Options-Submenu'>
-                                            <li>
-                                                <button
-                                                    className='globalbutton'
-                                                    style={{ height: 'auto', width: '95%' }}
-                                                    onClick={() => sendFriendRequest(profileDispatch, CurrentProfile._id)}
-                                                >
-                                                    Add Friend
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <Link to={`/directchat/${CurrentProfile._id}`}>
-                                                    <button className='globalbutton' style={{ height: 'auto', width: '95%' }}>
-                                                        Chat
-                                                    </button>
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    ) : null}
-                                </h1>
+                            <div>
+                                <h1 className='Profile_Title'>{CurrentProfile.name}</h1>
                                 <h4 className='globalHeaderL Secondary-Header'>Location: {CurrentProfile.location}</h4>
                                 <p className='globalHeaderL Secondary-Header'>Desc: {CurrentProfile.bio}</p>
                             </div>
                             <div />
-                            <div>
+                            <div className='Profile_Header_R'>
                                 <h3 className='globalHeaderR Primary-Header'>Level: {CurrentProfile.profileLevel}</h3>
                                 <h3 className='globalHeaderR Primary-Header'>Years: 0</h3>
                                 {CurrentProfile.onlineStatus ? (
@@ -164,6 +123,28 @@ export const Profile = () => {
                                 ) : (
                                     <h3 className='globalHeaderR Seconday-Header'>Offline</h3>
                                 )}
+                                <div className='Profile_Header_Options'>
+                                    {menu ? (
+                                        <>
+                                            <button className='profileButton' onClick={() => sendFriendRequest(profileDispatch, CurrentProfile._id)}>
+                                                Add Friend
+                                            </button>
+                                            <button className='profileButton' onClick={() => showModalWithFriendRequests(modalDipatch)}>
+                                                Chat
+                                            </button>
+                                        </>
+                                    ) : null}
+                                    {menu ? (
+                                        <>
+                                            <RightArrow className='Profile_Arrows' onClick={() => (menu ? setMenu(false) : setMenu(true))} />
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LeftArrow className='Profile_Arrows' onClick={() => (menu ? setMenu(false) : setMenu(true))} />
+                                            Profile Options
+                                        </>
+                                    )}
+                                </div>
                             </div>
                         </div>
                         <div className='profile-SubMaster'>
